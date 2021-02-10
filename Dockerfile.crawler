@@ -1,0 +1,14 @@
+FROM buildkite/puppeteer AS crawler
+
+WORKDIR /build 
+
+ADD . /build/
+
+RUN yarn && npx lerna link
+
+WORKDIR /build/packages/crawler
+
+RUN yarn
+
+ENTRYPOINT yarn start
+

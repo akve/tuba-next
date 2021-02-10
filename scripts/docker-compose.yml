@@ -1,0 +1,105 @@
+version: "3"
+
+
+services:
+
+ db:
+  image: postgres:13.1
+  container_name: p_db
+  ports:
+   - 5433:5432
+  networks:
+   - backend
+  volumes:
+   - ${DATA_PATH}/pg:/var/lib/postgresql/data
+   - ${CODE_PATH}/scripts/entrypoints/init.sql:/docker-entrypoint-initdb.d/init.sql
+  environment:
+   - POSTGRES_USER=pdeals
+   - POSTGRES_DB=pdeals
+   - POSTGRES_PASSWORD=pdeals
+
+ redis:
+  image: redis
+  container_name: p_redis
+  networks:
+   - backend
+  ports:
+   - 6379:6379
+  volumes:
+   - ${DATA_PATH}/redis:/data
+  command:
+   - --appendonly
+   - "yes"
+
+ frontend:
+  image: node:12.4
+  container_name: p_frontend
+  user: ${UID:-0}
+  entrypoint: /data/scripts/frontend-entrypoint.sh
+  networks:
+   - backend
+  ports:
+   - 3000:3000
+  volumes:
+   - ${CODE_PATH}:/data
+  environment:
+   - NODE_ENV
+   - NPM
+   - NEXT_PUBLIC_API_URL
+   - NEXT_BUILD_API_URL
+
+ api:
+  image: node:12.4
+  container_name: p_api
+  user: ${UID:-0}
+  entrypoint: /data/scripts/server.sh
+  networks:
+   - backend
+  depends_on:
+   - redis
+   - db
+  ports:
+   - 3001:3001
+  volumes:
+   - ${CODE_PATH}:/data
+  environment:
+   - NODE_ENV
+   - NPM
+
+ crawler:
+  image: buildkite/puppeteer
+  container_name: p_crawler
+  user: ${UID:-0}
+  entrypoint: /data/scripts/crawler.sh
+  networks:
+   - backend
+  depends_on:
+   - redis
+   - db
+  volumes:
+   - ${CODE_PATH}:/data
+  environment:
+   - ENV
+   - NODE_ENV
+   - NPM
+
+ nginx:
+  image: nginx:latest
+  container_name: p_nginx
+  networks:
+   - backend
+  environment:
+   - NGINX_CONF_PATH=/data/scripts/nginx
+   - NGINX_WEB_ROOT=/data/
+  ports:
+   - 80:80
+  depends_on:
+   - api
+   - frontend
+  volumes:
+   - ${CODE_PATH}/scripts/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+   - ${CODE_PATH}:/data
+  command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+networks:
+ backend:

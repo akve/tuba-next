@@ -1,0 +1,15 @@
+FROM node:12.4
+
+WORKDIR /build 
+
+ADD . /build/
+
+RUN yarn && npx lerna link
+
+WORKDIR /build/packages/api
+
+RUN yarn &&\
+    yarn swagger
+
+ENTRYPOINT yarn start
+

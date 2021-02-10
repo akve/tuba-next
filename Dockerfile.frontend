@@ -1,0 +1,15 @@
+FROM node:12.4 AS base
+
+WORKDIR /build 
+
+ADD . /build/
+
+RUN yarn && npx lerna link
+
+WORKDIR /build/packages/next
+
+RUN yarn &&\
+    yarn build
+
+ENTRYPOINT yarn start
+
