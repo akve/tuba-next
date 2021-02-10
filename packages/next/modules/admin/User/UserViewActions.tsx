@@ -1,0 +1,52 @@
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { isArray } from 'lodash';
+import { useEffect } from 'react';
+import { getId } from '@pdeals/next/utils/helpers';
+import { getStore } from '@pdeals/next/stores/initStore';
+
+export const ViewPokerDealsAction = () => {
+  const router = useRouter();
+  const userId = getId(router);
+
+  return (
+    <Link href={`/admin/users/deals/${userId}`}>
+      <a className="btn btn-outline-default btn-sm" href={`/admin/users/deals/${userId}`}>
+        View Accounts
+      </a>
+    </Link>
+  );
+};
+
+export const LoginAsAction = () => {
+  const router = useRouter();
+  const userId = getId(router);
+  const onLogin = async () => {
+    const store = await getStore().userStore;
+    await store.loginAs(userId);
+    if (store.me.role === 'admin') {
+      router.push('/admin/users');
+    } else {
+      router.push('/user/');
+    }
+  };
+
+  return (
+    <a className="btn btn-outline-default btn-sm" onClick={() => onLogin()}>
+      Login as
+    </a>
+  );
+};
+
+export const ViewEarningsAction = () => {
+  const router = useRouter();
+  const userId = getId(router);
+
+  return (
+    <Link href={`/admin/users/earnings/${userId}`}>
+      <a className="btn btn-outline-default btn-sm" href={`/admin/users/earnings/${userId}`}>
+        View Earnings
+      </a>
+    </Link>
+  );
+};
