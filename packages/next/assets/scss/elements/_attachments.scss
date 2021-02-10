@@ -1,0 +1,106 @@
+.uploads{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0;
+  width: 100%;
+  user-select: none;
+  flex-wrap: wrap;
+  &-item{
+    display: block;
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+    margin: 0;
+    &__title{
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #447df7;
+    }
+    &__img{
+      max-width: 60px;
+      width: 100%;
+      cursor: pointer;
+    }
+    &_single{
+      width: 100%;
+      max-width: 100%;
+      margin: auto;
+    }
+    &__file{
+      position: relative;
+      display: inline-block;
+    }
+    &__delete{
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 18px;
+      font-weight: 900;
+      outline: none !important;
+      border: none;
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+      color: rgba(255, 30, 80, 0);
+      background-color: transparent;
+      &:hover{
+        color: rgba(255, 30, 80, 0.5);
+      }
+    }
+    &__icon{
+      cursor: pointer;
+      font-size: 60px;
+      color: #447df7;
+    }
+    &:hover{
+      .uploads-item__delete{
+        color: rgba(255, 30, 80, 1);
+        background-color: #ffffff;
+      }
+    }
+  }
+  &__add-button{
+    width: 60px;
+    height: 60px;
+    border: 2px solid #447df7;
+    text-align: center;
+    border-radius: 50%;
+    padding: 5px;
+    outline: none !important;
+    opacity: 0.8;
+    transition: 0.3s ease-in-out;
+    background-color: transparent;
+    i{
+      line-height: 53px;
+      transition: 0.3s ease-in-out;
+      font-size: 45px;
+      font-weight: 600;
+      color: #447df7;
+    }
+    &:hover{
+      background-color: #447df7;
+      i{
+        color: #ffffff;
+      }
+    }
+  }
+  .input-area{
+    margin-bottom: 10px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+  &_with-groups{
+    justify-content: flex-start;
+    .input-area{
+      margin-left: 7px;
+      margin-right: 7px;
+      &__content{
+        padding: 10px 0px!important;
+      }
+    }
+  }
+}
