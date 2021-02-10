@@ -1,0 +1,48 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "number"
+        },
+        "email": {
+            "type": "string"
+        },
+        "firstName": {
+            "type": "string"
+        },
+        "lastName": {
+            "type": "string"
+        },
+        "address": {
+            "type": "string"
+        },
+        "optionalAddress": {
+            "type": "string"
+        },
+        "city": {
+            "type": "string"
+        },
+        "zip": {
+            "type": "string"
+        },
+        "country": {
+            "type": "number"
+        },
+        "phone": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "address",
+        "city",
+        "country",
+        "email",
+        "firstName",
+        "id",
+        "lastName",
+        "optionalAddress",
+        "phone",
+        "zip"
+    ],
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}

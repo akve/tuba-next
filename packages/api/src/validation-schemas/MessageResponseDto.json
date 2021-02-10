@@ -1,0 +1,32 @@
+{
+    "type": "object",
+    "properties": {
+        "isInfo": {
+            "type": "boolean",
+            "default": true
+        },
+        "status": {
+            "enum": [
+                "error",
+                "info",
+                "success"
+            ],
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "text": {
+            "type": "string"
+        },
+        "fields": {}
+    },
+    "required": [
+        "fields",
+        "isInfo",
+        "status",
+        "text",
+        "title"
+    ],
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}

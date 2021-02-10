@@ -1,0 +1,22 @@
+{
+    "type": "object",
+    "properties": {
+        "username": {
+            "type": "string"
+        },
+        "password": {
+            "type": "string"
+        },
+        "rememberMe": {
+            "type": "boolean"
+        },
+        "recaptchaResponse": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "password",
+        "username"
+    ],
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}

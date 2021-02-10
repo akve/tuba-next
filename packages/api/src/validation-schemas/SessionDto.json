@@ -1,0 +1,174 @@
+{
+    "type": "object",
+    "properties": {
+        "session": {
+            "description": "Total number of items fitting your search criteria",
+            "type": "string"
+        },
+        "user": {
+            "$ref": "#/definitions/User"
+        }
+    },
+    "required": [
+        "session"
+    ],
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "rooms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Room"
+                    }
+                },
+                "createdDate": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedDate": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "createdDate",
+                "email",
+                "firstName",
+                "lastName",
+                "password",
+                "rooms",
+                "updatedDate",
+                "username"
+            ]
+        },
+        "Room": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "crawler": {
+                    "$ref": "#/definitions/CrawlerSite"
+                },
+                "network_code": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": true
+                },
+                "createdDate": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedDate": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "crawler",
+                "createdDate",
+                "data",
+                "name",
+                "network_code",
+                "password",
+                "updatedDate",
+                "url",
+                "username"
+            ]
+        },
+        "CrawlerSite": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "rooms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Room"
+                    }
+                },
+                "network_code": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": true
+                },
+                "createdDate": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedDate": {
+                    "description": "Enables basic storage and retrieval of dates and times.",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "createdDate",
+                "data",
+                "name",
+                "network_code",
+                "password",
+                "rooms",
+                "updatedDate",
+                "url",
+                "username"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}

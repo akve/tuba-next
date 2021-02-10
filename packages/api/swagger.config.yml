@@ -1,0 +1,23 @@
+swagger:
+  servers:
+    - url: /
+      description: Live server
+  outputDirectory: ./dist
+  entryFile:
+    - ./src/controllers/*
+  outputFormat: OpenApi_3
+  name: PokerDeals API service
+  description: PokerDeals API
+  license: Unlicense
+  produces: [application/json]
+  version: 0.0.1
+  securityDefinitions:
+#    default:
+#      type: apiKey
+#      in: header
+#      name: Authorization
+    SessionBasedAuthentication:
+      description: Session token
+      type: apiKey
+      in: header
+      name: token

@@ -1,0 +1,64 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "number"
+        },
+        "userIsSeller": {
+            "type": "boolean"
+        },
+        "options": {
+            "type": "number"
+        },
+        "aseEnabled": {
+            "type": "boolean"
+        },
+        "timezoneOffset": {
+            "type": "number"
+        },
+        "email": {
+            "type": "string"
+        },
+        "firstName": {
+            "type": "string"
+        },
+        "lastName": {
+            "type": "string"
+        },
+        "phone": {
+            "type": "string"
+        },
+        "companyName": {
+            "type": "string"
+        },
+        "city": {
+            "type": "string"
+        },
+        "zip": {
+            "type": "string"
+        },
+        "country": {
+            "type": "string"
+        },
+        "state": {
+            "type": "string"
+        },
+        "loginRedirect": {
+            "description": "Will return URL if user should be redirected after login",
+            "type": "string"
+        }
+    },
+    "required": [
+        "aseEnabled",
+        "companyName",
+        "email",
+        "firstName",
+        "id",
+        "lastName",
+        "options",
+        "phone",
+        "timezoneOffset",
+        "userIsSeller"
+    ],
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
