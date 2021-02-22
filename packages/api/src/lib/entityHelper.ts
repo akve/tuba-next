@@ -8,6 +8,7 @@ import { Color } from '@pdeals/models/entities/Color';
 import { Category } from '@pdeals/models/entities/Category';
 import { Collection } from '@pdeals/models/entities/Collection';
 import { Product } from '@pdeals/models/entities/Product';
+import { Snippet } from '@pdeals/models/entities/Snippet';
 
 export const EntityNameToEntityMapping: any = {
   user: User,
@@ -19,5 +20,6 @@ export const EntityNameToEntityMapping: any = {
   color: Color,
   category: Category,
   collection: Collection,
-  product: Product
+  product: Product,
+  snippet: Snippet,
 };

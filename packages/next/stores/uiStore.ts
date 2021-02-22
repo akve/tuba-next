@@ -2,6 +2,7 @@ import { action, observable, computed } from 'mobx';
 // import { toast } from 'react-toastify';
 import { ADD_NOTIFICATION, publish } from '../utils/eventBus';
 import { IBreadcrumb } from '@pdeals/next/components/Crud/ICrud';
+import { filter, find, get } from 'lodash';
 
 interface IListActionDescriptor {
   action: string;
@@ -20,11 +21,17 @@ class UiStore {
 
   @observable listAction: IListActionDescriptor | null = null;
 
+  @observable category: string | null = null;
+
+  @observable product: string | null = null;
+
   @observable breadCrumbs: { data: IBreadcrumb[]; title: string; resolvers: any } = {
     data: [],
     title: '',
     resolvers: {},
   };
+
+  @observable sliderWidth = 0;
 
   @observable allData: any;
 
@@ -37,10 +44,34 @@ class UiStore {
     }, 1000);
   }
 
-  @action setAllData(data:any) {
+  @action setCategory(cat: string) {
+    this.category = cat;
+  }
+  @action setProduct(id: string | number) {
+    this.product = `${id}`;
+  }
+
+  @action setAllData(data: any) {
+    if (this.allData) return;
     this.allData = data;
   }
 
+  @action getListByCategory(category: string) {
+    if (!category) return this.allData.products;
+    console.log('filter by', category);
+    const categoryRecord = find(this.allData.categories.rows, (r) => r.code === category);
+    if (!categoryRecord) return [];
+    const categoryId = categoryRecord.id;
+    console.log('???', categoryId);
+
+    return filter(this.allData.products, (r) => {
+      const rCategories: any = r.data.categories;
+      if (rCategories && rCategories.length) {
+        return !!find(rCategories, (c: any) => `${c.category}` === `${categoryId}`);
+      }
+      return false;
+    });
+  }
 
   @action setBreadCrumbs(breadCrumbs) {
     this.breadCrumbs.data = breadCrumbs;
@@ -56,6 +87,10 @@ class UiStore {
 
   @action setListAction(action: IListActionDescriptor | null) {
     this.listAction = action;
+  }
+
+  @action setSliderWidth(w) {
+    this.sliderWidth = w;
   }
 
   @action addNotification = (
@@ -128,6 +163,22 @@ if (level === 'success') {
     return this.notifications.filter((notif) => {
       return !this._displayedUids.includes(notif.uid);
     });
+  }
+
+  @computed get ProductDetails(): any {
+    const p = find(this.allData.products, (r: any) => `${r.code}` === `${this.product}`);
+    if (!p) return {};
+    const categories = get(p, 'data.categories') || null;
+    console.log('FOUND?', p, this.allData, categories);
+    let categoryId = null;
+    if (categories) {
+      categoryId = find(categories, (r) => ['featured', 'new', 'sale'].indexOf(r.name) < 0);
+      if (categoryId) categoryId = categoryId.category;
+    }
+    if (categoryId) {
+      p.category = find(this.allData.categories.rows, (r: any) => `${r.id}` === `${categoryId}`);
+    }
+    return p;
   }
 }
 

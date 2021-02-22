@@ -7,7 +7,7 @@ import Sidebar from '@pdeals/next/components/Sidebar/Sidebar';
 import routes from '@pdeals/next/routes';
 
 const Admin = (props) => {
-  const [sidenavOpen, setSidenavOpen] = useState(true);
+  const [sidenavOpen, setSidenavOpen] = useState(false);
 
   useEffect(() => {
     document.body.classList.add('g-sidenav-hidden');

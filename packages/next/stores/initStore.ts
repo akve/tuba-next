@@ -2,31 +2,40 @@ import { useStaticRendering } from 'mobx-react';
 import { create } from 'mobx-persist';
 import UiStore from './uiStore';
 import UserStore from './userStore';
+import OrderStore from '@pdeals/next/stores/orderStore';
 
 const isServer = typeof window === 'undefined';
 useStaticRendering(isServer);
 
-let store = null;
+interface IStore {
+  uiStore: UiStore;
+  userStore: UserStore;
+  orderStore: OrderStore;
+}
 
-export const getStore = () => store || initializeStore();
+let store: IStore;
+
+export const getStore = () => store || initalizeStoreClean();
 const initalizeStoreClean = () => {
   if (!store) {
-    store =  {
+    store = {
       uiStore: new UiStore(),
       userStore: new UserStore(),
+      orderStore: new OrderStore(),
     };
   }
   return store;
-}
+};
 export default async function initializeStore() {
   if (store === null) {
-
     store = initalizeStoreClean();
     const userStore = new UserStore();
     const uiStore = new UiStore();
+    const orderStore = new OrderStore();
     store = {
       uiStore,
       userStore,
+      orderStore,
     };
   }
 
@@ -45,7 +54,11 @@ export async function hydrateEverything(store) {
     console.log('userStore has been hydrated');
     // store.userStore.clearTokenData();
   });
+  await hydrate('orderStore', store.orderStore).then(() => {
+    console.log('orderStore has been hydrated');
+    // store.userStore.clearTokenData();
+  });
   // await hydrate('uiStore', store.uiStore);
 }
 
-export {initalizeStoreClean};
+export { initalizeStoreClean };

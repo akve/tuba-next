@@ -24,7 +24,7 @@ export const LoginAsAction = () => {
   const onLogin = async () => {
     const store = await getStore().userStore;
     await store.loginAs(userId);
-    if (store.me.role === 'admin') {
+    if (store.me && store.me.role === 'admin') {
       router.push('/admin/users');
     } else {
       router.push('/user/');

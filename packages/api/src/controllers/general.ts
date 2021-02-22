@@ -8,7 +8,7 @@ import { EntitySchema } from 'typeorm';
 import { EntityNameToEntityMapping } from '../lib/entityHelper';
 import generateUserFilter from '../utils/generateUserFilter';
 import { verifyColumnTypes } from '../utils/verifyColumnTypes';
-import {LogService, LOG_ACTIONS} from "@pdeals/db/services/log.service";
+import { LogService, LOG_ACTIONS } from '@pdeals/db/services/log.service';
 
 @Path('/v1/general')
 @PreProcessor(RequestPreProcess)
@@ -107,7 +107,14 @@ export class GeneralController {
     const repo = await getTypeormManager().getRepository(entity);
     const record = await repo.findOne(id);
     if (!record) throw new Error('Not found');
-    LogService.systemLog({user_id: (this.context.request as IRequestWithUser).user!.id, area: LOG_ACTIONS.FORM_CHANGE, action: 'DELETE', model: entity, id: id, readable:`Deleted ${entity} # ${id}` });
+    LogService.systemLog({
+      user_id: (this.context.request as IRequestWithUser).user!.id,
+      area: LOG_ACTIONS.FORM_CHANGE,
+      action: 'DELETE',
+      model: entity,
+      id: id,
+      readable: `Deleted ${entity} # ${id}`,
+    });
     await repo.remove(record);
     return new SimpleResponseDto('ok');
   }
@@ -126,7 +133,15 @@ export class GeneralController {
     Object.keys(payload).forEach((key) => {
       record[key] = payload[key];
     });
-    LogService.systemLog({user_id: (this.context.request as IRequestWithUser).user!.id, area: LOG_ACTIONS.FORM_CHANGE, action: 'UPDATE', model: entity, id: id, readable:`Updated ${entity} # ${id}`, changes: payload });
+    LogService.systemLog({
+      user_id: (this.context.request as IRequestWithUser).user!.id,
+      area: LOG_ACTIONS.FORM_CHANGE,
+      action: 'UPDATE',
+      model: entity,
+      id: id,
+      readable: `Updated ${entity} # ${id}`,
+      changes: payload,
+    });
     await repo.save(record);
     return new SimpleResponseDto('ok');
   }
@@ -140,7 +155,15 @@ export class GeneralController {
     // suppose there should be 'data' field
     if (!(record as any).data) (record as any).data = {};
     const e: any = await repo.save(record);
-    LogService.systemLog({user_id: (this.context.request as IRequestWithUser).user!.id, area: LOG_ACTIONS.FORM_CHANGE, action: 'CREATE', model: entity, id: e.id, readable:`Created ${entity} # ${e.id}`, changes: payload });
+    LogService.systemLog({
+      user_id: (this.context.request as IRequestWithUser).user!.id,
+      area: LOG_ACTIONS.FORM_CHANGE,
+      action: 'CREATE',
+      model: entity,
+      id: e.id,
+      readable: `Created ${entity} # ${e.id}`,
+      changes: payload,
+    });
     return e;
   }
 }

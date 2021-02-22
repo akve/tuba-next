@@ -19,5 +19,7 @@ export const tableKeys = {
   languages: 'languages',
   referral_requests: 'referral_requests',
   logs: 'logs',
-  products: 'products'
+  products: 'products',
+  categories: 'categories',
+  snippets: 'snippets',
 };

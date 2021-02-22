@@ -59,7 +59,6 @@ export class UserController {
     }
   }
 
-
   @Path('/list')
   @POST
   public async getUsersList(params: ListRequestDto): Promise<ListDto<any> | null> {

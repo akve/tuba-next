@@ -1,9 +1,11 @@
 import React from 'react';
 import { FormGroup, Input } from 'reactstrap';
+import { omit } from 'lodash';
 
 import { registerRenderer } from './index';
 
-const BaseInput = ({ class: className, label, name, innerRef, type, ...rest}) => {
+const BaseInput = ({ class: className, label, name, innerRef, type, ...rest }) => {
+  const normalAttributes = omit(rest, ['notEditable', 'setValue', 'initialValue', 'entityId', 'value']);
   return (
     <FormGroup className={className}>
       {label && (
@@ -11,7 +13,7 @@ const BaseInput = ({ class: className, label, name, innerRef, type, ...rest}) =>
           {label}
         </label>
       )}
-      <Input style={{ height: '38px' }} name={name} innerRef={innerRef} type={type} {...rest} />
+      <Input style={{ height: '38px' }} name={name} innerRef={innerRef} type={type} {...normalAttributes} />
     </FormGroup>
   );
 };

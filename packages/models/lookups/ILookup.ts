@@ -13,4 +13,5 @@ export interface ILookupResource {
 export interface ILookup {
   options?: ILookupOption[];
   resource?: ILookupResource;
+  alsoSetLabelTo?: string;
 }

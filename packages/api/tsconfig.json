@@ -17,8 +17,12 @@
     "sourceMap": false,
     "strictNullChecks": false,
     "target": "es2016",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
     // "objectLiteralSortKeys": false
+    "typeRoots": ["src/types/decs.d.ts"]
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts"],
+  "typeAcquisition": {
+    "enable": true
+  }
 }

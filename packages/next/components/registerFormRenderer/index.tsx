@@ -7,6 +7,7 @@ import RegisterRange from './Range';
 import RegisterLazyDropDown from './LazyDropDown';
 import RegisterAttachment from './Attachment';
 import RegisterRadio from './Radio';
+import RegisterSmartList from './SmartList';
 
 const registeredRenderer: any = {};
 
@@ -27,3 +28,4 @@ RegisterRange();
 RegisterLazyDropDown();
 RegisterAttachment();
 RegisterRadio();
+RegisterSmartList();

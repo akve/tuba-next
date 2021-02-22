@@ -29,6 +29,10 @@ function CrudFormWrapper(props: IProps) {
   const transformEntityToForm = (entity: any, language?: string): Record<string, any> => {
     const values = {};
     props.params.form.fields.forEach((field) => {
+      if (field.name.indexOf('data.') === 0) {
+        values[field.name] = entity.data[field.name.replace('data.', '')] || null;
+        return;
+      }
       if (!language || language === DEFAULT_LANG || !field.canBeTranslated) {
         values[field.name] = entity[field.name] || null;
       } else {
@@ -70,7 +74,7 @@ function CrudFormWrapper(props: IProps) {
     try {
       const api = CrudApi(props.params);
       if (props.id) {
-        let d = null;
+        const d = null;
         if (props.params.translatableEntity && savingLanguage !== DEFAULT_LANG) {
           const newData = { ...data };
           if (!newData.data.langs) newData.data.langs = {};

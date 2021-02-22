@@ -49,33 +49,35 @@ export class LookupsController {
   @Path('/categories')
   @POST
   public async categoriesLookup(listParams: ListRequestDto | null): Promise<ListDto<any> | null> {
-    let sql = `
+    const sql = `
     select * from category order by sorter
 `;
     const rows = await getTypeormConnection().query(sql);
     const res: any = [];
-    const findByParent = (parentId:number) => {
-      return filter(rows, (r: any) => {
-        return parentId === 0 ? !r.parent : r.parent === parentId;
-      }) || [];
-    }
-    const startBuild = (parent: number, level: number, parentcode: string) => {
+    const findByParent = (parentId: number) => {
+      return (
+        filter(rows, (r: any) => {
+          return parentId === 0 ? !r.parent : r.parent === parentId;
+        }) || []
+      );
+    };
+    const startBuild = (parent: number, level: number, parentcode: string, parentname: string) => {
       const children = findByParent(parent);
       children.forEach((child: any) => {
-        const subcode = parentcode? parentcode + '_' + child.code : child.code;
+        const subcode = parentcode ? parentcode + '_' + child.code : child.code;
+        const subname = parentname ? parentname + ' > ' + child.name : child.name;
         res.push({
           id: child.id,
-          name: "--".repeat(level) + ' ' + child.name,
+          name: subname, //'--'.repeat(level) + ' ' + child.name
           originalName: child.name,
           parent: child.parent || 0,
           code: subcode,
-          level: level
-        })
-        startBuild(child.id, level + 1, subcode);
-      })
+          level: level,
+        });
+        startBuild(child.id, level + 1, subcode, subname);
+      });
     };
-    startBuild(0, 0, '');
-
+    startBuild(0, 0, '', '');
 
     const reply = new ListDto();
     reply.rows = res;
@@ -102,7 +104,12 @@ export class LookupsController {
       };
     }
 
-    if (entity === 'payment_request' || entity === 'payment' || entity === 'payment' || entity === 'referral_requests') {
+    if (
+      entity === 'payment_request' ||
+      entity === 'payment' ||
+      entity === 'payment' ||
+      entity === 'referral_requests'
+    ) {
       return {
         name: data.id,
         id: data.id,
@@ -121,5 +128,4 @@ export class LookupsController {
       id: data.id,
     };
   }
-
 }

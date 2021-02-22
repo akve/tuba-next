@@ -40,7 +40,6 @@ export interface IOptions {
   formPreSaveFunction?: any;
   listDefaultSortField?: string;
   listDefaultSortDirection?: 'asc' | 'desc';
-
 }
 
 export type FilterFieldType = 'text' | 'number' | 'checkbox' | 'date' | 'range' | 'lazydropdown'; // should be extended

@@ -24,7 +24,7 @@ const LazyDropDown = ({
 
   const fetchOptions = debounce(async (userFilter) => {
     try {
-      const { url, value, label} = dropdownOptions.resource;
+      const { url, value, label } = dropdownOptions.resource;
       const { allowEmpty } = dropdownOptions;
       const crudOptions: any = url.indexOf('/') >= 0 ? { overrideListUrlPrefix: url } : { apiUrlPrefix: url };
       const list: any = await CrudApi(crudOptions).getObjects({
@@ -36,7 +36,7 @@ const LazyDropDown = ({
         label: t(item[label]) || '',
       }));
       if (allowEmpty) {
-        newOptions.unshift({value:'', label: allowEmpty});
+        newOptions.unshift({ value: '', label: allowEmpty });
       }
       setOptions(newOptions);
     } catch (e) {
@@ -46,30 +46,28 @@ const LazyDropDown = ({
 
   useEffect(() => {
     if (initialValue) {
-      fetchOptions([
-        { field: 'search', condition: 'like', value: String(initialValue) }
-      ]);
+      fetchOptions([{ field: 'search', condition: 'like', value: String(initialValue) }]);
     }
   }, [initialValue]);
 
   const debouncedFetchOptions = (val) => {
     if (!inputChanged) setInputChanged(true);
-    fetchOptions([
-      { field: 'search', condition: 'like', value: val },
-    ]);
+    fetchOptions([{ field: 'search', condition: 'like', value: val }]);
   };
 
   const handleMenuOpen = () => {
     if (options.length > 1) return;
 
     if (dropdownOptions.resource) {
-        fetchOptions([
-        { field: 'search', condition: 'like', value: '' }
-      ]);    
+      fetchOptions([{ field: 'search', condition: 'like', value: '' }]);
     }
   };
 
-  const handelSelect = ({ value }) => {
+  const handelSelect = (all) => {
+    const { value, label } = all;
+    if (dropdownOptions.alsoSetLabelTo) {
+      setValue(dropdownOptions.alsoSetLabelTo, label);
+    }
     setValue(name, value);
     if (onChange) onChange(name, value);
   };
@@ -77,7 +75,7 @@ const LazyDropDown = ({
   return (
     <FormGroup className={className} style={{ position: 'relative' }}>
       {label && <label className="form-control-label">{label}</label>}
-      {(!initialValue || options.length || inputChanged) ? (
+      {!initialValue || options.length || inputChanged ? (
         <ReactSelect
           filterOption={() => true}
           options={options}
@@ -91,15 +89,20 @@ const LazyDropDown = ({
       ) : (
         <ReactSelect key="diabled" isDisabled={disabled} onMenuOpen={handleMenuOpen} />
       )}
-      <Input type="text" name={name} innerRef={innerRef} style={{
-        height: 0,
-        width: 0,
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        zIndex: -1,
-        transform: 'translate(-50%, 50%)',
-      }} />
+      <Input
+        type="text"
+        name={name}
+        innerRef={innerRef}
+        style={{
+          height: 0,
+          width: 0,
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          zIndex: -1,
+          transform: 'translate(-50%, 50%)',
+        }}
+      />
     </FormGroup>
   );
 };

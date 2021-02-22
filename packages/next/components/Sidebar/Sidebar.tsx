@@ -14,7 +14,7 @@ interface IProps {
     outterLink?: string;
     imgSrc: string;
     imgAlt: string;
-  },
+  };
   rtlActive?: boolean;
   router: any;
 }
@@ -27,6 +27,8 @@ class Sidebar extends React.Component<IProps, any> {
     };
   }
   componentDidMount() {
+    if (typeof window === 'undefined') return null;
+
     this.setState({
       windowWidth: window.innerWidth,
       navigatorPlatform: navigator.platform,
@@ -149,6 +151,8 @@ class Sidebar extends React.Component<IProps, any> {
   };
   render() {
     const { routes, logo } = this.props;
+    if (typeof window === 'undefined') return null;
+
     const scrollBarInner = (
       <div className="scrollbar-inner">
         <div className="sidenav-header d-flex align-items-center">
@@ -197,21 +201,10 @@ class Sidebar extends React.Component<IProps, any> {
         onMouseEnter={this.onMouseEnterSidenav}
         onMouseLeave={this.onMouseLeaveSidenav}
       >
-        {this.state.navigatorPlatform && this.state.navigatorPlatform.indexOf('Win') > -1 ? (
-          <PerfectScrollbar>{scrollBarInner}</PerfectScrollbar>
-        ) : (
-          scrollBarInner
-        )}
+        {scrollBarInner}
       </Navbar>
     );
   }
 }
-
-// Sidebar.defaultProps = {
-//   routes: [{}],
-//   toggleSidenav: () => {},
-//   sidenavOpen: false,
-//   rtlActive: false,
-// };
 
 export default withRouter(Sidebar);
