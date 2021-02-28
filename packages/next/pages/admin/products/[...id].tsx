@@ -42,10 +42,40 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         { name: 'name', label: 'Name', type: 'text', class: 'col-lg-6', required: true },
         { name: 'price', label: 'Price', type: 'number', class: 'col-lg-6', required: true },
         {
+          name: 'data.collections',
+          label: 'Коллекция',
+          type: 'smartlist',
+          class: 'col-lg-6',
+          fieldSpecificParams: {
+            initialData: {
+              collection: '',
+              name: '',
+            },
+            fields: [
+              {
+                name: 'collection',
+                label: '',
+                type: 'lazydropdown',
+                class: 'col-12',
+                options: {
+                  resource: {
+                    url: '/lookups/collections',
+                    value: 'id',
+                    label: 'name',
+                  },
+                  alsoSetLabelTo: 'name',
+                },
+              },
+              { name: 'name', label: 'Name', type: 'text', class: 'd-none', required: true },
+            ],
+            columns: [{ name: 'name', label: 'Коллекция' }],
+          },
+        },
+        {
           name: 'data.categories',
           label: 'Категории',
           type: 'smartlist',
-          class: 'col-lg-12',
+          class: 'col-lg-6',
           fieldSpecificParams: {
             initialData: {
               category: '',
@@ -54,9 +84,9 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
             fields: [
               {
                 name: 'category',
-                label: 'Category',
+                label: '',
                 type: 'lazydropdown',
-                class: 'col-lg-6',
+                class: 'col-12',
                 options: {
                   resource: {
                     url: '/lookups/categories',
@@ -71,7 +101,36 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
             columns: [{ name: 'name', label: 'Категория' }],
           },
         },
-
+        {
+          name: 'data.colors',
+          label: 'Цвета',
+          type: 'smartlist',
+          class: 'col-lg-6',
+          fieldSpecificParams: {
+            initialData: {
+              color: '',
+              name: '',
+            },
+            fields: [
+              {
+                name: 'color',
+                label: '',
+                type: 'lazydropdown',
+                class: 'col-12',
+                options: {
+                  resource: {
+                    url: '/lookups/colors',
+                    value: 'id',
+                    label: 'name',
+                  },
+                  alsoSetLabelTo: 'name',
+                },
+              },
+              { name: 'name', label: 'Name', type: 'text', class: 'd-none', required: true },
+            ],
+            columns: [{ name: 'name', label: 'Цвет' }],
+          },
+        },
         { name: 'description', label: 'Описание', type: 'html', class: 'col-lg-12', required: true },
       ],
     },
@@ -85,7 +144,7 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
       resolvers: {
         title: (result) => result.id,
         link: (result) => `/admin/products/${result.id}/edit`,
-        entity: 'color',
+        entity: 'product',
       },
     },
   };

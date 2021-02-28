@@ -23,10 +23,10 @@ const IndexPage: React.FunctionComponent<any> = ({ alldata, id }) => {
   console.log('Rendering now', id, new Date());
   return (
     <NormalLayout>
-      <div className="col-lg-3 d-none d-lg-block d-xl-block">
+      <div className="col-lg-2 d-none d-lg-block d-xl-block">
         <ShopSidebar currentRoute={id} />
       </div>
-      <div className="col-lg-9 col-xs-12">
+      <div className="col-lg-10 col-xs-12">
         <ProductsList currentRoute={id} />
       </div>
     </NormalLayout>

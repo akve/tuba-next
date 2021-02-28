@@ -3,12 +3,13 @@ import startOfMonth from 'date-fns/startOfMonth';
 import endOfMonth from 'date-fns/endOfMonth';
 import lightFormat from 'date-fns/lightFormat';
 
-export const footerSumCalculator = (unit = '') => columnData => `${columnData.reduce((acc, item) => acc + item, 0)} ${unit}`;
+export const footerSumCalculator = (unit = '') => (columnData) =>
+  `${columnData.reduce((acc, item) => acc + item, 0)} ${unit}`;
 
-export const footerPercentCalculator = (unit = '') =>
-  (columnData) => `${(columnData.reduce((acc, item) => acc + item, 0) / columnData.length).toFixed(2)} ${unit}`;
+export const footerPercentCalculator = (unit = '') => (columnData) =>
+  `${(columnData.reduce((acc, item) => acc + item, 0) / columnData.length).toFixed(2)} ${unit}`;
 
-export const counterCreater = (startIndex: number = 0): () => number => {
+export const counterCreater = (startIndex: number = 0): (() => number) => {
   let index = startIndex;
   return (): number => index++;
 };
@@ -18,11 +19,9 @@ export const getId = (router: any, firstParam?: boolean) => {
   let id;
   if (!query) return null;
   if (isArray(query.id)) {
-    const ids = firstParam
-      ? [...query.id]
-      : [...query.id].reverse();
+    const ids = firstParam ? [...query.id] : [...query.id].reverse();
 
-    id = ids.find(i => +i && isFinite(+i));
+    id = ids.find((i) => +i && isFinite(+i));
   } else if (isString(query.id)) {
     id = query.id;
   } else if (isObject(query.id)) {
@@ -46,4 +45,17 @@ export const getEndOfMonth = (date = new Date()) => {
   const start = endOfMonth(date);
   const result = lightFormat(start, 'yyyy-MM-dd');
   return result;
+};
+
+export const resizeImage = (url: string, format: 'list' | 'thumb' | 'normal') => {
+  if (url.indexOf('cloudinary') < 0) return url;
+  if (format === 'list') {
+    return url.replace('/upload/', '/upload/w_400/');
+  }
+  if (format === 'thumb') {
+    return url.replace('/upload/', '/upload/w_200/');
+  }
+  if (format === 'normal') {
+    return url.replace('/upload/', '/upload/h_1000/');
+  }
 };

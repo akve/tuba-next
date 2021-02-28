@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import UiStore from '@pdeals/next/stores/uiStore';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-sea-green.min.css';
+import { resizeImage } from '@pdeals/next/utils/helpers';
 
 interface IProps {
   uiStore?: UiStore;
@@ -32,6 +33,7 @@ class ThumbnailSlider extends React.Component<IProps, any> {
 
   renderSecondary() {
     const isMobile = window.outerWidth < 700;
+    const product = this.props.uiStore!.ProductDetails;
 
     const secondaryOptions = {
       rewind: true,
@@ -53,30 +55,27 @@ class ThumbnailSlider extends React.Component<IProps, any> {
     };
 
     return (
-      <Splide
-        id="splide01"
-        options={secondaryOptions}
-        ref={this.secondaryRef}
-        className={isMobile ? 'slider-secondary-mobile' : ''}
-      >
-        <SplideSlide>
-          <img
-            src="https://res.cloudinary.com/dble3qk6e/image/upload/h_450/v1607120387/tuba/111/12.jpg"
-            alt="Image 1"
-          />
-        </SplideSlide>
-        <SplideSlide>
-          <img
-            src="https://res.cloudinary.com/dble3qk6e/image/upload/h_450/v1607120391/tuba/111/21.jpg"
-            alt="Image 2"
-          />
-        </SplideSlide>
-      </Splide>
+      <div style={isMobile ? { width: '100%' } : {}}>
+        <Splide
+          id="splide01"
+          options={secondaryOptions}
+          ref={this.secondaryRef}
+          className={isMobile ? 'slider-secondary-mobile' : ''}
+        >
+          {product.data.images.map((image, index) => (
+            <SplideSlide key={`${index}`}>
+              <img src={resizeImage(image.image, 'thumb')} alt="Image 1" />
+            </SplideSlide>
+          ))}
+        </Splide>
+      </div>
     );
   }
 
   render() {
     if (typeof window === 'undefined') return null;
+    const product = this.props.uiStore!.ProductDetails;
+
     const isMobile = window.outerWidth < 700;
     /*const primaryOptions = {
       type: 'loop',
@@ -86,24 +85,39 @@ class ThumbnailSlider extends React.Component<IProps, any> {
       gap: '1rem',
       pagination: false,
     };*/
+    const isHuge = window.outerWidth > 1400;
 
     function getImgWidth() {
       if (isMobile) {
         return 450;
       }
+      if (isHuge) {
+        return 600;
+      }
       return 500;
     }
 
-    const primaryOptions = {
-      type: 'fade',
-      height: `${getImgWidth()}px`,
-      autoWidth: true,
-      perPage: 1,
-      perMove: 1,
-      pagination: false,
-      arrows: true,
-      cover: false,
-    };
+    const primaryOptions = isMobile
+      ? {
+          type: 'fade',
+          autoHeight: true,
+          autoWidth: true,
+          perPage: 1,
+          perMove: 1,
+          pagination: false,
+          arrows: true,
+          cover: false,
+        }
+      : {
+          type: 'fade',
+          height: `${getImgWidth()}px`,
+          autoWidth: true,
+          perPage: 1,
+          perMove: 1,
+          pagination: false,
+          arrows: true,
+          cover: false,
+        };
 
     /*const secondaryOptions = {
       type: 'slide',
@@ -122,20 +136,20 @@ class ThumbnailSlider extends React.Component<IProps, any> {
     return (
       <>
         {!isMobile && this.renderSecondary()}
-        <Splide id="splide02" options={primaryOptions} ref={this.primaryRef}>
-          <SplideSlide>
-            <img
-              src="https://res.cloudinary.com/dble3qk6e/image/upload/h_450/v1607120387/tuba/111/12.jpg"
-              alt="Image 1"
-            />
-          </SplideSlide>
-          <SplideSlide>
-            <img
-              src="https://res.cloudinary.com/dble3qk6e/image/upload/h_450/v1607120391/tuba/111/21.jpg"
-              alt="Image 2"
-            />
-          </SplideSlide>
-        </Splide>
+        <div style={{ paddingLeft: isMobile ? 0 : '15px' }}>
+          <Splide id="splide02" options={primaryOptions} ref={this.primaryRef}>
+            {product.data.images.map((image, index) => (
+              <SplideSlide key={`${index}`}>
+                <img
+                  src={resizeImage(image.image, 'normal')}
+                  alt="Image 1"
+                  style={{ maxWidth: '80vw' }}
+                  height={getImgWidth()}
+                />
+              </SplideSlide>
+            ))}
+          </Splide>
+        </div>
         {isMobile && this.renderSecondary()}
       </>
     );

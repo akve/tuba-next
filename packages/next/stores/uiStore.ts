@@ -64,7 +64,8 @@ class UiStore {
     const categoryId = categoryRecord.id;
     console.log('???', categoryId);
 
-    return filter(this.allData.products, (r) => {
+    return filter(this.allData.products, (r: any) => {
+      if (r.invisible) return false;
       const rCategories: any = r.data.categories;
       if (rCategories && rCategories.length) {
         return !!find(rCategories, (c: any) => `${c.category}` === `${categoryId}`);
@@ -177,6 +178,9 @@ if (level === 'success') {
     }
     if (categoryId) {
       p.category = find(this.allData.categories.rows, (r: any) => `${r.id}` === `${categoryId}`);
+    }
+    if (!p.image) {
+      p.image = p.data.images[0].image;
     }
     return p;
   }

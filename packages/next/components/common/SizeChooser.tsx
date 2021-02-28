@@ -50,7 +50,7 @@ function SizeChooser(props: IProps) {
 
   return (
     <div className="size-chooser w-100">
-      <div className="d-flex flex-row justify-content-between">
+      <div className="d-flex flex-row">
         <DropDown
           class="mb-0"
           options={options}
@@ -63,7 +63,7 @@ function SizeChooser(props: IProps) {
         </Button>
       </div>
       <Collapse isOpen={isOpen}>
-        <Card>
+        <Card className="mt-1">
           <CardBody className="p-0">
             <SizeTable />
           </CardBody>

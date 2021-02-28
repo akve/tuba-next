@@ -43,7 +43,7 @@ function PublicNavbar(props: IProps) {
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-light tuba-navbar" expand="md">
         <div>
-          <Link href="/admin/dashboard">
+          <Link href="/">
             <span>
               <NavbarBrand href="/">
                 <img alt="..." src={require('assets/img/tuba/logo-top.png')} />
@@ -94,12 +94,17 @@ function PublicNavbar(props: IProps) {
               <ShopSidebar position="topmenu" />
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <Link href="/admin/dashboard">
-                    <NavLink href="#pablo" className="nav-link-icon">
+                  <Link href="/info/contacts">
+                    <NavLink href="/info/contacts" className="nav-link-icon">
                       <i className="ni ni-planet" />
                       <span className="nav-link-inner--text">{i18n.t('[R:О нас][U:Про нас]')}</span>
                     </NavLink>
                   </Link>
+                </NavItem>
+                <NavItem>
+                  <a href="tel:+380502831543" className="nav-link-icon nav-link">
+                    <i className="ni ni-mobile-button" /> +380502831543
+                  </a>
                 </NavItem>
               </Nav>
             </UncontrolledCollapse>

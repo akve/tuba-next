@@ -1,6 +1,6 @@
 // import config from './lib/config';
 import { createTypeormConnection, getTypeormManager } from '@pdeals/db';
-const store = require('./store.json');
+import * as store from './store.json';
 import { Color } from '@pdeals/models/entities/Color';
 import { Collection } from '@pdeals/models/entities/Collection';
 import { Category } from '@pdeals/models/entities/Category';
@@ -50,7 +50,7 @@ const importCollections = async (): Promise<any> => {
     const e = await repo.save(record);
     collectionsMap[e.code] = e.id;
   }
-  for (let i = 0; i < store.categories.length; i++) {
+  /*for (let i = 0; i < store.categories.length; i++) {
     if (!store.categories[i].id) continue;
     const record = repo.create({
       code: store.categories[i].id,
@@ -60,7 +60,7 @@ const importCollections = async (): Promise<any> => {
     });
     const e = await repo.save(record);
     collectionsMap[e.code] = e.id;
-  }
+  }*/
   //  console.log(collectionsMap);
   return null;
 };
@@ -119,6 +119,18 @@ const importCategories = async (): Promise<any> => {
     const e = await repo.save(record);
     categoryMap[e.code] = e.id;
   }
+  for (let i = 0; i < store.categories.length; i++) {
+    if (!store.categories[i].id) continue;
+    const record = repo.create({
+      code: store.categories[i].id,
+      parent: 0,
+      data: {},
+      sorter: i + 1,
+      name: store.categories[i].title,
+    });
+    const e = await repo.save(record);
+    categoryMap[e.code] = e.id;
+  }
   //  console.log(collectionsMap);
   return null;
 };
@@ -163,9 +175,13 @@ const importProducts = async (): Promise<any> => {
     if (!r.id) continue;
     const categories: any[] = [];
     const collections: any[] = [];
+    const colors: any[] = [];
     if (r.categories) {
       r.categories.forEach((cat: any): any => {
         if (collectionsMap[cat]) collections.push({ collection: collectionsMap[cat], name: cat });
+      });
+      r.categories.forEach((cat: any): any => {
+        if (categoryMap[cat.id]) categories.push({ category: categoryMap[cat.id], name: cat.id });
       });
     }
     if (r.group) {
@@ -182,6 +198,11 @@ const importProducts = async (): Promise<any> => {
     if (r.isnew) {
       categories.push({ category: categoryMap['new'], name: 'New' });
     }
+    if (r.colors) {
+      r.colors.forEach((cat: any): any => {
+        if (colorsMap[cat.id]) colors.push({ color: colorsMap[cat.id], name: cat.id });
+      });
+    }
     const record = repo.create({
       code: r.id,
       name: r.title,
@@ -195,6 +216,7 @@ const importProducts = async (): Promise<any> => {
         images: r.images.map((img: any) => {
           return { image: img.path };
         }),
+        colors,
         categories: categories,
         collections: collections,
       },
@@ -218,12 +240,15 @@ const run = async () => {
     mapCategories,
     importProducts
   );
-  // await importColors();
-  await mapColors();
-  // await importCollections();
-  await mapCollections();
-  // await importCategories();
-  await mapCategories();
+  if (true) {
+    await importColors();
+    await importCollections();
+    await importCategories();
+  } else {
+    await mapColors();
+    await mapCollections();
+    await mapCategories();
+  }
 
   await importProducts();
   // console.log(categoryMap);

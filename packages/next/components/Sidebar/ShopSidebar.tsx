@@ -98,7 +98,7 @@ class ShopSidebar extends React.Component<IProps, any> {
       );
     });
   };
-  prepareRoutes = (rawRoutes) => {
+  prepareRoutes = (rawRoutes, rawCollections) => {
     // console.log('R', rawRoutes);
     const findByParent = (parentId: number) => {
       return (
@@ -126,6 +126,24 @@ class ShopSidebar extends React.Component<IProps, any> {
       });
     };
     startBuild(res, 0, 0, '');
+    const collections = {
+      icon: '-',
+      name: t('[R:Коллекции][U:Колекції]'),
+      layout: '',
+      path: '/collection/1',
+      level: 0,
+      collapse: true,
+      views: rawCollections.map((c) => {
+        return {
+          icon: '-',
+          name: t(c.name),
+          layout: '',
+          path: '/collection/' + c.code,
+          level: 1,
+        };
+      }),
+    };
+    res.push(collections);
     return res;
   };
 
@@ -134,7 +152,10 @@ class ShopSidebar extends React.Component<IProps, any> {
   };
 
   render() {
-    const routes = this.prepareRoutes(this.props.uiStore.allData.categories.rows);
+    const routes = this.prepareRoutes(
+      this.props.uiStore.allData.categories.rows,
+      this.props.uiStore.allData.collections
+    );
     if (this.props.position === 'topmenu') {
       return (
         <>
@@ -174,7 +195,7 @@ class ShopSidebar extends React.Component<IProps, any> {
       );
     }
     return (
-      <div className="d-none d-md-block">
+      <div className="d-none d-md-block shop-sidebar">
         <Nav navbar>{this.createLinks(routes)}</Nav>
       </div>
     );

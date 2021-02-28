@@ -69,10 +69,14 @@ const SmartList = ({
 
   const renderForm = (fields: IFormField[]) => {
     return (
-      <>
-        {fields.map((field, index) => renderField(field, index))}
-        <a onClick={() => onAddRow()}>Add</a>
-      </>
+      <div className="d-flex">
+        <div style={{ minWidth: '250px' }}>{fields.map((field, index) => renderField(field, index))}</div>
+        <div>
+          <button className="btn btn-outline-default" onClick={() => onAddRow()}>
+            <i className="fa fa-plus-circle" /> Добавить
+          </button>
+        </div>
+      </div>
     );
   };
   const onRemoveRow = (index) => {
@@ -90,17 +94,24 @@ const SmartList = ({
   const renderList = () => {
     if (!value || !value.length) return null;
     return (
-      <table>
+      <table style={{ marginLeft: '15px' }}>
         {value.map((row, index) => (
           <tr key={`${index}`}>
             {listOptions.columns.map((col, colIndex) => (
               <td key={`${colIndex}`}>{row[col.name]}</td>
             ))}
             <td>
-              <a onClick={() => onRemoveRow(index)}>[x]</a>
+              <a onClick={() => onRemoveRow(index)}>
+                <i className="ni ni-fat-remove" style={{ fontSize: '20px' }} />
+              </a>
             </td>
           </tr>
         ))}
+        <tr>
+          <td colSpan={100}>
+            <hr style={{ marginTop: 10, marginBottom: 10 }} />
+          </td>
+        </tr>
       </table>
     );
   };

@@ -10,7 +10,7 @@ const setLang = (lang) => {
 const t = (s: string) => {
   const l = currentLang();
   if (!s) return s;
-  const regex = /\[(R|U|E):(.*?)\]/g;
+  const regex = /\[(R|U|E):(.*?)\]/gs;
   let m: any = null;
   let removed = false;
   while (s.match(regex)) {

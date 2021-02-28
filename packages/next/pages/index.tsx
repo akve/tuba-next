@@ -19,10 +19,10 @@ const IndexPage: React.FunctionComponent<any> = ({ alldata }) => {
   console.log('Rendering now', alldata, new Date());
   return (
     <NormalLayout withHeading>
-      <div className="col-lg-3 d-none d-lg-block d-xl-block">
+      <div className="col-lg-2 d-none d-lg-block d-xl-block">
         <ShopSidebar currentRoute="featured" />
       </div>
-      <div className="col-lg-9 col-xs-12">
+      <div className="col-lg-10 col-xs-12">
         <ProductsList currentRoute="featured" />
       </div>
     </NormalLayout>

@@ -15,7 +15,7 @@ const CartPreview = ({ orderStore, allData }) => {
 
   return (
     <>
-      <h1>{i18n.t('[U:Кошик][R:Корзина]')}</h1>
+      <h1 style={{ marginLeft: '20px' }}>{i18n.t('[U:Кошик][R:Корзина]')}</h1>
       <table className="table table-cart">
         <thead>
           <tr>
@@ -35,7 +35,7 @@ const CartPreview = ({ orderStore, allData }) => {
                   <div className="pl-2 ">
                     <b>{i18n.t(product.name)}</b>
                     <br />
-                    {i18n.t('[R:Цвет][U:Колір]')}: <b>...</b>
+                    {i18n.t('[R:Цвет][U:Колір]')}: <b>{product.color}</b>
                     <br />
                     {i18n.t('[R:Размер][U:Розмір]')}: <b>{product.size}</b>
                   </div>
@@ -61,7 +61,7 @@ const CartPreview = ({ orderStore, allData }) => {
               <div className="text-right" style={{ marginRight: '5px' }}>
                 <b className="text-right mr-10">{i18n.t(product.name)}</b>
                 <br />
-                {i18n.t('[R:Цвет][U:Колір]')}: <b>...</b>
+                {i18n.t('[R:Цвет][U:Колір]')}: <b>{product.color}</b>
                 <br />
                 {i18n.t('[R:Размер][U:Розмір]')}: <b>{product.size}</b>
                 <div>

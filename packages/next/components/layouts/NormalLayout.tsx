@@ -13,14 +13,17 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
         <PublicNavbar />
 
         {/*<!-- Header -->*/}
-        <div className="header bg-gradient-primary py-7 py-lg-8">
-          {props.withHeading && (
-            <div className="container">
+        <div className="header bg-gradient-primary py-3 py-lg-3">
+          {(props.withHeading || true) && (
+            <div className="container heading-container" style={{ paddingBottom: '20px' }}>
               <div className="header-body text-center mb-7" style={{ marginTop: '30px' }}>
                 <div className="row justify-content-center">
                   <div className="col-lg-5 col-md-6">
-                    <h1 className="text-white">{t('[R:Привет][U:Вiтаємо]')}</h1>
-                    <p className="text-lead text-light">Туба-дуба - это одежда с душой</p>
+                    <div className="main-menu">
+                      <a href="/">Магазин</a>
+                      <a href="/">Акции</a>
+                      <a href="/">Доставка</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -43,7 +46,7 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
         <div className="container mt--8 pb-5 main-content-block">
           <div className="row justify-content-center">
             <div className="col-lg-12">
-              <div className="card bg-secondary shadow border-0 d-flex flex-row flex-wrap">{props.children}</div>
+              <div className="card shadow border-0 d-flex flex-row flex-wrap">{props.children}</div>
             </div>
           </div>
         </div>
@@ -58,18 +61,13 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
             <div className="col-xl-6">
               <ul className="nav nav-footer justify-content-center justify-content-xl-end">
                 <li className="nav-item">
-                  <a href="https://www.creative-tim.com" className="nav-link" target="_blank">
-                    Creative Tim
+                  <a href="https://www.facebook.com/tubaiduba" className="nav-link" target="_blank">
+                    <i className="fa fa-facebook" /> Facebook
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" className="nav-link" target="_blank">
-                    About Us
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="http://blog.creative-tim.com" className="nav-link" target="_blank">
-                    Blog
+                  <a href="https://www.instagram.com/tubaiduba/" className="nav-link" target="_blank">
+                    <i className="fa fa-instagram" /> Instagram
                   </a>
                 </li>
               </ul>

@@ -23,6 +23,7 @@ import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
 import Snippet from '@pdeals/next/components/Snippet/Snippet';
 import Breadcrumb from '@pdeals/next/components/Product/Breadcrumb';
+import { resizeImage } from '@pdeals/next/utils/helpers';
 
 interface IProps {
   uiStore?: UiStore;
@@ -45,11 +46,15 @@ function ProductsList(props: IProps) {
           <div className="col-lg-4 col-xs-12 product-item" key={`${product.code}`}>
             <Card className="">
               <Link href={`/product/${product.code}`}>
-                <img src={product.image || require('assets/img/tuba/logo-top.png')} className="card-img-top" />
+                <a href={`/product/${product.code}`} className="card-img-top">
+                  <img src={resizeImage(product.image, 'list') || require('assets/img/tuba/logo-top.png')} />
+                </a>
               </Link>
               <div className="card-body text-center">
                 <Link href={`/product/${product.code}`}>
-                  <h4>{i18n.t(product.name)}</h4>
+                  <a href={`/product/${product.code}`}>
+                    <h4>{i18n.t(product.name)}</h4>
+                  </a>
                 </Link>
                 <div className="text-muted price-text">{product.price} грн</div>
                 <button className="btn btn-outline-secondary" onClick={() => onAddToCart(product)}>
