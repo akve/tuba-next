@@ -21,10 +21,11 @@ import { inject, observer } from 'mobx-react';
 import ShopSidebar from '../Sidebar/ShopSidebar';
 import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
+import OrderStore from '@pdeals/next/stores/orderStore';
 
 interface IProps {
   uiStore?: UiStore;
-  orderStore?: UiStore;
+  orderStore?: OrderStore;
 }
 function PublicNavbar(props: IProps) {
   const { uiStore } = props;

@@ -17,3 +17,4 @@ packages/crawler/downloads
 packages/next/.next
 
 packages/crawler/fiddle.js
+packages/api/.env

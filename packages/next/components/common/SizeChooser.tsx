@@ -24,7 +24,7 @@ import { getRenderer } from '@pdeals/next/components/registerFormRenderer';
 import { SizeTable } from './SizeTable';
 
 interface IProps {
-  value: number;
+  value: string;
   onChange: any;
 }
 

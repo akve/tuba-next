@@ -8,7 +8,7 @@ import ShopSidebar from '../components/Sidebar/ShopSidebar';
 import ProductsList from '@pdeals/next/components/ProductsList/ProductsList';
 import NormalLayout from '@pdeals/next/components/layouts/NormalLayout';
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const alldata = await client().get('/open/alldata');
   return { props: { alldata } };
 }

@@ -4,9 +4,15 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { Form, FormGroup, Input, Card, CardHeader, Row, Button, Col, CardBody } from 'reactstrap';
 import { getRenderer } from '@pdeals/next/components/registerFormRenderer/index';
+import OrderStore from '@pdeals/next/stores/orderStore';
 
-const CartForm = ({ orderStore }) => {
-  const { cart } = orderStore!;
+interface IProps {
+  orderStore?: OrderStore;
+}
+
+const CartForm = (props: IProps) => {
+  const orderStore = props.orderStore!;
+  const { cart } = orderStore;
   const router = useRouter();
   const formOptions = {
     defaultValues: {

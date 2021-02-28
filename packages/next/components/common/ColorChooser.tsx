@@ -21,10 +21,10 @@ import * as i18n from '@pdeals/next/utils/i18n';
 import { find } from 'lodash';
 
 interface IProps {
-  value: number;
+  value: string;
   onChange: any;
   product: any;
-  uiStore: UiStore;
+  uiStore?: UiStore;
 }
 
 function ColorChooser(props: IProps) {
@@ -32,10 +32,10 @@ function ColorChooser(props: IProps) {
     props.onChange(change);
   };
   const prepareColors = () => {
-    const res = [];
-    let selected = null;
+    const res: any = [];
+    let selected: any = null;
     props.product.data.colors.forEach((c: any) => {
-      const found = find(props.uiStore.allData.colors, (r) => r.id === c.color);
+      const found = find(props.uiStore!.allData.colors, (r) => r.id === c.color);
       const c2 = { id: found.id, name: found.name, image: found.image };
       if (c2.name === props.value) {
         selected = c2;

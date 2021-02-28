@@ -107,7 +107,7 @@ class ShopSidebar extends React.Component<IProps, any> {
         }) || []
       );
     };
-    const res = [];
+    const res: any = [];
     const startBuild = (target: any, parent: number, level: number, parentcode: string) => {
       const children = findByParent(parent);
       children.forEach((child: any) => {

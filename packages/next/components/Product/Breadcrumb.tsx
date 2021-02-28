@@ -22,13 +22,13 @@ import {find} from 'lodash';
 
 interface IProps {
   uiStore?: UiStore;
-  type: 'product' | 'list';
+  type: 'product' | 'list' | 'category';
   id?: string;
 }
 function Breadcrumb(props: IProps) {
   const { uiStore } = props;
   const calculateBreadcrumbs = () => {
-    const res = [];
+    const res: any = [];
     if (props.type === 'product') {
       const p = uiStore!.ProductDetails;
       if (p) {

@@ -14,22 +14,9 @@ services:
    - ${DATA_PATH}/pg:/var/lib/postgresql/data
    - ${CODE_PATH}/scripts/entrypoints/init.sql:/docker-entrypoint-initdb.d/init.sql
   environment:
-   - POSTGRES_USER=pdeals
-   - POSTGRES_DB=pdeals
-   - POSTGRES_PASSWORD=pdeals
-
- redis:
-  image: redis
-  container_name: p_redis
-  networks:
-   - backend
-  ports:
-   - 6379:6379
-  volumes:
-   - ${DATA_PATH}/redis:/data
-  command:
-   - --appendonly
-   - "yes"
+   - POSTGRES_USER=tuba
+   - POSTGRES_DB=tuba
+   - POSTGRES_PASSWORD=tuba
 
  frontend:
   image: node:12.4
@@ -56,30 +43,12 @@ services:
   networks:
    - backend
   depends_on:
-   - redis
    - db
   ports:
    - 3001:3001
   volumes:
    - ${CODE_PATH}:/data
   environment:
-   - NODE_ENV
-   - NPM
-
- crawler:
-  image: buildkite/puppeteer
-  container_name: p_crawler
-  user: ${UID:-0}
-  entrypoint: /data/scripts/crawler.sh
-  networks:
-   - backend
-  depends_on:
-   - redis
-   - db
-  volumes:
-   - ${CODE_PATH}:/data
-  environment:
-   - ENV
    - NODE_ENV
    - NPM
 

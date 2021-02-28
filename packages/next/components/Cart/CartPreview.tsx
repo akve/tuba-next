@@ -1,8 +1,14 @@
 import { inject, observer } from 'mobx-react';
 import * as i18n from '@pdeals/next/utils/i18n';
 import { find } from 'lodash';
+import OrderStore from '@pdeals/next/stores/orderStore';
 
-const CartPreview = ({ orderStore, allData }) => {
+interface IProps {
+  orderStore?: OrderStore;
+  allData: any;
+}
+const CartPreview = (props: IProps) => {
+  const { orderStore, allData } = props;
   const { cart } = orderStore!;
   const getProduct = (product) => {
     console.log(allData, product.code);

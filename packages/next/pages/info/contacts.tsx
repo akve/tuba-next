@@ -22,7 +22,7 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata }) => {
     <NormalLayout>
       <div className="d-flex w-100">
         <div>
-          <Snippet id={'contacts'} />
+          <Snippet code={'contacts'} />
         </div>
       </div>
     </NormalLayout>

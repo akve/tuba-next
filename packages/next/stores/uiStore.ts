@@ -171,7 +171,7 @@ if (level === 'success') {
     if (!p) return {};
     const categories = get(p, 'data.categories') || null;
     console.log('FOUND?', p, this.allData, categories);
-    let categoryId = null;
+    let categoryId: any = null;
     if (categories) {
       categoryId = find(categories, (r) => ['featured', 'new', 'sale'].indexOf(r.name) < 0);
       if (categoryId) categoryId = categoryId.category;
