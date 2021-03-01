@@ -140,12 +140,8 @@ class ThumbnailSlider extends React.Component<IProps, any> {
           <Splide id="splide02" options={primaryOptions} ref={this.primaryRef}>
             {product.data.images.map((image, index) => (
               <SplideSlide key={`${index}`}>
-                <img
-                  src={resizeImage(image.image, 'normal')}
-                  alt="Image 1"
-                  style={{ maxWidth: '80vw' }}
-                  height={getImgWidth()}
-                />
+                <img src={resizeImage(image.image, 'normal')} alt="Image 1" height={getImgWidth()} />{' '}
+                {/*style={{ maxWidth: 'calc(100vw-60px)' }}*/}
               </SplideSlide>
             ))}
           </Splide>

@@ -53,7 +53,7 @@ function PublicNavbar(props: IProps) {
           </Link>
         </div>
         <div>
-          <Container className="px-4">
+          <Container className="px-1">
             <div className="nav-top-line" style={{ marginLeft: 'auto' }}>
               <div className="top-cart">
                 {productsInCart === 0 && <i className="ni ni-cart" />}
@@ -71,7 +71,7 @@ function PublicNavbar(props: IProps) {
               </span>
             </div>
           </Container>
-          <Container className="px-4">
+          <Container className="px-1">
             <div></div>
             <button className="navbar-toggler" id="navbar-collapse-main">
               <span className="navbar-toggler-icon" />
