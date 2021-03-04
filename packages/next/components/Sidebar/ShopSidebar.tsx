@@ -103,7 +103,7 @@ class ShopSidebar extends React.Component<IProps, any> {
     const findByParent = (parentId: number) => {
       return (
         filter(rawRoutes, (r: any) => {
-          return (parentId === 0 ? !r.parent : r.parent === parentId) && !r.invisible;
+          return (parentId === 0 ? !r.parent : r.parent === parentId) && r.invisible !== 'true';
         }) || []
       );
     };
