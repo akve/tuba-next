@@ -87,7 +87,7 @@ const sendEmail = async (order: any, generatedId: string) => {
     },
   });
   text = 'Спасибо за заказ! Наш менеджер свяжется с вами: ' + text;
-  const info2 = await transporter.sendMail({
+  await transporter.sendMail({
     from: '"Tuba Duba Shop" <tubadubauk@gmail.com>', // sender address
     to: 'tubadubauk@gmail.com', // list of receivers
     subject: `Ваш заказ - ${order.data.email}`, // Subject line
