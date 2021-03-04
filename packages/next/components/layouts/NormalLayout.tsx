@@ -5,8 +5,15 @@ import { t, setLang, currentLang } from '@pdeals/next/utils/i18n';
 import { client } from '../../lib/api/api-client';
 import { getStore } from '@pdeals/next/stores/initStore';
 import Snippet from '@pdeals/next/components/Snippet/Snippet';
+import Link from 'next/link';
 
 const NormalLayout: React.FunctionComponent<any> = (props) => {
+  const links = [
+    { href: '/', title: 'Магазин' },
+    { href: '/info/otzyvy', title: t('[R:Отзывы][U:Відгуки]') },
+    { href: '/info/contacts', title: t('[R:Контакты][U:Контакти]') },
+  ];
+
   return (
     <div className="bg-default">
       <div className="main-content">
@@ -20,9 +27,11 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
                 <div className="row justify-content-center">
                   <div className="col-lg-5 col-md-6">
                     <div className="main-menu">
-                      <a href="/">Магазин</a>
-                      <a href="/">Акции</a>
-                      <a href="/">Доставка</a>
+                      {links.map((link) => (
+                        <Link href={link.href}>
+                          <a href={link.href}>{link.title}</a>
+                        </Link>
+                      ))}
                     </div>
                   </div>
                 </div>

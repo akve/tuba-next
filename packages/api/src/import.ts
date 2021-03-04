@@ -11,6 +11,17 @@ const colorsMap: any = {};
 const collectionsMap: any = {};
 const categoryMap: any = {};
 
+const convertImg = (path: string) => {
+  if (path.indexOf('cloudinary') >= 0) return path;
+  if (path.indexOf('/wp-content') === 0) {
+    return '/oldimages/' + path.replace('/wp-content/uploads/', '');
+  }
+  if (path.indexOf('tuba-duba.com') > 0) {
+    return '/oldimages/' + path.split('/wp-content/uploads/')[1];
+  }
+  return path;
+};
+
 const importColors = async (): Promise<any> => {
   await conn.query('delete from color; ');
   const repo = await getTypeormManager().getRepository(Color);
@@ -20,7 +31,7 @@ const importColors = async (): Promise<any> => {
     const record = repo.create({
       name: store.colorCodes[i].id,
       data: {},
-      image: store.colorCodes[i].path_big,
+      image: convertImg(store.colorCodes[i].path_big),
     });
     const e = await repo.save(record);
     colorsMap[e.name] = e.id;
@@ -214,7 +225,7 @@ const importProducts = async (): Promise<any> => {
       sorter: i + 1,
       data: {
         images: r.images.map((img: any) => {
-          return { image: img.path };
+          return { image: convertImg(img.path) };
         }),
         colors,
         categories: categories,

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
+import Safe from 'react-safe';
 
 import PageChange from 'components/PageChange/PageChange.js';
 
@@ -78,6 +79,38 @@ export default class MyApp extends App {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
           <title>TubaDuba</title>
+          <meta property="og:title" content="Туба-дуба: пространство легкости и красоты" />
+          <meta property="og:description" content="Одежда, которая обнимает..." />
+          <meta
+            property="description"
+            content="Волшебная одежда, созданная с легкостью и любовью для Вас. Проект, объединяющий творческих людей. С радостью ответим на ваши вопросы: 38 050 050 176 42 23"
+          />
+          <meta
+            property="og:image"
+            content="https://tuba-duba.com/wp-content/uploads/2016/08/13932973_1088930401199199_138885520_n.jpg"
+          />
+          <meta name="p:domain_verify" content="f80bef3d9d034afebf0911637637190e" />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>
+          <Safe.script>
+            {`!function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '366138666843162');
+            fbq('track', 'PageView');`}
+          </Safe.script>
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: 'none' }}
+              src="https://www.facebook.com/tr?id=366138666843162&ev=PageView&noscript=1"
+            />
+          </noscript>
         </Head>
         <Provider {...this.state.mobxStore}>
           <Layout>
