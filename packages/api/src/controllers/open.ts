@@ -32,6 +32,13 @@ export class OpenController {
     const rows = await getTypeormConnection().query('select * from product');
     data.collections = await await getTypeormConnection().query('select * from collection');
 
+    rows.forEach((r: any) => {
+      try {
+        r.image = r.data.images[0].image;
+      } catch (e) {
+        console.log('bad image');
+      }
+    });
     data.products = rows;
 
     data.snippets = await getTypeormConnection().query('select * from snippet');
