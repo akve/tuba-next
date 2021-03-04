@@ -23,6 +23,8 @@ class UiStore {
 
   @observable category: string | null = null;
 
+  @observable collection: string | null = null;
+
   @observable product: string | null = null;
 
   @observable breadCrumbs: { data: IBreadcrumb[]; title: string; resolvers: any } = {
@@ -47,6 +49,11 @@ class UiStore {
   @action setCategory(cat: string) {
     this.category = cat;
   }
+
+  @action setCollection(cat: string) {
+    this.collection = cat;
+  }
+
   @action setProduct(id: string | number) {
     this.product = `${id}`;
   }
@@ -56,19 +63,22 @@ class UiStore {
     this.allData = data;
   }
 
-  @action getListByCategory(category: string) {
+  @action getListByCategory(category: string, isForCollection?: boolean) {
     if (!category) return this.allData.products;
-    console.log('filter by', category);
-    const categoryRecord = find(this.allData.categories.rows, (r) => r.code === category);
+    console.log('filter by', category, isForCollection);
+    let categoryRecord = find(this.allData.categories.rows, (r) => r.code === category);
+    if (isForCollection) {
+      categoryRecord = find(this.allData.collections, (r) => r.code === category || `${r.id}` === category);
+    }
     if (!categoryRecord) return [];
     const categoryId = categoryRecord.id;
     console.log('???', categoryId);
 
     return filter(this.allData.products, (r: any) => {
       if (r.invisible) return false;
-      const rCategories: any = r.data.categories;
+      const rCategories: any = isForCollection ? r.data.collections : r.data.categories;
       if (rCategories && rCategories.length) {
-        return !!find(rCategories, (c: any) => `${c.category}` === `${categoryId}`);
+        return !!find(rCategories, (c: any) => `${isForCollection ? c.collection : c.category}` === `${categoryId}`);
       }
       return false;
     });

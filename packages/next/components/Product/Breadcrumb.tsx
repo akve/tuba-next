@@ -24,6 +24,7 @@ interface IProps {
   uiStore?: UiStore;
   type: 'product' | 'list' | 'category';
   id?: string;
+  isForCollection?: boolean;
 }
 function Breadcrumb(props: IProps) {
   const { uiStore } = props;
@@ -45,24 +46,36 @@ function Breadcrumb(props: IProps) {
       }
     }
     if (props.type === 'category') {
-        if (props.id !== 'featured') {
-          const cat = find(uiStore!.allData.categories.rows, r => r.code === props.id);
-          if (cat) {
-            if (cat.parent) {
-              const parent = find(uiStore!.allData.categories.rows, r => r.id === cat.parent);
-              if (parent) {
-                res.push({
-                  link: `/category/${parent.code}`,
-                  title: i18n.t(parent.name),
-                });
-              }
+        if (props.isForCollection) {
+            const cat = find(uiStore!.allData.collections, r => `${r.id}` === props.id || r.code === props.id);
+            if (cat) {
+              res.push({
+                link: `/collections/${cat.code}`,
+                title: `${i18n.t('[R:Коллекция][U:Колекцiя]')}: ${i18n.t(cat.name)}`,
+              });
             }
-            res.push({
-              link: `/category/${cat.code}`,
-              title: i18n.t(cat.name),
-            });
+        } else {
+
+        if (props.id !== 'featured') {
+            const cat = find(uiStore!.allData.categories.rows, r => r.code === props.id);
+            if (cat) {
+              if (cat.parent) {
+                const parent = find(uiStore!.allData.categories.rows, r => r.id === cat.parent);
+                if (parent) {
+                  res.push({
+                    link: `/category/${parent.code}`,
+                    title: i18n.t(parent.name),
+                  });
+                }
+              }
+              res.push({
+                link: `/category/${cat.code}`,
+                title: i18n.t(cat.name),
+              });
+            }
           }
         }
+
     }
     return res;
   };

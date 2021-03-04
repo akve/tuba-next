@@ -27,11 +27,12 @@ import { resizeImage } from '@pdeals/next/utils/helpers';
 
 interface IProps {
   uiStore?: UiStore;
+  isForCollection?: boolean;
   currentRoute?: string;
 }
 function ProductsList(props: IProps) {
   const { uiStore } = props;
-  const products = uiStore!.getListByCategory(props.currentRoute!) || [];
+  const products = uiStore!.getListByCategory(props.currentRoute!, !!props.isForCollection) || [];
   const productsList = products; //.slice(0, 20);
 
   const onAddToCart = (product: any) => {
@@ -40,7 +41,7 @@ function ProductsList(props: IProps) {
 
   return (
     <div className="products-list">
-      <Breadcrumb type="category" id={props.currentRoute!} />
+      <Breadcrumb type="category" id={props.currentRoute!} isForCollection />
       <div className="list-wrapper">
         {productsList.map((product) => (
           <div className="col-lg-4 col-xs-12 product-item" key={`${product.code}`}>

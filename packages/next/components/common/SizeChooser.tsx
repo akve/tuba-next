@@ -56,7 +56,7 @@ function SizeChooser(props: IProps) {
           options={options}
           initialValue={props.value}
           value={props.value}
-          onChange={(e, v) => props.onChange(v)}
+          onChange={(e) => props.onChange(e)}
         />
         <Button outline size="sm" className="button-smaller" onClick={toggle}>
           {i18n.t('[R:Таблица размеров][U:Таблиця розмірів]')}

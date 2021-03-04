@@ -38,6 +38,7 @@ function ProductContent(props: IProps) {
   console.log(product);
 
   const onAddToCart = (buyImmediately?: boolean) => {
+    console.log('S', size);
     props.orderStore!.putToCart({
       name: `${product.name}`,
       code: `${product.code}`,
@@ -74,7 +75,13 @@ function ProductContent(props: IProps) {
         <div className="order-wrapper">
           <AmountChooser value={amount} onChange={(v) => setAmount(v)} />
           <h4>{i18n.t('[U:Розмір][R:Размер]')}</h4>
-          <SizeChooser value={size} onChange={(v) => setSize(v)} />
+          <SizeChooser
+            value={size}
+            onChange={(v) => {
+              console.log('?????', v);
+              setSize(v);
+            }}
+          />
           <h4>{i18n.t('[U:Колiр][R:Цвет]')}</h4>
           <ColorChooser product={product} value={color} onChange={(v) => setColor(v)} />
           {/*

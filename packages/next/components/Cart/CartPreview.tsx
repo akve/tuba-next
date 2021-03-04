@@ -67,7 +67,7 @@ const CartPreview = (props: IProps) => {
               <div className="text-right" style={{ marginRight: '5px' }}>
                 <b className="text-right mr-10">{i18n.t(product.name)}</b>
                 <br />
-                {i18n.t('[R:Цвет][U:Колір]')}: <b>{product.color}</b>
+                {i18n.t('[R:Цвет][U:Колір]')}: <b>{i18n.t(product.color || '')}</b>
                 <br />
                 {i18n.t('[R:Размер][U:Розмір]')}: <b>{product.size}</b>
                 <div>

@@ -12,7 +12,7 @@ const buildOrder = (order: any) => {
     }(грн);;`;
     html += `<tr>
       <td>${product.amount}</td>
-      <td>${i18n.t(product.name)} // ${product.color}</td>
+      <td>${i18n.t(product.name)} // ${i18n.t(product.color)}</td>
       <td>${product.price}</td>
       <td>${product.size}</td>
     </tr>`;
