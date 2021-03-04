@@ -72,6 +72,7 @@ export class LookupsController {
           originalName: child.name,
           parent: child.parent || 0,
           code: subcode,
+          invisible: child.invisible,
           level: level,
         });
         startBuild(child.id, level + 1, subcode, subname);
