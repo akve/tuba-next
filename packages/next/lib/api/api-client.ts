@@ -19,7 +19,7 @@ class ClientParams {
 }
 
 const internalClient = (params?: ClientParams) => {
-  process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+  process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
   const isServer = typeof window === 'undefined';
   const token = isServer ? '' : window.localStorage.getItem('token') || window.sessionStorage.getItem('token');
   const store = getStore();
