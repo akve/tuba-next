@@ -6,6 +6,12 @@ const routes = [
     icon: 'ni ni-vector text-primary',
   },
   {
+    path: '/organize',
+    name: 'Организатор',
+    layout: '/admin',
+    icon: 'ni ni-vector text-primary',
+  },
+  {
     path: '/settings/admins',
     name: 'Администраторы',
     layout: '/admin',

@@ -44,32 +44,31 @@ class ShopSidebar extends React.Component<IProps, any> {
       }
       if (prop.collapse) {
         const isOpen = !!(this.state.openroutes.indexOf(prop.path) >= 0);
+        const onOpen = (e: any) => {
+          e.preventDefault();
+          let r;
+          if (isOpen) {
+            const routes = [...this.state.openroutes];
+            routes.splice(this.state.openroutes.indexOf(prop.path), 1);
+            this.setState({ openroutes: routes });
+          } else {
+            r = [...this.state.openroutes, prop.path];
+            console.log('!', r);
+            this.setState({ openroutes: r });
+          }
+        };
         return (
           <NavItem key={key}>
             <NavLink
               data-toggle="collapse"
-              href={prop.layout + prop.path}
+              href={prop.path ? prop.layout + prop.path : null}
               aria-expanded={isOpen}
               className={'sidenav-shop-expandable' + this.activeRoute(prop.path)}
               style={{ paddingLeft: prop.level * 40 }}
+              onClick={prop.path ? null : onOpen}
             >
               <span className="sidenav-normal"> {prop.name} </span>
-              <span
-                className="sidenav-expander"
-                onClick={(e) => {
-                  e.preventDefault();
-                  let r;
-                  if (isOpen) {
-                    const routes = [...this.state.openroutes];
-                    routes.splice(this.state.openroutes.indexOf(prop.path), 1);
-                    this.setState({ openroutes: routes });
-                  } else {
-                    r = [...this.state.openroutes, prop.path];
-                    console.log('!', r);
-                    this.setState({ openroutes: r });
-                  }
-                }}
-              >
+              <span className="sidenav-expander" onClick={onOpen}>
                 {isOpen && <i className="fa fa-minus-circle" />}
                 {!isOpen && <i className="fa fa-plus-circle" />}
               </span>
@@ -130,7 +129,7 @@ class ShopSidebar extends React.Component<IProps, any> {
       icon: '-',
       name: t('[R:Коллекции][U:Колекції]'),
       layout: '',
-      path: '/collection/1',
+      path: '',
       level: 0,
       collapse: true,
       views: rawCollections.map((c) => {

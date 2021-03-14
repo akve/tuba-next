@@ -249,3 +249,18 @@ a {
     }
   }
 }
+
+.splide__arrow {
+  opacity: 0.4;
+}
+
+.organizer {
+  .categories {
+    .active {
+      font-weight: bold;
+    }
+  }
+}
+.modal-big {
+  max-width: 90vw;
+}

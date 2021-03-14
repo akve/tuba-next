@@ -38,6 +38,8 @@ export interface IOptions {
   isCreatable?: boolean;
   isDeletable?: boolean;
   formPreSaveFunction?: any;
+  formPostSaveFunction?: any;
+  disableBack?: boolean;
   listDefaultSortField?: string;
   listDefaultSortDirection?: 'asc' | 'desc';
 }

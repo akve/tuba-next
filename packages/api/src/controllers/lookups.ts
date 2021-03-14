@@ -74,6 +74,7 @@ export class LookupsController {
           code: subcode,
           invisible: child.invisible,
           level: level,
+          sorter: child.sorter,
         });
         startBuild(child.id, level + 1, subcode, subname);
       });

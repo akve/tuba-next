@@ -70,6 +70,7 @@ function CrudFormWrapper(props: IProps) {
 
   const handleSubmit = async (values: any, forLanguage?: string) => {
     let notificationMessage = '';
+    console.log('V', values);
     const savingLanguage = forLanguage || currentLanguage;
     try {
       const api = CrudApi(props.params);
@@ -84,10 +85,14 @@ function CrudFormWrapper(props: IProps) {
           if (props.params.options && props.params.options.formPreSaveFunction) {
             values = await props.params.options.formPreSaveFunction(props.id, values);
           }
-          api.save(props.id, values);
+          await api.save(props.id, values);
         }
+
         if (!props.params.translatableEntity) {
           loadData();
+        }
+        if (props.params.options && props.params.options.formPostSaveFunction) {
+          props.params.options.formPostSaveFunction();
         }
         notificationMessage = 'Item has been changed!';
         notify('success', 'Success', notificationMessage);
@@ -98,7 +103,11 @@ function CrudFormWrapper(props: IProps) {
         const e: any = await api.create(values);
         notificationMessage = 'Item has been created!';
         notify('success', 'Success', notificationMessage);
-        router.push(`${props.params.uiUrlPrefix}/${e.id}/edit`);
+        if (props.params.options && props.params.options.formPostSaveFunction) {
+          props.params.options.formPostSaveFunction();
+        } else {
+          router.push(`${props.params.uiUrlPrefix}/${e.id}/edit`);
+        }
       }
     } catch (error) {
       notify('danger', error.name, error.message);

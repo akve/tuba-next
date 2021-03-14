@@ -2,7 +2,7 @@ import { action, observable, computed } from 'mobx';
 // import { toast } from 'react-toastify';
 import { ADD_NOTIFICATION, publish } from '../utils/eventBus';
 import { IBreadcrumb } from '@pdeals/next/components/Crud/ICrud';
-import { filter, find, get } from 'lodash';
+import { filter, find, get, sortBy } from 'lodash';
 
 interface IListActionDescriptor {
   action: string;
@@ -74,7 +74,7 @@ class UiStore {
     const categoryId = categoryRecord.id;
     console.log('???', categoryId);
 
-    return filter(this.allData.products, (r: any) => {
+    let result = filter(this.allData.products, (r: any) => {
       if (r.invisible) return false;
       const rCategories: any = isForCollection ? r.data.collections : r.data.categories;
       if (rCategories && rCategories.length) {
@@ -82,6 +82,8 @@ class UiStore {
       }
       return false;
     });
+    result = sortBy(result, (r) => r.sorter);
+    return result;
   }
 
   @action setBreadCrumbs(breadCrumbs) {
@@ -192,6 +194,7 @@ if (level === 'success') {
     if (!p.image) {
       p.image = p.data.images[0].image;
     }
+    if (!p.data.images) p.data.images = [];
     return p;
   }
 }

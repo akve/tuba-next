@@ -26,7 +26,9 @@ function CrudForm(props: IProps) {
   const formOptions = {
     defaultValues: props.initialData,
   };
-  const { register: register1, handleSubmit: handleSubmit1, setValue, watch, reset, ...rest } = useForm(formOptions);
+  const { register: register1, handleSubmit: handleSubmit1, setValue, watch, reset, errors, ...rest } = useForm(
+    formOptions
+  );
   const handleSave = (event) => {
     event.preventDefault();
     handleSubmit1(props.onSubmit)();
@@ -65,17 +67,19 @@ function CrudForm(props: IProps) {
     const watchedValue = watch(field.name);
     if (field.type === 'custom' && field.component) {
       const { component: Component, ...fieldPprops } = field;
-      return <Component
-        {...fieldPprops}
-        name={fieldPprops.name}
-        key={field.name + index}
-        innerRef={register1({})}
-        setValue={setValue}
-        value={watchedValue}
-        initialValue={props.initialData[field.name]}
-        entityId={props.data.id}
-        isEdit={!!props.data.id}
-      />;
+      return (
+        <Component
+          {...fieldPprops}
+          name={fieldPprops.name}
+          key={field.name + index}
+          innerRef={register1({})}
+          setValue={setValue}
+          value={watchedValue}
+          initialValue={props.initialData[field.name]}
+          entityId={props.data.id}
+          isEdit={!!props.data.id}
+        />
+      );
     }
 
     const Component = getRenderer(field.type);
@@ -121,9 +125,11 @@ function CrudForm(props: IProps) {
         <CardHeader className="bg-white border-0">
           <Row className="mb-2">
             <Col xs="3">
-              <Button onClick={handleGoBack} color="light" type="button" size="sm">
-                Back
-              </Button>
+              {!(props.params.options && props.params.options.disableBack) && (
+                <Button onClick={handleGoBack} color="light" type="button" size="sm">
+                  Back
+                </Button>
+              )}
               <h3 className="mb-0 ml-3 d-inline-block">{props.data && props.data.id ? 'Edit' : 'Create'}</h3>
             </Col>
             <Col className="text-right" xs="9">
@@ -140,7 +146,7 @@ function CrudForm(props: IProps) {
                   }}
                 />
               )}
-              <Button color="primary" type="submit" size="sm">
+              <Button color="primary" type="submit" size="sm" onClick={handleSave}>
                 Save
               </Button>
             </Col>

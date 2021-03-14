@@ -51,10 +51,13 @@ function ColorChooser(props: IProps) {
   const { colors, selectedColor } = prepareColors();
 
   useEffect(() => {
+    if (!selectedColor) return null;
     if (!props.value) {
       props.onChange(selectedColor.name);
     }
   }, []);
+
+  if (!selectedColor) return null;
 
   return (
     <div className="color-chooser">

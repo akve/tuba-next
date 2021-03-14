@@ -58,7 +58,10 @@ function ProductContent(props: IProps) {
         <meta name="keywords" content="Туба-дуба, Tuba-Duba" />
         <meta property="og:title" content={`${i18n.t(product.name)} - Tuba-Duba`} key="title" />
         <meta property="og:type" content="product" />
-        <meta property="og:image" content={`${product.data.images[0].image}`} />
+        <meta
+          property="og:image"
+          content={`${product.data.images && product.data.images.length ? product.data.images[0].image : ''}`}
+        />
         <meta property="og:description" content={`${i18n.t(product.name)}`} />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
         <meta property="product:price:amount" content={`${product.price}`} />
@@ -67,7 +70,7 @@ function ProductContent(props: IProps) {
       <div className="product-details-wrapper w-100">
         <h1>{i18n.t(product.name)}</h1>
         <h3>{product.price} грн</h3>
-        <div className="content" dangerouslySetInnerHTML={{ __html: i18n.t(product.description) }}></div>
+        <div className="content" dangerouslySetInnerHTML={{ __html: i18n.t(product.description, true) }}></div>
         <div className="content">
           <p>{i18n.t('[R:Шьем по вашим меркам][U:Шиємо за вашими мірочками]')}</p>
         </div>

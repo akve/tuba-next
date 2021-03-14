@@ -7,7 +7,7 @@ const setLang = (lang) => {
   localStorage.setItem('lang', lang);
 };
 
-const t = (s: string) => {
+const t = (s: string, leaveHtml?: boolean) => {
   const l = currentLang();
   if (!s) return s;
   const regex = /\[(R|U|E):(.*?)\]/gs;
@@ -32,6 +32,7 @@ const t = (s: string) => {
       s = s.replace(m[0], m[0].substr(3, m[0].length - 4));
     }
   }
+  if (!leaveHtml) s = s.replace('<br>', ', ');
   return s;
 };
 

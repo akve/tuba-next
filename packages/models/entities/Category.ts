@@ -29,7 +29,7 @@ export class Category extends BaseEntity {
   @Column({ type: 'json' })
   data?: object;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float' })
   sorter: number;
 
   @Column({ nullable: true })
