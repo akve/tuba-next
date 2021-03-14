@@ -18,10 +18,12 @@ class ClientParams {
   returnFullResponse?: boolean = false;
 }
 
-const internalClient = (params?:ClientParams) => {
+const internalClient = (params?: ClientParams) => {
+  process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
   const isServer = typeof window === 'undefined';
-  const token = isServer ? '' : (window.localStorage.getItem('token') || window.sessionStorage.getItem('token'));
+  const token = isServer ? '' : window.localStorage.getItem('token') || window.sessionStorage.getItem('token');
   const store = getStore();
+  console.log('?', API_URL);
   const client = axios.create({
     baseURL: API_URL,
     headers: {
@@ -31,7 +33,7 @@ const internalClient = (params?:ClientParams) => {
       },
       Authorization: token ? `Bearer ${token}` : '',
     },
-    responseType: params && params.responseTypeIsBlob ? 'blob' : 'json'
+    responseType: params && params.responseTypeIsBlob ? 'blob' : 'json',
   });
 
   client.interceptors.response.use(
@@ -52,9 +54,13 @@ const internalClient = (params?:ClientParams) => {
           //    Router.push('/sign-in');
           //}, 3000);
         } else {
-          const { message, name } = error.response.data?.error || {};
-          let errorMessage = message || errorText;
-          addNotification('error', name || '', errorMessage);
+          if (!error.response) {
+            addNotification('error', 'Empty response', 'Empty response');
+          } else {
+            const { message, name } = error.response.data?.error || {};
+            let errorMessage = message || errorText;
+            addNotification('error', name || '', errorMessage);
+          }
         }
         throw error;
       } else {

@@ -87,6 +87,36 @@ export class LookupsController {
     return reply;
   }
 
+  @Path('/colors')
+  @POST
+  public async colorsLookup(listParams: ListRequestDto | null): Promise<ListDto<any> | null> {
+    const sql = `
+    select * from color order by name
+`;
+    const rows = await getTypeormConnection().query(sql);
+    const res: any = rows;
+
+    const reply = new ListDto();
+    reply.rows = res;
+    reply.count = 1000;
+    return reply;
+  }
+
+  @Path('/collections')
+  @POST
+  public async collectionsLookup(listParams: ListRequestDto | null): Promise<ListDto<any> | null> {
+    const sql = `
+    select * from collection order by name
+`;
+    const rows = await getTypeormConnection().query(sql);
+    const res: any = rows;
+
+    const reply = new ListDto();
+    reply.rows = res;
+    reply.count = 1000;
+    return reply;
+  }
+
   @Path('/resolver/:entity/:id')
   @GET
   public async genericCrudGet(@PathParam('entity') entity: string, @PathParam('id') id: number): Promise<any> {
