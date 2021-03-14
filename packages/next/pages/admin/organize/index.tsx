@@ -9,7 +9,7 @@ import arrayMove from 'array-move';
 import * as i18n from '@pdeals/next/utils/i18n';
 import EditProductForm from '@pdeals/next/components/EditProductForm/EditProductForm';
 
-type Props = {};
+// type Props = {};
 
 const SortableItem = SortableElement(({ value, onSelect, active }) => (
   <li tabIndex={0} className={active === value.id ? 'active' : ''}>
@@ -59,7 +59,7 @@ const SortableListProducts = SortableContainer(({ items, onSelect, active }) => 
   );
 });
 
-const Organizer: React.FunctionComponent<Props> = () => {
+const Organizer: React.FunctionComponent = () => {
   const [allData, setAllData] = useState<any>(null);
   const [category, setCategory] = useState<any>(0);
   const [products, setProducts] = useState<any>(null);
@@ -71,7 +71,7 @@ const Organizer: React.FunctionComponent<Props> = () => {
   };
 
   const loadData = async () => {
-    const alldata = await client().get('/open/alldata');
+    const alldata: any = await client().get('/open/alldata');
     setSortedCategories(sortBy(alldata.categories.rows, (r) => r.sorter));
     const c = find(alldata.categories.rows, (r) => r.code === 'featured').id;
     onSetCategory(c, alldata.products);
