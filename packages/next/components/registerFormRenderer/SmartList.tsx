@@ -98,7 +98,9 @@ const SmartList = ({
         {value.map((row, index) => (
           <tr key={`${index}`}>
             {listOptions.columns.map((col, colIndex) => (
-              <td key={`${colIndex}`}>{row[col.name]}</td>
+              <td key={`${colIndex}`} className={col.class}>
+                {row[col.name]}
+              </td>
             ))}
             <td>
               <a onClick={() => onRemoveRow(index)}>

@@ -131,6 +131,26 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
             columns: [{ name: 'name', label: 'Цвет' }],
           },
         },
+        {
+          name: 'data.images',
+          label: 'Картинки',
+          type: 'smartlist',
+          class: 'col-lg-6',
+          fieldSpecificParams: {
+            initialData: {
+              image: '',
+            },
+            fields: [
+              {
+                name: 'image',
+                label: '',
+                type: 'text',
+                class: 'col-12',
+              },
+            ],
+            columns: [{ name: 'image', label: 'Image', class: 'image-col' }],
+          },
+        },
         { name: 'description', label: 'Описание', type: 'html', class: 'col-lg-12', required: true },
       ],
     },
