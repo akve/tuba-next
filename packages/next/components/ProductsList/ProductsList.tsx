@@ -34,6 +34,7 @@ function ProductsList(props: IProps) {
   const { uiStore } = props;
   const products = uiStore!.getListByCategory(props.currentRoute!, !!props.isForCollection) || [];
   const productsList = products; //.slice(0, 20);
+  const category = (props.isForCollection ? 'collection-' : 'category-') + props.currentRoute!;
 
   const onAddToCart = (product: any) => {
     console.log(product);
@@ -46,14 +47,14 @@ function ProductsList(props: IProps) {
         {productsList.map((product) => (
           <div className="col-lg-4 col-xs-12 product-item" key={`${product.code}`}>
             <Card className="">
-              <Link href={`/product/${product.code}`}>
-                <a href={`/product/${product.code}`} className="card-img-top">
+              <Link href={`/product/${product.code}?from=${category}`}>
+                <a href={`/product/${product.code}?from=${category}`} className="card-img-top">
                   <img src={resizeImage(product.image, 'list') || require('assets/img/tuba/logo-top.png')} />
                 </a>
               </Link>
               <div className="card-body text-center">
-                <Link href={`/product/${product.code}`}>
-                  <a href={`/product/${product.code}`}>
+                <Link href={`/product/${product.code}?from=${category}`}>
+                  <a href={`/product/${product.code}?from=${category}`}>
                     <h4>{i18n.t(product.name)}</h4>
                   </a>
                 </Link>

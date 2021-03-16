@@ -25,6 +25,7 @@ interface IProps {
   type: 'product' | 'list' | 'category';
   id?: string;
   isForCollection?: boolean;
+  from?: string;
 }
 function Breadcrumb(props: IProps) {
   const { uiStore } = props;
@@ -33,14 +34,22 @@ function Breadcrumb(props: IProps) {
     if (props.type === 'product') {
       const p = uiStore!.ProductDetails;
       if (p) {
-        if (p.category) {
+        if (props.from) {
+          const category = uiStore!.getCategoryBreadcrumb(props.from);
           res.push({
-            link: `/category/${p.category.code}`,
-            title: i18n.t(p.category.name),
+            link: `/${category.prefix}/${category.code}`,
+            title: i18n.t(category.name),
           });
+        } else {
+          if (p.category) {
+            res.push({
+              link: `/category/${p.category.code}`,
+              title: i18n.t(p.category.name),
+            });
+          }
         }
         res.push({
-          link: `/product/${p.code}`,
+          link: `/product/${p.code}${props.from ? `?from=${props.from}` : ''}`,
           title: i18n.t(p.name),
         });
       }

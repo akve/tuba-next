@@ -197,6 +197,27 @@ if (level === 'success') {
     if (!p.data.images) p.data.images = [];
     return p;
   }
+
+  @action getCategoryBreadcrumb(input: string) {
+    const result = {
+      code: '',
+      name: '',
+      prefix: '',
+    };
+    const [prefix, name] = input.split('-', 2);
+    let item;
+    if (prefix === 'category') {
+      item = find(this.allData.categories.rows, (r: any) => `${r.code}` === `${name}`);
+    } else {
+      item = find(this.allData.collections, (r: any) => `${r.code}` === `${name}`);
+    }
+    if (item) {
+      result.name = item.name;
+    }
+    result.code = name;
+    result.prefix = prefix;
+    return result;
+  }
 }
 
 export default UiStore;

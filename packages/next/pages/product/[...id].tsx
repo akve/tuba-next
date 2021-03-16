@@ -13,20 +13,22 @@ const Slider = dynamic(() => import('@pdeals/next/components/Product/Slider'));
 export async function getServerSideProps(context) {
   const alldata = await client().get('/open/alldata');
   const { id } = context.params;
+  const from = context.query ? context.query.from : '';
+
   return {
-    props: { alldata, id: id[0] }, // will be passed to the page component as props
+    props: { alldata, id: id[0], from }, // will be passed to the page component as props
   };
 }
 
-const ProductPage: React.FunctionComponent<any> = ({ uiStore, alldata, id }) => {
+const ProductPage: React.FunctionComponent<any> = ({ uiStore, alldata, id, from }) => {
   // const { query } = useRouter();
   uiStore.setProduct(id);
   uiStore.setAllData(alldata);
-  console.log('Rendering now', id, new Date());
+  console.log('Rendering now', id, new Date(), from);
   const isServer = typeof window === 'undefined';
   return (
     <NormalLayout>
-      <Breadcrumb type="product" id={id} />
+      <Breadcrumb type="product" id={id} from={from} />
       <div
         className="d-flex col-md-5 col-sm-12 flex-wrap"
         style={uiStore.sliderWidth ? { minWidth: uiStore.sliderWidth } : {}}

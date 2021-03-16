@@ -252,6 +252,11 @@ a {
 
 .splide__arrow {
   opacity: 0.4;
+  svg {
+    width: 1em !important;
+    height: 1em !important;
+    fill: #92aba9 !important;
+  }
 }
 
 .organizer {
