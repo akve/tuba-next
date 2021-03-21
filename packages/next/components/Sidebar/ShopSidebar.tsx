@@ -17,8 +17,18 @@ interface IProps {
 class ShopSidebar extends React.Component<IProps, any> {
   constructor(props) {
     super(props);
+    // console.log('CR', props.currentRoute);
+    const routes = [];
+    if (props.currentRoute) {
+      routes.push(`/category/${props.currentRoute}`);
+      routes.push(`/collection/${props.currentRoute}`);
+      if (props.currentRoute.indexOf('_') > 0) {
+        routes.push(`/category/${props.currentRoute.split('_')[0]}`);
+        routes.push(`/collection/${props.currentRoute.split('_')[0]}`);
+      }
+    }
     this.state = {
-      openroutes: [],
+      openroutes: routes,
       popoverOpen: false,
       // ...this.getCollapseStates(props.routes),
     };
@@ -34,7 +44,7 @@ class ShopSidebar extends React.Component<IProps, any> {
   };
   // verifies if routeName is the one active (in browser input)
   activeRoute = (routeName) => {
-    return this.props.currentRoute && routeName.indexOf(this.props.currentRoute) > -1 ? 'active' : '';
+    return this.props.currentRoute && routeName === `/category/${this.props.currentRoute}` ? 'active' : '';
   };
   // this function creates the links and collapses that appear in the sidebar (left menu)
   createLinks = (routes) => {
@@ -44,6 +54,7 @@ class ShopSidebar extends React.Component<IProps, any> {
       }
       if (prop.collapse) {
         const isOpen = !!(this.state.openroutes.indexOf(prop.path) >= 0);
+        console.log('P', prop.path);
         const onOpen = (e: any) => {
           e.preventDefault();
           let r;

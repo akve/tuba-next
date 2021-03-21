@@ -11,12 +11,12 @@ import ProductContent from '@pdeals/next/components/Product/ProductContent';
 const Slider = dynamic(() => import('@pdeals/next/components/Product/Slider'));
 
 export async function getServerSideProps(context) {
-  const alldata = await client().get('/open/alldata');
+  const alldata = await client().get('/open/alldata?cache=' + new Date());
   const { id } = context.params;
   const from = context.query ? context.query.from : '';
 
   return {
-    props: { alldata, id: id[0], from }, // will be passed to the page component as props
+    props: { alldata, id: id[0], from: from || '' }, // will be passed to the page component as props
   };
 }
 

@@ -117,7 +117,7 @@ const Organizer: React.FunctionComponent = () => {
   const onSetCategory = (id, theProducts?) => {
     setCategory(id);
     let prods = filter(theProducts || allData.products, (product) => {
-      return !!find(product.data.categories, (r) => r.category === id);
+      return !!find(product.data.categories, (r) => `${r.category}` === `${id}`);
     });
     prods = sortBy(prods, (r) => r.sorter);
     setProducts(prods);

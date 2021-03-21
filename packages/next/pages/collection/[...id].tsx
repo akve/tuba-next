@@ -9,7 +9,7 @@ import ProductsList from '@pdeals/next/components/ProductsList/ProductsList';
 import NormalLayout from '@pdeals/next/components/layouts/NormalLayout';
 
 export async function getServerSideProps(context) {
-  const alldata = await client().get('/open/alldata');
+  const alldata = await client().get('/open/alldata?cache=' + new Date());
   const { id } = context.params;
   return {
     props: { alldata, id: id[0] }, // will be passed to the page component as props
