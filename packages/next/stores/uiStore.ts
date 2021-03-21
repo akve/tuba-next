@@ -203,16 +203,21 @@ if (level === 'success') {
       code: '',
       name: '',
       prefix: '',
+      originalName: '',
+      parent: 0,
     };
     const [prefix, name] = input.split('-', 2);
+    const codename = name.indexOf('_') > 0 ? name.split('_').pop() : name;
     let item;
     if (prefix === 'category') {
-      item = find(this.allData.categories.rows, (r: any) => `${r.code}` === `${name}`);
+      item = find(this.allData.categories.rows, (r: any) => `${r.code}` === `${codename}` || r.code === name);
     } else {
-      item = find(this.allData.collections, (r: any) => `${r.code}` === `${name}`);
+      item = find(this.allData.collections, (r: any) => `${r.code}` === `${codename}`);
     }
     if (item) {
       result.name = item.name;
+      result.originalName = item.originalName;
+      result.parent = item.parent;
     }
     result.code = name;
     result.prefix = prefix;

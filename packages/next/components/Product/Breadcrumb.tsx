@@ -34,19 +34,25 @@ function Breadcrumb(props: IProps) {
     if (props.type === 'product') {
       const p = uiStore!.ProductDetails;
       if (p) {
+        let category = p ? p.category : null;
         if (props.from) {
-          const category = uiStore!.getCategoryBreadcrumb(props.from);
-          res.push({
-            link: `/${category.prefix}/${category.code}`,
-            title: i18n.t(category.name),
-          });
-        } else {
-          if (p.category) {
-            res.push({
-              link: `/category/${p.category.code}`,
-              title: i18n.t(p.category.name),
-            });
+          category = uiStore!.getCategoryBreadcrumb(props.from);
+        }
+        console.log('?????', props.id, props.type, props.isForCollection, category  );
+        if (category) {
+          if (category.parent) {
+            const parent = find(uiStore!.allData.categories.rows, r => r.id === category.parent);
+            if (parent) {
+              res.push({
+                link: `/category/${parent.code}`,
+                title: i18n.t(parent.originalName || parent.name),
+              });
+            }
           }
+          res.push({
+            link: `/category/${category.code}`,
+            title: i18n.t(category.originalName || category.name),
+          });
         }
         res.push({
           link: `/product/${p.code}${props.from ? `?from=${props.from}` : ''}`,
@@ -66,20 +72,21 @@ function Breadcrumb(props: IProps) {
         } else {
 
         if (props.id !== 'featured') {
-            const cat = find(uiStore!.allData.categories.rows, r => r.code === props.id);
+            const lastId = props.id!.indexOf('_') >0 ? props.id!.split('_').pop() : props.id;
+            const cat = find(uiStore!.allData.categories.rows, r => r.code === props.id || r.code === lastId);
             if (cat) {
               if (cat.parent) {
                 const parent = find(uiStore!.allData.categories.rows, r => r.id === cat.parent);
                 if (parent) {
                   res.push({
                     link: `/category/${parent.code}`,
-                    title: i18n.t(parent.name),
+                    title: i18n.t(parent.originalName || parent.name),
                   });
                 }
               }
               res.push({
                 link: `/category/${cat.code}`,
-                title: i18n.t(cat.name),
+                title: i18n.t(cat.originalName || cat.name),
               });
             }
           }

@@ -30,7 +30,7 @@ export class OpenController {
     const data: any = {};
     data.categories = await lookupsController.categoriesLookup(null);
     const rows = await getTypeormConnection().query('select * from product');
-    data.collections = await await getTypeormConnection().query('select * from collection');
+    data.collections = await getTypeormConnection().query('select * from collection');
 
     rows.forEach((r: any) => {
       try {

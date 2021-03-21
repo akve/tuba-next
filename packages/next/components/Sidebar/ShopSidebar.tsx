@@ -110,7 +110,7 @@ class ShopSidebar extends React.Component<IProps, any> {
     const startBuild = (target: any, parent: number, level: number, parentcode: string) => {
       const children = findByParent(parent);
       children.forEach((child: any) => {
-        const subcode = parentcode ? parentcode + '_' + child.code : child.code;
+        const subcode = child.code; //parentcode ? parentcode + '_' + child.code : child.code;
         const v: any = {
           icon: '-',
           name: t(child.originalName),

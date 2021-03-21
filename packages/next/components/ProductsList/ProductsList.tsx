@@ -42,7 +42,7 @@ function ProductsList(props: IProps) {
 
   return (
     <div className="products-list">
-      <Breadcrumb type="category" id={props.currentRoute!} isForCollection />
+      <Breadcrumb type="category" id={props.currentRoute!} isForCollection={props.isForCollection} />
       <div className="list-wrapper">
         {productsList.map((product) => (
           <div className="col-lg-4 col-xs-12 product-item" key={`${product.code}`}>

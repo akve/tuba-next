@@ -9,6 +9,7 @@ import { EntityNameToEntityMapping } from '../lib/entityHelper';
 import generateUserFilter from '../utils/generateUserFilter';
 import { verifyColumnTypes } from '../utils/verifyColumnTypes';
 import { LogService, LOG_ACTIONS } from '@pdeals/db/services/log.service';
+import { getNewSortId } from '../utils/getNewSortId';
 
 @Path('/v1/general')
 @PreProcessor(RequestPreProcess)
@@ -129,6 +130,8 @@ export class GeneralController {
     const repo = await getTypeormManager().getRepository(entity);
     const record: any = await repo.findOne(id);
     if (!record) throw new Error('Not found');
+    if (!(payload as any).sorter) (payload as any).sorter = await getNewSortId(entity);
+    console.log('UPD', payload.sorter);
     payload = verifyColumnTypes(payload, repo);
     Object.keys(payload).forEach((key) => {
       record[key] = payload[key];
@@ -150,6 +153,7 @@ export class GeneralController {
   @POST
   public async genericCrudCreate(@PathParam('entity') entity: string, payload: any): Promise<any> {
     const repo = await getTypeormManager().getRepository(entity);
+    if (!(payload as any).sorter) (payload as any).sorter = await getNewSortId(entity);
     payload = verifyColumnTypes(payload, repo);
     const record = repo.create(payload);
     // suppose there should be 'data' field

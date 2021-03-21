@@ -23,7 +23,7 @@ const IndexPage: React.FunctionComponent<any> = ({ alldata }) => {
         <ShopSidebar currentRoute="featured" />
       </div>
       <div className="col-lg-10 col-xs-12">
-        <ProductsList currentRoute="featured" />
+        <ProductsList currentRoute="featured" isForCollection={false} />
       </div>
     </NormalLayout>
   );
