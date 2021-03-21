@@ -37,7 +37,7 @@ const CartPreview = (props: IProps) => {
             <tr key={`${index}`}>
               <td>
                 <div className="d-flex ">
-                  <img src={getProduct(product).image} width="50" />
+                  <img src={getProduct(product).image} height="60" />
                   <div className="pl-2 ">
                     <b>{i18n.t(product.name)}</b>
                     <br />
