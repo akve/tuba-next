@@ -18,7 +18,7 @@ class ShopSidebar extends React.Component<IProps, any> {
   constructor(props) {
     super(props);
     // console.log('CR', props.currentRoute);
-    const routes = [];
+    const routes: any = [];
     if (props.currentRoute) {
       routes.push(`/category/${props.currentRoute}`);
       routes.push(`/collection/${props.currentRoute}`);
