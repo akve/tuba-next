@@ -29,6 +29,7 @@ const EditProductForm: React.FunctionComponent<Props> = ({ id, afterSave }) => {
         { name: 'code', label: 'Code', type: 'text', class: 'col-lg-6', required: true, notEditable: false },
         { name: 'name', label: 'Name', type: 'text', class: 'col-lg-6', required: true },
         { name: 'price', label: 'Price', type: 'number', class: 'col-lg-6', required: true },
+        { name: 'invisible', label: 'Invisible', type: 'checkbox', class: 'col-lg-3' },
         {
           name: 'data.collections',
           label: 'Коллекция',
