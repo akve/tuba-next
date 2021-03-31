@@ -44,6 +44,7 @@ const SortableItemProduct = SortableElement(({ value, onSelect, active }) => (
         onSelect(value.id);
       }}
     >
+      {value.invisible ? ' [X] ' : ''}
       {i18n.t(value.name)}
     </a>
   </li>

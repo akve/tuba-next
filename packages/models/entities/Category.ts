@@ -33,7 +33,7 @@ export class Category extends BaseEntity {
   sorter: number;
 
   @Column({ nullable: true })
-  invisible: string;
+  invisible: boolean;
 
   @CreateDateColumn()
   createdDate?: Date;

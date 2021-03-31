@@ -30,6 +30,11 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         sort: true,
       },
       {
+        text: 'invisible',
+        dataField: 'invisible',
+        sort: true,
+      },
+      {
         text: 'Created Date',
         dataField: 'createdDate',
         formatter: DateCell,

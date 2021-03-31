@@ -30,12 +30,20 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         sort: true,
       },
       {
+        text: 'Код',
+        dataField: 'code',
+        sort: true,
+      },
+      {
         text: 'Created Date',
         dataField: 'createdDate',
         formatter: DateCell,
       },
     ],
-    userFilter: [{ field: 'name', fieldType: 'text', fieldLabel: 'Имя' }],
+    userFilter: [
+      { field: 'name', fieldType: 'text', fieldLabel: 'Имя' },
+      { field: 'code', fieldType: 'text', fieldLabel: 'Код' },
+    ],
     form: {
       fields: [
         { name: 'code', label: 'Code', type: 'text', class: 'col-lg-6', required: true, notEditable: false },

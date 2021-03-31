@@ -36,7 +36,7 @@ const Login = (props) => {
       await props.userStore.login(values.email, values.password, rememberMe);
       console.log('ROLE', props.userStore.me.role);
       if (props.userStore.me.role === 'admin') {
-        router.push('/admin/users');
+        router.push('/admin/products');
       } else {
         router.push('/user');
       }
