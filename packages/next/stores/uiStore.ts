@@ -207,7 +207,8 @@ if (level === 'success') {
       parent: 0,
     };
     const [prefix, name] = input.split('-', 2);
-    const codename = name.indexOf('_') > 0 ? name.split('_').pop() : name;
+    const codename = name && name.indexOf('_') > 0 ? name.split('_').pop() : name;
+    if (!name) return null;
     let item;
     if (prefix === 'category') {
       item = find(this.allData.categories.rows, (r: any) => `${r.code}` === `${codename}` || r.code === name);

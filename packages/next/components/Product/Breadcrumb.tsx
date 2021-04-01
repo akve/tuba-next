@@ -36,7 +36,7 @@ function Breadcrumb(props: IProps) {
       if (p) {
         let category = p ? p.category : null;
         if (props.from) {
-          category = uiStore!.getCategoryBreadcrumb(props.from);
+          category = uiStore!.getCategoryBreadcrumb(props.from) || category;
         }
         console.log('?????', props.id, props.type, props.isForCollection, category  );
         if (category) {
