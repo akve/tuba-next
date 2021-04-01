@@ -25,6 +25,11 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         sort: true,
       },
       {
+        text: 'Sorter',
+        dataField: 'sorter',
+        sort: true,
+      },
+      {
         text: 'Name',
         dataField: 'name',
         sort: true,
@@ -32,6 +37,11 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
       {
         text: 'Код',
         dataField: 'code',
+        sort: true,
+      },
+      {
+        text: 'Invisible',
+        dataField: 'invisible',
         sort: true,
       },
       {

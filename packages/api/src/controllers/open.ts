@@ -6,6 +6,8 @@ import { getTypeormConnection } from '../../../db';
 import { SimpleResponseDto } from '@pdeals/models/dto/SimpleResponseDto';
 import * as i18n from '../utils/i18n';
 import * as orderService from '../services/orderService';
+import { ListDto, ListRequestDto } from '@pdeals/models/dto/ListDto';
+import generateUserFilter from '../utils/generateUserFilter';
 
 @Path('/v1/open')
 @PreProcessor(RequestPreProcess)
@@ -74,5 +76,47 @@ export class OpenController {
     }
 
     return new SimpleResponseDto('ok');
+  }
+
+  @Path('/categories')
+  @POST
+  public async categoriesList(listParams: ListRequestDto): Promise<ListDto<any> | null> {
+    const fields = `category.*, parentcat.name parentname`;
+    let sort = 'category.sorter';
+    if (listParams.sort) {
+      if (listParams.sort === 'parentname') {
+        listParams.sort = 'parentcat.name';
+      }
+      if (['id', 'createdDate', 'name', 'code'].indexOf(listParams.sort) >= 0) {
+        sort = `"category"."${listParams.sort}"`;
+      } else {
+        sort = listParams.sort;
+      }
+      sort += listParams.sortDirectionIsAsc ? ' asc' : ' desc';
+    }
+
+    let sql = `
+    select [FIELDS] from category
+    left join category parentcat on parentcat.id =category.parent
+    WHERE [USERSEARCH]
+    [ORDER]
+    LIMIT ${listParams.limit || 10}
+`;
+
+    let where = '1=1';
+    where += generateUserFilter(listParams);
+
+    sql = sql.replace('[USERSEARCH]', where);
+    let count = await getTypeormConnection().query(sql.replace('[FIELDS]', 'count(*)').replace('[ORDER]', ``));
+    count = parseInt(count[0].count || '0');
+
+    const rows = await getTypeormConnection().query(
+      sql.replace('[FIELDS]', fields).replace('[ORDER]', `ORDER BY ${sort}`)
+    );
+
+    const reply = new ListDto();
+    reply.rows = rows;
+    reply.count = count;
+    return reply;
   }
 }

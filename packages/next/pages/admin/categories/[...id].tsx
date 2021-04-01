@@ -11,6 +11,7 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
   const params: ICrud = {
     apiUrlPrefix: 'category',
     uiUrlPrefix: '/admin/categories',
+    overrideListUrlPrefix: '/open/categories',
     title: 'Категории',
     tableKey: tableKeys.categories,
     options: {
@@ -22,6 +23,16 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
       {
         text: 'ID',
         dataField: 'id',
+        sort: true,
+      },
+      {
+        text: 'Sorter',
+        dataField: 'sorter',
+        sort: true,
+      },
+      {
+        text: 'Parent',
+        dataField: 'parentname',
         sort: true,
       },
       {
@@ -40,7 +51,10 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         formatter: DateCell,
       },
     ],
-    userFilter: [{ field: 'name', fieldType: 'text', fieldLabel: 'Search' }],
+    userFilter: [
+      { field: '"category".name', fieldType: 'text', fieldLabel: 'Name' },
+      { field: '"parentcat".name', fieldType: 'text', fieldLabel: 'Parent' },
+    ],
     form: {
       fields: [
         { name: 'code', label: 'Code', type: 'text', class: 'col-lg-6', required: true, notEditable: false },

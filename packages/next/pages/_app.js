@@ -47,7 +47,7 @@ export default class MyApp extends App {
     mobxStore: initalizeStoreClean(),
   };
 
-  static async getInitialProps(appContext) {
+  static async getStaticProps(appContext) {
     const mobxStore = await initalizeStoreClean();
     appContext.ctx.mobxStore = mobxStore;
     const appProps = await App.getInitialProps(appContext);
