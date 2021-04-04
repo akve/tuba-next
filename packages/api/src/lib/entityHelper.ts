@@ -9,6 +9,7 @@ import { Category } from '@pdeals/models/entities/Category';
 import { Collection } from '@pdeals/models/entities/Collection';
 import { Product } from '@pdeals/models/entities/Product';
 import { Snippet } from '@pdeals/models/entities/Snippet';
+import { Fabric } from '@pdeals/models/entities/Fabric';
 
 export const EntityNameToEntityMapping: any = {
   user: User,
@@ -22,4 +23,5 @@ export const EntityNameToEntityMapping: any = {
   collection: Collection,
   product: Product,
   snippet: Snippet,
+  fabric: Fabric,
 };

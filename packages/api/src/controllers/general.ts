@@ -130,11 +130,18 @@ export class GeneralController {
     const repo = await getTypeormManager().getRepository(entity);
     const record: any = await repo.findOne(id);
     if (!record) throw new Error('Not found');
-    if (!(payload as any).sorter) (payload as any).sorter = await getNewSortId(entity);
-    console.log('UPD', payload.sorter);
+    //    if (!(payload as any).sorter) (payload as any).sorter = await getNewSortId(entity);
+    // console.log('UPD', payload.sorter);
     payload = verifyColumnTypes(payload, repo);
     Object.keys(payload).forEach((key) => {
-      record[key] = payload[key];
+      if (key === 'data') {
+        if (!record.data) record.data = {};
+        Object.keys(payload.data).forEach((keyData) => {
+          record.data[keyData] = payload.data[keyData];
+        });
+      } else {
+        record[key] = payload[key];
+      }
     });
     LogService.systemLog({
       user_id: (this.context.request as IRequestWithUser).user!.id,

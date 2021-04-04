@@ -111,7 +111,49 @@ export class OpenController {
     count = parseInt(count[0].count || '0');
 
     const rows = await getTypeormConnection().query(
-      sql.replace('[FIELDS]', fields).replace('[ORDER]', `ORDER BY ${sort}`)
+      sql.replace('[FIELDS]', fields).replace('[ORDER]', `ORDER BY ${sort}`) + `    OFFSET ${listParams.offset || 0}`
+    );
+
+    const reply = new ListDto();
+    reply.rows = rows;
+    reply.count = count;
+    return reply;
+  }
+
+  @Path('/colors')
+  @POST
+  public async colorsList(listParams: ListRequestDto): Promise<ListDto<any> | null> {
+    const fields = `color.*, fabric.name fabricname`;
+    let sort = 'fabric.name, color.name';
+    if (listParams.sort) {
+      if (listParams.sort === 'fabricname') {
+        listParams.sort = 'fabric.name';
+      }
+      if (['id', 'createdDate', 'name', 'code'].indexOf(listParams.sort) >= 0) {
+        sort = `"color"."${listParams.sort}"`;
+      } else {
+        sort = listParams.sort;
+      }
+      sort += listParams.sortDirectionIsAsc ? ' asc' : ' desc';
+    }
+
+    let sql = `
+    select [FIELDS] from color
+    left join fabric on fabric.id =color.fabric
+    WHERE [USERSEARCH]
+    [ORDER]
+    LIMIT ${listParams.limit || 10}
+`;
+
+    let where = '1=1';
+    where += generateUserFilter(listParams);
+
+    sql = sql.replace('[USERSEARCH]', where);
+    let count = await getTypeormConnection().query(sql.replace('[FIELDS]', 'count(*)').replace('[ORDER]', ``));
+    count = parseInt(count[0].count || '0');
+
+    const rows = await getTypeormConnection().query(
+      sql.replace('[FIELDS]', fields).replace('[ORDER]', `ORDER BY ${sort}`) + `    OFFSET ${listParams.offset || 0}`
     );
 
     const reply = new ListDto();

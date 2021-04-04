@@ -47,6 +47,12 @@ const routes = [
     layout: '/admin',
     icon: 'ni ni-archive-2 text-primary',
   },
+  {
+    path: '/fabrics',
+    name: 'Ткани',
+    layout: '/admin',
+    icon: 'ni ni-archive-2 text-primary',
+  },
 ];
 
 export default routes;

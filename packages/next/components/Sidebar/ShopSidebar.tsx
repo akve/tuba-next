@@ -76,7 +76,7 @@ class ShopSidebar extends React.Component<IProps, any> {
               aria-expanded={isOpen}
               className={'sidenav-shop-expandable' + this.activeRoute(prop.path)}
               style={{ paddingLeft: prop.level * 40 }}
-              onClick={prop.path ? null : onOpen}
+              onClick={prop.path ? () => {} : onOpen}
             >
               <span className="sidenav-normal"> {prop.name} </span>
               <span className="sidenav-expander" onClick={onOpen}>

@@ -31,6 +31,11 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         sort: true,
       },
       {
+        text: 'Code',
+        dataField: 'code',
+        sort: true,
+      },
+      {
         text: 'Parent',
         dataField: 'parentname',
         sort: true,
@@ -54,6 +59,7 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
     userFilter: [
       { field: '"category".name', fieldType: 'text', fieldLabel: 'Name' },
       { field: '"parentcat".name', fieldType: 'text', fieldLabel: 'Parent' },
+      { field: '"category".code', fieldType: 'text', fieldLabel: 'Code' },
     ],
     form: {
       fields: [

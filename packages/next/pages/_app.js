@@ -74,6 +74,7 @@ export default class MyApp extends App {
 
     const Layout = Component.layout || (isAdminPath ? Admin : UserLayout) || (({ children }) => <>{children}</>);
     // console.log('l', La)
+
     return (
       <React.Fragment>
         <Head>
@@ -114,7 +115,9 @@ export default class MyApp extends App {
         </Head>
         <Provider {...this.state.mobxStore}>
           <Layout>
-            <Component {...pageProps} />
+            <NotificationProvider>
+              <Component {...pageProps} />
+            </NotificationProvider>
           </Layout>
         </Provider>
       </React.Fragment>

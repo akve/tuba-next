@@ -10,7 +10,7 @@ import {
 // import { CrawlerSite } from './CrawlerSite';
 
 @Entity()
-export class Color extends BaseEntity {
+export class Fabric extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id?: number;
 
@@ -20,11 +20,8 @@ export class Color extends BaseEntity {
   @Column({ nullable: false })
   name: string;
 
-  @Column({ nullable: true })
-  fabric: number;
-
-  @Column({ nullable: true })
-  image: string;
+  @Column({ nullable: true, type: 'text' })
+  description: string;
 
   @Column({ type: 'json' })
   data?: object;

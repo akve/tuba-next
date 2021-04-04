@@ -9,7 +9,8 @@ export const NotificationProvider = ({ children }) => {
   const notificationAlert = useRef<any>(null);
 
   const notify = (type, title, message) => {
-    let options = {
+    console.log('NOTIFY', message);
+    const options = {
       place: 'tc',
       message: (
         <div className="alert-text">

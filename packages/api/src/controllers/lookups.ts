@@ -117,6 +117,21 @@ export class LookupsController {
     return reply;
   }
 
+  @Path('/fabrics')
+  @POST
+  public async fabricsLookup(listParams: ListRequestDto | null): Promise<ListDto<any> | null> {
+    const sql = `
+    select * from fabric order by name
+`;
+    const rows = await getTypeormConnection().query(sql);
+    const res: any = rows;
+
+    const reply = new ListDto();
+    reply.rows = res;
+    reply.count = 1000;
+    return reply;
+  }
+
   @Path('/resolver/:entity/:id')
   @GET
   public async genericCrudGet(@PathParam('entity') entity: string, @PathParam('id') id: number): Promise<any> {
