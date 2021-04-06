@@ -47,10 +47,13 @@ export default class MyApp extends App {
     mobxStore: initalizeStoreClean(),
   };
 
-  static async getStaticProps(appContext) {
+  static async getInitialProps(appContext) {
     const mobxStore = await initalizeStoreClean();
     appContext.ctx.mobxStore = mobxStore;
     const appProps = await App.getInitialProps(appContext);
+    const req = appContext.ctx ? appContext.ctx.req : appContext.req;
+    appProps.url = req ? req.url : '';
+    console.log(appProps.url);
     return {
       ...appProps,
       initialMobxState: mobxStore,
@@ -66,11 +69,13 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, url } = this.props;
 
     //if (!this.state.mobxStore) return null;
+    //console.log('???', this.props);
 
-    const isAdminPath = typeof window === 'undefined' ? false : Router.router.pathname.indexOf('/admin') === 0;
+    const isAdminPath =
+      typeof window === 'undefined' ? url.indexOf('/admin') === 0 : Router.router.pathname.indexOf('/admin') === 0;
 
     const Layout = Component.layout || (isAdminPath ? Admin : UserLayout) || (({ children }) => <>{children}</>);
     // console.log('l', La)
@@ -93,6 +98,14 @@ export default class MyApp extends App {
           <meta name="p:domain_verify" content="f80bef3d9d034afebf0911637637190e" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>
           <Safe.script>
+            {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-84542153-1');`}
+          </Safe.script>
+
+          <Safe.script>
             {`!function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -114,11 +127,11 @@ export default class MyApp extends App {
           </noscript>
         </Head>
         <Provider {...this.state.mobxStore}>
-          <Layout>
-            <NotificationProvider>
+          <NotificationProvider>
+            <Layout>
               <Component {...pageProps} />
-            </NotificationProvider>
-          </Layout>
+            </Layout>
+          </NotificationProvider>
         </Provider>
       </React.Fragment>
     );

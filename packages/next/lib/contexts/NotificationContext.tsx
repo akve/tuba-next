@@ -37,7 +37,7 @@ export const NotificationProvider = ({ children }) => {
   return (
     <NotificationContext.Provider value={value}>
       {children}
-      <div className="rna-wrapper">
+      <div className="rna-wrapper" style={{ marginLeft: '70px' }}>
         <NotificationAlert ref={notificationAlert} />
       </div>
     </NotificationContext.Provider>

@@ -7,6 +7,7 @@ import Sidebar from '@pdeals/next/components/Sidebar/Sidebar';
 import routes from '@pdeals/next/routes';
 
 const Admin = (props) => {
+  const pathname = props.router.pathname;
   const [sidenavOpen, setSidenavOpen] = useState(false);
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const Admin = (props) => {
   const getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
       const route: any = routes[i];
-      if (props.router.pathname.indexOf(route.layout + route.path) !== -1) {
+      if (pathname.indexOf(route.layout + route.path) !== -1) {
         return routes[i].name;
       }
     }
@@ -35,7 +36,7 @@ const Admin = (props) => {
   };
 
   const getNavbarTheme = () => {
-    return props.router.pathname.indexOf('admin/alternative-dashboard') === -1 ? 'dark' : 'light';
+    return pathname.indexOf('admin/alternative-dashboard') === -1 ? 'dark' : 'light';
   };
 
   const closeSidenav = () => {
@@ -61,14 +62,10 @@ const Admin = (props) => {
           theme={getNavbarTheme()}
           toggleSidenav={toggleSidenav}
           sidenavOpen={sidenavOpen}
-          brandText={getBrandText(props.router.pathname)}
+          brandText={getBrandText(pathname)}
         />
         {props.children}
       </div>
-      {/* TODO: fix backdrop */}
-      {/* {!sidenavOpen ? (
-        <div className="backdrop d-xl-none" onClick={toggleSidenav} />
-      ) : null} */}
     </>
   );
 };

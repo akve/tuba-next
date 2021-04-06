@@ -26,6 +26,11 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         sort: true,
       },
       {
+        text: 'Fabric',
+        dataField: 'fabricname',
+        sort: true,
+      },
+      {
         text: 'Name',
         dataField: 'name',
         sort: true,

@@ -151,7 +151,6 @@ class Sidebar extends React.Component<IProps, any> {
   };
   render() {
     const { routes, logo } = this.props;
-    if (typeof window === 'undefined') return null;
 
     const scrollBarInner = (
       <div className="scrollbar-inner">

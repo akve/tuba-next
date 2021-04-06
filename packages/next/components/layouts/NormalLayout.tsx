@@ -27,8 +27,8 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
                 <div className="row justify-content-center">
                   <div className="col-lg-5 col-md-6">
                     <div className="main-menu">
-                      {links.map((link) => (
-                        <Link href={link.href}>
+                      {links.map((link, index) => (
+                        <Link href={link.href} key={`${index}`}>
                           <a href={link.href}>{link.title}</a>
                         </Link>
                       ))}
