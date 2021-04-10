@@ -45,6 +45,7 @@ export class OpenController {
 
     data.snippets = await getTypeormConnection().query('select * from snippet');
     data.colors = await getTypeormConnection().query('select * from color');
+    data.fabrics = await getTypeormConnection().query('select * from fabric');
     return data;
   }
 

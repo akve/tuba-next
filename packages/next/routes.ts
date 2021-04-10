@@ -36,6 +36,12 @@ const routes = [
     icon: 'ni ni-sound-wave text-primary',
   },
   {
+    path: '/colors-inline',
+    name: 'Цвета / табличка',
+    layout: '/admin',
+    icon: 'ni ni-sound-wave text-primary',
+  },
+  {
     path: '/collections',
     name: 'Коллекции',
     layout: '/admin',

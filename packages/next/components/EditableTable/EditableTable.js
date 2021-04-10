@@ -21,6 +21,10 @@ class EditableTable extends React.Component {
   }
 
   handleAddEvent(evt) {
+    if (this.props.additionalOptions && this.props.additionalOptions.overrideAdd) {
+      this.props.additionalOptions.overrideAdd();
+      return;
+    }
     var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
     var product = {
       id: id,
@@ -49,23 +53,25 @@ class EditableTable extends React.Component {
       }
       return product;
     });
-    this.props.onChange(newProducts);
+    this.props.onChange(newProducts, item);
     this.setState({ products: newProducts });
     // console.log('CH', newProducts);
   }
   render() {
     return (
-      <div>
+      <>
         {/*<SearchBar filterText={this.state.filterText} onUserInput={this.handleUserInput.bind(this)} />*/}
         <EditableTableInner
+          class={this.props.class}
           onProductTableUpdate={this.handleProductTable.bind(this)}
           onRowAdd={this.handleAddEvent.bind(this)}
           onRowDel={this.handleRowDel.bind(this)}
           products={this.state.products}
           columns={this.state.columns}
           filterText={this.state.filterText}
+          additionalOptions={this.props.additionalOptions}
         />
-      </div>
+      </>
     );
   }
 }
@@ -75,7 +81,7 @@ class SearchBar extends React.Component {
   }
   render() {
     return (
-      <div>
+      <>
         <input
           type="text"
           placeholder="Search..."
@@ -83,7 +89,7 @@ class SearchBar extends React.Component {
           ref="filterTextInput"
           onChange={this.handleChange.bind(this)}
         />
-      </div>
+      </>
     );
   }
 }
@@ -93,7 +99,7 @@ class EditableTableInner extends React.Component {
     var onProductTableUpdate = this.props.onProductTableUpdate;
     var rowDel = this.props.onRowDel;
     var filterText = this.props.filterText;
-    var { columns } = this.props;
+    var { columns, additionalOptions } = this.props;
     var rows = this.props.products.map(function (product) {
       /*if (product.name.indexOf(filterText) === -1) {
           return;
@@ -105,32 +111,29 @@ class EditableTableInner extends React.Component {
           onDelEvent={rowDel.bind(this)}
           columns={columns}
           key={product.id}
+          additionalOptions={additionalOptions}
         />
       );
     });
     return (
-      <div>
-        <table className="table table-bordered table-sm">
+      <>
+        <table className={`table table-bordered table-sm ${this.props.class || ''}`}>
           <thead>
             <tr>
               {columns.map((col) => (
                 <th key={col.name}>{col.label || col.name}</th>
               ))}
               <th>
-                <button
-                  type="button"
-                  onClick={this.props.onRowAdd}
-                  className="btn btn-success pull-right"
-                >
+                <button type="button" onClick={this.props.onRowAdd} className="btn btn-success pull-right">
                   Add
-                                </button>
+                </button>
               </th>
             </tr>
           </thead>
 
           <tbody>{rows}</tbody>
         </table>
-      </div>
+      </>
     );
   }
 }
@@ -144,28 +147,34 @@ class TableRow extends React.Component {
     return (
       <tr className="eachRow">
         {columns.map((col) => (
-          <EditableCell
-            key={col.name}
-            onProductTableUpdate={this.props.onProductTableUpdate}
-            cellData={{
-              key: col.name,
-              type: col.name,
-              value: this.props.product[col.name],
-              id: this.props.product.id,
-            }}
-          />
+          <td key={col.name}>
+            <EditableCell
+              key={col.name}
+              field={col.field}
+              onProductTableUpdate={this.props.onProductTableUpdate}
+              cellData={{
+                key: col.name,
+                type: col.name,
+                value: this.props.product[col.name],
+                id: this.props.product.id,
+              }}
+            />
+          </td>
         ))}
-        <td className="del-cell">
-          <input type="button" onClick={this.onDelEvent.bind(this)} value="X" className="del-btn" />
-        </td>
+        {(!this.props.additionalOptions || !this.props.additionalOptions.hideDelete) && (
+          <td className="del-cell">
+            <input type="button" onClick={this.onDelEvent.bind(this)} value="X" className="del-btn" />
+          </td>
+        )}
       </tr>
     );
   }
 }
 class EditableCell extends React.Component {
   render() {
-    return (
-      <td>
+    const field = this.props.field || { type: 'text' };
+    if (field.type === 'text') {
+      return (
         <input
           type="text"
           name={this.props.cellData.type}
@@ -173,8 +182,25 @@ class EditableCell extends React.Component {
           value={this.props.cellData.value}
           onChange={this.props.onProductTableUpdate}
         />
-      </td>
-    );
+      );
+    }
+    if (field.type === 'select') {
+      return (
+        <select
+          name={this.props.cellData.type}
+          id={this.props.cellData.id}
+          value={this.props.cellData.value || 0}
+          onChange={this.props.onProductTableUpdate}
+        >
+          <option value={0}>--</option>
+          {field.options.map((row) => (
+            <option key={row.id} value={row.id}>
+              {row.name}
+            </option>
+          ))}
+        </select>
+      );
+    }
   }
 }
 export { EditableTable };

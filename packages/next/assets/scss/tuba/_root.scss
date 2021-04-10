@@ -273,3 +273,8 @@ a {
 .image-col {
   max-width: 80vw;
 }
+.wide-table {
+  input, select {
+    width: 100%;
+  }
+}
