@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
-import { withRouter } from 'next/router';
+import { useRouter, withRouter } from 'next/router';
 import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
@@ -32,12 +32,13 @@ interface IProps {
 }
 function ProductsList(props: IProps) {
   const { uiStore } = props;
+  const router = useRouter();
   const products = uiStore!.getListByCategory(props.currentRoute!, !!props.isForCollection) || [];
   const productsList = products; //.slice(0, 20);
   const category = (props.isForCollection ? 'collection-' : 'category-') + props.currentRoute!;
 
   const onAddToCart = (product: any) => {
-    console.log(product);
+    router.push(`/product/${product.code}?from=${category}`);
   };
 
   return (
@@ -60,7 +61,7 @@ function ProductsList(props: IProps) {
                 </Link>
                 <div className="text-muted price-text">{product.price} грн</div>
                 <button className="btn btn-outline-secondary" onClick={() => onAddToCart(product)}>
-                  {i18n.t('[R:В корзину][U:До кошика]')}
+                  {i18n.t('[R:Детальнее][U:Детальнiше]')}
                 </button>
               </div>
             </Card>

@@ -25,7 +25,7 @@ class OrderStore {
   }
 
   @action async send(payload: any) {
-    await client().post('/open/order', payload);
+    return await client().post('/open/order', payload);
   }
 }
 

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Form, FormGroup, Input, Card, CardHeader, Row, Button, Col, CardBody } from 'reactstrap';
 import { getRenderer } from '@pdeals/next/components/registerFormRenderer/index';
 import OrderStore from '@pdeals/next/stores/orderStore';
+import { useState } from 'react';
 
 interface IProps {
   orderStore?: OrderStore;
@@ -13,6 +14,8 @@ interface IProps {
 const CartForm = (props: IProps) => {
   const orderStore = props.orderStore!;
   const { cart } = orderStore;
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
   const formOptions = {
     defaultValues: {
@@ -27,12 +30,23 @@ const CartForm = (props: IProps) => {
   };
   const { register: register1, handleSubmit: handleSubmit1, setValue, watch, reset, ...rest } = useForm(formOptions);
   const onSubmit = async (values: any) => {
-    await orderStore.send({
-      data: values,
-      lang: i18n.currentLang(),
-      cart: cart,
-    });
-    router.push('/checkout/thanks');
+    setSending(true);
+    try {
+      const response = await orderStore.send({
+        data: values,
+        lang: i18n.currentLang(),
+        cart: cart,
+      });
+      if (response.status === 'ok') {
+        router.push('/checkout/thanks');
+      } else {
+        throw new Error('Please contact administrator :(');
+      }
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setSending(false);
+    }
   };
   const handleSave = (event) => {
     event.preventDefault();
@@ -87,9 +101,20 @@ const CartForm = (props: IProps) => {
             name="comments"
             class="col-12"
           />
-          <Button color="primary" type="submit" size="sm">
-            {i18n.t('[R:Оформить заказ][U:Оформити замовлення]')}
-          </Button>
+          {!!error && <div className="text-red">{error}</div>}
+          <div className="col-12">
+            <Button
+              color="primary"
+              type="submit"
+              size="lg"
+              className={`order-button ${sending ? '' : ''}`}
+              disabled={!!sending}
+            >
+              {sending
+                ? i18n.t('[R:Шлем заказ...][U:Надсилаємо замовлення...]')
+                : i18n.t('[R:Оформить заказ][U:Оформити замовлення]')}
+            </Button>
+          </div>
         </Form>
       </CardBody>
     </Card>

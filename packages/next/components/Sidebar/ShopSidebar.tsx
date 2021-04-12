@@ -162,10 +162,9 @@ class ShopSidebar extends React.Component<IProps, any> {
   };
 
   render() {
-    const routes = this.prepareRoutes(
-      this.props.uiStore.allData.categories.rows,
-      this.props.uiStore.allData.collections
-    );
+    const routes = this.props.uiStore.allData
+      ? this.prepareRoutes(this.props.uiStore.allData.categories.rows, this.props.uiStore.allData.collections)
+      : [];
     if (this.props.position === 'topmenu') {
       return (
         <>
