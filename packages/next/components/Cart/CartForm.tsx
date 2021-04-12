@@ -37,11 +37,11 @@ const CartForm = (props: IProps) => {
         lang: i18n.currentLang(),
         cart: cart,
       });
-      if (response.status === 'ok') {
+      /*if (response.status === 'ok') {
         router.push('/checkout/thanks');
       } else {
         throw new Error('Please contact administrator :(');
-      }
+      }*/
     } catch (e) {
       setError(e.message);
     } finally {
