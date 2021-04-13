@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import { useRouter } from 'next/router';
 
 // reactstrap components

@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { inject, observer } from 'mobx-react';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import { ICrud, IFormField } from '@pdeals/next/components/Crud/ICrud';
 import { useRouter } from 'next/router';
 import {

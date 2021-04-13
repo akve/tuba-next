@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Popover, PopoverHeader, PopoverBody } from 'reactstrap';

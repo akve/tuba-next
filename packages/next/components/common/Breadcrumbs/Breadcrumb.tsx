@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect, memo } from 'react';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import { useRouter } from 'next/router';
 import { inject, observer } from 'mobx-react';
 import { BreadcrumbItem } from 'reactstrap';
@@ -30,15 +30,15 @@ const Breadcrumb: FC<Props> = (props) => {
     const { breadcrumbData, resolvers = {}, title, uiStore } = props;
 
     const normalizeData = async ({ id, resolvers: customResolvers = {} }: IBreadcrumb) => {
-
       try {
         const entity = customResolvers.entity || resolvers?.entity;
         if (!entity) return;
 
         const result = await ResolveApi({ entity }).getName(id);
         const breadcrumb = {
-          title: customResolvers.title && customResolvers.title(result) || resolvers.title && resolvers.title(result),
-          link: customResolvers.link && customResolvers.link(result) || resolvers.link && resolvers.link(result),
+          title:
+            (customResolvers.title && customResolvers.title(result)) || (resolvers.title && resolvers.title(result)),
+          link: (customResolvers.link && customResolvers.link(result)) || (resolvers.link && resolvers.link(result)),
         };
         setData(breadcrumb);
         if (uiStore && !data.title) {
@@ -57,7 +57,7 @@ const Breadcrumb: FC<Props> = (props) => {
   }, [router.pathname]);
 
   const handleClick = () => {
-    props.uiStore?.setBreadCrumbTitle(data.title)
+    props.uiStore?.setBreadCrumbTitle(data.title);
   };
 
   return (
@@ -65,23 +65,12 @@ const Breadcrumb: FC<Props> = (props) => {
       {data.link ? (
         <Link href={data.link}>
           <a href={data.link} onClick={handleClick}>
-            {data.icon ? (
-              <i className={data.icon} />
-            ) : (
-              data.title
-            )}
+            {data.icon ? <i className={data.icon} /> : data.title}
           </a>
         </Link>
       ) : (
-        <span style={{ color: 'white' }}>
-          {data.icon ? (
-            <i className={data.icon} />
-          ) : (
-            data.title
-          )}
-        </span>
+        <span style={{ color: 'white' }}>{data.icon ? <i className={data.icon} /> : data.title}</span>
       )}
-      
     </BreadcrumbItem>
   );
 };

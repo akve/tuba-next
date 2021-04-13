@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import { useRouter, withRouter } from 'next/router';
 import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';

@@ -15,7 +15,7 @@ import {
 
 import { CrudApi } from '@pdeals/next/lib/api/crud-api';
 import { IActionProps } from '@pdeals/next/components/Crud/CrudList/Actions';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 
 export const CanLogin = (props: IActionProps) => {
   const saveItem = async () => {
@@ -131,10 +131,10 @@ export const ViewPaymentRequestsCell = ({ data }) => {
 
 export const ViewReferralReportCell = ({ data }) => {
   return (
-      <Link href={`/admin/reports/referrals?user=${data.id}`}>
-        <a className="btn btn-link btn-block btn-sm" href={`/admin/reports/referrals?user=${data.id}`}>
-          View Referral Earnings
-        </a>
-      </Link>
+    <Link href={`/admin/reports/referrals?user=${data.id}`}>
+      <a className="btn btn-link btn-block btn-sm" href={`/admin/reports/referrals?user=${data.id}`}>
+        View Referral Earnings
+      </a>
+    </Link>
   );
 };

@@ -14,7 +14,7 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 
 import Auth from '@pdeals/next/components/layouts/Auth';
 import AuthHeader from '@pdeals/next/components/Headers/AuthHeader';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import { client } from '../lib/api/api-client';
 import { getStore } from '@pdeals/next/stores/initStore';
 import NormalLayout from '@pdeals/next/components/layouts/NormalLayout';

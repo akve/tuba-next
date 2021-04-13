@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import { withRouter } from 'next/router';
 import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';

@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import { Card, CardHeader, Row, ButtonGroup, Button, Col } from 'reactstrap';
 
 import { ICrud } from '@pdeals/next/components/Crud/ICrud';
@@ -18,7 +18,7 @@ function CrudList(props: IProps) {
   const [requestParams, setRequestParams] = useState<any>({
     limit: 10,
     offset: 0,
-    sort: props.params.options ? (props.params.options.listDefaultSortField || 'id') : 'id',
+    sort: props.params.options ? props.params.options.listDefaultSortField || 'id' : 'id',
     sortDirectionIsAsc: props.params.options && props.params.options.listDefaultSortDirection === 'desc' ? false : true,
     filter: props.params.defaultFilter || {},
     userFilter: props.params.defaultUserFilter || [],
@@ -63,7 +63,7 @@ function CrudList(props: IProps) {
                 <Col>
                   {!!props.params.listFilterTopComponent && props.params.listFilterTopComponent()}
                   {props.params.userFilter && (
-                  <ListFilter
+                    <ListFilter
                       onApplyFilter={updateFilter}
                       fields={props.params.userFilter}
                       tableKey={props.params.tableKey}

@@ -1,11 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import { inject, observer } from 'mobx-react';
-import {
-  Breadcrumb,
-  Row,
-  Col,
-} from 'reactstrap';
+import { Breadcrumb, Row, Col } from 'reactstrap';
 import BreadcrumbItem from './Breadcrumb';
 
 const Breadcrumbs = (props) => {
@@ -17,13 +13,8 @@ const Breadcrumbs = (props) => {
   return (
     <Row className="align-items-center py-4">
       <Col>
-        <h6 className="fullcalendar-title h1 text-white d-inline-block mb-0">
-          {breadCrumbs.title}
-        </h6>{" "}
-        <Breadcrumb
-          className="d-none d-md-inline-block ml-lg-4"
-          listClassName="breadcrumb-links breadcrumb-dark"
-        >
+        <h6 className="fullcalendar-title h1 text-white d-inline-block mb-0">{breadCrumbs.title}</h6>{' '}
+        <Breadcrumb className="d-none d-md-inline-block ml-lg-4" listClassName="breadcrumb-links breadcrumb-dark">
           <BreadcrumbItem
             breadcrumbData={{
               link: '/',

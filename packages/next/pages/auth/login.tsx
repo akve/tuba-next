@@ -14,7 +14,7 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { inject, observer } from 'mobx-react';

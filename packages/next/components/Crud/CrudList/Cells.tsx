@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import Link from 'next/link';
+import Link from '@pdeals/next/elements/NextLink';
 import format from 'date-fns/format';
 
 import { CrudApi } from '@pdeals/next/lib/api/crud-api';
