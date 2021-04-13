@@ -62,11 +62,12 @@ class ThumbnailSlider extends React.Component<IProps, any> {
           ref={this.secondaryRef}
           className={isMobile ? 'slider-secondary-mobile' : ''}
         >
-          {product.data.images.map((image, index) => (
-            <SplideSlide key={`${index}`}>
-              <img src={resizeImage(image.image, 'thumb')} alt="Image 1" />
-            </SplideSlide>
-          ))}
+          {!!product.data &&
+            product.data.images.map((image, index) => (
+              <SplideSlide key={`${index}`}>
+                <img src={resizeImage(image.image, 'thumb')} alt="Image 1" />
+              </SplideSlide>
+            ))}
         </Splide>
       </div>
     );
@@ -138,12 +139,13 @@ class ThumbnailSlider extends React.Component<IProps, any> {
         {!isMobile && this.renderSecondary()}
         <div style={{ paddingLeft: isMobile ? 0 : '15px' }}>
           <Splide id="splide02" options={primaryOptions} ref={this.primaryRef}>
-            {product.data.images.map((image, index) => (
-              <SplideSlide key={`${index}`}>
-                <img src={resizeImage(image.image, 'normal')} alt="Image 1" height={getImgWidth()} />{' '}
-                {/*style={{ maxWidth: 'calc(100vw-60px)' }}*/}
-              </SplideSlide>
-            ))}
+            {!!product.data &&
+              product.data.images.map((image, index) => (
+                <SplideSlide key={`${index}`}>
+                  <img src={resizeImage(image.image, 'normal')} alt="Image 1" height={getImgWidth()} />{' '}
+                  {/*style={{ maxWidth: 'calc(100vw-60px)' }}*/}
+                </SplideSlide>
+              ))}
           </Splide>
         </div>
         {isMobile && this.renderSecondary()}

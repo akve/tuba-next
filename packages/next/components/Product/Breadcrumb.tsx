@@ -107,7 +107,7 @@ function Breadcrumb(props: IProps) {
           <span key={`${index}`}>
             <span>&nbsp;>&nbsp;</span>
             <Link href={row.link}>
-              <a href={row.link}>{row.title.replace('<br>', ': ')}</a>
+              <a href={row.link}>{(row.title || '').replace('<br>', ': ')}</a>
             </Link>
           </span>
         ))}

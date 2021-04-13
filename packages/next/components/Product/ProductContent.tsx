@@ -35,7 +35,7 @@ function ProductContent(props: IProps) {
   const [amount, setAmount] = useState(1);
   const [size, setSize] = useState('44');
   const [color, setColor] = useState('');
-  console.log(product);
+  console.log('PROD', product);
 
   const onAddToCart = (buyImmediately?: boolean) => {
     console.log('S', size);
@@ -49,6 +49,8 @@ function ProductContent(props: IProps) {
     });
     router.push('/checkout');
   };
+
+  if (!product.id) return <h1>This product is not found</h1>;
 
   return (
     <>

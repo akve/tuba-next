@@ -3,6 +3,8 @@ import Link from '@pdeals/next/elements/NextLink';
 import { useRouter, withRouter } from 'next/router';
 import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import Image from 'next/image';
+
 import {
   Card,
   Collapse,
@@ -50,7 +52,12 @@ function ProductsList(props: IProps) {
             <Card className="">
               <Link href={`/product/${product.code}?from=${category}`}>
                 <a href={`/product/${product.code}?from=${category}`} className="card-img-top">
-                  <img src={resizeImage(product.image, 'list') || require('assets/img/tuba/logo-top.png')} />
+                  <Image
+                    src={resizeImage(product.image, 'list') || require('assets/img/tuba/logo-top.png')}
+                    alt={i18n.t(product.name)}
+                    height={520}
+                    width={336}
+                  />
                 </a>
               </Link>
               <div className="card-body text-center">

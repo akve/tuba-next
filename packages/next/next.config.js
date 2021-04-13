@@ -38,6 +38,9 @@ module.exports = withBundleAnalyzer(
       withCSS(
         withImages(
           withSass({
+            images: {
+              domains: ['res.cloudinary.com'],
+            },
             //                    withPWA({
             webpack(config, options) {
               config.plugins.push(
