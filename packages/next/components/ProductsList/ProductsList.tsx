@@ -27,6 +27,9 @@ import Snippet from '@pdeals/next/components/Snippet/Snippet';
 import Breadcrumb from '@pdeals/next/components/Product/Breadcrumb';
 import { resizeImage } from '@pdeals/next/utils/helpers';
 
+const myLoader = ({ src, width, quality }) => {
+  return src;
+};
 interface IProps {
   uiStore?: UiStore;
   isForCollection?: boolean;
@@ -55,6 +58,7 @@ function ProductsList(props: IProps) {
                   <Image
                     src={resizeImage(product.image, 'list') || require('assets/img/tuba/logo-top.png')}
                     alt={i18n.t(product.name)}
+                    loader={myLoader}
                     height={520}
                     width={336}
                   />
