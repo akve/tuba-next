@@ -5,7 +5,7 @@ import { client } from '../lib/api/api-client';
 const sitemapXML = async () => {
   const ROOT = 'https://tuba-duba.com/';
   const stream = new SitemapStream({ hostname: ROOT });
-  const alldata = await client().get('/open/alldata');
+  const alldata: any = await client().get('/open/alldata');
 
   stream.write({
     url: ROOT,
@@ -68,7 +68,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const xml = await sitemapXML();
   context.res.write(xml);
   context.res.end();
-  return { props: { data } };
+  return { props: {} };
 };
 
 function Sitemap() {
