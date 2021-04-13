@@ -91,7 +91,7 @@ export class LookupsController {
   @POST
   public async colorsLookup(listParams: ListRequestDto | null): Promise<ListDto<any> | null> {
     const sql = `
-    select * from color order by name
+    select color.id, concat(coalesce(fabric.name, '--'), ' > ', color.name) "name" from color left join fabric on color.fabric = fabric.id order by fabric.name, color.name
 `;
     const rows = await getTypeormConnection().query(sql);
     const res: any = rows;
