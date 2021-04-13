@@ -27,7 +27,7 @@ import Snippet from '@pdeals/next/components/Snippet/Snippet';
 import Breadcrumb from '@pdeals/next/components/Product/Breadcrumb';
 import { resizeImage } from '@pdeals/next/utils/helpers';
 
-const myLoader = ({ src, width, quality }) => {
+const myLoader = ({ src }) => {
   return src;
 };
 interface IProps {
