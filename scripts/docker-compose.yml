@@ -19,7 +19,7 @@ services:
    - POSTGRES_PASSWORD=tuba
 
  frontend:
-  image: node:12.4
+  image: node:12.13
   container_name: p_frontend
   user: ${UID:-0}
   entrypoint: /data/scripts/frontend-entrypoint.sh
@@ -36,7 +36,7 @@ services:
    - NEXT_BUILD_API_URL
 
  api:
-  image: node:12.4
+  image: node:12.13
   container_name: p_api
   user: ${UID:-0}
   entrypoint: /data/scripts/server.sh
