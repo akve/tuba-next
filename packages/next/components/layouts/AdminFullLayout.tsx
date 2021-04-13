@@ -1,5 +1,6 @@
 import { Container, Row } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import UserStore from '@pdeals/next/stores/userStore';
 
@@ -12,9 +13,7 @@ const AdminFullLayout: React.FunctionComponent<React.PropsWithChildren<Props>> =
   if (!userStore!.me && false) {
     return <div>checking auth...</div>;
   }
-  return (
-    <>{children}</>
-  );
+  return <>{children}</>;
 };
 
 export default inject('userStore')(observer(AdminFullLayout));

@@ -8,6 +8,9 @@ import { filter } from 'lodash';
 import { t } from '../../utils/i18n';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Router from 'next/router';
+import Plus from '../../assets/img/plus.svg';
+import Minus from '../../assets/img/minus.svg';
+
 interface IProps {
   uiStore?: any;
   currentRoute?: string;
@@ -80,8 +83,8 @@ class ShopSidebar extends React.Component<IProps, any> {
             >
               <span className="sidenav-normal"> {prop.name} </span>
               <span className="sidenav-expander" onClick={onOpen}>
-                {isOpen && <i className="fa fa-minus-circle" />}
-                {!isOpen && <i className="fa fa-plus-circle" />}
+                {isOpen && <img src={Minus} style={{ width: '20px', height: '20px' }} />}
+                {!isOpen && <img src={Plus} style={{ width: '20px', height: '20px' }} />}
               </span>
             </NavLink>
             <Collapse isOpen={isOpen}>

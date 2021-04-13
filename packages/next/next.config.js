@@ -4,6 +4,9 @@ const withSass = require('@zeit/next-sass');
 const withCSS = require('@zeit/next-css');
 const withFonts = require('next-fonts');
 const webpack = require('webpack');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const path = require('path');
 const withTM = require('next-transpile-modules')(
@@ -29,33 +32,35 @@ module.exports = withTM(
 */
 // const withPWA = require('next-pwa');
 
-module.exports = withTM(
-  withFonts(
-    withCSS(
-      withImages(
-        withSass({
-          //                    withPWA({
-          webpack(config, options) {
-            config.plugins.push(
-              new webpack.ProvidePlugin({
-                React: 'react',
-              })
-            );
-            config.module.rules.push({
-              test: /\.(eot|ttf|woff|woff2)$/,
-              use: {
-                loader: 'url-loader',
-              },
-            });
-            if (!options.isServer) {
-              config.resolve.alias['@sentry/node'] = '@sentry/browser';
-            }
-            config.resolve.alias['@pdeals/models'] = '../models/';
-            config.resolve.modules.push(path.resolve('../models'));
-            config.resolve.modules.push(path.resolve('./'));
-            return config;
-          },
-        })
+module.exports = withBundleAnalyzer(
+  withTM(
+    withFonts(
+      withCSS(
+        withImages(
+          withSass({
+            //                    withPWA({
+            webpack(config, options) {
+              config.plugins.push(
+                new webpack.ProvidePlugin({
+                  React: 'react',
+                })
+              );
+              config.module.rules.push({
+                test: /\.(eot|ttf|woff|woff2)$/,
+                use: {
+                  loader: 'url-loader',
+                },
+              });
+              if (!options.isServer) {
+                config.resolve.alias['@sentry/node'] = '@sentry/browser';
+              }
+              config.resolve.alias['@pdeals/models'] = '../models/';
+              config.resolve.modules.push(path.resolve('../models'));
+              config.resolve.modules.push(path.resolve('./'));
+              return config;
+            },
+          })
+        )
       )
     )
   )

@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Toast, ToastHeader, ToastBody } from 'reactstrap';
 import classNames from 'classnames';
-import { faExclamationTriangle, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faExclamationTriangle, faCheck } from '@fortawesome/free-solid-svg-icons';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UiStore from '@pdeals/next/stores/uiStore';
 import NotificationAlert from 'react-notification-alert';
 // react component used to create sweet alerts
