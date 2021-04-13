@@ -84,11 +84,16 @@ export default class MyApp extends App {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
           <title>TubaDuba</title>
+          <meta
+            name="description"
+            content="Волшебная одежда, созданная с легкостью и любовью для Вас. Проект, объединяющий творческих людей. С радостью ответим на ваши вопросы: 38 050 176 42 23"
+          />
+          <meta name="keywords" content="Дизайнерская одежда, Украина, Туба-Дуба, Tuba-Duba, женская одежда" />
           <meta property="og:title" content="Туба-дуба: пространство легкости и красоты" />
           <meta property="og:description" content="Одежда, которая обнимает..." />
           <meta
             property="description"
-            content="Волшебная одежда, созданная с легкостью и любовью для Вас. Проект, объединяющий творческих людей. С радостью ответим на ваши вопросы: 38 050 050 176 42 23"
+            content="Волшебная одежда, созданная с легкостью и любовью для Вас. Проект, объединяющий творческих людей. С радостью ответим на ваши вопросы: 38 050 176 42 23"
           />
           <meta
             property="og:image"
