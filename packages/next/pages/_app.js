@@ -4,6 +4,7 @@ import App from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
 import Safe from 'react-safe';
+// import { Head } from 'next/document';
 
 import PageChange from 'components/PageChange/PageChange.js';
 
@@ -11,7 +12,8 @@ import { Provider } from 'mobx-react';
 
 import 'react-notification-alert/dist/animate.css';
 import 'assets/plugins/nucleo/css/nucleo.css';
-import 'assets/scss/nextjs-argon-dashboard-pro.scss';
+//import 'assets/scss/nextjs-argon-dashboard-pro.scss';
+// import 'assets/css/out.css';
 import 'assets/vendor/quill/dist/quill.core.css';
 import '../assets/css/nprogress.css';
 
@@ -20,6 +22,8 @@ import { NotificationProvider } from '@pdeals/next/lib/contexts/NotificationCont
 import Admin from '@pdeals/next/components/layouts/Admin';
 import UserLayout from '../components/layouts/UserLayout';
 import { getStore, initalizeStoreClean, hydrateEverything } from '../stores/initStore';
+// import { readFileSync } from 'fs';
+// import { join } from 'path';
 
 import NProgress from 'nprogress';
 
@@ -40,6 +44,18 @@ Router.events.on('routeChangeComplete', async () => {
 Router.events.on('routeChangeError', () => {
   NProgress.done();
 });
+
+function dedupe(bundles) {
+  const files = new Set();
+  const kept = [];
+
+  for (const bundle of bundles) {
+    if (files.has(bundle.file)) continue;
+    files.add(bundle.file);
+    kept.push(bundle);
+  }
+  return kept;
+}
 
 export default class MyApp extends App {
   state = {
@@ -99,6 +115,7 @@ export default class MyApp extends App {
             property="og:image"
             content="https://tuba-duba.com/wp-content/uploads/2016/08/13932973_1088930401199199_138885520_n.jpg"
           />
+          <style dangerouslySetInnerHTML={{ __html: require('../assets/css/out.css') }}></style>
           <meta name="p:domain_verify" content="f80bef3d9d034afebf0911637637190e" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>
           <Safe.script>
