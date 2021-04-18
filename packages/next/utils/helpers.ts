@@ -59,3 +59,8 @@ export const resizeImage = (url: string, format: 'list' | 'thumb' | 'normal') =>
     return url.replace('/upload/', '/upload/h_1000/');
   }
 };
+
+export const safeJson = (str: string) => {
+  if (!str) return str;
+  return str.replace(/"/g, "'");
+};

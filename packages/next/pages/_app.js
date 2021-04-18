@@ -111,10 +111,7 @@ export default class MyApp extends App {
             property="description"
             content="Волшебная одежда, созданная с легкостью и любовью для Вас. Проект, объединяющий творческих людей. С радостью ответим на ваши вопросы: 38 050 176 42 23"
           />
-          <meta
-            property="og:image"
-            content="https://tuba-duba.com/wp-content/uploads/2016/08/13932973_1088930401199199_138885520_n.jpg"
-          />
+          <meta property="og:image" content="https://tuba-duba.com/assets/img/main.jpg" />
           <style dangerouslySetInnerHTML={{ __html: require('../assets/css/out.css') }}></style>
           <meta name="p:domain_verify" content="f80bef3d9d034afebf0911637637190e" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>

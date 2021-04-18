@@ -59,8 +59,9 @@ function ProductsList(props: IProps) {
                     src={resizeImage(product.image, 'list') || require('assets/img/tuba/logo-top.png')}
                     alt={i18n.t(product.name)}
                     loader={myLoader}
-                    height={520}
-                    width={336}
+                    height={500}
+                    width={350}
+                    layout={'responsive'}
                   />
                 </a>
               </Link>

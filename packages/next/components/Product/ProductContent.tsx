@@ -23,6 +23,7 @@ import OrderStore from '@pdeals/next/stores/orderStore';
 import AmountChooser from '@pdeals/next/components/common/AmountChooser';
 import SizeChooser from '@pdeals/next/components/common/SizeChooser';
 import ColorChooser from '@pdeals/next/components/common/ColorChooser';
+import { safeJson } from '@pdeals/next/utils/helpers';
 
 interface IProps {
   uiStore?: UiStore;
@@ -51,23 +52,67 @@ function ProductContent(props: IProps) {
   };
 
   if (!product.id) return <h1>This product is not found</h1>;
+  const colors = !product.data.colors
+    ? ''
+    : product.data.colors.reduce((acc, cv) => {
+        return acc + cv.name + ' / ';
+      }, '');
+  console.log('C', colors);
 
   return (
     <>
       <Head>
         <title>{i18n.t(product.name)} - Tuba-Duba</title>
-        <meta name="description" content={`${i18n.t(product.name)} - Tuba-Duba`} />
+        <meta name="description" content={`${safeJson(i18n.t(product.name))} - Tuba-Duba`} />
         <meta name="keywords" content="Туба-дуба, Tuba-Duba" />
-        <meta property="og:title" content={`${i18n.t(product.name)} - Tuba-Duba`} key="title" />
+        <meta property="og:title" content={`${safeJson(i18n.t(product.name))} - Tuba-Duba`} key="title" />
         <meta property="og:type" content="product" />
         <meta
           property="og:image"
           content={`${product.data.images && product.data.images.length ? product.data.images[0].image : ''}`}
         />
-        <meta property="og:description" content={`${i18n.t(product.name)}`} />
-        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
+        <meta property="og:description" content={`${safeJson(i18n.t(product.name))}`} />
+        <meta
+          property="og:url"
+          content={
+            typeof window !== 'undefined' ? window.location.href : `https://tuba-duba.com/product/${product.code}`
+          }
+        />
         <meta property="product:price:amount" content={`${product.price}`} />
         <meta property="product:price:currency" content="UAH" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `{
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "${safeJson(i18n.t(product.name))} Tuba-Duba",
+      "image": "${product.data.images && product.data.images.length ? product.data.images[0].image : ''}",
+      "description": "${safeJson(i18n.t(product.name))}",
+      "brand": {
+        "@type": "Thing",
+        "name": "Tuba-Duba"
+      },
+      "logo": "https://tuba-duba.com/assets/img/logo.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "${product.price}",
+        "priceCurrency": "UAH",
+        "url": "https://tuba-duba.com/product/${product.code}",
+        "availability": "https://schema.org/InStock",
+        "offerCount": "1",
+        "itemOffered":{
+          "@type": "IndividualProduct",
+          "name": "${i18n.t(product.name)}",
+          "model": "${product.id}",
+          "color":"${i18n.t(colors)}"
+          },
+        "seller": {"@type":"Organization","name":"Tuba-Duba"}
+      }      
+    };`,
+          }}
+        />
       </Head>
       <div className="product-details-wrapper w-100">
         <h1>{i18n.t(product.name)}</h1>

@@ -7,6 +7,7 @@ import { getStore } from '@pdeals/next/stores/initStore';
 import ShopSidebar from '../components/Sidebar/ShopSidebar';
 import ProductsList from '@pdeals/next/components/ProductsList/ProductsList';
 import NormalLayout from '@pdeals/next/components/layouts/NormalLayout';
+import { HeadNonProduct } from '@pdeals/next/components/Headers/HeadNonProduct';
 
 export async function getServerSideProps({ params }) {
   const alldata = await client().get('/open/alldata');
@@ -19,6 +20,7 @@ const IndexPage: React.FunctionComponent<any> = ({ alldata }) => {
   console.log('Rendering now', alldata, new Date());
   return (
     <NormalLayout withHeading>
+      <HeadNonProduct />
       <div className="col-lg-2 d-none d-lg-block d-xl-block">
         <ShopSidebar currentRoute="featured" />
       </div>

@@ -7,7 +7,6 @@ import NormalLayout from '@pdeals/next/components/layouts/NormalLayout';
 import { inject, observer } from 'mobx-react';
 import Breadcrumb from '@pdeals/next/components/Product/Breadcrumb';
 import ProductContent from '@pdeals/next/components/Product/ProductContent';
-
 const Slider = dynamic(() => import('@pdeals/next/components/Product/Slider'));
 
 export async function getServerSideProps(context) {
@@ -27,18 +26,20 @@ const ProductPage: React.FunctionComponent<any> = ({ uiStore, alldata, id, from 
   console.log('Rendering now', id, new Date(), from);
   const isServer = typeof window === 'undefined';
   return (
-    <NormalLayout>
-      <Breadcrumb type="product" id={id} from={from} />
-      <div
-        className="d-flex col-md-5 col-sm-12 flex-wrap"
-        style={uiStore.sliderWidth ? { minWidth: uiStore.sliderWidth } : {}}
-      >
-        {!isServer && <Slider />}
-      </div>
-      <div className="d-flex col-md-7 col-sm-12 ">
-        <ProductContent />
-      </div>
-    </NormalLayout>
+    <>
+      <NormalLayout>
+        <Breadcrumb type="product" id={id} from={from} />
+        <div
+          className="d-flex col-md-5 col-sm-12 flex-wrap"
+          style={uiStore.sliderWidth ? { minWidth: uiStore.sliderWidth } : {}}
+        >
+          {!isServer && <Slider />}
+        </div>
+        <div className="d-flex col-md-7 col-sm-12 ">
+          <ProductContent />
+        </div>
+      </NormalLayout>
+    </>
   );
 };
 
