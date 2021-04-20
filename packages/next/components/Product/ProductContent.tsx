@@ -110,7 +110,7 @@ function ProductContent(props: IProps) {
           },
         "seller": {"@type":"Organization","name":"Tuba-Duba"}
       }      
-    };`,
+    }`,
           }}
         />
       </Head>

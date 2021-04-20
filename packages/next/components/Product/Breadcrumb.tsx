@@ -49,10 +49,18 @@ function Breadcrumb(props: IProps) {
               });
             }
           }
-          res.push({
-            link: `/category/${category.code}`,
-            title: i18n.t(category.originalName || category.name),
-          });
+          if (category.prefix === 'collection') {
+            res.push({
+              link: `/collection/${category.code}`,
+              title: i18n.t(category.originalName || category.name),
+            });
+
+          } else {
+            res.push({
+              link: `/category/${category.code}`,
+              title: i18n.t(category.originalName || category.name),
+            });
+          }
         }
         res.push({
           link: `/product/${p.code}${props.from ? `?from=${props.from}` : ''}`,

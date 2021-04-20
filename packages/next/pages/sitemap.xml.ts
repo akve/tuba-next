@@ -14,11 +14,13 @@ const sitemapXML = async () => {
   });
   for (let i = 0; i < alldata.products.length; i++) {
     const p = alldata.products[i];
-    stream.write({
-      url: `/product/${p.code}`,
-      changefreq: 'weekly',
-      priority: 0.8,
-    });
+    if (p.code !== 'DELETE-ME') {
+      stream.write({
+        url: `/product/${p.code}`,
+        changefreq: 'weekly',
+        priority: 0.8,
+      });
+    }
   }
   for (let i = 0; i < alldata.categories.rows.length; i++) {
     const cat = alldata.categories.rows[i];
