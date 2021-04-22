@@ -111,6 +111,7 @@ export default class MyApp extends App {
             property="description"
             content="Волшебная одежда, созданная с легкостью и любовью для Вас. Проект, объединяющий творческих людей. С радостью ответим на ваши вопросы: 38 050 176 42 23"
           />
+          <meta name="facebook-domain-verification" content="t4wqwx21dk9zpgtbdltyn6gmb7r5le" />
           <meta property="fb:app_id" content="785826554851503" />
           <meta property="og:url" content="https://tuba-duba.com" />
           <meta property="og:image" content="https://tuba-duba.com/assets/img/main.jpg" />
