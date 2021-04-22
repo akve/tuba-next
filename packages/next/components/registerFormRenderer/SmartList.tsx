@@ -69,14 +69,17 @@ const SmartList = ({
 
   const renderForm = (fields: IFormField[]) => {
     return (
-      <div className="d-flex">
-        <div style={{ minWidth: '250px' }}>{fields.map((field, index) => renderField(field, index))}</div>
-        <div>
-          <button className="btn btn-outline-default" onClick={() => onAddRow()}>
-            <i className="fa fa-plus-circle" /> Добавить
-          </button>
+      <>
+        <div className="d-flex">
+          <div style={{ minWidth: '250px' }}>{fields.map((field, index) => renderField(field, index))}</div>
+          <div>
+            <button className="btn btn-outline-default" onClick={() => onAddRow()}>
+              <i className="fa fa-plus-circle" /> Добавить
+            </button>
+          </div>
         </div>
-      </div>
+        {!!listOptions.alternativeAdd && listOptions.alternativeAdd({ bulkAdd })}
+      </>
     );
   };
   const onRemoveRow = (index) => {
@@ -90,6 +93,13 @@ const SmartList = ({
       v.push(values);
       setValue(name, v);
     })();
+  };
+  const bulkAdd = (valuesMulti) => {
+    console.log('Adding', valuesMulti);
+    let v = value ? [...value] : [];
+    v = [...v, ...valuesMulti];
+    //v.push(values);
+    setValue(name, v);
   };
   const renderList = () => {
     if (!value || !value.length) return null;

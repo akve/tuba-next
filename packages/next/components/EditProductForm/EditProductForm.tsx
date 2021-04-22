@@ -5,6 +5,7 @@ import { ExportTable } from '@pdeals/next/components/common/Actions';
 import { BooleanCell, HTMLCell, DateCell } from '@pdeals/next/components/Crud/CrudList/Cells';
 import { tableKeys } from '@pdeals/next/variables/constants';
 import CrudFormWrapper from '@pdeals/next/components/Crud/CrudForm/CrudFormWrapper';
+import AlternativeColorAdd from '@pdeals/next/components/EditProductForm/AlternativeColorAdd';
 
 type Props = {
   id: number;
@@ -100,6 +101,7 @@ const EditProductForm: React.FunctionComponent<Props> = ({ id, afterSave }) => {
               color: '',
               name: '',
             },
+            alternativeAdd: AlternativeColorAdd,
             fields: [
               {
                 name: 'color',

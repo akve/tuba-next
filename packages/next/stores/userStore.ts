@@ -14,6 +14,8 @@ class UserStore {
   @persist @observable session: string | null = null;
   @observable me: User | null = null;
 
+  @observable allData = null;
+
   @action setSession(s: string) {
     this.session = s;
   }
@@ -53,6 +55,7 @@ class UserStore {
         this.session = answer.session;
         // localStorage.setItem('token', answer.session);
         this.me = answer.user;
+        this.allData = await client().get('/open/alldata?cache=' + new Date());
       } else {
         throw new Error('Unauthorized');
       }

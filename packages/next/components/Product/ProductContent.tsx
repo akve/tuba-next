@@ -80,6 +80,7 @@ function ProductContent(props: IProps) {
         />
         <meta property="product:price:amount" content={`${product.price}`} />
         <meta property="product:price:currency" content="UAH" />
+        <meta property="productID" itemProp="productID" content={`tuba_duba_${product.code}`} />
 
         <script
           type="application/ld+json"
@@ -87,6 +88,7 @@ function ProductContent(props: IProps) {
             __html: `{
       "@context": "https://schema.org",
       "@type": "Product",
+      "productID":"tuba_duba_${product.code}",
       "name": "${safeJson(i18n.t(product.name))} Tuba-Duba",
       "image": "${product.data.images && product.data.images.length ? product.data.images[0].image : ''}",
       "description": "${safeJson(i18n.t(product.name))}",
