@@ -6,9 +6,11 @@ const LazyDropDownComponent = getRenderer('lazydropdown');
 const AlternativeColorAdd = (props) => {
   const addByFabric = (f) => {
     f = parseInt(f);
-    const toAdd = [];
-    props.userStore.allData.colors.forEach((c) => {
-      if (c.fabric === f) toAdd.push({ color: c.id, name: c.name });
+    const toAdd: any = [];
+    props.userStore.allData.colors.forEach((c: any) => {
+      if (c.fabric === f) {
+        toAdd.push({ color: c.id, name: c.name });
+      }
     });
     props.bulkAdd(toAdd);
   };
