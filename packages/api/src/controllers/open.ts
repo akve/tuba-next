@@ -162,4 +162,43 @@ export class OpenController {
     reply.count = count;
     return reply;
   }
+
+  @Path('/reviews')
+  @POST
+  public async reviewsList(listParams: ListRequestDto): Promise<ListDto<any> | null> {
+    const sql = `
+    select review.*, product.name from review 
+    left join product on product.id = review.product
+    ORDER BY coalesce(review.score_date, review."createdDate")
+    LIMIT ${listParams.limit || 10} 
+    OFFSET ${listParams.offset || 0}
+`;
+
+    const rows = await getTypeormConnection().query(sql);
+
+    const reply = new ListDto();
+    reply.rows = rows;
+    reply.count = rows.length;
+    return reply;
+  }
+
+  @Path('/reviews-frontend/:offset')
+  @GET
+  public async reviewsListFront(@PathParam('offset') offset: number): Promise<ListDto<any> | null> {
+    const sql = (isCount: boolean) => {
+      return `
+    select ${isCount ? 'count(*)' : 'review.*, product.name'} 
+    from review
+    left join product on product.id = review.product
+    ${isCount ? '' : 'ORDER BY coalesce(review.score_date, review."createdDate") LIMIT 20 OFFSET ' + (offset || 0)}`;
+    };
+
+    const rows = await getTypeormConnection().query(sql(false));
+    const count = await getTypeormConnection().query(sql(true));
+
+    const reply = new ListDto();
+    reply.rows = rows;
+    reply.count = count;
+    return reply;
+  }
 }

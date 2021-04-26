@@ -59,6 +59,12 @@ const routes = [
     layout: '/admin',
     icon: 'ni ni-archive-2 text-primary',
   },
+  {
+    path: '/reviews',
+    name: 'Отзывы',
+    layout: '/admin',
+    icon: 'ni ni-archive-2 text-primary',
+  },
 ];
 
 export default routes;

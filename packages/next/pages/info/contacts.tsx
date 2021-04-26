@@ -21,7 +21,7 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata }) => {
   return (
     <NormalLayout>
       <div className="d-flex w-100">
-        <div>
+        <div className="page-margin">
           <Snippet code={'contacts'} />
         </div>
       </div>

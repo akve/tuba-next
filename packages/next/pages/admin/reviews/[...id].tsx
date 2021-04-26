@@ -9,10 +9,10 @@ type Props = {};
 
 const MainInner: React.FunctionComponent<Props> = ({}) => {
   const params: ICrud = {
-    apiUrlPrefix: 'fabric',
-    uiUrlPrefix: '/admin/fabrics',
-    title: 'Ткани',
-    tableKey: tableKeys.colors,
+    apiUrlPrefix: 'review',
+    uiUrlPrefix: '/admin/reviews',
+    title: 'Отзывы',
+    tableKey: tableKeys.reviews,
     options: {
       isCreatable: true,
       isEditable: true,
@@ -26,8 +26,18 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
       },
       {
         text: 'Name',
-        dataField: 'name',
+        dataField: 'username',
         sort: true,
+      },
+      {
+        text: 'Score',
+        dataField: 'score',
+        sort: true,
+      },
+      {
+        text: 'Review Date',
+        dataField: 'score_date',
+        formatter: DateCell,
       },
       {
         text: 'Created Date',
@@ -35,12 +45,25 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         formatter: DateCell,
       },
     ],
-    userFilter: [{ field: 'name', fieldType: 'text', fieldLabel: 'Search' }],
+    userFilter: [{ field: 'username', fieldType: 'text', fieldLabel: 'Search' }],
     form: {
       fields: [
-        { name: 'code', label: 'Code', type: 'text', class: 'col-lg-6', required: true, notEditable: false },
-        { name: 'name', label: 'Name', type: 'text', class: 'col-lg-6', required: true },
-
+        { name: 'username', label: 'From user', type: 'text', class: 'col-lg-6', required: true, notEditable: false },
+        { name: 'score_date', label: 'Date', type: 'date', class: 'col-lg-6', required: false, notEditable: false },
+        {
+          name: 'product',
+          label: 'Product',
+          type: 'lazydropdown',
+          class: 'col-lg-6',
+          options: {
+            resource: {
+              url: '/lookups/products',
+              value: 'id',
+              label: 'name',
+            },
+          },
+        },
+        { name: 'score', label: 'Score', type: 'number', class: 'col-lg-6', required: true, defaultValue: 5 },
         {
           name: 'description',
           label: 'Description',
@@ -57,11 +80,11 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
     rowActions: [],
     translatableEntity: false,
     breadcrumbsData: {
-      breadcrumbs: [{ title: 'Ткани', link: '/admin/fabrics' }],
+      breadcrumbs: [{ title: 'Отзывы', link: '/admin/reviews' }],
       resolvers: {
         title: (result) => result.id,
-        link: (result) => `/admin/fabrics/${result.id}/edit`,
-        entity: 'color',
+        link: (result) => `/admin/reviews/${result.id}/edit`,
+        entity: 'review',
       },
     },
   };

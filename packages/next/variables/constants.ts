@@ -23,4 +23,5 @@ export const tableKeys = {
   categories: 'categories',
   snippets: 'snippets',
   fabrics: 'fabrics',
+  reviews: 'reviews',
 };

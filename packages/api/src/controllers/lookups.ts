@@ -102,6 +102,19 @@ export class LookupsController {
     return reply;
   }
 
+  @Path('/products')
+  @POST
+  public async productsLookup(listParams: ListRequestDto | null): Promise<ListDto<any> | null> {
+    const sql = `select id, name from product order by name`;
+    const rows = await getTypeormConnection().query(sql);
+    const res: any = rows;
+
+    const reply = new ListDto();
+    reply.rows = res;
+    reply.count = 1000;
+    return reply;
+  }
+
   @Path('/collections')
   @POST
   public async collectionsLookup(listParams: ListRequestDto | null): Promise<ListDto<any> | null> {

@@ -77,7 +77,10 @@ const LazyDropDown = ({
       {label && <label className="form-control-label">{label}</label>}
       {!initialValue || options.length || inputChanged ? (
         <ReactSelect
-          filterOption={() => true}
+          filterOption={(e, v) => {
+            if (!v) return true;
+            return e.label.toLowerCase().indexOf(v.toLowerCase()) >= 0;
+          }}
           options={options}
           placeholder={placeholder || 'Select...'}
           onInputChange={debouncedFetchOptions}

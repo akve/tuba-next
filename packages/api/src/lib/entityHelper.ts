@@ -10,6 +10,7 @@ import { Collection } from '@pdeals/models/entities/Collection';
 import { Product } from '@pdeals/models/entities/Product';
 import { Snippet } from '@pdeals/models/entities/Snippet';
 import { Fabric } from '@pdeals/models/entities/Fabric';
+import { Review } from '@pdeals/models/entities/Review';
 
 export const EntityNameToEntityMapping: any = {
   user: User,
@@ -24,4 +25,5 @@ export const EntityNameToEntityMapping: any = {
   product: Product,
   snippet: Snippet,
   fabric: Fabric,
+  review: Review,
 };

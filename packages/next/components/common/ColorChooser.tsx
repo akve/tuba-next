@@ -35,7 +35,7 @@ function ColorChooser(props: IProps) {
     const res: any = [];
     let selected: any = null;
     props.product.data.colors.forEach((c: any) => {
-      const found = find(props.uiStore!.allData.colors, (r) => r.id === c.color);
+      const found = find(props.uiStore!.allData.colors, (r) => `${r.id}` === `${c.color}`);
       if (!found) return;
       const c2 = { id: found.id, name: found.name, image: found.image };
       if (c2.name === props.value) {
@@ -57,9 +57,7 @@ function ColorChooser(props: IProps) {
       props.onChange(selectedColor.name);
     }
   }, []);
-
   if (!selectedColor) return null;
-
   return (
     <div className="color-chooser">
       <div className="colorname">{i18n.t(selectedColor.name)}</div>

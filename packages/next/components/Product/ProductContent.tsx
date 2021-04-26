@@ -17,6 +17,7 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
+import { find } from 'lodash';
 import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
 import OrderStore from '@pdeals/next/stores/orderStore';
@@ -38,6 +39,19 @@ function ProductContent(props: IProps) {
   const [color, setColor] = useState('');
   console.log('PROD', product);
 
+  const getFabric = () => {
+    if (!product.data.colors || !product.data.colors.length) return null;
+    const color = product.data.colors[0];
+    if (!color.color) return null;
+    const colorFull = find(uiStore?.allData.colors, (r) => `${r.id}` === `${color.color}`);
+    if (!colorFull) return null;
+    const f = find(uiStore?.allData.fabrics, (r) => r.id === colorFull.fabric);
+    if (f) {
+      return f;
+    }
+    return null;
+  };
+
   const onAddToCart = (buyImmediately?: boolean) => {
     console.log('S', size);
     props.orderStore!.putToCart({
@@ -57,8 +71,8 @@ function ProductContent(props: IProps) {
     : product.data.colors.reduce((acc, cv) => {
         return acc + cv.name + ' / ';
       }, '');
-  console.log('C', colors);
-
+  const fabric = getFabric();
+  console.log('C', colors, fabric);
   return (
     <>
       <Head>
@@ -120,9 +134,17 @@ function ProductContent(props: IProps) {
         <h1>{i18n.t(product.name)}</h1>
         <h3>{product.price} грн</h3>
         <div className="content" dangerouslySetInnerHTML={{ __html: i18n.t(product.description, true) }}></div>
-        <div className="content">
-          <p>{i18n.t('[R:Шьем по вашим меркам][U:Шиємо за вашими мірочками]')}</p>
-        </div>
+        {!!fabric && (
+          <div
+            className="content"
+            dangerouslySetInnerHTML={{ __html: i18n.t(fabric.description || fabric.name, true) }}
+          ></div>
+        )}
+        {!product.description && (
+          <div className="content">
+            <p>{i18n.t('[R:Шьем по вашим меркам][U:Шиємо за вашими мірочками]')}</p>
+          </div>
+        )}
         <hr />
         <div className="order-wrapper">
           <AmountChooser value={amount} onChange={(v) => setAmount(v)} />

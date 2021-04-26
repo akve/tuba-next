@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="19px" viewBox="0 0 20 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>toggle / star</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Cards-/-Wheels-/-Small" transform="translate(-102.000000, -365.000000)" fill="#EF233C">
+            <g id="toggle-/-star-half" transform="translate(100.000000, 362.000000)">
+                <g transform="translate(2.000000, 3.000000)" id="Shape">
+                    <path d="M20,7.24 L12.81,6.62 L10,0 L7.19,6.63 L0,7.24 L5.46,11.97 L3.82,19 L10,15.27 L16.18,19 L14.55,11.97 L20,7.24 Z M10,13.4 L10,4.1 L11.71,8.14 L16.09,8.52 L12.77,11.4 L13.77,15.68 L10,13.4 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
