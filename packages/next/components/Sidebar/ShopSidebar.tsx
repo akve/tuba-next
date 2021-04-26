@@ -57,7 +57,7 @@ class ShopSidebar extends React.Component<IProps, any> {
       }
       if (prop.collapse) {
         const isOpen = !!(this.state.openroutes.indexOf(prop.path) >= 0);
-        console.log('P', prop.path);
+        //console.log('P', prop.path);
         const onOpen = (e: any) => {
           e.preventDefault();
           let r;

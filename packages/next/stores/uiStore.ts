@@ -182,7 +182,7 @@ if (level === 'success') {
     const p = find(this.allData.products, (r: any) => `${r.code}` === `${this.product}`);
     if (!p) return {};
     const categories = get(p, 'data.categories') || null;
-    console.log('FOUND?', p, this.allData, categories);
+    //console.log('FOUND?', p, this.allData, categories);
     let categoryId: any = null;
     if (categories) {
       categoryId = find(categories, (r) => ['featured', 'new', 'sale'].indexOf(r.name) < 0);

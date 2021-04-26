@@ -37,7 +37,7 @@ function ProductContent(props: IProps) {
   const [amount, setAmount] = useState(1);
   const [size, setSize] = useState('44');
   const [color, setColor] = useState('');
-  console.log('PROD', product);
+  //console.log('PROD', product);
 
   const getFabric = () => {
     if (!product.data.colors || !product.data.colors.length) return null;

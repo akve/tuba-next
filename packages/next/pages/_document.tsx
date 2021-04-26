@@ -34,7 +34,7 @@ class MyDocument extends Document {
           </Safe.script>
           <div
             dangerouslySetInnerHTML={{
-              __html: `<div className="fb-customerchat" attribution="setup_tool" page_id="785826554851503"></div>`,
+              __html: `<div class="fb-customerchat" attribution="setup_tool" page_id="785826554851503"></div>`,
             }}
           />
 
