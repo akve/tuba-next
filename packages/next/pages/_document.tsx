@@ -32,7 +32,12 @@ class MyDocument extends Document {
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));`}
           </Safe.script>
-          <div className="fb-customerchat" attribution="setup_tool" page_id="785826554851503"></div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `<div className="fb-customerchat" attribution="setup_tool" page_id="785826554851503"></div>`,
+            }}
+          />
+
           <div id="page-transition"></div>
           <Main />
           <NextScript />
