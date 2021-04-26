@@ -37,7 +37,7 @@ const safeXml = (s) => {
   if (!s) return s;
   return i18n
     .t(s)
-    .replace('&nbsp;', ' ')
+    .replace(/&nbsp;/g, ' ')
     .replace(/(<([^>]+)>)/gi, ' ')
     .replace(/>/g, '&gt;')
     .replace(/</g, '&lt;');
