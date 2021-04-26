@@ -34,11 +34,24 @@ const ROOT = 'https://tuba-duba.com';
 
 * */
 const safeXml = (s) => {
-  return i18n.t(s).replace(/>/g, '&gt;').replace(/</g, '&lt;');
+  if (!s) return s;
+  return i18n
+    .t(s)
+    .replace(/(<([^>]+)>)/gi, '')
+    .replace(/>/g, '&gt;')
+    .replace(/</g, '&lt;');
 };
-const getImage = (p) => {
+const getImage = (p, showAll?: boolean) => {
   const res = p.data.images && p.data.images.length ? p.data.images[0].image : '';
   if (!res) return `${ROOT}/assets/img/main.jpg`;
+  if (showAll) {
+    return p.data.images
+      .map((p1) => {
+        if (p1.image.indexOf('cloudinary') >= 0) return p1.image;
+        return `${ROOT}${p1.image}`;
+      })
+      .join(',');
+  }
   if (res.indexOf('cloudinary') >= 0) return res;
   return `${ROOT}${res}`;
 };
@@ -61,9 +74,10 @@ const sitemapXML = async () => {
       <item>
       <g:id>tuba_duba_${p.code}</g:id>
       <g:title>${safeXml(p.name)}</g:title>
-      <g:description>${safeXml(p.name)}</g:description>
+      <g:description>${safeXml(p.description || p.name)}</g:description>
       <g:link>${ROOT}/product/${p.code}</g:link>
       <g:image_link>${getImage(p)}</g:image_link>
+      <g:additional_image_link>${getImage(p, true)}</g:additional_image_link>
       <g:brand>Tuba-Duba</g:brand>
       <g:condition>new</g:condition>
       <g:availability>in stock</g:availability>

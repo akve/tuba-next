@@ -35,6 +35,9 @@ export class Category extends BaseEntity {
   @Column({ nullable: true })
   invisible: boolean;
 
+  @Column({ nullable: true })
+  parent_not_clickable: boolean;
+
   @CreateDateColumn()
   createdDate?: Date;
 

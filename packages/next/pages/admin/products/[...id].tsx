@@ -4,6 +4,7 @@ import { ICrud } from '@pdeals/next/components/Crud/ICrud';
 import { ExportTable } from '@pdeals/next/components/common/Actions';
 import { BooleanCell, HTMLCell, DateCell } from '@pdeals/next/components/Crud/CrudList/Cells';
 import { tableKeys } from '@pdeals/next/variables/constants';
+import AlternativeColorAdd from '@pdeals/next/components/EditProductForm/AlternativeColorAdd';
 
 type Props = {};
 
@@ -130,6 +131,7 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
               color: '',
               name: '',
             },
+            alternativeAdd: AlternativeColorAdd,
             fields: [
               {
                 name: 'color',

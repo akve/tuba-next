@@ -2,14 +2,17 @@ import { useEffect, useRef } from 'react';
 import { getRenderer } from '@pdeals/next/components/registerFormRenderer';
 import { inject, observer } from 'mobx-react';
 const LazyDropDownComponent = getRenderer('lazydropdown');
+import { find } from 'lodash';
 
 const AlternativeColorAdd = (props) => {
   const addByFabric = (f) => {
     f = parseInt(f);
     const toAdd: any = [];
+    const fabric = find(props.userStore.allData.fabrics, (r) => r.id === f);
+
     props.userStore.allData.colors.forEach((c: any) => {
       if (c.fabric === f) {
-        toAdd.push({ color: c.id, name: c.name });
+        toAdd.push({ color: c.id, name: `${fabric ? fabric.name : '--'} > c.name` });
       }
     });
     props.bulkAdd(toAdd);

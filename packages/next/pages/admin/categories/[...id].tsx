@@ -69,7 +69,7 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
           name: 'parent',
           label: 'Parent category',
           type: 'lazydropdown',
-          class: 'col-lg-6',
+          class: 'col-lg-3',
           options: {
             resource: {
               url: '/lookups/categories',
@@ -80,6 +80,7 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         },
         { name: 'sorter', label: 'Sort', type: 'number', class: 'col-lg-3' },
         { name: 'invisible', label: 'Invisible', type: 'checkbox', class: 'col-lg-3' },
+        { name: 'parent_not_clickable', label: 'Not clickable', type: 'checkbox', class: 'col-lg-3' },
         { name: 'image', label: 'Image', type: 'text', class: 'col-lg-12', required: false },
         //{ name: 'content', label: 'Content', type: 'html', class: 'col-lg-12', canBeTranslated: true, required: true, },
       ],

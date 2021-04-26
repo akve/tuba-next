@@ -129,7 +129,7 @@ class ShopSidebar extends React.Component<IProps, any> {
           icon: '-',
           name: t(child.originalName),
           layout: '',
-          path: '/category/' + subcode,
+          path: child.parent_not_clickable ? null : '/category/' + subcode,
           level: level,
           views: [],
         };

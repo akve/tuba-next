@@ -105,7 +105,7 @@ function ProductContent(props: IProps) {
       "productID":"tuba_duba_${product.code}",
       "name": "${safeJson(i18n.t(product.name))} Tuba-Duba",
       "image": "${product.data.images && product.data.images.length ? product.data.images[0].image : ''}",
-      "description": "${safeJson(i18n.t(product.name))}",
+      "description": "${safeJson(i18n.t(product.description), true)}",
       "brand": {
         "@type": "Thing",
         "name": "Tuba-Duba"

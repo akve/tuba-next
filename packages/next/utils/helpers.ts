@@ -60,7 +60,7 @@ export const resizeImage = (url: string, format: 'list' | 'thumb' | 'normal') =>
   }
 };
 
-export const safeJson = (str: string) => {
+export const safeJson = (str: string, stripTags?: boolean) => {
   if (!str) return str;
-  return str.replace(/"/g, "'");
+  return str.replace(/(<([^>]+)>)/gi, '').replace(/"/g, "'");
 };

@@ -73,6 +73,7 @@ export class LookupsController {
           parent: child.parent || 0,
           code: subcode,
           invisible: child.invisible,
+          parent_not_clickable: child.parent_not_clickable,
           level: level,
           sorter: child.sorter,
         });
