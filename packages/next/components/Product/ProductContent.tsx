@@ -120,9 +120,9 @@ function ProductContent(props: IProps) {
         "offerCount": "1",
         "itemOffered":{
           "@type": "IndividualProduct",
-          "name": "${i18n.t(product.name)}",
+          "name": "${safeJson(i18n.t(product.name))}",
           "model": "${product.id}",
-          "color":"${i18n.t(colors)}"
+          "color":"${safeJson(i18n.t(colors))}"
           },
         "seller": {"@type":"Organization","name":"Tuba-Duba"}
       }      
