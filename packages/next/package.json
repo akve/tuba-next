@@ -2,7 +2,7 @@
     "name": "@pdeals/next",
     "version": "1.0.0",
     "scripts": {
-        "dev": "next -p 8081",
+        "dev": "cross-env ANALYZE=false next -p 8081",
         "fix-splide": "cp -f ./modules/splide.js-fixture ../../node_modules/@splidejs/splide/dist/js/splide.js",
         "build": "npx next build",
         "start": "npx next start",

@@ -1,9 +1,10 @@
+import * as i18n from '@pdeals/next/utils/i18n';
 const SizeTable = () => {
   return (
-    <table className="table table-condensed">
+    <table className="table table-condensed table-sizes">
       <tbody>
         <tr>
-          <th>Размер</th>
+          <th>{i18n.t('[R:Размер][U:Розмір]')}</th>
           <td>S</td>
           <td>M</td>
           <td>L</td>
@@ -14,7 +15,7 @@ const SizeTable = () => {
           <td>5XL</td>
         </tr>
         <tr>
-          <th>Размер Украинский</th>
+          <th>{i18n.t('[R:Размер украинский][U:Розмір український]')}</th>
           <td>44</td>
           <td>46</td>
           <td>48</td>
@@ -25,7 +26,7 @@ const SizeTable = () => {
           <td>58</td>
         </tr>
         <tr>
-          <th>Обхват груди (см)</th>
+          <th>{i18n.t('[R:Обхват груди (см)][U:Обхват грудей (см)]')}</th>
           <td>86</td>
           <td>92</td>
           <td>98</td>
@@ -36,7 +37,7 @@ const SizeTable = () => {
           <td>128</td>
         </tr>
         <tr>
-          <th>Обхват талии&nbsp;(см)</th>
+          <th>{i18n.t('[R:Обхват талии (см)][U:Обхват талії (см)]')}</th>
           <td>68</td>
           <td>74</td>
           <td>80</td>
@@ -47,7 +48,7 @@ const SizeTable = () => {
           <td>112</td>
         </tr>
         <tr>
-          <th>Обхват бедер&nbsp;(см)</th>
+          <th>{i18n.t('[R:Обхват бедер (см)][U:Обхват стеген (см)]')}</th>
           <td>92</td>
           <td>98</td>
           <td>106</td>
