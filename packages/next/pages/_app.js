@@ -124,7 +124,7 @@ export default class MyApp extends App {
           <meta property="og:image" content="https://tuba-duba.com/assets/img/main.jpg" />
           {/*<style dangerouslySetInnerHTML={{ __html: require('../assets/css/out.css') }}></style>*/}
           <meta name="p:domain_verify" content="f80bef3d9d034afebf0911637637190e" />
-          {/*<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>
           <Safe.script>
             {`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -145,7 +145,7 @@ export default class MyApp extends App {
             fbq('init', '366138666843162');
             fbq('track', 'PageView');`}
           </Safe.script>
-          <Safe.script>
+          {/*<Safe.script>
             {`
                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})

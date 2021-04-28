@@ -15,7 +15,7 @@ class MyDocument extends Document {
           <link rel="stylesheet" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
         </Head>
         <body>
-        {/*<div id="fb-root"></div>
+          <div id="fb-root"></div>
           <Safe.script>
             {`window.fbAsyncInit = function() {
           FB.init({
@@ -36,7 +36,7 @@ class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `<div class="fb-customerchat" attribution="setup_tool" page_id="785826554851503"></div>`,
             }}
-          />*/}
+          />
 
           <div id="page-transition"></div>
           <Main />
