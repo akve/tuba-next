@@ -133,7 +133,7 @@ export default class MyApp extends App {
             gtag('config', 'UA-84542153-1');`}
           </Safe.script>
 
-          <Safe.script>
+          {/*<Safe.script>
             {`!function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -145,7 +145,7 @@ export default class MyApp extends App {
             fbq('init', '366138666843162');
             fbq('track', 'PageView');`}
           </Safe.script>
-          {/*<Safe.script>
+          <Safe.script>
             {`
                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
