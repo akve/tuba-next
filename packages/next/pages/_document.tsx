@@ -16,7 +16,7 @@ class MyDocument extends Document {
         </Head>
         <body>
           <div id="fb-root"></div>
-          <Safe.script>
+          {/*<Safe.script>
             {`window.fbAsyncInit = function() {
           FB.init({
             xfbml            : true,
@@ -36,7 +36,7 @@ class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `<div class="fb-customerchat" attribution="setup_tool" page_id="785826554851503"></div>`,
             }}
-          />
+          />*/}
 
           <div id="page-transition"></div>
           <Main />
