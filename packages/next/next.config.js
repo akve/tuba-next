@@ -3,6 +3,7 @@ const runtimeCaching = require('next-pwa/cache');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const webpack = require('webpack');
 const path = require('path');
 const withTM = require('next-transpile-modules')(
   // All of the packages will resolve to our monorepo so we can match that path.
@@ -17,8 +18,13 @@ const withTM = require('next-transpile-modules')(
 //   },
 //   exportTrailingSlash: true,
 // });
-module.exports = withTM(
-  withBundleAnalyzer({
+module.exports =
+  //withTM(
+  //withBundleAnalyzer({
+  {
+    future: {
+      webpack5: true,
+    },
     pwa: {
       dest: 'public',
       runtimeCaching,
@@ -27,14 +33,20 @@ module.exports = withTM(
     env: {
       stagingMediaURL: 'https://mcprod.wheelhero.com/media/',
     },
+    plugins: [
+      new webpack.optimize.MinChunkSizePlugin({
+        minChunkSize: 10000,
+      }),
+    ],
     webpack: (config, { isServer }) => {
       if (!isServer) {
         config.resolve.alias['@sentry/node'] = '@sentry/browser';
       }
       return config;
     },
-  })
-);
+  };
+//  })
+//);
 
 // const withPlugins = require('next-compose-plugins');
 // const withImages = require('next-images');

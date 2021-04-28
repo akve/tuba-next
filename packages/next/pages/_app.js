@@ -62,7 +62,7 @@ export default class MyApp extends App {
     mobxStore: initalizeStoreClean(),
   };
 
-  static async getInitialProps(appContext) {
+  /*static async getInitialProps(appContext) {
     const mobxStore = await initalizeStoreClean();
     appContext.ctx.mobxStore = mobxStore;
     const appProps = await App.getInitialProps(appContext);
@@ -73,7 +73,7 @@ export default class MyApp extends App {
       ...appProps,
       initialMobxState: mobxStore,
     };
-  }
+  }*/
 
   constructor(props) {
     super(props);
@@ -90,7 +90,9 @@ export default class MyApp extends App {
     //console.log('???', this.props);
 
     const isAdminPath =
-      typeof window === 'undefined' ? url.indexOf('/admin') === 0 : Router.router.pathname.indexOf('/admin') === 0;
+      typeof window === 'undefined'
+        ? url && url.indexOf('/admin') === 0
+        : Router.router.pathname.indexOf('/admin') === 0;
 
     const Layout = Component.layout || (isAdminPath ? Admin : UserLayout) || (({ children }) => <>{children}</>);
     // console.log('l', La)

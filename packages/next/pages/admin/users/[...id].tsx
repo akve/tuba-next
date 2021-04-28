@@ -11,7 +11,7 @@ import {
   ViewPokerDealsCell,
   ViewPaymentsCell,
   ViewPaymentRequestsCell,
-  ViewReferralReportCell
+  ViewReferralReportCell,
 } from '@pdeals/next/modules/admin/User/UserListActions';
 import {
   LoginAsAction,
@@ -19,7 +19,7 @@ import {
   ViewEarningsAction,
 } from '@pdeals/next/modules/admin/User/UserViewActions';
 import { DateCell, FullNameCell } from '@pdeals/next/components/Crud/CrudList/Cells';
-import { UserCategoryLookup, UserRolesLookup } from '@pdeals/models/lookups/UserRoles';
+//import { UserCategoryLookup, UserRolesLookup } from '@pdeals/models/lookups/UserRoles';
 
 type Props = {};
 
@@ -143,8 +143,8 @@ const MainInner: React.FunctionComponent<Props> = (props) => {
         { name: 'firstName', label: 'First Name', type: 'text', class: 'col-lg-6', required: true },
         { name: 'lastName', label: 'Last Name', type: 'text', class: 'col-lg-6', required: true },
         { name: 'password', label: 'Password', type: 'text', class: 'col-lg-6', notEditable: true, required: true },
-        { name: 'role', label: 'Role', type: 'dropdown', options: UserRolesLookup, class: 'col-lg-6' },
-        { name: 'tag', label: 'Tag', type: 'dropdown', options: UserCategoryLookup, class: 'col-lg-6' },
+        //{ name: 'role', label: 'Role', type: 'dropdown', options: UserRolesLookup, class: 'col-lg-6' },
+        //{ name: 'tag', label: 'Tag', type: 'dropdown', options: UserCategoryLookup, class: 'col-lg-6' },
         { name: 'h6', label: 'Referral system', type: 'heading' },
         {
           name: 'parentId',
@@ -193,7 +193,13 @@ const MainInner: React.FunctionComponent<Props> = (props) => {
     createActions: [],
     tableActions: [ExportTable],
     editActions: [LoginAsAction, ViewPokerDealsAction, ViewEarningsAction],
-    rowActions: [ViewPokerDealsCell, ViewEarningsCell, ViewPaymentsCell, ViewPaymentRequestsCell, ViewReferralReportCell],
+    rowActions: [
+      ViewPokerDealsCell,
+      ViewEarningsCell,
+      ViewPaymentsCell,
+      ViewPaymentRequestsCell,
+      ViewReferralReportCell,
+    ],
     breadcrumbsData: {
       breadcrumbs: [{ title: 'Users', link: '/admin/users' }],
       resolvers: {
