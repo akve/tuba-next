@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import Router from 'next/router';
 import PublicNavbar from '@pdeals/next/components/Navbars/PublicNavbar';
 import { t, setLang, currentLang } from '@pdeals/next/utils/i18n';
-import { client } from '../../lib/api/api-client';
-import { getStore } from '@pdeals/next/stores/initStore';
-import Snippet from '@pdeals/next/components/Snippet/Snippet';
 import Link from '@pdeals/next/elements/NextLink';
 
 const NormalLayout: React.FunctionComponent<any> = (props) => {

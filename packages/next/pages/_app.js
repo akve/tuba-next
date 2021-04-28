@@ -19,13 +19,18 @@ import '../assets/css/nprogress.css';
 
 import { ToastWrapper } from '../components/common/ToastWrapper';
 import { NotificationProvider } from '@pdeals/next/lib/contexts/NotificationContext';
-import Admin from '@pdeals/next/components/layouts/Admin';
+
+//import Admin from '@pdeals/next/components/layouts/Admin';
+
 import UserLayout from '../components/layouts/UserLayout';
 import { getStore, initalizeStoreClean, hydrateEverything } from '../stores/initStore';
 // import { readFileSync } from 'fs';
 // import { join } from 'path';
 
+const Admin = dynamic(() => import('@pdeals/next/components/layouts/Admin'));
+
 import NProgress from 'nprogress';
+import dynamic from 'next/dynamic';
 
 NProgress.configure({ showSpinner: true });
 

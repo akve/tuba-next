@@ -1,7 +1,3 @@
-import { Component } from 'react';
-import Router from 'next/router';
-import PublicNavbar from '@pdeals/next/components/Navbars/PublicNavbar';
-import { t, setLang, currentLang } from '@pdeals/next/utils/i18n';
 import { client } from '../lib/api/api-client';
 import { getStore } from '@pdeals/next/stores/initStore';
 import ShopSidebar from '../components/Sidebar/ShopSidebar';
