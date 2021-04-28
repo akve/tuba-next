@@ -6,15 +6,15 @@ import Router from 'next/router';
 import Safe from 'react-safe';
 // import { Head } from 'next/document';
 
-import PageChange from 'components/PageChange/PageChange.js';
+//import PageChange from 'components/PageChange/PageChange.js';
 
 import { Provider } from 'mobx-react';
 
-import 'react-notification-alert/dist/animate.css';
-import 'assets/plugins/nucleo/css/nucleo.css';
-// import 'assets/scss/nextjs-argon-dashboard-pro.scss';
+//import 'assets/scss/nextjs-argon-dashboard-pro.scss';
 // import 'assets/css/out.css';
-import 'assets/vendor/quill/dist/quill.core.css';
+import 'react-notification-alert/dist/animate.css';
+import '../assets/plugins/nucleo/css/nucleo.css';
+import '../assets/vendor/quill/dist/quill.core.css';
 import '../assets/css/nprogress.css';
 
 import { ToastWrapper } from '../components/common/ToastWrapper';

@@ -47,7 +47,7 @@ function PublicNavbar(props: IProps) {
           <Link href="/">
             <span>
               <NavbarBrand href="/">
-                <img alt="..." src={require('assets/img/tuba/logo-top.png')} />
+                <img alt="Tuba-Duba" src="/assets/img/logo.png" />
               </NavbarBrand>
             </span>
           </Link>
@@ -81,7 +81,7 @@ function PublicNavbar(props: IProps) {
                 <Row>
                   <Col className="collapse-brand" xs="6">
                     <Link href="/">
-                      <img alt="..." src={require('assets/img/tuba/logo-top.png')} />
+                      <img alt="Tuba-Duba" src="/assets/img/logo.png" />
                     </Link>
                   </Col>
                   <Col className="collapse-close" xs="6">

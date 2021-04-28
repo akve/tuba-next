@@ -1,18 +1,51 @@
-const withPlugins = require('next-compose-plugins');
-const withImages = require('next-images');
-const withSass = require('@zeit/next-sass');
-const withCSS = require('@zeit/next-css');
-const withFonts = require('next-fonts');
-const webpack = require('webpack');
+const withPWA = require('next-pwa');
+const runtimeCaching = require('next-pwa/cache');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-
 const path = require('path');
 const withTM = require('next-transpile-modules')(
   // All of the packages will resolve to our monorepo so we can match that path.
   [path.resolve(__dirname, '../../packages')]
 );
+
+// module.exports = withPWA({
+//   pwa: {
+//     dest: 'public',
+//     runtimeCaching
+
+//   },
+//   exportTrailingSlash: true,
+// });
+module.exports = withTM(
+  withBundleAnalyzer({
+    pwa: {
+      dest: 'public',
+      runtimeCaching,
+    },
+    trailingSlash: true,
+    env: {
+      stagingMediaURL: 'https://mcprod.wheelhero.com/media/',
+    },
+    webpack: (config, { isServer }) => {
+      if (!isServer) {
+        config.resolve.alias['@sentry/node'] = '@sentry/browser';
+      }
+      return config;
+    },
+  })
+);
+
+// const withPlugins = require('next-compose-plugins');
+// const withImages = require('next-images');
+// const withSass = require('@zeit/next-sass');
+// const withCSS = require('@zeit/next-css');
+// const withFonts = require('next-fonts');
+// const webpack = require('webpack');
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true',
+// });
+
 /*const withPWA = require('next-pwa');
 module.exports = withTM(
     withPWA({
@@ -29,7 +62,6 @@ module.exports = withTM(
         },
     })
 );
-*/
 // const withPWA = require('next-pwa');
 
 module.exports = withBundleAnalyzer(
@@ -68,3 +100,4 @@ module.exports = withBundleAnalyzer(
     )
   )
 );
+*/

@@ -52,7 +52,7 @@ const Admin = (props) => {
         sidenavOpen={sidenavOpen}
         logo={{
           innerLink: '/',
-          imgSrc: require('assets/img/brand/pokerdeals_small.jpg'),
+          imgSrc: '',
           imgAlt: '...',
         }}
       />

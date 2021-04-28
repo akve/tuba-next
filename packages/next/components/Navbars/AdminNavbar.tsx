@@ -93,9 +93,7 @@ class AdminNavbar extends Component<IProps> {
                 <UncontrolledDropdown nav>
                   <DropdownToggle className="nav-link pr-0" color="" tag="a">
                     <Media className="align-items-center">
-                      <span className="avatar avatar-sm rounded-circle">
-                        <img alt="..." src={require('assets/img/theme/team-4.jpg')} />
-                      </span>
+                      <span className="avatar avatar-sm rounded-circle">USER{/*<img alt="..." src={} />*/}</span>
                       <Media className="ml-2 d-none d-lg-block">
                         <span className="mb-0 text-sm font-weight-bold">
                           {`${this.props.userStore.me?.firstName} ${this.props.userStore.me?.lastName}`}

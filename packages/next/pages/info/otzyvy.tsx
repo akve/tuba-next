@@ -8,7 +8,7 @@ import { inject, observer } from 'mobx-react';
 import * as i18n from '@pdeals/next/utils/i18n';
 import Snippet from '@pdeals/next/components/Snippet/Snippet';
 import { formatDate } from '@pdeals/next/utils/dateFormat';
-import Quote from '../../assets/img/quote.svg';
+//import Quote from '../../assets/img/quote.svg';
 import Plus from '@pdeals/next/assets/img/plus.svg';
 import StarsRating from 'react-rating';
 
@@ -70,7 +70,7 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, reviews 
                 <div className="review--date">{calcDate(r.score_date || r.createdDate)}</div>
               </div>
               <div className="review--right">
-                <img src={Quote} style={{ width: '30px', height: '30px' }} />
+                <img src="/assets/img/quote.svg" style={{ width: '30px', height: '30px' }} />
                 <div className="review--content" dangerouslySetInnerHTML={{ __html: r.description }} />
               </div>
             </div>

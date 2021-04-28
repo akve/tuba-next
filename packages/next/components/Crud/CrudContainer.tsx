@@ -26,10 +26,10 @@ function CrudContainer(props: IProps) {
     const { breadcrumbsData } = props.params;
     const myBreadcrumbs = [...(breadcrumbsData?.breadcrumbs || [])];
 
-    if (router.asPath.endsWith('/create')) {
+    if (router.asPath.endsWith('/create') || router.asPath.endsWith('/create')) {
       myBreadcrumbs.push({ title: 'Create' });
       setView('create');
-    } else if (router.asPath.endsWith('/edit')) {
+    } else if (router.asPath.endsWith('/edit') || router.asPath.endsWith('/edit/')) {
       myBreadcrumbs.push({ id });
       setView('edit');
     } else {

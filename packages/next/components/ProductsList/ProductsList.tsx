@@ -56,7 +56,7 @@ function ProductsList(props: IProps) {
               <Link href={`/product/${product.code}?from=${category}`}>
                 <a href={`/product/${product.code}?from=${category}`} className="card-img-top">
                   <Image
-                    src={resizeImage(product.image, 'list') || require('assets/img/tuba/logo-top.png')}
+                    src={resizeImage(product.image, 'list') || '/assets/img/logo.png'}
                     alt={i18n.t(product.name)}
                     loader={myLoader}
                     height={500}
