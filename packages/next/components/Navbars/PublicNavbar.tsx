@@ -76,7 +76,7 @@ function PublicNavbar(props: IProps) {
             <button className="navbar-toggler" id="navbar-collapse-main">
               <span className="navbar-toggler-icon" />
             </button>
-            <UncontrolledCollapse navbar toggler="#navbar-collapse-main">
+            <UncontrolledCollapse navbar toggler="#navbar-collapse-main" id="main-collapse-menu">
               <div className="navbar-collapse-header d-md-none">
                 <Row>
                   <Col className="collapse-brand" xs="6">

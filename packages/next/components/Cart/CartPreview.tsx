@@ -37,7 +37,11 @@ const CartPreview = (props: IProps) => {
             <tr key={`${index}`}>
               <td>
                 <div className="d-flex ">
-                  <img src={getProduct(product).image} height="60" />
+                  <img
+                    src={getProduct(product).image}
+                    height="60"
+                    style={{ maxHeight: '300px', objectFit: 'contain' }}
+                  />
                   <div className="pl-2 ">
                     <b>{i18n.t(product.name)}</b>
                     <br />
@@ -63,7 +67,11 @@ const CartPreview = (props: IProps) => {
         {cart.products.map((product, index) => (
           <div className="d-flex flex-column" key={`${index}`}>
             <div className="d-flex justify-content-between flex-row">
-              <img src={getProduct(product).image} width="50%" style={{ marginLeft: '5px' }} />
+              <img
+                src={getProduct(product).image}
+                width="50%"
+                style={{ maxHeight: '300px', objectFit: 'contain', marginLeft: '5px' }}
+              />
               <div className="text-right" style={{ marginRight: '5px' }}>
                 <b className="text-right mr-10">{i18n.t(product.name)}</b>
                 <br />

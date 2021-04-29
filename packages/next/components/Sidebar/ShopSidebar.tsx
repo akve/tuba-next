@@ -83,7 +83,9 @@ class ShopSidebar extends React.Component<IProps, any> {
                 prop.path
                   ? () => {
                       try {
-                        document.getElementById('navbar-collapse-main')?.click();
+                        console.log('????????????!!!!!');
+                        document.getElementById('main-collapse-menu').className = 'collapse navbar-collapse';
+                        // document.getElementById('navbar-collapse-main')?.click();
                       } catch (e) {}
                     }
                   : onOpen
@@ -108,6 +110,13 @@ class ShopSidebar extends React.Component<IProps, any> {
               href={prop.layout + prop.path}
               data-path={prop.layout + prop.path}
               style={{ paddingLeft: prop.level * 40 }}
+              onClick={() => {
+                try {
+                  console.log('????????????!!!!!');
+                  document.getElementById('main-collapse-menu').className = 'collapse navbar-collapse';
+                  // document.getElementById('navbar-collapse-main')?.click();
+                } catch (e) {}
+              }}
             >
               <span className="sidenav-normal" data-path={prop.layout + prop.path}>
                 {' '}
