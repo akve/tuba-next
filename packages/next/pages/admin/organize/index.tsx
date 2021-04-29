@@ -147,6 +147,7 @@ const Organizer: React.FunctionComponent = () => {
             <SortableListProducts
               distance={1}
               lockAxis="y"
+              active={0}
               items={products}
               onSortEnd={resortProducts}
               onSelect={(id) => onClickProduct(id)}

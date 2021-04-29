@@ -2,13 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { FormGroup, Input } from 'reactstrap';
 
-/*const ReactQuill = dynamic(
-  import('react-quill'),
-  {
-    ssr: false,
-    loading: () => <span>...</span>,
-  }
-);*/
+const ReactQuill = dynamic(import('react-quill'), {
+  ssr: false,
+  loading: () => <span>...</span>,
+});
 
 import { registerRenderer } from './index';
 
@@ -28,25 +25,25 @@ const TextRedactor = (props) => {
       <label className="form-control-label">{props.label}</label>
       {/* UGLY: Hidden input to change form state */}
       <Input innerRef={props.innerRef} name={props.name} type="text" style={{ display: 'none' }} />
-      {/*<ReactQuill
+      <ReactQuill
         value={reactQuillText || ''}
         onChange={handleReactQuillChange}
         theme="snow"
         modules={{
           toolbar: [
-            ["bold", "italic"],
-            ["link", "blockquote", "code", "image"],
+            ['bold', 'italic'],
+            ['link', 'blockquote', 'code', 'image'],
             [
               {
-                list: "ordered",
+                list: 'ordered',
               },
               {
-                list: "bullet",
+                list: 'bullet',
               },
             ],
           ],
         }}
-      />*/}
+      />
     </FormGroup>
   );
 };
