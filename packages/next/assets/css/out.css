@@ -26598,7 +26598,6 @@ button:focus, :focus {
 }
 .body-page-transition #page-transition > div:after {
   content: "";
-  background-image: url("../img/theme/img-1-1000x600.jpg");
   background-size: cover;
   position: fixed;
   z-index: 9998;
@@ -27092,6 +27091,10 @@ a:hover {
   width: 100%;
   display: flex;
   background: #ECF0F1;
+}
+.table-sizes td, .table-sizes th {
+  padding: 0 !important;
+  font-size: 0.7rem !important;
 }
 
 /*# sourceMappingURL=out.css.map */

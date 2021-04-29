@@ -10,7 +10,7 @@ import Safe from 'react-safe';
 
 import { Provider } from 'mobx-react';
 
-import '../assets/scss/nextjs-argon-dashboard-pro.scss';
+//import '../assets/scss/nextjs-argon-dashboard-pro.scss';
 // import 'assets/css/out.css';
 import 'react-notification-alert/dist/animate.css';
 // import '../assets/plugins/nucleo/css/nucleo.css';
@@ -123,7 +123,7 @@ export default class MyApp extends App {
           <meta property="fb:app_id" content="785826554851503" />
           <meta property="og:url" content="https://tuba-duba.com" />
           <meta property="og:image" content="https://tuba-duba.com/assets/img/main.jpg" />
-          {/*<style dangerouslySetInnerHTML={{ __html: require('../assets/css/out.css') }}></style>*/}
+          <style dangerouslySetInnerHTML={{ __html: require('../assets/css/out.css') }}></style>
           <meta name="p:domain_verify" content="f80bef3d9d034afebf0911637637190e" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>
           <Safe.script>
