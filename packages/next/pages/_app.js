@@ -123,7 +123,7 @@ export default class MyApp extends App {
           <meta property="fb:app_id" content="785826554851503" />
           <meta property="og:url" content="https://tuba-duba.com" />
           <meta property="og:image" content="https://tuba-duba.com/assets/img/main.jpg" />
-          <style dangerouslySetInnerHTML={{ __html: require('../assets/css/out.css') }}></style>
+          <style dangerouslySetInnerHTML={{ __html: require('../assets/css/out.css').default }}></style>
           <meta name="p:domain_verify" content="f80bef3d9d034afebf0911637637190e" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>
           <Safe.script>
