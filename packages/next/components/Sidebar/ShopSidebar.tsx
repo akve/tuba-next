@@ -84,7 +84,8 @@ class ShopSidebar extends React.Component<IProps, any> {
                   ? () => {
                       try {
                         console.log('????????????!!!!!');
-                        document.getElementById('main-collapse-menu')?.className = 'collapse navbar-collapse';
+                        if (document.getElementById('main-collapse-menu'))
+                          document.getElementById('main-collapse-menu').className = 'collapse navbar-collapse';
                         // document.getElementById('navbar-collapse-main')?.click();
                       } catch (e) {}
                     }
@@ -113,7 +114,8 @@ class ShopSidebar extends React.Component<IProps, any> {
               onClick={() => {
                 try {
                   console.log('????????????!!!!!');
-                  document.getElementById('main-collapse-menu')?.className = 'collapse navbar-collapse';
+                  if (document.getElementById('main-collapse-menu'))
+                    document.getElementById('main-collapse-menu').className = 'collapse navbar-collapse';
                   // document.getElementById('navbar-collapse-main')?.click();
                 } catch (e) {}
               }}
