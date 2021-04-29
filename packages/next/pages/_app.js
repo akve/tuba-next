@@ -31,6 +31,7 @@ const Admin = dynamic(() => import('@pdeals/next/components/layouts/Admin'));
 
 import NProgress from 'nprogress';
 import dynamic from 'next/dynamic';
+import { MarketingTrackers } from '../components/MarketingTrackers/MarketingTrackers';
 
 NProgress.configure({ showSpinner: true });
 
@@ -172,6 +173,8 @@ export default class MyApp extends App {
         <Provider {...this.state.mobxStore}>
           <NotificationProvider>
             <Layout>
+              <MarketingTrackers />
+
               <Component {...pageProps} />
             </Layout>
           </NotificationProvider>

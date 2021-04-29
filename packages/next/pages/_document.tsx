@@ -1,6 +1,7 @@
 import React from 'react';
 import Document, { Head, Main, NextScript, Html } from 'next/document';
 import Safe from 'react-safe';
+import { MarketingTrackers } from '@pdeals/next/components/MarketingTrackers/MarketingTrackers';
 
 class MyDocument extends Document {
   render() {
@@ -15,29 +16,6 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
         </Head>
         <body>
-          <div id="fb-root"></div>
-          {/*<Safe.script>
-            {`window.fbAsyncInit = function() {
-          FB.init({
-            xfbml            : true,
-            version          : 'v10.0'
-          });
-        };
-
-          (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = 'https://connect.facebook.net/ru_RU/sdk/xfbml.customerchat.js';
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));`}
-          </Safe.script>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: `<div class="fb-customerchat" attribution="setup_tool" page_id="785826554851503"></div>`,
-            }}
-          />*/}
-
           <div id="page-transition"></div>
           <Main />
           <NextScript />
