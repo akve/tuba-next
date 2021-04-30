@@ -1,23 +1,4 @@
 
-/*!
-
-=========================================================
-* NextJS Argon Dashboard PRO - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/nextjs-argon-dashboard-pro
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-
-
 // Bootstrap functions
 @import 'bootstrap/functions';
 @import "bootstrap/mixins";
@@ -74,5 +55,8 @@
 
 @import 'elements/stepper';
 @import 'elements/attachments';
+
+ @import "tuba/vendor";
+ @import "tuba/nprogress";
 
 @import "tuba/root";

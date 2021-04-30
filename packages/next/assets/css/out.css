@@ -1,20 +1,4 @@
 @charset "UTF-8";
-/*!
-
-=========================================================
-* NextJS Argon Dashboard PRO - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/nextjs-argon-dashboard-pro
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 :root {
   --blue: #5e72e4;
   --indigo: #5603ad;
@@ -508,9 +492,6 @@ mark,
   display: block;
   font-size: 80%;
   color: #8898aa;
-}
-.blockquote-footer::before {
-  content: "— ";
 }
 
 .img-fluid {
@@ -16189,7 +16170,7 @@ a.btn-icon-only {
   cursor: pointer;
 }
 .accordion .card-header:after {
-  content: "";
+  content: ".";
   position: absolute;
   right: 1.5rem;
   top: 50%;
@@ -16204,7 +16185,7 @@ a.btn-icon-only {
   }
 }
 .accordion .card-header[aria-expanded=false]:after {
-  content: "";
+  content: ".";
 }
 .accordion .card-header[aria-expanded=true]:after {
   transform: rotate(180deg);
@@ -17051,7 +17032,7 @@ textarea[resize=horizontal] {
 }
 
 .has-success:after {
-  content: "";
+  content: ".";
   color: #1d8357;
   background-color: #69deac;
 }
@@ -17063,7 +17044,7 @@ textarea[resize=horizontal] {
 }
 
 .has-danger:after {
-  content: "";
+  content: "!";
   color: #db2d05;
   background-color: #fda08b;
 }
@@ -18027,7 +18008,7 @@ textarea[resize=horizontal] {
   -webkit-font-smoothing: antialiased;
   font-family: "Font Awesome 5 Free";
   font-weight: 700;
-  content: "";
+  content: ".";
   margin-left: auto;
   color: #ced4da;
   transition: all 0.15s ease;
@@ -25483,11 +25464,11 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 .react-bootstrap-table .order-4:after, .react-bootstrap-table .caret-4-asc:after, .react-bootstrap-table .caret-4-desc:after {
   right: 0.5em;
-  content: "↓";
+  content: "#2193";
 }
 .react-bootstrap-table .order-4:before, .react-bootstrap-table .caret-4-asc:before, .react-bootstrap-table .caret-4-desc:before {
   right: 1em;
-  content: "↑";
+  content: "#2191";
 }
 .react-bootstrap-table .order-4:after, .react-bootstrap-table .order-4:before, .react-bootstrap-table .caret-4-asc:after, .react-bootstrap-table .caret-4-asc:before, .react-bootstrap-table .caret-4-desc:after, .react-bootstrap-table .caret-4-desc:before {
   position: absolute;
@@ -25616,7 +25597,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   align-items: center;
   font: normal normal normal 1em/1 "Nucleo";
   font-size: 18px;
-  content: "";
+  content: "EA5E";
 }
 
 .rdtPicker table {

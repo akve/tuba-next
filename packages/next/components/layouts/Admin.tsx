@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { withRouter, Router } from 'next/router';
 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import '../../assets/plugins/nucleo/css/nucleo.module.css';
+//import '../../assets/vendor/nucleo/css/nucleo.module.css';
+
 import AdminNavbar from '@pdeals/next/components/Navbars/AdminNavbar';
 import Sidebar from '@pdeals/next/components/Sidebar/Sidebar';
 
@@ -9,6 +13,7 @@ import routes from '@pdeals/next/routes';
 const Admin = (props) => {
   const pathname = props.router.pathname;
   const [sidenavOpen, setSidenavOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
 
   useEffect(() => {
     document.body.classList.add('g-sidenav-hidden');
@@ -45,6 +50,7 @@ const Admin = (props) => {
 
   return (
     <>
+      {' '}
       <Sidebar
         {...props}
         routes={routes}

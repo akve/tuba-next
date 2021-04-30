@@ -1,0 +1,58 @@
+
+/*!
+
+=========================================================
+* NextJS Argon Dashboard PRO - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/nextjs-argon-dashboard-pro
+* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+
+* Coded by www.creative-tim.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
+
+
+// Bootstrap functions
+@import 'bootstrap/functions';
+@import "bootstrap/mixins";
+
+// Argon functions
+@import "custom/functions";
+@import "custom/variables";
+
+// Argon mixins
+@import "custom/mixins";
+
+// Bootstrap components
+@import "bootstrap/root";
+@import "bootstrap/reboot";
+@import "bootstrap/type";
+@import "bootstrap/grid";
+@import "bootstrap/tables";
+@import "bootstrap/forms";
+@import "bootstrap/buttons";
+@import "bootstrap/transitions";
+@import "bootstrap/dropdown";
+@import "bootstrap/button-group";
+@import "bootstrap/nav";
+@import "bootstrap/navbar";
+@import "bootstrap/card";
+@import "bootstrap/utilities";
+
+// Argon components
+@import 'custom/components';
+@import 'custom/utilities';
+@import 'custom/vendors';
+
+// React differences
+@import 'react/react-differences';
+
+// @import "tuba/vendor";
+// @import "tuba/nprogress";
+@import "tuba/root";
