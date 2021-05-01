@@ -87,6 +87,14 @@ const SmartList = ({
     v.splice(index, 1);
     setValue(name, v);
   };
+  const onTopRow = (index) => {
+    const v = value ? [...value] : [];
+    const r = { ...v[0] };
+    v[0] = { ...v[index] };
+    v[index] = r;
+    //    v.splice(index, 1);
+    setValue(name, v);
+  };
   const onAddRow = () => {
     handleSubmit1((values) => {
       const v = value ? [...value] : [];
@@ -112,6 +120,13 @@ const SmartList = ({
                 {row[col.name]}
               </td>
             ))}
+            <td>
+              {index > 0 && (
+                <a onClick={() => onTopRow(index)}>
+                  <i className="ni ni-active-40" style={{ fontSize: '20px' }} />
+                </a>
+              )}
+            </td>
             <td>
               <a onClick={() => onRemoveRow(index)}>
                 <i className="ni ni-fat-remove" style={{ fontSize: '20px' }} />

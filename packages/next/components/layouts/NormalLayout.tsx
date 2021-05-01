@@ -16,12 +16,20 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
         <PublicNavbar />
 
         {/*<!-- Header -->*/}
-        <div className="header bg-gradient-primary py-3 py-lg-3">
+        <div className="header bg-gradient-primary py-3 py-lg-3" style={{ paddingTop: '0 !important' }}>
           {(props.withHeading || true) && (
             <div className="container heading-container" style={{ paddingBottom: '20px' }}>
-              <div className="header-body text-center mb-7" style={{ marginTop: '30px' }}>
+              <div className="header-body text-center mb-7">
                 <div className="row justify-content-center">
                   <div className="col-lg-5 col-md-6">
+                    <h2 style={{ opacity: 0.8, fontWeight: '400' }}>
+                      {t('[R:Одежда которая вдохновляет][U:Одяг що надихає]')}
+                    </h2>
+                    <img
+                      src="assets/img/logo-only.png"
+                      alt="Tuba-Duba"
+                      style={{ marginTop: '-20px', marginBottom: '20px', maxWidth: '100%' }}
+                    />
                     <div className="main-menu">
                       {links.map((link, index) => (
                         <Link href={link.href} key={`${index}`}>

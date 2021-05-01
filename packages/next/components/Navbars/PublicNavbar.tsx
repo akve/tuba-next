@@ -47,7 +47,7 @@ function PublicNavbar(props: IProps) {
           <Link href="/">
             <span>
               <NavbarBrand href="/">
-                <img alt="Tuba-Duba" src="/assets/img/logo.png" />
+                <img alt="Tuba-Duba" src="/assets/img/logo.png" width="234" style={{ opacity: 0.7 }} />
               </NavbarBrand>
             </span>
           </Link>
@@ -81,7 +81,7 @@ function PublicNavbar(props: IProps) {
                 <Row>
                   <Col className="collapse-brand" xs="6">
                     <Link href="/">
-                      <img alt="Tuba-Duba" src="/assets/img/logo.png" />
+                      <img alt="Tuba-Duba" src="/assets/img/logo.png" width="234" style={{ opacity: 0.7 }} />
                     </Link>
                   </Col>
                   <Col className="collapse-close" xs="6">

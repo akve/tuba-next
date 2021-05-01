@@ -25,11 +25,11 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         dataField: 'id',
         sort: true,
       },
-      {
+      /*{
         text: 'Sorter',
         dataField: 'sorter',
         sort: true,
-      },
+      },*/
       {
         text: 'Name',
         dataField: 'name',
