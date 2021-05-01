@@ -22,7 +22,7 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
               <div className="header-body text-center mb-7">
                 <div className="row justify-content-center">
                   <div className="col-lg-5 col-md-6">
-                    <h2 style={{ opacity: 0.8, fontWeight: '400' }}>
+                    <h2 style={{ opacity: 0.8, fontWeight: 'normal' }}>
                       {t('[R:Одежда которая вдохновляет][U:Одяг що надихає]')}
                     </h2>
                     <img
