@@ -82,7 +82,31 @@ class UiStore {
       }
       return false;
     });
-    result = sortBy(result, (r) => r.sorter);
+
+    const sortProducts = (cat: number, prods: any[]) => {
+      const all = this.allData;
+      if (!all || !all.sorting) return prods;
+      const sorts = filter(all.sorting, (r: any) => r.category === cat);
+      const outList: any = [];
+      // pass 1. put the "known"
+      const outListIds: any = [];
+      sorts.forEach((sortRow: any) => {
+        const prod = find(prods, (r: any) => r.id === sortRow.product);
+        if (prod) {
+          outList.push(prod);
+          outListIds.push(prod.id);
+        }
+      });
+      // pass 2. put rest
+      prods.forEach((prodRow: any) => {
+        if (outListIds.indexOf(prodRow.id) < 0) {
+          outList.push(prodRow);
+        }
+      });
+      return outList;
+    };
+
+    result = sortProducts(categoryId, result);
     return result;
   }
 

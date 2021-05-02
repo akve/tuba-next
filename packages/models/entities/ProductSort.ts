@@ -2,10 +2,10 @@ import {
   BaseEntity,
   //    BeforeInsert,
   Column,
-  CreateDateColumn,
+  //  CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  //  UpdateDateColumn,
 } from 'typeorm';
 // import { CrawlerSite } from './CrawlerSite';
 

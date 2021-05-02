@@ -26,7 +26,7 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
                       {t('[R:Одежда которая вдохновляет][U:Одяг що надихає]')}
                     </h2>
                     <img
-                      src="assets/img/logo-only.png"
+                      src="/assets/img/logo-only.png"
                       alt="Tuba-Duba"
                       style={{ marginTop: '-20px', marginBottom: '20px', maxWidth: '100%' }}
                     />

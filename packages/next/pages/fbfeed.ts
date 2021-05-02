@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { sortBy } from 'lodash';
+import { sortBy, filter, find } from 'lodash';
 import { client } from '../lib/api/api-client';
 import * as i18n from '@pdeals/next/utils/i18n';
 const ROOT = 'https://tuba-duba.com';
@@ -67,6 +67,15 @@ const sitemapXML = async () => {
   const alldata: any = await client().get('/open/alldata');
   alldata.products = sortBy(alldata.products, (r) => {
     return r.updatedAt;
+  });
+  alldata.products = filter(alldata.products, (r: any) => {
+    if (r.invisible) return false;
+    if (r.data && r.data.categories) {
+      if (find(r.data.categories, (c) => c.category === 63)) {
+        return false;
+      }
+    }
+    return true;
   });
   for (let i = 0; i < alldata.products.length; i++) {
     const p = alldata.products[i];

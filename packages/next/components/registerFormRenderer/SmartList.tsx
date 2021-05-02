@@ -89,8 +89,8 @@ const SmartList = ({
   };
   const onTopRow = (index) => {
     const v = value ? [...value] : [];
-    const r = { ...v[0] };
-    v[0] = { ...v[index] };
+    const r = { ...v[index - 1] };
+    v[index - 1] = { ...v[index] };
     v[index] = r;
     //    v.splice(index, 1);
     setValue(name, v);

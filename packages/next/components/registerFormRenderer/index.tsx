@@ -23,7 +23,7 @@ RegisterBaseInput();
 RegisterDropDown();
 RegisterCheckbox();
 RegisterDate();
-RegisterTextRedactor();
+// RegisterTextRedactor();
 RegisterRange();
 RegisterLazyDropDown();
 RegisterAttachment();

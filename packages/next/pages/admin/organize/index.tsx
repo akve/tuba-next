@@ -75,23 +75,17 @@ const Organizer: React.FunctionComponent = () => {
     const alldata: any = await client().get('/open/alldata');
     setSortedCategories(sortBy(alldata.categories.rows, (r) => r.sorter));
     const c = find(alldata.categories.rows, (r) => r.code === 'featured').id;
-    onSetCategory(c, alldata.products);
+    onSetCategory(c, alldata.products, alldata);
     setAllData(alldata);
   };
 
   const resortProducts = async (params) => {
-    const item = products[params.oldIndex];
-    const newIndex = params.newIndex;
-    let newSorter = parseFloat(item.sorter);
-    if (newIndex === 0) {
-      newSorter = parseFloat(products[0].sorter) / 2;
-    } else if (newIndex === products.length - 1) {
-      newSorter = parseFloat(products[products.length - 1].sorter) + 1;
-    } else {
-      newSorter = (parseFloat(products[newIndex].sorter) + parseFloat(products[newIndex + 1].sorter)) / 2;
-    }
-    await client().put(`/general/crud/product/${item.id}`, { sorter: newSorter });
-    setProducts(arrayMove(products, params.oldIndex, newIndex));
+    const newProds = arrayMove(products, params.oldIndex, params.newIndex);
+    const newSortIds = newProds.map((r: any) => r.id);
+    await client().put(`/open/reorder/category/${category}`, newSortIds);
+    const alldata: any = await client().get('/open/alldata');
+    setAllData(alldata);
+    setProducts(newProds);
   };
 
   const resortCategories = async (params) => {
@@ -115,12 +109,37 @@ const Organizer: React.FunctionComponent = () => {
     loadData();
   }, []);
 
-  const onSetCategory = (id, theProducts?) => {
+  const sortProducts = (cat: number, prods: any[], alldataOverride?) => {
+    const all = alldataOverride || allData;
+    if (!all || !all.sorting) return prods;
+    const sorts = filter(all.sorting, (r: any) => r.category === cat);
+    const outList: any = [];
+    // pass 1. put the "known"
+    const outListIds: any = [];
+    sorts.forEach((sortRow: any) => {
+      const prod = find(prods, (r: any) => r.id === sortRow.product);
+      if (prod) {
+        outList.push(prod);
+        outListIds.push(prod.id);
+      }
+    });
+    // pass 2. put rest
+    prods.forEach((prodRow: any) => {
+      if (outListIds.indexOf(prodRow.id) < 0) {
+        outList.push(prodRow);
+      }
+    });
+    return outList;
+  };
+
+  const onSetCategory = (id, theProducts?, alldataOverride?) => {
     setCategory(id);
     let prods = filter(theProducts || allData.products, (product) => {
       return !!find(product.data.categories, (r) => `${r.category}` === `${id}`);
     });
-    prods = sortBy(prods, (r) => r.sorter);
+    console.log('PRODS1', prods);
+    prods = sortProducts(id, prods, alldataOverride);
+    console.log('PRODS', prods);
     setProducts(prods);
   };
 

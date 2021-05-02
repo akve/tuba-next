@@ -1,4 +1,4 @@
-import { Context, GET, POST, Path, PreProcessor, PathParam, ServiceContext } from 'typescript-rest';
+import { Context, GET, POST, PUT, Path, PreProcessor, PathParam, ServiceContext } from 'typescript-rest';
 import { attachmentsService } from '../services/attachmentsService';
 import { RequestPreProcess } from '../utils/request-with-user';
 import { LookupsController } from './lookups';
@@ -46,6 +46,7 @@ export class OpenController {
     data.snippets = await getTypeormConnection().query('select * from snippet');
     data.colors = await getTypeormConnection().query('select * from color');
     data.fabrics = await getTypeormConnection().query('select * from fabric');
+    data.sorting = await getTypeormConnection().query('select * from product_sort');
     return data;
   }
 
@@ -200,5 +201,22 @@ export class OpenController {
     reply.rows = rows;
     reply.count = count;
     return reply;
+  }
+
+  @Path('/reorder/:coll_or_cat/:id')
+  @PUT
+  public async reorder(
+    @PathParam('coll_or_cat') collectionOrCategory: string,
+    @PathParam('id') id: number,
+    sortData: number[]
+  ): Promise<any> {
+    console.log('SD', sortData);
+    await getTypeormConnection().query(`delete from product_sort where ${collectionOrCategory} = ${id}`);
+    for (let i = 0; i < sortData.length; i++) {
+      await getTypeormConnection().query(
+        `insert into product_sort (${collectionOrCategory}, product, sort) values (${id}, ${sortData[i]}, ${i})`
+      );
+    }
+    return new SimpleResponseDto('ok');
   }
 }

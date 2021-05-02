@@ -1,14 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { withRouter, Router } from 'next/router';
+import Head from 'next/head';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import '../../assets/plugins/nucleo/css/nucleo.module.css';
+//import '../../assets/plugins/nucleo/css/nucleo.module.css';
 //import '../../assets/vendor/nucleo/css/nucleo.module.css';
 
 import AdminNavbar from '@pdeals/next/components/Navbars/AdminNavbar';
 import Sidebar from '@pdeals/next/components/Sidebar/Sidebar';
 
 import routes from '@pdeals/next/routes';
+import RegisterTextRedactor from '@pdeals/next/components/registerFormRenderer/TextRedactor';
+
+RegisterTextRedactor();
 
 const Admin = (props) => {
   const pathname = props.router.pathname;
@@ -50,7 +54,10 @@ const Admin = (props) => {
 
   return (
     <>
-      {' '}
+      <Head>
+        <link href="/assets/out.css" rel="stylesheet" />
+        <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet" />
+      </Head>
       <Sidebar
         {...props}
         routes={routes}

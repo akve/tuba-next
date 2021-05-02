@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "cross-env ANALYZE=false next -p 8081",
         "fix-splide": "cp -f ./modules/splide.js-fixture ../../node_modules/@splidejs/splide/dist/js/splide.js",
-        "build": "next build",
+        "build": "cross-env BUNDLE_ANALYZE=browser next build",
         "start": "next start",
         "type-check": "tsc",
         "clear": "rm -rf .next",

@@ -10,11 +10,11 @@ import Safe from 'react-safe';
 
 import { Provider } from 'mobx-react';
 
-import '../assets/scss/nextjs-argon-dashboard-pro.scss';
+import '../assets/scss/public.scss';
 // import 'assets/css/out.css';
-//import 'react-notification-alert/dist/animate.css';
-//import '../assets/plugins/nucleo/css/nucleo.module.css';
-import '../assets/vendor/nucleo/css/nucleo.css';
+// import 'react-notification-alert/dist/animate.css';
+// import '../assets/plugins/nucleo/css/nucleo.module.css';
+// import '../assets/vendor/nucleo/css/nucleo.css';
 // import '../assets/vendor/quill/dist/quill.core.css';
 // import '../assets/css/nprogress.css';
 

@@ -72,7 +72,7 @@ function ProductContent(props: IProps) {
         return acc + cv.name + ' / ';
       }, '');
   const fabric = getFabric();
-  console.log('C', colors, fabric);
+  // console.log('C', colors, fabric);
   return (
     <>
       <Head>
@@ -152,7 +152,7 @@ function ProductContent(props: IProps) {
           <SizeChooser
             value={size}
             onChange={(v) => {
-              console.log('?????', v);
+              // console.log('?????', v);
               setSize(v);
             }}
           />
