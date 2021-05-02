@@ -71,7 +71,10 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, reviews 
               </div>
               <div className="review--right">
                 <img src="/assets/img/quote.svg" style={{ width: '30px', height: '30px' }} />
-                <div className="review--content" dangerouslySetInnerHTML={{ __html: r.description }} />
+                <div
+                  className="review--content"
+                  dangerouslySetInnerHTML={{ __html: r.description.replace(/\n/g, '<br/>') }}
+                />
               </div>
             </div>
           ))}

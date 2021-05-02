@@ -191,7 +191,9 @@ export class OpenController {
     select ${isCount ? 'count(*)' : 'review.*, product.name'} 
     from review
     left join product on product.id = review.product
-    ${isCount ? '' : 'ORDER BY coalesce(review.score_date, review."createdDate") LIMIT 20 OFFSET ' + (offset || 0)}`;
+    ${
+      isCount ? '' : 'ORDER BY coalesce(review.score_date, review."createdDate") desc LIMIT 100 OFFSET ' + (offset || 0)
+    }`;
     };
 
     const rows = await getTypeormConnection().query(sql(false));

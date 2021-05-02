@@ -5,6 +5,10 @@ import { Color } from '@pdeals/models/entities/Color';
 import { Collection } from '@pdeals/models/entities/Collection';
 import { Category } from '@pdeals/models/entities/Category';
 import { Product } from '@pdeals/models/entities/Product';
+import { Review } from '@pdeals/models/entities/Review';
+
+import parse from 'csv-parse';
+import * as fs from 'fs';
 
 let conn: any;
 const colorsMap: any = {};
@@ -239,6 +243,23 @@ const importProducts = async (): Promise<any> => {
   return null;
 };
 
+const importReviews = async (): Promise<any> => {
+  await conn.query('delete from review; ');
+  //const repo = await getTypeormManager().getRepository(Review);
+  const txt = fs.readFileSync(__dirname + '/importer/reviews.csv', 'utf-8');
+  const arr = parse(txt, { columns: false });
+  console.log(arr);
+  /*const record = repo.create({
+    score: r[2],
+    username: r[1],
+    score_date: new Date(r[3]),
+    description: r[0],
+    data: {},
+  });
+  await repo.save(record);*/
+  return null;
+};
+
 const run = async () => {
   conn = await createTypeormConnection();
   console.log(`Connected to database. Connection: ${conn.name} / ${conn.options.database}`);
@@ -251,17 +272,20 @@ const run = async () => {
     mapCategories,
     importProducts
   );
-  if (true) {
-    await importColors();
-    await importCollections();
-    await importCategories();
-  } else {
-    await mapColors();
-    await mapCollections();
-    await mapCategories();
-  }
+  if (false) {
+    if (true) {
+      await importColors();
+      await importCollections();
+      await importCategories();
+    } else {
+      await mapColors();
+      await mapCollections();
+      await mapCategories();
+    }
 
-  await importProducts();
+    await importProducts();
+  }
+  await importReviews();
   // console.log(categoryMap);
   // delete from product; delete from category; delete from collection;
   console.log('DONE');

@@ -20,7 +20,8 @@
     "lint": "eslint -c ../frontend-next/.eslintrc . --ext .ts",
     "regen-schemas": "ts-node generateSchemas.ts",
     "seed:run": "env-cmd ts-node ../../node_modules/typeorm-seeding/dist/cli.js seed -r $(pwd)/../..",
-    "importdata": "env-cmd ./node_modules/.bin/ts-node-dev src/import.ts"
+    "importdata": "env-cmd ./node_modules/.bin/ts-node-dev src/import.ts",
+    "importreviews": "env-cmd ./node_modules/.bin/ts-node-dev src/import-reviews.ts"
   },
   "dependencies": {
     "@pdeals/db": "*",
@@ -28,6 +29,7 @@
     "@sentry/node": "^5.29.2",
     "@sentry/tracing": "^5.29.2",
     "@types/bull-board": "^0.6.0",
+    "@types/csv-parse": "^1.2.2",
     "@types/google-spreadsheet": "^3.0.2",
     "@types/mkdirp": "^1.0.1",
     "@types/nodemailer": "^6.4.0",
@@ -41,6 +43,7 @@
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "cors": "^2.8.5",
+    "csv-parse": "^4.15.4",
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
     "express": "^4.17.1",
