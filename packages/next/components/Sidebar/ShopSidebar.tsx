@@ -206,7 +206,7 @@ class ShopSidebar extends React.Component<IProps, any> {
             >
               <>
                 <i className="ni ni-bag-17" />
-                <a id="topshop"> Магазин</a>
+                <a id="topshop"> Каталог</a>
                 <Popover
                   placement={'bottom'}
                   isOpen={this.state.popoverOpen}
@@ -214,7 +214,7 @@ class ShopSidebar extends React.Component<IProps, any> {
                   toggle={this.setPopoverOpen}
                   style={{ minWidth: '250px' }}
                 >
-                  <PopoverHeader>Магазин</PopoverHeader>
+                  <PopoverHeader>Каталог</PopoverHeader>
                   <PopoverBody>
                     <Nav navbar>{this.createLinks(routes)}</Nav>
                   </PopoverBody>

@@ -27039,7 +27039,7 @@ a:hover {
 }
 
 .image-col {
-  max-width: 80vw;
+  max-width: 500px;
 }
 
 .wide-table input, .wide-table select {

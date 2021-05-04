@@ -27358,7 +27358,8 @@ a:hover {
 }
 .breadcrumb-wrapper .breadcrumb {
   padding-bottom: 0;
-  padding-top: 1rem;
+  line-height: 40px;
+  padding-left: 10px;
   background-color: transparent;
 }
 
@@ -27521,6 +27522,58 @@ a:hover {
 .table-sizes td, .table-sizes th {
   padding: 0 !important;
   font-size: 0.7rem !important;
+}
+
+/*.main-message {
+  display: flex;
+  text-align: left;
+  line-height: 33px;
+  margin-bottom: 15px;
+}*/
+.main-message {
+  background: url("/assets/img/bg_home.jpg");
+  width: 100vw;
+  height: 70vh;
+  background-position: center top;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  margin-bottom: 1rem;
+  display: flex;
+  /*justify-content: space-around;*/
+  position: relative;
+}
+@media (max-width: 600px) {
+  .main-message {
+    height: 70vh;
+  }
+}
+.main-message .main-message--center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  /*text-align: center;*/
+  padding-left: 5vw;
+}
+.main-message h2 {
+  font-size: 3rem;
+  color: white;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #A0A0A0;
+  margin-bottom: 40px;
+}
+.main-message a {
+  background: #dac2af;
+  color: #404040;
+  border-color: #dac2af;
+}
+.main-message a:hover {
+  background: #e0b48f;
+  color: #404040;
+  outline: none;
+  border-color: #dac2af;
 }
 
 /*# sourceMappingURL=out.css.map */
