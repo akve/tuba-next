@@ -19,7 +19,7 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
 
         {/*<!-- Header -->*/}
         <div className={`header bg-gradient-primary ${router.asPath === '/' ? '' : 'py-3 py-lg-3'}`}>
-          {router.asPath === '/' && (
+          {router.asPath === '/' && false && (
             <div className="main-message">
               <div className="main-message--center">
                 {/*<h2>{t('[U:нарешті тепло][R:наконец тепло]')}</h2>
