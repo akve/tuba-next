@@ -13,7 +13,7 @@ import Plus from '@pdeals/next/assets/img/plus.svg';
 import StarsRating from 'react-rating';
 
 export async function getServerSideProps(context) {
-  const alldata = await client().get('/open/alldata');
+  const alldata = await client().get(`/open/alldata?d=${new Date()}`);
   const reviews = await client().get('/open/reviews-frontend/0');
   return {
     props: { alldata, reviews }, // will be passed to the page component as props

@@ -2,7 +2,7 @@ import RegisterBaseInput from './BaseInput';
 import RegisterDropDown from './DropDown';
 import RegisterCheckbox from './Checkbox';
 import RegisterDate from './Date';
-import RegisterTextRedactor from './TextRedactor';
+// import RegisterTextRedactor from './TextRedactor';
 import RegisterRange from './Range';
 import RegisterLazyDropDown from './LazyDropDown';
 import RegisterAttachment from './Attachment';

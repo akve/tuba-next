@@ -81,7 +81,13 @@ function PublicNavbar(props: IProps) {
                 <Row>
                   <Col className="collapse-brand" xs="6">
                     <Link href="/">
-                      <img alt="Tuba-Duba" src="/assets/img/logo-top3.png" width="240" style={{ opacity: 1 }} />
+                      <img
+                        alt="Tuba-Duba"
+                        src="/assets/img/logo-top3.png"
+                        width="120"
+                        height="38"
+                        style={{ opacity: 1 }}
+                      />
                     </Link>
                   </Col>
                   <Col className="collapse-close" xs="6">
@@ -102,7 +108,7 @@ function PublicNavbar(props: IProps) {
                     </NavLink>
                   </Link>
                 </NavItem>
-                <NavItem>
+                <NavItem className="d-none d-lg-inline">
                   <a href="tel:+380501764223" className="nav-link-icon nav-link">
                     <i className="ni ni-mobile-button" /> +38 (050) 176-42-23
                   </a>

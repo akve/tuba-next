@@ -9,7 +9,7 @@ import * as i18n from '@pdeals/next/utils/i18n';
 import Snippet from '@pdeals/next/components/Snippet/Snippet';
 
 export async function getServerSideProps(context) {
-  const alldata = await client().get('/open/alldata');
+  const alldata = await client().get(`/open/alldata?d=${new Date()}`);
   return {
     props: { alldata }, // will be passed to the page component as props
   };

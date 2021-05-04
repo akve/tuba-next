@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "scripts": {
         "dev": "cross-env ANALYZE=false next -p 8081",
-        "fix-splide": "cp -f ./modules/splide.js-fixture ../../node_modules/@splidejs/splide/dist/js/splide.js",
-        "build": "cross-env BUNDLE_ANALYZE=browser next build",
+        "fix-splide": "cp -f ./modules/splide.js-fixture ../../node_modules/@splidejs/splide/dist/js/splide.js; cp -f ./modules/jodit.d-fixture ../../node_modules/jodit-react/index.d.ts; cp -f ./modules/jodit-utils.fixture ../../node_modules/jodit/src/core/helpers/utils/utils.ts ",
+        "build": "cross-env NODE_ENV=production BUNDLE_ANALYZE=browser next build",
         "start": "next start",
         "type-check": "tsc",
         "clear": "rm -rf .next",
@@ -36,6 +36,7 @@
         "cross-env": "^7.0.3",
         "date-fns": "^2.16.1",
         "i18n-js": "^3.8.0",
+        "jodit-react": "^1.0.83",
         "lodash": "^4.17.20",
         "mobx": "5.15.4",
         "mobx-persist": "^0.4.1",
