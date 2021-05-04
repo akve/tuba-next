@@ -93,9 +93,6 @@ export default class MyApp extends App {
   render() {
     const { Component, pageProps, url } = this.props;
 
-    //if (!this.state.mobxStore) return null;
-    //console.log('???', this.props);
-
     const isAdminPath =
       typeof window === 'undefined'
         ? url && url.indexOf('/admin') === 0

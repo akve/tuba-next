@@ -5,7 +5,7 @@ import ProductsList from '@pdeals/next/components/ProductsList/ProductsList';
 import NormalLayout from '@pdeals/next/components/layouts/NormalLayout';
 import { HeadNonProduct } from '@pdeals/next/components/Headers/HeadNonProduct';
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps(context) {
   const structure = await client().get('/open/structure/structure');
   const list = await client().get('/open/products/category/featured');
   return { props: { structure, list } };
