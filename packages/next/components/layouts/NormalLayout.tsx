@@ -22,10 +22,10 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
           {router.asPath === '/' && (
             <div className="main-message">
               <div className="main-message--center">
-                {/*<h2>{t('[U:нарешті тепло][R:наконец тепло]')}</h2>*/}
+                {/*<h2>{t('[U:нарешті тепло][R:наконец тепло]')}</h2>
                 <a href="/category/featured" className="btn btn-primary">
                   {t('[U:Перейти до каталогу][R:Перейти в каталог]')}
-                </a>
+                </a>*/}
               </div>
             </div>
           )}

@@ -36,6 +36,7 @@ const TextRedactor = (props) => {
           ref={editor}
           value={content}
           onBlur={(newContent) => {
+            console.log('NC', newContent);
             setContent(newContent);
             props.setValue(props.name, newContent);
           }} // preferred to use only this option to update the content for performance reasons
