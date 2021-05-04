@@ -9,15 +9,17 @@ import * as i18n from '@pdeals/next/utils/i18n';
 import Snippet from '@pdeals/next/components/Snippet/Snippet';
 
 export async function getServerSideProps(context) {
-  const alldata = await client().get(`/open/alldata?d=${new Date()}`);
+  const structure = await client().get('/open/structure/structure');
+  const content = await client().get('/open/structure/snippets');
   return {
-    props: { alldata }, // will be passed to the page component as props
+    props: { structure, content }, // will be passed to the page component as props
   };
 }
 
-const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata }) => {
+const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, structure, content }) => {
   // const { query } = useRouter();
-  uiStore.setAllData(alldata);
+  uiStore.setAllData(structure);
+  uiStore.setSnippets(content);
   return (
     <NormalLayout>
       <div className="d-flex w-100">

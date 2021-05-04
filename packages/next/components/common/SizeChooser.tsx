@@ -26,6 +26,7 @@ import { SizeTable } from './SizeTable';
 interface IProps {
   value: string;
   onChange: any;
+  onOpenModal?: any;
 }
 
 function SizeChooser(props: IProps) {

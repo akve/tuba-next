@@ -15,6 +15,8 @@ class CartSingleProduct {
   @persist @serializable size: string;
 
   @persist @serializable price: number;
+
+  @persist @serializable image: string;
 }
 
 class Cart {

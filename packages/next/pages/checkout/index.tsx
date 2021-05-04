@@ -25,7 +25,7 @@ import {
 } from 'reactstrap';
 
 export async function getServerSideProps(context) {
-  const alldata = await client().get('/open/alldata');
+  const alldata = await client().get('/open/structure/structure');
   return {
     props: { alldata }, // will be passed to the page component as props
   };

@@ -8,6 +8,7 @@ import * as i18n from '../utils/i18n';
 import * as orderService from '../services/orderService';
 import { ListDto, ListRequestDto } from '@pdeals/models/dto/ListDto';
 import generateUserFilter from '../utils/generateUserFilter';
+import { find } from 'lodash';
 
 @Path('/v1/open')
 @PreProcessor(RequestPreProcess)
@@ -47,6 +48,77 @@ export class OpenController {
     data.colors = await getTypeormConnection().query('select * from color');
     data.fabrics = await getTypeormConnection().query('select * from fabric');
     data.sorting = await getTypeormConnection().query('select * from product_sort');
+    return data;
+  }
+
+  @Path('/product/:code')
+  @GET
+  public async getProdData(@PathParam('code') code: string): Promise<any> {
+    const data: any = {};
+    const rows = await getTypeormConnection().query(`select * from product where code='${code}'`);
+    if (rows.length === 0) return null;
+    data.product = rows[0];
+    data.colors = await getTypeormConnection().query('select * from color');
+    data.fabrics = await getTypeormConnection().query(`select * from fabric where id=${rows[0].fabric || 0}`);
+    return data;
+  }
+
+  @Path('/products/:category_or_collection/:id')
+  @GET
+  public async getCollData(
+    @PathParam('category_or_collection') type: string,
+    @PathParam('id') id: string
+  ): Promise<any> {
+    const data: any = {};
+    let _id: any = id.split('_');
+    _id = _id[_id.length - 1];
+    console.log(`select * from ${type} where code='${_id}'`);
+    const catOrCol = await getTypeormConnection().query(`select * from ${type} where code='${_id}'`);
+    if (catOrCol.length === 0) return null;
+    const catId = '' + catOrCol[0].id;
+    const rows = await getTypeormConnection().query('select * from product where not(coalesce(invisible, false))');
+    const res: any = [];
+    rows.forEach((r: any) => {
+      try {
+        r.image = r.data.images[0].image;
+      } catch (e) {
+        console.log('bad image');
+      }
+      r.description = '';
+      if (type === 'category') {
+        if (find(r.data.categories, (c) => `${c.category}` === catId)) {
+          res.push(r);
+        }
+      }
+      if (type === 'collection') {
+        if (find(r.data.collections, (c) => `${c.collection}` === catId)) {
+          res.push(r);
+        }
+      }
+    });
+    data.products = res;
+    // data.colors = await getTypeormConnection().query('select * from color');
+    // data.fabrics = await getTypeormConnection().query('select * from fabric');
+    data.sorting = await getTypeormConnection().query('select * from product_sort');
+    return data;
+  }
+
+  @Path('/structure/:type')
+  @GET
+  public async getStructureData(@PathParam('type') type: string): Promise<any> {
+    const data: any = {};
+    if (type === 'structure') {
+      const lookupsController = new LookupsController();
+      lookupsController.context = this.context;
+      data.categories = await lookupsController.categoriesLookup(null);
+      data.collections = await getTypeormConnection().query('select * from collection');
+    }
+    if (type === 'snippets') {
+      data.snippets = await getTypeormConnection().query('select * from snippet');
+    }
+    if (type === 'reviews') {
+      data.snippets = await getTypeormConnection().query('select * from snippet');
+    }
     return data;
   }
 

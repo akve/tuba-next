@@ -24,11 +24,12 @@ import OrderStore from '@pdeals/next/stores/orderStore';
 import AmountChooser from '@pdeals/next/components/common/AmountChooser';
 import SizeChooser from '@pdeals/next/components/common/SizeChooser';
 import ColorChooser from '@pdeals/next/components/common/ColorChooser';
-import { safeJson } from '@pdeals/next/utils/helpers';
+import { resizeImage, safeJson } from '@pdeals/next/utils/helpers';
 
 interface IProps {
   uiStore?: UiStore;
   orderStore?: OrderStore;
+  onOpenModal?: any;
 }
 function ProductContent(props: IProps) {
   const { uiStore } = props;
@@ -40,12 +41,12 @@ function ProductContent(props: IProps) {
   //console.log('PROD', product);
 
   const getFabric = () => {
-    if (!product.data.colors || !product.data.colors.length) return null;
-    const color = product.data.colors[0];
+    if (!product.product.data.colors || !product.product.data.colors.length) return null;
+    const color = product.product.data.colors[0];
     if (!color.color) return null;
-    const colorFull = find(uiStore?.allData.colors, (r) => `${r.id}` === `${color.color}`);
+    const colorFull = find(product.colors, (r) => `${r.id}` === `${color.color}`);
     if (!colorFull) return null;
-    const f = find(uiStore?.allData.fabrics, (r) => r.id === colorFull.fabric);
+    const f = find(product.fabrics, (r) => r.id === colorFull.fabric);
     if (f) {
       return f;
     }
@@ -54,21 +55,23 @@ function ProductContent(props: IProps) {
 
   const onAddToCart = (buyImmediately?: boolean) => {
     console.log('S', size);
+    const p = product.product;
     props.orderStore!.putToCart({
-      name: `${product.name}`,
-      code: `${product.code}`,
+      image: `${p.image}`,
+      name: `${p.name}`,
+      code: `${p.code}`,
       color: color,
       amount: amount,
       size: size,
-      price: product.pricediscount || product.price,
+      price: p.pricediscount || p.price,
     });
     router.push('/checkout');
   };
 
-  if (!product.id) return <h1>This product is not found</h1>;
-  const colors = !product.data.colors
+  if (!product.product || !product.product.id) return <h1>This product is not found</h1>;
+  const colors = !product.product.data.colors
     ? ''
-    : product.data.colors.reduce((acc, cv) => {
+    : product.product.data.colors.reduce((acc, cv) => {
         return acc + cv.name + ' / ';
       }, '');
   const fabric = getFabric();
@@ -76,25 +79,31 @@ function ProductContent(props: IProps) {
   return (
     <>
       <Head>
-        <title>{i18n.t(product.name)} - Tuba-Duba</title>
-        <meta name="description" content={`${safeJson(i18n.t(product.name))} - Tuba-Duba`} />
+        <title>{i18n.t(product.product.name)} - Tuba-Duba</title>
+        <meta name="description" content={`${safeJson(i18n.t(product.product.name))} - Tuba-Duba`} />
         <meta name="keywords" content="Туба-дуба, Tuba-Duba" />
-        <meta property="og:title" content={`${safeJson(i18n.t(product.name))} - Tuba-Duba`} key="title" />
+        <meta property="og:title" content={`${safeJson(i18n.t(product.product.name))} - Tuba-Duba`} key="title" />
         <meta property="og:type" content="product" />
         <meta
           property="og:image"
-          content={`${product.data.images && product.data.images.length ? product.data.images[0].image : ''}`}
+          content={`${
+            product.product.data.images && product.product.data.images.length
+              ? resizeImage(product.product.data.images[0].image, 'normal')
+              : ''
+          }`}
         />
-        <meta property="og:description" content={`${safeJson(i18n.t(product.name))}`} />
+        <meta property="og:description" content={`${safeJson(i18n.t(product.product.name))}`} />
         <meta
           property="og:url"
           content={
-            typeof window !== 'undefined' ? window.location.href : `https://tuba-duba.com/product/${product.code}`
+            typeof window !== 'undefined'
+              ? window.location.href
+              : `https://tuba-duba.com/product/${product.product.code}`
           }
         />
-        <meta property="product:price:amount" content={`${product.price}`} />
+        <meta property="product:price:amount" content={`${product.product.price}`} />
         <meta property="product:price:currency" content="UAH" />
-        <meta property="productID" itemProp="productID" content={`tuba_duba_${product.code}`} />
+        <meta property="productID" itemProp="productID" content={`tuba_duba_${product.product.code}`} />
 
         <script
           type="application/ld+json"
@@ -102,10 +111,14 @@ function ProductContent(props: IProps) {
             __html: `{
       "@context": "https://schema.org",
       "@type": "Product",
-      "productID":"tuba_duba_${product.code}",
-      "name": "${safeJson(i18n.t(product.name))} Tuba-Duba",
-      "image": "${product.data.images && product.data.images.length ? product.data.images[0].image : ''}",
-      "description": "${safeJson(i18n.t(product.description), true)}",
+      "productID":"tuba_duba_${product.product.code}",
+      "name": "${safeJson(i18n.t(product.product.name))} Tuba-Duba",
+      "image": "${
+        product.product.data.images && product.product.data.images.length
+          ? resizeImage(product.product.data.images[0].image, 'normal')
+          : ''
+      }",
+      "description": "${safeJson(i18n.t(product.product.description), true)}",
       "brand": {
         "@type": "Thing",
         "name": "Tuba-Duba"
@@ -113,15 +126,15 @@ function ProductContent(props: IProps) {
       "logo": "https://tuba-duba.com/assets/img/logo.png",
       "offers": {
         "@type": "Offer",
-        "price": "${product.price}",
+        "price": "${product.product.price}",
         "priceCurrency": "UAH",
-        "url": "https://tuba-duba.com/product/${product.code}",
+        "url": "https://tuba-duba.com/product/${product.product.code}",
         "availability": "https://schema.org/InStock",
         "offerCount": "1",
         "itemOffered":{
           "@type": "IndividualProduct",
-          "name": "${safeJson(i18n.t(product.name))}",
-          "model": "${product.id}",
+          "name": "${safeJson(i18n.t(product.product.name))}",
+          "model": "${product.product.id}",
           "color":"${safeJson(i18n.t(colors))}"
           },
         "seller": {"@type":"Organization","name":"Tuba-Duba"}
@@ -131,16 +144,16 @@ function ProductContent(props: IProps) {
         />
       </Head>
       <div className="product-details-wrapper w-100">
-        <h1>{i18n.t(product.name)}</h1>
-        <h3>{product.price} грн</h3>
-        <div className="content" dangerouslySetInnerHTML={{ __html: i18n.t(product.description, true) }}></div>
+        <h1>{i18n.t(product.product.name)}</h1>
+        <h3>{product.product.price} грн</h3>
+        <div className="content" dangerouslySetInnerHTML={{ __html: i18n.t(product.product.description, true) }}></div>
         {!!fabric && (
           <div
             className="content"
             dangerouslySetInnerHTML={{ __html: i18n.t(fabric.description || fabric.name, true) }}
           ></div>
         )}
-        {!product.description && (
+        {!product.product.description && (
           <div className="content">
             <p>{i18n.t('[R:Шьем по вашим меркам][U:Шиємо за вашими мірочками]')}</p>
           </div>
@@ -155,9 +168,10 @@ function ProductContent(props: IProps) {
               // console.log('?????', v);
               setSize(v);
             }}
+            onOpenModal={props.onOpenModal}
           />
           <h4>{i18n.t('[U:Колiр][R:Цвет]')}</h4>
-          <ColorChooser product={product} value={color} onChange={(v) => setColor(v)} />
+          <ColorChooser product={product} value={color} onChange={(v) => setColor(v)} onOpenModal={props.onOpenModal} />
           {/*
         <button className="btn btn-secondary" onClick={() => onAddToCart()}>
           {i18n.t('[R:Добавить в корзину][U:Додати до кошика]')}

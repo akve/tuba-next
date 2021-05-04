@@ -13,16 +13,20 @@ import Plus from '@pdeals/next/assets/img/plus.svg';
 import StarsRating from 'react-rating';
 
 export async function getServerSideProps(context) {
-  const alldata = await client().get(`/open/alldata?d=${new Date()}`);
+  const structure = await client().get('/open/structure/structure');
+  const content = await client().get('/open/structure/snippets');
   const reviews = await client().get('/open/reviews-frontend/0');
   return {
-    props: { alldata, reviews }, // will be passed to the page component as props
+    props: { structure, content, reviews }, // will be passed to the page component as props
   };
 }
 
-const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, reviews }) => {
+const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, structure, content, reviews }) => {
   // const { query } = useRouter();
-  uiStore.setAllData(alldata);
+  uiStore.setAllData(structure);
+  uiStore.setSnippets(content);
+  uiStore.setReviews(reviews);
+
   const calcDate = (d) => {
     return formatDate(d);
   };

@@ -2,6 +2,7 @@ import { inject, observer } from 'mobx-react';
 import * as i18n from '@pdeals/next/utils/i18n';
 import { find } from 'lodash';
 import OrderStore from '@pdeals/next/stores/orderStore';
+import { resizeImage } from '@pdeals/next/utils/helpers';
 
 interface IProps {
   orderStore?: OrderStore;
@@ -10,11 +11,11 @@ interface IProps {
 const CartPreview = (props: IProps) => {
   const { orderStore, allData } = props;
   const { cart } = orderStore!;
-  const getProduct = (product) => {
+  /*const getProduct = (product) => {
     console.log(allData, product.code);
     const p = find(allData.products, (r) => r.code === product.code);
     return p;
-  };
+  };*/
   const onRemove = (index) => {
     orderStore!.remove(index);
   };
@@ -38,7 +39,7 @@ const CartPreview = (props: IProps) => {
               <td>
                 <div className="d-flex ">
                   <img
-                    src={getProduct(product).image}
+                    src={resizeImage(product.image, 'thumb')}
                     height="60"
                     style={{ maxHeight: '300px', objectFit: 'contain' }}
                   />
@@ -68,7 +69,7 @@ const CartPreview = (props: IProps) => {
           <div className="d-flex flex-column" key={`${index}`}>
             <div className="d-flex justify-content-between flex-row">
               <img
-                src={getProduct(product).image}
+                src={resizeImage(product.image, 'thumb')}
                 width="50%"
                 style={{ maxHeight: '300px', objectFit: 'contain', marginLeft: '5px' }}
               />

@@ -28,7 +28,7 @@ interface IProps {
 }
 function Snippet(props: IProps) {
   const { uiStore } = props;
-  const snippet = find(uiStore?.allData.snippets, (r) => r.code === props.code);
+  const snippet = find(uiStore?.snippets.snippets, (r) => r.code === props.code);
   if (!snippet) return null;
   const lang = i18n.currentLang();
   const content = snippet['content_' + lang];

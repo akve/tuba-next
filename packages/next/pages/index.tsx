@@ -6,14 +6,16 @@ import NormalLayout from '@pdeals/next/components/layouts/NormalLayout';
 import { HeadNonProduct } from '@pdeals/next/components/Headers/HeadNonProduct';
 
 export async function getServerSideProps({ params }) {
-  const alldata = await client().get('/open/alldata');
-  return { props: { alldata } };
+  const structure = await client().get('/open/structure/structure');
+  const list = await client().get('/open/products/category/featured');
+  return { props: { structure, list } };
 }
 
-const IndexPage: React.FunctionComponent<any> = ({ alldata }) => {
+const IndexPage: React.FunctionComponent<any> = ({ structure, list }) => {
   // const { query } = useRouter();
-  getStore().uiStore.setAllData(alldata);
-  console.log('Rendering now', alldata, new Date());
+  getStore().uiStore.setAllData(structure);
+  getStore().uiStore.setList(list);
+  // console.log('Rendering now', alldata, new Date());
   return (
     <NormalLayout withHeading>
       <HeadNonProduct />

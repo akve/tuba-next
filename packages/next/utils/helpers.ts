@@ -47,7 +47,7 @@ export const getEndOfMonth = (date = new Date()) => {
   return result;
 };
 
-export const resizeImage = (url: string, format: 'list' | 'thumb' | 'normal') => {
+export const resizeImage = (url: string, format: 'list' | 'thumb' | 'normal' | 'huge') => {
   if (url.indexOf('cloudinary') < 0) return url;
   if (format === 'list') {
     return url.replace('/upload/', '/upload/w_400/');
@@ -57,6 +57,9 @@ export const resizeImage = (url: string, format: 'list' | 'thumb' | 'normal') =>
   }
   if (format === 'normal') {
     return url.replace('/upload/', '/upload/h_1000/');
+  }
+  if (format === 'huge') {
+    return url.replace('/upload/', '/upload/h_2000/');
   }
 };
 

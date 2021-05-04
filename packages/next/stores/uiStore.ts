@@ -27,6 +27,14 @@ class UiStore {
 
   @observable product: string | null = null;
 
+  @observable productDetails: any = null;
+
+  @observable list: any = [];
+
+  @observable snippets: any = null;
+
+  @observable reviews: any = null;
+
   @observable breadCrumbs: { data: IBreadcrumb[]; title: string; resolvers: any } = {
     data: [],
     title: '',
@@ -58,9 +66,25 @@ class UiStore {
     this.product = `${id}`;
   }
 
+  @action setProductDetails(data: any) {
+    this.productDetails = data;
+  }
+
   @action setAllData(data: any) {
     if (this.allData) return;
     this.allData = data;
+  }
+
+  @action setList(data: any) {
+    this.list = data;
+  }
+
+  @action setSnippets(data) {
+    this.snippets = data;
+  }
+
+  @action setReviews(data) {
+    this.reviews = data;
   }
 
   @action getListByCategory(category: string, isForCollection?: boolean) {
@@ -74,17 +98,10 @@ class UiStore {
     const categoryId = categoryRecord.id;
     console.log('???', categoryId);
 
-    let result = filter(this.allData.products, (r: any) => {
-      if (r.invisible) return false;
-      const rCategories: any = isForCollection ? r.data.collections : r.data.categories;
-      if (rCategories && rCategories.length) {
-        return !!find(rCategories, (c: any) => `${isForCollection ? c.collection : c.category}` === `${categoryId}`);
-      }
-      return false;
-    });
+    let result = this.list;
 
     const sortProducts = (cat: number, prods: any[]) => {
-      const all = this.allData;
+      const all = this.list;
       if (!all || !all.sorting) return prods;
       const sorts = filter(all.sorting, (r: any) => r.category === cat);
       const outList: any = [];
@@ -106,7 +123,7 @@ class UiStore {
       return outList;
     };
 
-    result = sortProducts(categoryId, result);
+    result = sortProducts(categoryId, result.products);
     return result;
   }
 
@@ -203,9 +220,10 @@ if (level === 'success') {
   }
 
   @computed get ProductDetails(): any {
-    const p = find(this.allData.products, (r: any) => `${r.code}` === `${this.product}`);
+    const p = this.productDetails; // find(this.allData.products, (r: any) => `${r.code}` === `${this.product}`);
     if (!p) return {};
-    const categories = get(p, 'data.categories') || null;
+    console.log('!!!', p, this.allData);
+    const categories = get(p, 'product.categories') || null;
     //console.log('FOUND?', p, this.allData, categories);
     let categoryId: any = null;
     if (categories) {
@@ -215,10 +233,10 @@ if (level === 'success') {
     if (categoryId) {
       p.category = find(this.allData.categories.rows, (r: any) => `${r.id}` === `${categoryId}`);
     }
+    if (!p.product.data.images) p.product.data.images = [];
     if (!p.image) {
-      p.image = p.data.images[0].image;
+      p.image = p.product.data.images[0].image;
     }
-    if (!p.data.images) p.data.images = [];
     return p;
   }
 

@@ -19,12 +19,14 @@ import { inject, observer } from 'mobx-react';
 import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
 import { find } from 'lodash';
+import { resizeImage } from '@pdeals/next/utils/helpers';
 
 interface IProps {
   value: string;
   onChange: any;
   product: any;
   uiStore?: UiStore;
+  onOpenModal?: any;
 }
 
 function ColorChooser(props: IProps) {
@@ -34,8 +36,8 @@ function ColorChooser(props: IProps) {
   const prepareColors = () => {
     const res: any = [];
     let selected: any = null;
-    props.product.data.colors.forEach((c: any) => {
-      const found = find(props.uiStore!.allData.colors, (r) => `${r.id}` === `${c.color}`);
+    props.product.product.data.colors.forEach((c: any) => {
+      const found = find(props.product.colors, (r) => `${r.id}` === `${c.color}`);
       if (!found) return;
       const c2 = { id: found.id, name: found.name, image: found.image };
       if (c2.name === props.value) {
@@ -62,14 +64,19 @@ function ColorChooser(props: IProps) {
     <div className="color-chooser">
       <div className="colorname">{i18n.t(selectedColor.name)}</div>
       <div className="fabricsample">
-        <img src={selectedColor.image} height="100" />
+        <img
+          src={resizeImage(selectedColor.image, 'thumb')}
+          height="100"
+          style={{ cursor: 'zoom-in' }}
+          onClick={() => props.onOpenModal('color:' + selectedColor.image)}
+        />
       </div>
       <div className="colors-wrapper d-flex flex-row">
         {colors.map((color) => (
           <a
             className={`color ${color.id === selectedColor.id && 'color-active'}`}
             key={color.id}
-            style={{ backgroundImage: `url("${color.image}")` }}
+            style={{ backgroundImage: `url("${resizeImage(color.image, 'thumb')}")` }}
             onClick={() => onSet(color.name)}
           ></a>
         ))}

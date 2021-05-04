@@ -7,6 +7,7 @@ import { resizeImage } from '@pdeals/next/utils/helpers';
 
 interface IProps {
   uiStore?: UiStore;
+  onOpenModal?: any;
 }
 
 class ThumbnailSlider extends React.Component<IProps, any> {
@@ -62,8 +63,8 @@ class ThumbnailSlider extends React.Component<IProps, any> {
           ref={this.secondaryRef}
           className={isMobile ? 'slider-secondary-mobile' : ''}
         >
-          {!!product.data &&
-            product.data.images.map((image, index) => (
+          {!!product.product.data &&
+            product.product.data.images.map((image, index) => (
               <SplideSlide key={`${index}`}>
                 <img src={resizeImage(image.image, 'thumb')} alt="Image 1" />
               </SplideSlide>
@@ -139,10 +140,16 @@ class ThumbnailSlider extends React.Component<IProps, any> {
         {!isMobile && this.renderSecondary()}
         <div style={{ paddingLeft: isMobile ? 0 : '15px' }}>
           <Splide id="splide02" options={primaryOptions} ref={this.primaryRef}>
-            {!!product.data &&
-              product.data.images.map((image, index) => (
+            {!!product.product.data &&
+              product.product.data.images.map((image, index) => (
                 <SplideSlide key={`${index}`}>
-                  <img src={resizeImage(image.image, 'normal')} alt="Image 1" height={getImgWidth()} />{' '}
+                  <img
+                    src={resizeImage(image.image, 'normal')}
+                    alt="Image 1"
+                    height={getImgWidth()}
+                    style={{ cursor: 'zoom-in' }}
+                    onClick={() => this.props.onOpenModal('product:' + image.image)}
+                  />{' '}
                   {/*style={{ maxWidth: 'calc(100vw-60px)' }}*/}
                 </SplideSlide>
               ))}

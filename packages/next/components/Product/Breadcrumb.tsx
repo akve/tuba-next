@@ -63,8 +63,8 @@ function Breadcrumb(props: IProps) {
           }
         }
         res.push({
-          link: `/product/${p.code}${props.from ? `?from=${props.from}` : ''}`,
-          title: i18n.t(p.name),
+          link: `/product/${p.product.code}${props.from ? `?from=${props.from}` : ''}`,
+          title: i18n.t(p.product.name),
         });
       }
     }
