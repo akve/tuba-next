@@ -20,12 +20,35 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="theme-color" content="#000000" />
-          {(this.props as any).isBot && <link rel="stylesheet" href="/assets/public.css" />}
+          {((this.props as any).isBot || true) && <link rel="stylesheet" href="/assets/public.css" />}
           {/*<link rel="shortcut icon" href={require('assets/img/brand/favicon.ico')} />
           <link rel="apple-touch-icon" sizes="76x76" href={require('assets/img/brand/apple-icon.png')} />*/}
           <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://res.cloudinary.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+          <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
+          />
+
+          <link
+            rel="stylesheet"
+            media="print"
+            onLoad={() => {
+              (this as any).onload = null;
+              (this as any).removeAttribute('media');
+            }}
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
+          />
+          <noscript>
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
+            />
+          </noscript>
         </Head>
         <body>
           <div id="page-transition"></div>
