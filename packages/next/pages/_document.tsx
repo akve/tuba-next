@@ -43,12 +43,6 @@ class MyDocument extends Document {
             }}
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
           />
-          <noscript>
-            <link
-              rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
-            />
-          </noscript>
         </Head>
         <body>
           <div id="page-transition"></div>
