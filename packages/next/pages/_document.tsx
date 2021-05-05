@@ -24,6 +24,7 @@ class MyDocument extends Document {
           {/*<link rel="shortcut icon" href={require('assets/img/brand/favicon.ico')} />
           <link rel="apple-touch-icon" sizes="76x76" href={require('assets/img/brand/apple-icon.png')} />*/}
           <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link rel="preconnect" href="https://res.cloudinary.com" />
           <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
         </Head>
         <body>

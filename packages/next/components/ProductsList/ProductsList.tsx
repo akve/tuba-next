@@ -4,6 +4,7 @@ import { useRouter, withRouter } from 'next/router';
 import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import Image from 'next/image';
+import Head from 'next/head';
 
 import {
   Card,
@@ -48,6 +49,11 @@ function ProductsList(props: IProps) {
 
   return (
     <div className="products-list">
+      <Head>
+        {productsList.length > 0 && (
+          <link rel="preload" as="image" href={resizeImage(productsList[0].image, 'list') || '/assets/img/logo.png'} />
+        )}
+      </Head>
       <Breadcrumb type="category" id={props.currentRoute!} isForCollection={props.isForCollection} />
       <div className="list-wrapper">
         {productsList.map((product) => (
