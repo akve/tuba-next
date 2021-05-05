@@ -107,13 +107,6 @@ function PublicNavbar(props: IProps) {
                     </NavLink>
                   </Link>
                 </NavItem>
-                <NavItem>
-                  <Link href="/info/vozvrat/">
-                    <NavLink href="/info/vozvrat/" className="nav-link-icon">
-                      <span className="nav-link-inner--text">{i18n.t('[R:Обмен/Возврат][U:Обмін/Повернення]')}</span>
-                    </NavLink>
-                  </Link>
-                </NavItem>
                 <NavItem className="d-none d-lg-inline">
                   <a href="tel:+380501764223" className="nav-link-icon nav-link">
                     <i className="ni ni-mobile-button" /> +38 (050) 176-42-23

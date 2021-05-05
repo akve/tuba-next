@@ -3,6 +3,8 @@ import PublicNavbar from '@pdeals/next/components/Navbars/PublicNavbar';
 import { t, setLang, currentLang } from '@pdeals/next/utils/i18n';
 import Link from '@pdeals/next/elements/NextLink';
 import { useRouter } from 'next/router';
+import { Nav, NavItem, NavLink } from 'reactstrap';
+import * as i18n from '@pdeals/next/utils/i18n';
 
 const NormalLayout: React.FunctionComponent<any> = (props) => {
   const router = useRouter();
@@ -103,6 +105,16 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
             </div>
             <div className="col-xl-6">
               <ul className="nav nav-footer justify-content-center justify-content-xl-end">
+                <li className="nav-item">
+                  <a href="/info/dostavka/" className="nav-link">
+                    {t('[R:Оплата и доставка][U:Оплата та доставка]')}
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="/info/vozvrat/" className="nav-link">
+                    {t('[R:Обмен/Возврат][U:Обмін/Повернення]')}
+                  </a>
+                </li>
                 <li className="nav-item">
                   <a href="https://www.facebook.com/tubaiduba" className="nav-link" target="_blank">
                     <i className="fa fa-facebook" /> Facebook
