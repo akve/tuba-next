@@ -103,8 +103,14 @@ function PublicNavbar(props: IProps) {
                 <NavItem>
                   <Link href="/info/contacts">
                     <NavLink href="/info/contacts" className="nav-link-icon">
-                      <i className="ni ni-planet" />
                       <span className="nav-link-inner--text">{i18n.t('[R:О нас][U:Про нас]')}</span>
+                    </NavLink>
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link href="/info/vozvrat/">
+                    <NavLink href="/info/vozvrat/" className="nav-link-icon">
+                      <span className="nav-link-inner--text">{i18n.t('[R:Обмен/Возврат][U:Обмін/Повернення]')}</span>
                     </NavLink>
                   </Link>
                 </NavItem>
