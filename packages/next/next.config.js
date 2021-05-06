@@ -20,8 +20,7 @@ const withTM = require('next-transpile-modules')(
 // });
 module.exports =
   //withTM(
-  //withBundleAnalyzer({
-  {
+  withBundleAnalyzer({
     future: {
       webpack5: true,
     },
@@ -44,8 +43,8 @@ module.exports =
       }
       return config;
     },
-  };
-//});
+    //  };
+  });
 //);
 
 // const withPlugins = require('next-compose-plugins');
