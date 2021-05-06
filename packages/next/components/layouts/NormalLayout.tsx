@@ -107,12 +107,12 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
               <ul className="nav nav-footer justify-content-center justify-content-xl-end">
                 <li className="nav-item">
                   <a href="/info/dostavka/" className="nav-link">
-                    {t('[R:Оплата и доставка][U:Оплата та доставка]')}
+                    {t('[R:Доставка и оплата][U:Доставка та оплата]')}
                   </a>
                 </li>
                 <li className="nav-item">
                   <a href="/info/vozvrat/" className="nav-link">
-                    {t('[R:Обмен/Возврат][U:Обмін/Повернення]')}
+                    {t('[R:Обмен и возврат][U:Обмін та повернення]')}
                   </a>
                 </li>
                 <li className="nav-item">
