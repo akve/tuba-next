@@ -12,6 +12,7 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
     { href: '/category/featured', title: 'Каталог' },
     { href: '/info/otzyvy', title: t('[R:Отзывы][U:Відгуки]') },
     { href: '/info/contacts', title: t('[R:Контакты][U:Контакти]') },
+    { href: '/info/onas', title: t('[R:О нас][U:Про нас]') },
   ];
 
   return (
