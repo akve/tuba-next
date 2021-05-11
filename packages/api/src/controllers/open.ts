@@ -152,6 +152,36 @@ export class OpenController {
     return new SimpleResponseDto('ok');
   }
 
+  @Path('/order-ci')
+  @POST
+  public async sendOrderCI(order: any): Promise<any> {
+    console.log('Order', order);
+
+    const a = new Date();
+    const generatedId =
+      '' + (a.getMonth() + 1) + '-' + a.getDate() + '-' + Math.floor(Math.random() * 10000).toString();
+
+    /*try {
+      await orderService.addToExcel(order, generatedId);
+    } catch (e) {
+      console.log('Failed to add to excel', e);
+    }*/
+
+    try {
+      await orderService.sendEmailCI(order, generatedId);
+    } catch (e) {
+      console.log('Failed to send email', e);
+    }
+
+    /*try {
+      await orderService.sendSMS(order, generatedId);
+    } catch (e) {
+      console.log('Failed to add SMS', e);
+    }*/
+
+    return new SimpleResponseDto('ok');
+  }
+
   @Path('/categories')
   @POST
   public async categoriesList(listParams: ListRequestDto): Promise<ListDto<any> | null> {

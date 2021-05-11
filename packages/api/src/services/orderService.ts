@@ -104,6 +104,33 @@ const sendEmail = async (order: any, generatedId: string) => {
   console.log('Message sent: %s', info.messageId);
 };
 
+const sendEmailCI = async (order: any, generatedId: string) => {
+  let html = `Новая рега<br>`;
+  Object.keys(order.data).forEach((key) => {
+    html += `${key}: ${order.data[key]}<br>`;
+  });
+  const text = 'Новая рега';
+
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: 'tubadubauk@gmail.com', // generated ethereal user
+      pass: process.env.GMAIL_PASSWD, // generated ethereal password
+    },
+  });
+  const info = await transporter.sendMail({
+    from: '"DF Registration" <tubadubauk@gmail.com>', // sender address
+    to: 'postnikov@gmail.com, svetabird@gmail.com, vitacalm@gmail.com', // list of receivers
+    subject: `Новая рега - ${order.data.email}`, // Subject line
+    text: text, // plain text body
+    html: html, // html body
+  });
+
+  console.log('Message sent: %s', info.messageId);
+};
+
 const sendSMS = async (order: any, generatedId: string) => {
   let phone = order.data.phone;
   if (!phone) return;
@@ -130,4 +157,4 @@ const sendSMS = async (order: any, generatedId: string) => {
   });
 };
 
-export { addToExcel, sendEmail, sendSMS };
+export { addToExcel, sendEmail, sendEmailCI, sendSMS };
