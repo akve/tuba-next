@@ -32,7 +32,7 @@ const CartForm = (props: IProps) => {
   const onSubmit = async (values: any) => {
     setSending(true);
     try {
-      const response = await orderStore.send({
+      const response: any = await orderStore.send({
         data: values,
         lang: i18n.currentLang(),
         cart: cart,
