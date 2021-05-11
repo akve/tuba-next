@@ -27415,11 +27415,23 @@ a:hover {
 .main-menu a {
   color: #525f7f !important;
   font-size: 20px;
-  padding: 5px;
-  margin: 10px;
+  white-space: nowrap;
 }
 .main-menu a:hover {
   text-decoration: underline;
+}
+@media (max-width: 700px) {
+  .main-menu {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+@media (min-width: 700px) {
+  .main-menu a {
+    padding: 5px;
+    margin: 10px;
+  }
 }
 
 .color-chooser {
@@ -27634,6 +27646,11 @@ a:hover {
 .modal-wrap .modal .modal-wrapper .big-product {
   max-width: 100%;
   margin-bottom: 20px;
+}
+
+.popover-inner {
+  background: white;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=out.css.map */

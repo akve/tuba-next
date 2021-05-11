@@ -57,7 +57,7 @@ const CartPreview = (props: IProps) => {
               <td>{product.price * product.amount} грн</td>
               <td>
                 <a onClick={() => onRemove(index)}>
-                  <i className="ni ni-fat-remove" style={{ fontSize: '20px' }} />
+                  <img src="/assets/img/x.svg" style={{ width: '20px', height: '20px' }} />
                 </a>
               </td>
             </tr>
@@ -89,7 +89,7 @@ const CartPreview = (props: IProps) => {
             </div>
             <div className="d-flex w-100 justify-content-center">
               <a onClick={() => onRemove(index)}>
-                <i className="ni ni-fat-remove" style={{ fontSize: '20px', color: 'darkred' }} />
+                <img src="/assets/img/x.svg" style={{ width: '20px', height: '20px' }} />
               </a>
             </div>
             <hr className="justify-content-center mt-0 mb-0" color="gray" style={{ width: '80%' }} />

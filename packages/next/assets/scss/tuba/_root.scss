@@ -194,13 +194,24 @@ a {
   a {
     color: rgb(82, 95, 127) !important;
     font-size: 20px;
-    padding: 5px;
-    margin: 10px;
     &:hover {
       text-decoration: underline;
     }
+    white-space: nowrap;
   }
   margin-bottom: 2.4rem ;
+  @media (max-width: 700px) {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+  @media (min-width: 700px) {
+    a {
+      padding: 5px;
+      margin: 10px;
+    }
+  }
+
 }
 
 .color-chooser {
@@ -430,4 +441,8 @@ a {
       }
     }
   }
+}
+.popover-inner {
+  background: white;
+  padding: 10px;
 }
