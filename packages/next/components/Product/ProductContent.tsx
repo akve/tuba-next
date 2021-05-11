@@ -57,7 +57,7 @@ function ProductContent(props: IProps) {
     console.log('S', size);
     const p = product.product;
     props.orderStore!.putToCart({
-      image: `${p.image || p.data.images[0]}`,
+      image: `${p.image || p.data.images[0].image}`,
       name: `${p.name}`,
       code: `${p.code}`,
       color: color,

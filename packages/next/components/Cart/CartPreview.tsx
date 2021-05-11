@@ -39,7 +39,7 @@ const CartPreview = (props: IProps) => {
               <td>
                 <div className="d-flex ">
                   <img
-                    src={resizeImage(product.image, 'thumb')}
+                    src={resizeImage(product.image || '', 'thumb')}
                     height="60"
                     style={{ maxHeight: '300px', objectFit: 'contain' }}
                   />
