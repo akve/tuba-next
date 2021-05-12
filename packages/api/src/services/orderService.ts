@@ -122,7 +122,7 @@ const sendEmailCI = async (order: any, generatedId: string) => {
   });
   const info = await transporter.sendMail({
     from: '"DF Registration" <tubadubauk@gmail.com>', // sender address
-    to: 'postnikov@gmail.com, svetabird@gmail.com, vitacalm@gmail.com', // list of receivers
+    to: 'postnikov@gmail.com, birdsveta@gmail.com, vitacalm@gmail.com', // list of receivers
     subject: `Новая рега - ${order.data.email}`, // Subject line
     text: text, // plain text body
     html: html, // html body
