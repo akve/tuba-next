@@ -323,6 +323,13 @@ a {
       }
     }
   }
+
+  @media (max-width: 600px) {
+    .review {
+      flex-direction: column;
+    }
+  }
+
 }
 
 .table-sizes {

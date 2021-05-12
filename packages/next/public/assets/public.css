@@ -24650,6 +24650,12 @@ a:hover {
   display: flex;
   background: #ECF0F1;
 }
+@media (max-width: 600px) {
+  .reviews-list .review {
+    flex-direction: column;
+  }
+}
+
 .table-sizes td, .table-sizes th {
   padding: 0 !important;
   font-size: 0.7rem !important;
