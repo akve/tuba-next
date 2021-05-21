@@ -24778,4 +24778,8 @@ a:hover {
   padding: 10px;
 }
 
+.strikeover {
+  text-decoration: line-through;
+}
+
 /*# sourceMappingURL=public.css.map */

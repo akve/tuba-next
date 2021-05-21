@@ -29,8 +29,22 @@ const EditProductForm: React.FunctionComponent<Props> = ({ id, afterSave }) => {
       fields: [
         { name: 'code', label: 'Code', type: 'text', class: 'col-lg-6', required: true, notEditable: false },
         { name: 'name', label: 'Name', type: 'text', class: 'col-lg-6', required: true },
-        { name: 'price', label: 'Price', type: 'number', class: 'col-lg-6', required: true },
+        { name: 'price', label: 'Price', type: 'number', class: 'col-lg-3', required: true },
+        { name: 'pricediscount', label: 'Price/Discount', type: 'number', class: 'col-lg-3', required: false },
         { name: 'invisible', label: 'Invisible', type: 'checkbox', class: 'col-lg-3' },
+        {
+          name: 'fabric',
+          label: 'Ткань',
+          type: 'lazydropdown',
+          class: 'col-lg-3',
+          options: {
+            resource: {
+              url: '/lookups/fabrics',
+              value: 'id',
+              label: 'name',
+            },
+          },
+        },
         {
           name: 'data.collections',
           label: 'Коллекция',

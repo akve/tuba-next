@@ -12,7 +12,7 @@ const AlternativeColorAdd = (props) => {
 
     props.userStore.allData.colors.forEach((c: any) => {
       if (c.fabric === f) {
-        toAdd.push({ color: c.id, name: `${fabric ? fabric.name : '--'} > c.name` });
+        toAdd.push({ color: c.id, name: `${fabric ? fabric.name : '--'} > ${c.name}` });
       }
     });
     props.bulkAdd(toAdd);

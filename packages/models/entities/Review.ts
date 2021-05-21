@@ -24,6 +24,12 @@ export class Review extends BaseEntity {
   username: string;
 
   @Column({ nullable: true })
+  userlink: string;
+
+  @Column({ nullable: true })
+  reviewlink: string;
+
+  @Column({ nullable: true })
   score_date: Date;
 
   @Column({ nullable: true, type: 'text' })

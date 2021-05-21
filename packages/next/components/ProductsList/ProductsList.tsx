@@ -77,7 +77,14 @@ function ProductsList(props: IProps) {
                     <h4>{i18n.t(product.name)}</h4>
                   </a>
                 </Link>
-                <div className="text-muted price-text">{product.price} грн</div>
+                <div className="text-muted price-text">
+                  {!!product.pricediscount && (
+                    <>
+                      <span className="strikeover">{product.price}</span> {product.pricediscount} грн
+                    </>
+                  )}
+                  {!product.pricediscount && <>{product.price} грн</>}
+                </div>
                 <button className="btn btn-outline-secondary" onClick={() => onAddToCart(product)}>
                   {i18n.t('[R:Детальнее][U:Детальнiше]')}
                 </button>

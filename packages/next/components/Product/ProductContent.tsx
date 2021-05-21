@@ -145,7 +145,14 @@ function ProductContent(props: IProps) {
       </Head>
       <div className="product-details-wrapper w-100">
         <h1>{i18n.t(product.product.name)}</h1>
-        <h3>{product.product.price} грн</h3>
+        <h3>
+          {!!product.product.pricediscount && (
+            <>
+              <span className="strikeover">{product.product.price}</span> {product.product.pricediscount} грн
+            </>
+          )}
+          {!product.product.pricediscount && <>{product.product.price} грн</>}
+        </h3>
         <div className="content" dangerouslySetInnerHTML={{ __html: i18n.t(product.product.description, true) }}></div>
         {!!fabric && (
           <div

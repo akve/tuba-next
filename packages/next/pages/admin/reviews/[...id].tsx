@@ -63,6 +63,52 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
             },
           },
         },
+        {
+          name: 'userlink',
+          label: 'Link to profile',
+          type: 'text',
+          class: 'col-lg-6',
+          required: true,
+          notEditable: false,
+        },
+        {
+          name: 'reviewlink',
+          label: 'Link to review',
+          type: 'text',
+          class: 'col-lg-6',
+          required: true,
+          notEditable: false,
+        },
+        {
+          name: 'data.products',
+          label: 'Доп.товары',
+          type: 'smartlist',
+          class: 'col-lg-6',
+          fieldSpecificParams: {
+            initialData: {
+              product: '',
+              name: '',
+            },
+            fields: [
+              {
+                name: 'product',
+                label: '',
+                type: 'lazydropdown',
+                class: 'col-12',
+                options: {
+                  resource: {
+                    url: '/lookups/products',
+                    value: 'id',
+                    label: 'name',
+                  },
+                  alsoSetLabelTo: 'name',
+                },
+              },
+              { name: 'name', label: 'Name', type: 'text', class: 'd-none', required: true },
+            ],
+            columns: [{ name: 'name', label: 'Продукт' }],
+          },
+        },
         { name: 'score', label: 'Score', type: 'number', class: 'col-lg-6', required: true, defaultValue: 5 },
         {
           name: 'description',
