@@ -9,7 +9,8 @@ const verifyColumnTypes = (payload: any, repo: Repository<any>) => {
     const col = colByName(key);
     if (col) {
       // change '' to null for numbers
-      if (payload[key] === '' && `${col.type}`.indexOf('Number') > 0) payload[key] = null;
+      if (payload[key] === '' && (`${col.type}`.indexOf('Number') >= 0 || `${col.type}`.indexOf('float') >= 0))
+        payload[key] = null;
     }
   });
   return payload;

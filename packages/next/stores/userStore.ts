@@ -32,6 +32,7 @@ class UserStore {
         localStorage.setItem('token', answer.session);
       } else sessionStorage.setItem('token', answer.session);
       this.me = answer.user;
+      this.allData = await client().get('/open/alldata?cache=' + new Date());
     } else {
       throw new Error('Unauthorized');
     }
