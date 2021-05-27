@@ -79,6 +79,10 @@ const sitemapXML = async () => {
   });
   for (let i = 0; i < alldata.products.length; i++) {
     const p = alldata.products[i];
+    let salePrice = '';
+    if (p.pricediscount) {
+      salePrice = `<g:sale_price>${p.pricediscount} UAH</g:sale_price>`;
+    }
     if (p.code !== 'DELETE-ME') {
       res += `
       <item>
@@ -92,6 +96,7 @@ const sitemapXML = async () => {
       <g:condition>new</g:condition>
       <g:availability>in stock</g:availability>
       <g:price>${p.price} UAH</g:price>
+      ${salePrice}
       <g:google_product_category>Clothing &amp; Accessories &gt; Clothing &gt;   Dresses</g:google_product_category>
       </item>
       `;
