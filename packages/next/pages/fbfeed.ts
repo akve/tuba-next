@@ -70,6 +70,7 @@ const sitemapXML = async () => {
   });
   alldata.products = filter(alldata.products, (r: any) => {
     if (r.invisible) return false;
+    if (r.code === 'shtanillyani') return false;
     if (r.data && r.data.categories) {
       if (find(r.data.categories, (c) => c.category === 63)) {
         return false;
