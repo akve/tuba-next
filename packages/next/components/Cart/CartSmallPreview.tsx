@@ -46,7 +46,11 @@ const CartPreview = (props: IProps) => {
                 </div>
               </div>
             </div>
-            <hr className="justify-content-center mt-0 mb-0" color="gray" style={{ width: '80%' }} />
+            <hr
+              className="justify-content-center mt-0 mb-0"
+              color="gray"
+              style={{ width: '80%', marginTop: '10px !important' }}
+            />
           </div>
         ))}
       </div>

@@ -43,7 +43,6 @@ const CartForm = (props: IProps) => {
     }
     values.delivery = values.delivery_warehouse;
     console.log(values);
-    return;
     setSending(true);
     try {
       const response: any = await orderStore.send({
