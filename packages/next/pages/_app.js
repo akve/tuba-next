@@ -10,7 +10,7 @@ import Safe from 'react-safe';
 
 import { Provider } from 'mobx-react';
 
-// import '../assets/scss/public.scss';
+import '../assets/scss/public.scss';
 // import 'assets/css/out.css';
 // import 'react-notification-alert/dist/animate.css';
 // import '../assets/plugins/nucleo/css/nucleo.module.css';

@@ -3,6 +3,9 @@ import * as i18n from '@pdeals/next/utils/i18n';
 import { find } from 'lodash';
 import OrderStore from '@pdeals/next/stores/orderStore';
 import { resizeImage } from '@pdeals/next/utils/helpers';
+import { Button } from 'reactstrap';
+import { router } from 'next/client';
+import { useRouter } from 'next/router';
 
 interface IProps {
   orderStore?: OrderStore;
@@ -11,6 +14,7 @@ interface IProps {
 const CartPreview = (props: IProps) => {
   const { orderStore, allData } = props;
   const { cart } = orderStore!;
+  const router = useRouter();
   /*const getProduct = (product) => {
     console.log(allData, product.code);
     const p = find(allData.products, (r) => r.code === product.code);
@@ -19,6 +23,10 @@ const CartPreview = (props: IProps) => {
   const onRemove = (index) => {
     orderStore!.remove(index);
   };
+  const onProceed = () => {
+    router.push('/checkout/order');
+  };
+  const total = cart.products.reduce((sum, product) => sum + product.price * product.amount, 0);
 
   return (
     <>
@@ -46,9 +54,9 @@ const CartPreview = (props: IProps) => {
                   <div className="pl-2 ">
                     <b>{i18n.t(product.name)}</b>
                     <br />
-                    {i18n.t('[R:Цвет][U:Колір]')}: <b>{product.color}</b>
+                    {i18n.t('[R:Цвет][U:Колір]')}: <b>{i18n.t(product.color || '')}</b>
                     <br />
-                    {i18n.t('[R:Размер][U:Розмір]')}: <b>{product.size}</b>
+                    {i18n.t('[R:Размер][U:Розмір]')}: <b>{i18n.t(product.size || '')}</b>
                   </div>
                 </div>
               </td>
@@ -95,6 +103,15 @@ const CartPreview = (props: IProps) => {
             <hr className="justify-content-center mt-0 mb-0" color="gray" style={{ width: '80%' }} />
           </div>
         ))}
+      </div>
+      <div style={{ marginLeft: '20px', marginBottom: '50px' }}>
+        <h3>
+          {i18n.t('[R:Всего][U:Разом]')}: {total} грн
+        </h3>
+
+        <Button color="primary" type="submit" size="lg" className={`order-button`} onClick={() => onProceed()}>
+          {i18n.t('[R:Оформить заказ][U:Оформити замовлення]')}
+        </Button>
       </div>
     </>
   );

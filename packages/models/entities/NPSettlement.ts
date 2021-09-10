@@ -10,42 +10,30 @@ import {
 // import { CrawlerSite } from './CrawlerSite';
 
 @Entity()
-export class Product extends BaseEntity {
+export class NPSettlement extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id?: number;
 
+  @Column({ nullable: false })
+  action: string;
+
+  @Column({ nullable: true })
+  area: string;
+
+  @Column({ nullable: true })
+  from_user_id: number;
+
+  @Column({ nullable: true })
+  to_model?: string;
+
+  @Column({ nullable: true })
+  to_id?: number;
+
   @Column()
-  code: string;
-
-  @Column({ nullable: true })
-  name: string;
-
-  @Column({ nullable: true })
-  image: string;
-
-  @Column({ nullable: true, type: 'float' })
-  price: number;
-
-  @Column({ nullable: true, type: 'float' })
-  pricediscount: number;
-
-  @Column({ nullable: true })
-  fabric: number;
-
-  @Column({ nullable: true })
-  description: string;
-
-  @Column({ nullable: true })
-  invisible: boolean;
-
-  @Column({ nullable: true, type: 'float' })
-  sorter: number;
+  readable: string;
 
   @Column({ type: 'json' })
   data?: object;
-
-  @Column({ nullable: true })
-  rz_category: string;
 
   @CreateDateColumn()
   createdDate?: Date;

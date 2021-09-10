@@ -5,6 +5,8 @@ import { ExportTable } from '@pdeals/next/components/common/Actions';
 import { BooleanCell, HTMLCell, DateCell } from '@pdeals/next/components/Crud/CrudList/Cells';
 import { tableKeys } from '@pdeals/next/variables/constants';
 import AlternativeColorAdd from '@pdeals/next/components/EditProductForm/AlternativeColorAdd';
+import { ILookup } from '@pdeals/models/lookups/ILookup';
+import { RozetkaCategoryLookup } from '@pdeals/next/utils/rozetkaHelper';
 
 type Props = {};
 
@@ -187,6 +189,12 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
           },
         },
         { name: 'description', label: 'Описание', type: 'html', class: 'col-lg-12', required: true },
+        {
+          name: 'rz_category',
+          label: 'Категория на Розетке',
+          type: 'dropdown',
+          options: RozetkaCategoryLookup,
+        },
       ],
     },
     createActions: [],

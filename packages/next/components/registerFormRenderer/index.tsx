@@ -8,6 +8,7 @@ import RegisterLazyDropDown from './LazyDropDown';
 import RegisterAttachment from './Attachment';
 import RegisterRadio from './Radio';
 import RegisterSmartList from './SmartList';
+import RegisterAsyncDropDown from '@pdeals/next/components/registerFormRenderer/AsyncDropDown';
 
 const registeredRenderer: any = {};
 
@@ -29,3 +30,4 @@ RegisterLazyDropDown();
 RegisterAttachment();
 RegisterRadio();
 RegisterSmartList();
+RegisterAsyncDropDown();

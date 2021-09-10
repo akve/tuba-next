@@ -55,7 +55,7 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, orderSto
   }
   return (
     <NormalLayout>
-      <CartPreview allData={alldata} />
+      <CartForm />
     </NormalLayout>
   );
 };

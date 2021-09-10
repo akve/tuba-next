@@ -20,10 +20,9 @@ const withTM = require('next-transpile-modules')(
 // });
 module.exports =
   //withTM(
-  withBundleAnalyzer({
-    future: {
-      webpack5: true,
-    },
+  //withBundleAnalyzer({
+  {
+    webpack5: true,
     pwa: {
       dest: 'public',
       runtimeCaching,
@@ -44,7 +43,8 @@ module.exports =
       return config;
     },
     //  };
-  });
+    //});
+  };
 //);
 
 // const withPlugins = require('next-compose-plugins');
