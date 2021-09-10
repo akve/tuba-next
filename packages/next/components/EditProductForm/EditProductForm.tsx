@@ -6,6 +6,7 @@ import { BooleanCell, HTMLCell, DateCell } from '@pdeals/next/components/Crud/Cr
 import { tableKeys } from '@pdeals/next/variables/constants';
 import CrudFormWrapper from '@pdeals/next/components/Crud/CrudForm/CrudFormWrapper';
 import AlternativeColorAdd from '@pdeals/next/components/EditProductForm/AlternativeColorAdd';
+import { RozetkaCategoryLookup } from '@pdeals/next/utils/rozetkaHelper';
 
 type Props = {
   id: number;
@@ -155,6 +156,12 @@ const EditProductForm: React.FunctionComponent<Props> = ({ id, afterSave }) => {
             ],
             columns: [{ name: 'image', label: 'Image', class: 'image-col' }],
           },
+        },
+        {
+          name: 'rz_category',
+          label: 'Категория на Розетке',
+          type: 'dropdown',
+          options: RozetkaCategoryLookup,
         },
         { name: 'description', label: 'Описание', type: 'html', class: 'col-lg-12', required: true },
       ],
