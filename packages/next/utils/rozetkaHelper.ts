@@ -11,6 +11,8 @@ const RozetkaCategoryLookup: ILookup = {
     { value: '4635287', label: 'Жилет' },
     { value: '4637383', label: 'Свитер' },
     { value: '4638207', label: 'Штаны' },
+    { value: '4637647', label: 'Сорочки' },
+    { value: '4637671', label: 'Костюмы' },
   ],
 };
 
