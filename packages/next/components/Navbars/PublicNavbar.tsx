@@ -108,8 +108,8 @@ function PublicNavbar(props: IProps) {
                   </Link>
                 </NavItem>*/}
                 <NavItem className="d-none d-lg-inline">
-                  <a href="tel:+380501764223" className="nav-link-icon nav-link">
-                    <i className="ni ni-mobile-button" /> +38 (050) 176-42-23
+                  <a href="tel:+380931413176" className="nav-link-icon nav-link">
+                    <i className="ni ni-mobile-button" /> +38 (093) 141-31-76
                   </a>
                 </NavItem>
               </Nav>
