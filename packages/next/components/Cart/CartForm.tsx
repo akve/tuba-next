@@ -37,6 +37,10 @@ const CartForm = (props: IProps) => {
   };
   const { register: register1, handleSubmit: handleSubmit1, setValue, watch, reset, ...rest } = useForm(formOptions);
   const onSubmit = async (values: any) => {
+    if (!values.phone || !values.phone.trim()) {
+      setError(i18n.t('[R:Введите телефон][U:Введіть телефон]'));
+      return;
+    }
     if (values.delivery_type === 'np' && !values.delivery_warehouse) {
       setError(i18n.t('[R:Выберите отделение НП][U:Оберіть відділення НП]'));
       return;
@@ -107,25 +111,25 @@ const CartForm = (props: IProps) => {
         <h2 style={{ marginLeft: '20px', marginTop: '10px' }}>{i18n.t('[U:Доставка][R:Доставка]')}</h2>
         <Form onSubmit={handleSave} className="d-flex flex-wrap">
           <Input
-            label={i18n.t(`[R:Имя][U:Ім'я]`)}
+            label={i18n.t(`[R:Имя][U:Ім'я] *`)}
             innerRef={register1({ required: true })}
             name="firstName"
             class="col-12 col-lg-6"
           />
           <Input
-            label={i18n.t(`[R:Фамилия][U:Прізвище]`)}
+            label={i18n.t(`[R:Фамилия][U:Прізвище] *`)}
             innerRef={register1({ required: true })}
             name="lastName"
             class="col-12 col-lg-6"
           />
           <Input
-            label={i18n.t(`[R:E-mail][U:E-mail]`)}
+            label={i18n.t(`[R:E-mail][U:E-mail] *`)}
             innerRef={register1({ required: true })}
             name="email"
             class="col-12 col-lg-6"
           />
           <Input
-            label={i18n.t(`[R:Телефон][U:Телефон]`)}
+            label={i18n.t(`[R:Телефон][U:Телефон] *`)}
             innerRef={register1({ required: true })}
             name="phone"
             class="col-12 col-lg-6"
