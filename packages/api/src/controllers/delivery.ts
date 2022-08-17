@@ -23,7 +23,7 @@ export class DeliveryController {
     const r = await axios.post(
       'http://api.novaposhta.ua/v2.0/json/Address/searchSettlements/',
       {
-        apiKey: 'fbc704eab3825847c33ae387c649daf1',
+        apiKey: '91cf3c878c0c414d522ffd14cbabad7d',
         modelName: 'Address',
         calledMethod: 'searchSettlements',
         methodProperties: {
@@ -35,6 +35,7 @@ export class DeliveryController {
         headers: {}, // Authorization: `Bearer ${process.env.TURBOSMS_KEY}`
       }
     );
+    console.log(r);
     if (r.data && r.data.data && r.data.data[0].Addresses) {
       return r.data.data[0].Addresses.map((r: any) => {
         return { label: r.Present, value: r.DeliveryCity };
@@ -57,7 +58,7 @@ export class DeliveryController {
         modelName: 'AddressGeneral',
         calledMethod: 'getWarehouses',
         methodProperties,
-        apiKey: 'fbc704eab3825847c33ae387c649daf1',
+        apiKey: '91cf3c878c0c414d522ffd14cbabad7d',
       },
       {
         headers: {}, // Authorization: `Bearer ${process.env.TURBOSMS_KEY}`
