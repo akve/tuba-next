@@ -54,9 +54,13 @@ const CartForm = (props: IProps) => {
         lang: i18n.currentLang(),
         cart: cart,
       });
-      if (response && response.status === 'ok') {
-        orderStore.clear();
-        router.push('/checkout/thanks');
+      if (response && response.id) {
+        const redirect: any = await orderStore.getPaymentRedirect(response.id);
+        if (redirect?.response?.checkout_url) {
+          router.push(redirect?.response?.checkout_url);
+        }
+        // orderStore.clear();
+        // router.push(`/checkout/payment?id=${response.id}&amnt=${response.sum}`);
       } else {
         throw new Error('Please contact administrator :(');
       }
@@ -103,6 +107,8 @@ const CartForm = (props: IProps) => {
   const goBack = () => {
     router.push('/checkout');
   };
+
+
 
   return (
     <Card className="w-100">

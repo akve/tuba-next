@@ -2,13 +2,15 @@ import { Context, GET, POST, PUT, Path, PreProcessor, PathParam, ServiceContext 
 import { attachmentsService } from '../services/attachmentsService';
 import { RequestPreProcess } from '../utils/request-with-user';
 import { LookupsController } from './lookups';
-import { getTypeormConnection } from '../../../db';
+import { getTypeormConnection, getTypeormManager } from '../../../db';
 import { SimpleResponseDto } from '@pdeals/models/dto/SimpleResponseDto';
 import * as i18n from '../utils/i18n';
 import * as orderService from '../services/orderService';
 import { ListDto, ListRequestDto } from '@pdeals/models/dto/ListDto';
 import generateUserFilter from '../utils/generateUserFilter';
 import { find } from 'lodash';
+import { Order } from '../../../models/entities/Order';
+import axios from 'axios';
 
 @Path('/v1/open')
 @PreProcessor(RequestPreProcess)
@@ -131,25 +133,37 @@ export class OpenController {
     const generatedId =
       '' + (a.getMonth() + 1) + '-' + a.getDate() + '-' + Math.floor(Math.random() * 10000).toString();
 
-    try {
-      await orderService.addToExcel(order, generatedId);
-    } catch (e) {
-      console.log('Failed to add to excel', e);
-    }
+    const repo = getTypeormManager().getRepository(Order);
+    const record: any = await repo.create({
+      code: generatedId,
+      payment_status: 'requested',
+      data: order,
+      total: order.total
+    });
+    const newRecord = await repo.save(record);
+    console.log('?', newRecord);
 
-    try {
-      await orderService.sendEmail(order, generatedId);
-    } catch (e) {
-      console.log('Failed to send email', e);
-    }
 
-    try {
-      await orderService.sendSMS(order, generatedId);
-    } catch (e) {
-      console.log('Failed to add SMS', e);
-    }
 
-    return new SimpleResponseDto('ok');
+    // try {
+    //   await orderService.addToExcel(order, generatedId);
+    // } catch (e) {
+    //   console.log('Failed to add to excel', e);
+    // }
+    //
+    // try {
+    //   await orderService.sendEmail(order, generatedId);
+    // } catch (e) {
+    //   console.log('Failed to send email', e);
+    // }
+    //
+    // try {
+    //   await orderService.sendSMS(order, generatedId);
+    // } catch (e) {
+    //   console.log('Failed to add SMS', e);
+    // }
+
+    return {id: generatedId, sum: order.total};
   }
 
   @Path('/order-ci')
@@ -321,6 +335,57 @@ export class OpenController {
         `insert into product_sort (${collectionOrCategory}, product, sort) values (${id}, ${sortData[i]}, ${i})`
       );
     }
+    return new SimpleResponseDto('ok');
+  }
+
+  @Path('/checkout-fondy-url/:id')
+  @GET
+  public async checkoutUrl(
+    @PathParam('id') id: string,
+  ): Promise<any> {
+    const crypto = require('crypto')
+    const shasum = crypto.createHash('sha1');
+    const resUrl = `${process.env.FONDY_REDIRECT}?id=${id}`;
+
+    const rawOrder = await getTypeormConnection().query(`select * from "order" where code = '${id}'`);
+    if (!rawOrder.length) throw new Error('order not found');
+
+
+    const data: any = {
+      "amount": rawOrder[0].total * 100,
+      "currency": "UAH",
+      "merchant_id": process.env.FONDY_MERCHANT,
+      "order_desc": "Tuba-Duba order",
+      "order_id": id,
+      "response_url": resUrl,
+    };
+
+    const v = [];
+    Object.keys(data).forEach(k => {
+      v.push(data[k]);
+    })
+    v.unshift(process.env.FONDY_KEY);
+    const str = v.join('|');
+    shasum.update(str);
+    const signature = shasum.digest('hex');
+    data.signature = signature;
+
+    const response = await axios.post('https://pay.fondy.eu/api/checkout/url/', {request:data}, {
+    });
+
+    return response.data;
+  }
+
+  @Path('/checkout-paid/:id')
+  @GET
+  public async checkoutPaid(
+    @PathParam('id') id: string,
+  ): Promise<any> {
+
+    await getTypeormConnection().query(`update "order" set payment_status='paid' where code = '${id}'`);
+    await orderService.sendEmailPayment(id);
+
+
     return new SimpleResponseDto('ok');
   }
 }

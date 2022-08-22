@@ -104,6 +104,42 @@ const sendEmail = async (order: any, generatedId: string) => {
   console.log('Message sent: %s', info.messageId);
 };
 
+
+const sendEmailPayment = async (generatedId: string) => {
+  let html = '';
+  let text = '';
+  const _T = i18n.t;
+
+  html =
+    _T(`<h3>[R:Спасибо! Мы получили оплату заказа # ${generatedId}!][U:Дякуємо, ми отримали сплату замовлення ${generatedId}!] </h3>`);
+  text =
+    _T(`[R:Спасибо! Мы получили оплату заказа # ${generatedId}!][U:Дякуємо, ми отримали сплату замовлення ${generatedId}!]`);
+
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: 'tubadubauk@gmail.com', // generated ethereal user
+      pass: process.env.GMAIL_PASSWD, // generated ethereal password
+    },
+  });
+  const info = await transporter.sendMail({
+    from: '"Tuba Duba Shop" <tubadubauk@gmail.com>', // sender address
+    to: 'tubadubauk@gmail.com', // list of receivers
+    subject: `Замовлення сплачене - ${generatedId}`, // Subject line
+    text: text, // plain text body
+    html: html, // html body
+  });
+  // const info = await transporter.sendMail({
+  //   from: '"Tuba Duba Shop" <tubadubauk@gmail.com>', // sender address
+  //   to: email, // list of receivers
+  //   subject: 'Оплата пройшла успішно ✔', // Subject line
+  //   text: text, // plain text body
+  //   html: html, // html body
+  // });
+  console.log('Message sent: %s', info.messageId);
+};
 const sendEmailCI = async (order: any, generatedId: string) => {
   let html = `Новая рега<br>`;
   Object.keys(order.data).forEach((key) => {
@@ -157,4 +193,4 @@ const sendSMS = async (order: any, generatedId: string) => {
   });
 };
 
-export { addToExcel, sendEmail, sendEmailCI, sendSMS };
+export { addToExcel, sendEmail, sendEmailCI, sendSMS, sendEmailPayment };

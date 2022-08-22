@@ -25,7 +25,18 @@ class OrderStore {
   }
 
   @action async send(payload: any) {
+    let total = 0;
+    this.cart.products.forEach(p => {
+      total += p.amount * p.price;
+    })
+    payload.total = total;
     return await client().post('/open/order', payload);
+  }
+  @action async getPaymentRedirect(id) {
+    return await client().get(`/open/checkout-fondy-url/${id}`);
+  }
+  @action async markAsPaid(id) {
+    return await client().get(`/open/checkout-paid/${id}`);
   }
 }
 

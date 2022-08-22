@@ -11,6 +11,7 @@ import { Product } from '@pdeals/models/entities/Product';
 import { Snippet } from '@pdeals/models/entities/Snippet';
 import { Fabric } from '@pdeals/models/entities/Fabric';
 import { Review } from '@pdeals/models/entities/Review';
+import { Order } from '@pdeals/models/entities/Order';
 
 export const EntityNameToEntityMapping: any = {
   user: User,
@@ -26,4 +27,5 @@ export const EntityNameToEntityMapping: any = {
   snippet: Snippet,
   fabric: Fabric,
   review: Review,
+  order: Order
 };
