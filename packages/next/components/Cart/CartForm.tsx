@@ -19,6 +19,7 @@ const CartForm = (props: IProps) => {
   const orderStore = props.orderStore!;
   const { cart } = orderStore;
   const [sending, setSending] = useState(false);
+  const [skipPay, setSkipPay] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
   const formOptions = {
@@ -36,7 +37,7 @@ const CartForm = (props: IProps) => {
     },
   };
   const { register: register1, handleSubmit: handleSubmit1, setValue, watch, reset, ...rest } = useForm(formOptions);
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: any, skip) => {
     if (!values.phone || !values.phone.trim()) {
       setError(i18n.t('[R:Введите телефон][U:Введіть телефон]'));
       return;
@@ -55,12 +56,15 @@ const CartForm = (props: IProps) => {
         cart: cart,
       });
       if (response && response.id) {
-        const redirect: any = await orderStore.getPaymentRedirect(response.id);
-        if (redirect?.response?.checkout_url) {
-          router.push(redirect?.response?.checkout_url);
+        if (skip) {
+          orderStore.clear();
+          router.push(`/checkout/thanks`);
+        } else {
+          const redirect: any = await orderStore.getPaymentRedirect(response.id);
+          if (redirect?.response?.checkout_url) {
+            router.push(redirect?.response?.checkout_url);
+          }
         }
-        // orderStore.clear();
-        // router.push(`/checkout/payment?id=${response.id}&amnt=${response.sum}`);
       } else {
         throw new Error('Please contact administrator :(');
       }
@@ -70,9 +74,12 @@ const CartForm = (props: IProps) => {
       setSending(false);
     }
   };
-  const handleSave = (event) => {
-    event.preventDefault();
-    handleSubmit1(onSubmit)();
+  const handleSave = (skip, event?) => {
+    if (event) {
+      event.preventDefault();
+    }
+    setSkipPay(skip);
+    handleSubmit1((v) => onSubmit(v, skip))();
   };
 
   const Input = getRenderer('text');
@@ -115,7 +122,7 @@ const CartForm = (props: IProps) => {
       <CardBody>
         <CartSmallPreview allData={props.uiStore!.allData} />
         <h2 style={{ marginLeft: '20px', marginTop: '10px' }}>{i18n.t('[U:Доставка][R:Доставка]')}</h2>
-        <Form onSubmit={handleSave} className="d-flex flex-wrap">
+        <Form onSubmit={() => {}} className="d-flex flex-wrap">
           <Input
             label={i18n.t(`[R:Имя][U:Ім'я] *`)}
             innerRef={register1({ required: true })}
@@ -192,14 +199,15 @@ const CartForm = (props: IProps) => {
           <div className="col-12">
             <Button
               color="primary"
-              type="submit"
+              type="button"
               size="lg"
               className={`order-button ${sending ? '' : ''}`}
               disabled={!!sending}
+              onClick={() => handleSave(false)}
             >
               {sending
                 ? i18n.t('[R:Шлем заказ...][U:Надсилаємо замовлення...]')
-                : i18n.t('[R:Оформить заказ][U:Оформити замовлення]')}
+                : i18n.t('[R:Оформить заказ][U:Оформити замовлення і сплатити]')}
             </Button>
             <Button
               color="secondary"
@@ -210,6 +218,19 @@ const CartForm = (props: IProps) => {
               onClick={goBack}
             >
               {i18n.t('[R:Отредактировать заказ][U:Відредагувати замовлення]')}
+            </Button>
+          </div>
+          <div className="col-12 mt-2">
+            <Button
+              size="sm"
+              color="primary"
+              className={`order-button ${sending ? '' : ''}`}
+              disabled={!!sending}
+              onClick={() => handleSave(true)}
+            >
+              {sending
+                ? i18n.t('[R:Шлем заказ...][U:Надсилаємо замовлення...]')
+                : i18n.t('[R:Хочу сплатити після спілкування з менеджером][U:Хочу сплатити після спілкування з менеджером]')}
             </Button>
           </div>
         </Form>
