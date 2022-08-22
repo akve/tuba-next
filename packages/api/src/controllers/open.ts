@@ -145,23 +145,23 @@ export class OpenController {
 
 
 
-    // try {
-    //   await orderService.addToExcel(order, generatedId);
-    // } catch (e) {
-    //   console.log('Failed to add to excel', e);
-    // }
-    //
-    // try {
-    //   await orderService.sendEmail(order, generatedId);
-    // } catch (e) {
-    //   console.log('Failed to send email', e);
-    // }
-    //
-    // try {
-    //   await orderService.sendSMS(order, generatedId);
-    // } catch (e) {
-    //   console.log('Failed to add SMS', e);
-    // }
+    try {
+      await orderService.addToExcel(order, generatedId);
+    } catch (e) {
+      console.log('Failed to add to excel', e);
+    }
+
+    try {
+      await orderService.sendEmail(order, generatedId);
+    } catch (e) {
+      console.log('Failed to send email', e);
+    }
+
+    try {
+      await orderService.sendSMS(order, generatedId);
+    } catch (e) {
+      console.log('Failed to add SMS', e);
+    }
 
     return {id: generatedId, sum: order.total};
   }
