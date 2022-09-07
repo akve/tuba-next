@@ -1,6 +1,9 @@
 const currentLang = () => {
-  if (typeof window === 'undefined') return 'ua';
-  return localStorage.getItem('lang') || 'ua';
+  return 'ua';
+  // if (typeof window === 'undefined') return 'ua';
+  // let r = localStorage.getItem('lang');
+  // if (!r || r=== 'ru') r = 'ua';
+  // return r; //localStorage.getItem('lang') || 'ua';
 };
 
 const setLang = (lang) => {
