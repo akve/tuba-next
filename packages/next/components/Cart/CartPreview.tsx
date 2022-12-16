@@ -6,6 +6,7 @@ import { resizeImage } from '@pdeals/next/utils/helpers';
 import { Button } from 'reactstrap';
 import { router } from 'next/client';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 interface IProps {
   orderStore?: OrderStore;
@@ -20,6 +21,33 @@ const CartPreview = (props: IProps) => {
     const p = find(allData.products, (r) => r.code === product.code);
     return p;
   };*/
+
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+
+    const items = [];
+    console.log('P', cart.products);
+    cart.products.forEach(p => {
+      items.push({
+        'item_name': `${i18n.t(p.name)}`,       // Name or ID is required.
+        'item_id': `${p.code}`,				  // id під яким товар лежить у базі
+        'price': `${p.pricediscount || p.price}`,
+        'item_brand': 'Tuba Duba',
+        'item_category': i18n.t('Сукня'),
+        'index': 1,
+        'quantity': `${p.amount}`
+      });
+    });
+
+    window.dataLayer.push({
+      'event': 'begin_checkout',
+      'ecommerce': {
+        items
+      }
+    });
+
+  }, []);
+
   const onRemove = (index) => {
     orderStore!.remove(index);
   };

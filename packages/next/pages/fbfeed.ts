@@ -33,14 +33,91 @@ const ROOT = 'https://tuba-duba.com';
 </rss>
 
 * */
+
+
+/*
+* <rss xmlns:g="http://base.google.com/ns/1.0" xmlns:c="http://base.google.com/cns/1.0" version="2.0">
+  <channel>
+    <title>
+      <![CDATA[ Unity Store ]]> <!-- Название магазина -->
+    </title>
+
+    <link>
+      <![CDATA[ https://whounity.com ]]> <!--ссылка на главную -->
+    </link>
+
+    <description>
+      <![CDATA[ живийсередзомбі ]]> <!--описание магазина (краткое) -->
+    </description>
+
+    <item>
+      <g:identifier_exists>
+      <![CDATA[ false ]]> <!-- Оставить как есть -->
+      </g:identifier_exists>
+
+      <g:id>
+      <![CDATA[ 8372 ]]> <!-- product_id как в базе данных  -->
+      </g:id>
+
+      <title>
+      <![CDATA[ <h1> ]]> <!-- meta_title. Если нету - h1  -->
+      </title>
+
+      <description>
+      <![CDATA[ meta description ]]>
+      </description>
+
+      <link>
+      <![CDATA[ https://whounity.com/product/the-north-face-steep-tech-logo-tee ]]> <!-- url продукта  -->
+      </link>
+
+      <g:product_type>
+      <![CDATA[ Футболки ]]> <!-- категория продука (предпоследнее свойство хлебной крошки)  -->
+      </g:product_type>
+
+      <g:image_link>
+      <![CDATA[ https://whounity.com/storage/product-images/315/1_532_532.png ]]> <!-- абсолютный url на картинку товара  -->
+      </g:image_link>
+
+
+      <!-- Циклом вывести все доп картинки. По одной картинке на тег <g:additional_image_link> -->
+      <g:additional_image_link>
+      <![CDATA[ https://whounity.com/storage/product-images/315/4.png ]]> <!-- абсолютный url на картинку дополнительную картинку товара. Каждый URL в новом теге additional_image_link  -->
+      </g:additional_image_link>
+
+      <g:condition>
+      <![CDATA[ New ]]> <!-- Оставить как есть  -->
+      </g:condition>
+
+      <g:availability>
+      <![CDATA[ in stock ]]> <!-- Оставить как есть  -->
+      </g:availability>
+
+      <g:price>
+      <![CDATA[ 540 UAH ]]> <!-- целое число, без делимитеров, через пробел, валюта UAH  -->
+      </g:price>
+
+      <g:brand>
+      <![CDATA[ The North Face ]]>
+      </g:brand>
+
+    </item>
+
+    <item>
+      ...
+    </item>
+  </channel>
+</rss>
+* */
 const safeXml = (s) => {
   if (!s) return s;
-  return i18n
+  return `<![CDATA[ ` + i18n
     .t(s)
     .replace(/&nbsp;/g, ' ')
     .replace(/(<([^>]+)>)/gi, ' ')
     .replace(/>/g, '&gt;')
-    .replace(/</g, '&lt;');
+    .replace(/</g, '&lt;')
+    + ` ]]>`;
 };
 const getImage = (p, showAll?: boolean) => {
   const res = p.data.images && p.data.images.length ? p.data.images[0].image : '';
@@ -58,11 +135,13 @@ const getImage = (p, showAll?: boolean) => {
 };
 const sitemapXML = async () => {
   let res = `<?xml version="1.0"?>
-<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+<rss xmlns:g="http://base.google.com/ns/1.0" xmlns:c="http://base.google.com/cns/1.0" version="2.0">
 <channel>
-<title>Tuba-Duba Store</title>
-<link>https://tuba-duba.com</link>
-<description>Tuba-Duba store products</description>
+<title>
+      <![CDATA[ Tuba-Duba Store ]]> <!-- Название магазина -->
+</title>
+<link><![CDATA[ https://tuba-duba.com ]]></link>
+<description><![CDATA[ Tuba-Duba store products ]]></description>
   `;
   const alldata: any = await client().get('/open/alldata');
   alldata.products = sortBy(alldata.products, (r) => {
@@ -87,10 +166,12 @@ const sitemapXML = async () => {
     if (p.code !== 'DELETE-ME') {
       res += `
       <item>
-      <g:id>tuba_duba_${p.code}</g:id>
+      <g:identifier_exists>${safeXml('false')}</g:identifier_exists>
+      <g:id>${safeXml('tuba_duba_' + p.code)}</g:id>
       <g:title>${safeXml(p.name)}</g:title>
       <g:description>${safeXml(p.description || p.name)}</g:description>
       <g:link>${ROOT}/product/${p.code}</g:link>
+      <g:product_type>${safeXml('woman dresses')}</g:product_type>
       <g:image_link>${getImage(p)}</g:image_link>
       <g:additional_image_link>${getImage(p, true)}</g:additional_image_link>
       <g:brand>Tuba-Duba</g:brand>

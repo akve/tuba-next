@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from '@pdeals/next/elements/NextLink';
 import { useRouter, withRouter } from 'next/router';
@@ -53,9 +53,43 @@ function ProductContent(props: IProps) {
     return null;
   };
 
+  const fbEffect = (event) => {
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    const p = product.product;
+    // console.log(window._breadcrumbs);
+    let category = 'Плаття';
+    if (window._breadcrumbs && window._breadcrumbs.length) {
+      category = window._breadcrumbs[0].title
+    }
+
+
+    // @ts-ignore
+    window.dataLayer.push({
+      'event': event,
+      'ecommerce': {
+        'items': [
+          {
+            'item_name': `${i18n.t(p.name)}`,       // Name or ID is required.
+            'item_id': `${p.code}`,				  // id під яким товар лежить у базі
+            'price': `${p.pricediscount || p.price}`,
+            'item_brand': 'Tuba Duba',
+            'item_category': i18n.t(category),
+            'index': 1,
+            'quantity': '1'
+          }]
+      }
+    });
+  }
+
+  useEffect(()=> {
+    fbEffect('view_item');
+  }, [])
+
   const onAddToCart = (buyImmediately?: boolean) => {
     console.log('S', size);
     const p = product.product;
+    fbEffect('add_to_cart');
     props.orderStore!.putToCart({
       image: `${p.image || p.data.images[0].image}`,
       name: `${p.name}`,

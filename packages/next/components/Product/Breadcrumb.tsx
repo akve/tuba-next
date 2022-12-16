@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import Link from '@pdeals/next/elements/NextLink';
 import { useRouter, withRouter } from 'next/router';
 import classnames from 'classnames';
@@ -102,6 +102,9 @@ function Breadcrumb(props: IProps) {
     return res;
   };
   const bc = calculateBreadcrumbs();
+  useEffect(() =>{
+    window._breadcrumbs = bc;
+  })
 
   const mainText = () => {
     if (router.asPath === '/category/featured/' || router.asPath === '/') return i18n.t('[U:Актуальне][R:Актуальное]');

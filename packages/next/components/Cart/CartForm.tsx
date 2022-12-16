@@ -36,7 +36,37 @@ const CartForm = (props: IProps) => {
       delivery_warehouse: '',
     },
   };
+
   const { register: register1, handleSubmit: handleSubmit1, setValue, watch, reset, ...rest } = useForm(formOptions);
+
+  const addFBPixel = (id) => {
+    window.dataLayer = window.dataLayer || [];
+
+    const items = [];
+    console.log('P', cart.products);
+    cart.products.forEach(p => {
+      items.push({
+        'item_name': `${i18n.t(p.name)}`,       // Name or ID is required.
+        'item_id': `${p.code}`,				  // id під яким товар лежить у базі
+        'price': `${p.pricediscount || p.price}`,
+        'item_brand': 'Tuba Duba',
+        'item_category': i18n.t('Сукня'),
+        'index': 1,
+        'quantity': `${p.amount}`
+      });
+    });
+
+    window.dataLayer.push({
+      'event': 'purchase',
+      'ecommerce': {
+        'transaction_id': `${id}`,
+        'value': total,						  // Тотал по замовленню
+        'currency': 'UAH',
+        items
+      }
+    });
+  }
+
   const onSubmit = async (values: any, skip) => {
     if (!values.phone || !values.phone.trim()) {
       setError(i18n.t('[R:Введите телефон][U:Введіть телефон]'));
@@ -55,7 +85,9 @@ const CartForm = (props: IProps) => {
         lang: i18n.currentLang(),
         cart: cart,
       });
+
       if (response && response.id) {
+        addFBPixel(response.id);
         if (skip) {
           orderStore.clear();
           router.push(`/checkout/thanks`);
