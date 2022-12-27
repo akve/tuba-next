@@ -45,6 +45,7 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
+          <noscript dangerouslySetInnerHTML={{__html:`<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6F26DG" height="0" width="0" style="display:none;visibility:hidden"></iframe>`}}/>
           <div id="page-transition"></div>
           <Main />
           <NextScript />
