@@ -117,6 +117,11 @@ const CartForm = (props: IProps) => {
   const Input = getRenderer('text');
   const Radio = getRenderer('radio');
   const deliveryType = watch('delivery_type');
+  const email = watch('email');
+  if (typeof window !== 'undefined' && email) {
+    console.log('E', email);
+    localStorage.setItem('capi_client_email', email);
+  }
   const Dropdown = getRenderer('asyncdropdown');
 
   const total = cart.products.reduce((sum, product) => sum + product.price * product.amount, 0);
