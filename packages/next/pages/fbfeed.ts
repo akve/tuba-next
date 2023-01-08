@@ -179,7 +179,7 @@ const sitemapXML = async () => {
       <g:availability>in stock</g:availability>
       <g:price>${p.price} UAH</g:price>
       ${salePrice}
-      <g:google_product_category>Clothing &amp; Accessories &gt; Clothing &gt;   Dresses</g:google_product_category>
+      <g:google_product_category>2271</g:google_product_category>
       </item>
       `;
     }
