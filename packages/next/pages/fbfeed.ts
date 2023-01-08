@@ -120,6 +120,9 @@ const safeXml = (s) => {
     + ` ]]>`;
 };
 const getImage = (p, showAll?: boolean) => {
+  if (p.code === 'ubasquare') {
+    console.log('P', p.data.images);
+  }
   const res = p.data.images && p.data.images.length ? p.data.images[0].image : '';
   if (!res) return `${ROOT}/assets/img/main.jpg`;
   if (showAll) {
@@ -178,6 +181,10 @@ const sitemapXML = async () => {
       <g:condition>new</g:condition>
       <g:availability>in stock</g:availability>
       <g:price>${p.price} UAH</g:price>
+      <g:age_group>adult</g:age_group>
+      <g:gender>female</g:gender>
+      <g:color>variety</g:color>
+      <g:size>Custom fit</g:size>
       ${salePrice}
       <g:google_product_category>2271</g:google_product_category>
       </item>
