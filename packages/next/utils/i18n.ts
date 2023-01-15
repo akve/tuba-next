@@ -1,9 +1,9 @@
 const currentLang = () => {
-  return 'ua';
-  // if (typeof window === 'undefined') return 'ua';
-  // let r = localStorage.getItem('lang');
-  // if (!r || r=== 'ru') r = 'ua';
-  // return r; //localStorage.getItem('lang') || 'ua';
+  // return 'ua';
+  if (typeof window === 'undefined') return 'ua';
+  let r = localStorage.getItem('lang');
+  if (!r || r === 'ru') r = 'ua';
+  return r; //localStorage.getItem('lang') || 'ua';
 };
 
 const setLang = (lang) => {
@@ -11,11 +11,15 @@ const setLang = (lang) => {
 };
 
 const t = (s: string, leaveHtml?: boolean) => {
-  const l = currentLang();
+  let l = currentLang();
   if (!s) return s;
   const regex = /\[(R|U|E):(.*?)\]/gs;
   let m: any = null;
   let removed = false;
+  if (l === 'en' && s.indexOf('[E') < 0) {
+    // fallback to UA :(
+    l = 'ua';
+  }
   while (s.match(regex)) {
     m = s.match(regex);
     removed = false;

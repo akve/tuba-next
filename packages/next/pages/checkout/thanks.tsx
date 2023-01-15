@@ -38,9 +38,9 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, orderSto
   return (
     <NormalLayout>
       <div className="d-flex w-100 justify-content-center flex-column align-items-center pt-100 pb-100">
-        <h1>{i18n.t('[R:Спасибо за заказ!][U:Дякуємо за замовлення!]')}</h1>
+        <h1>{i18n.t('[E:Thanks for your order!][R:Спасибо за заказ!][U:Дякуємо за замовлення!]')}</h1>
         <div>
-          {i18n.t("[R:Наш менеджер очень скоро свяжется с вами][U:Наші менеджери вже дуже скоро зв'яжуться з вами]")}
+          {i18n.t("[E:Our manager will contact you soon][R:Наш менеджер очень скоро свяжется с вами][U:Наші менеджери вже дуже скоро зв'яжуться з вами]")}
         </div>
       </div>
     </NormalLayout>

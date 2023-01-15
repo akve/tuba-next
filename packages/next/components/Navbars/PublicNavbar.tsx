@@ -66,9 +66,9 @@ function PublicNavbar(props: IProps) {
                   </Link>
                 )}
               </div>
-              {/*<span>*/}
-              {/*  <a onClick={() => onChangeLang('ru')}>Рус</a> | <a onClick={() => onChangeLang('ua')}>Укр</a>*/}
-              {/*</span>*/}
+              <span>
+                <a onClick={() => onChangeLang('en')}>Eng</a> | <a onClick={() => onChangeLang('ua')}>Укр</a>
+              </span>
             </div>
           </Container>
           <Container className="px-1">

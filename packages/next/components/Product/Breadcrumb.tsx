@@ -107,8 +107,8 @@ function Breadcrumb(props: IProps) {
   })
 
   const mainText = () => {
-    if (router.asPath === '/category/featured/' || router.asPath === '/') return i18n.t('[U:Актуальне][R:Актуальное]');
-    return 'Каталог';
+    if (router.asPath === '/category/featured/' || router.asPath === '/') return i18n.t('[E:Actual][U:Актуальне][R:Актуальное]');
+    return i18n.t('[E:Catalog][U:Каталог]');
   };
 
   return (

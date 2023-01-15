@@ -30,7 +30,7 @@ const CartPreview = (props: IProps) => {
 
   return (
     <>
-      <h2 style={{ marginLeft: '20px' }}>{i18n.t('[U:Ваше замовлення][R:Ваш заказ]')}</h2>
+      <h2 style={{ marginLeft: '20px' }}>{i18n.t('[E:Your order][U:Ваше замовлення][R:Ваш заказ]')}</h2>
       <div className="div-cart-small">
         {cart.products.map((product, index) => (
           <div className="d-flex flex-column" key={`${index}`}>
@@ -38,11 +38,11 @@ const CartPreview = (props: IProps) => {
               <div style={{ marginLeft: '20px' }}>
                 <b className="text-right mr-10">{i18n.t(product.name)}</b>
                 <br />
-                {i18n.t('[R:Цвет][U:Колір]')}: <b>{i18n.t(product.color || '')}</b>, {i18n.t('[R:Размер][U:Розмір]')}:{' '}
+                {i18n.t('[E:Color][R:Цвет][U:Колір]')}: <b>{i18n.t(product.color || '')}</b>, {i18n.t('[E:Size][R:Размер][U:Розмір]')}:{' '}
                 <b>{product.size}</b>
                 <div>
-                  <b>{product.price}</b> грн,
-                  <b>{product.amount}</b> од.
+                  <b>{product.price}</b> {i18n.t('[E:UAH][R:Цвет][U:грн]')},
+                  <b>{product.amount}</b> ${i18n.t('[E:pcs][U:од]')}.
                 </div>
               </div>
             </div>

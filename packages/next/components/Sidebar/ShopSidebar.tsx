@@ -8,6 +8,7 @@ import { filter } from 'lodash';
 import { t } from '../../utils/i18n';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Router from 'next/router';
+import i18n from '@pdeals/next/lib/i18n';
 //import Plus from '../../assets/img/plus.svg';
 //import Minus from '../../assets/img/minus.svg';
 
@@ -206,7 +207,7 @@ class ShopSidebar extends React.Component<IProps, any> {
             >
               <>
                 <i className="ni ni-bag-17" />
-                <a id="topshop"> Каталог</a>
+                <a id="topshop"> {t('[E:Catalog][U:Каталог]')}</a>
                 <Popover
                   placement={'bottom'}
                   isOpen={this.state.popoverOpen}
@@ -214,7 +215,7 @@ class ShopSidebar extends React.Component<IProps, any> {
                   toggle={this.setPopoverOpen}
                   style={{ minWidth: '250px' }}
                 >
-                  <PopoverHeader>Каталог</PopoverHeader>
+                  <PopoverHeader>{t('[E:Catalog][U:Каталог]')}</PopoverHeader>
                   <PopoverBody>
                     <Nav navbar>{this.createLinks(routes)}</Nav>
                   </PopoverBody>

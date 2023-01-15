@@ -12,6 +12,11 @@ export type Response<T = {}> = (...args: any) => Promise<T>;
 
 export type Config = Pick<AxiosRequestConfig, 'baseURL' | 'cancelToken' | 'headers'>;
 
+let __get = null;
+const __cache = {};
+
+const CACHE_TIME = 10*60*1000; // 10 mins
+
 class ClientParams {
   skipHandleErrors?: boolean = false;
   responseTypeIsBlob?: boolean = false;
@@ -23,7 +28,7 @@ const internalClient = (params?: ClientParams) => {
   const isServer = typeof window === 'undefined';
   const token = isServer ? '' : window.localStorage.getItem('token') || window.sessionStorage.getItem('token');
   const store = getStore();
-  console.log('?', API_URL);
+  // console.log('?', API_URL);
   const client = axios.create({
     baseURL: API_URL,
     headers: {
@@ -35,6 +40,23 @@ const internalClient = (params?: ClientParams) => {
     },
     responseType: params && params.responseTypeIsBlob ? 'blob' : 'json',
   });
+
+  if (isServer) {
+    __get = client.get;
+
+    client.get = async (url) => {
+      if (__cache[url] && (new Date().getTime() - __cache[url].time) < CACHE_TIME) {
+        console.log('Cache hit', url);
+        return __cache[url].data;
+      }
+      // @ts-ignore
+      const result = await __get(url);
+      __cache[url] = { time: new Date().getTime(), data: result };
+      return result;
+    }
+  }
+
+
 
   client.interceptors.response.use(
     (response) => {

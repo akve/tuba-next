@@ -83,10 +83,10 @@ function ProductsList(props: IProps) {
                       <span className="strikeover">{product.price}</span> {product.pricediscount} грн
                     </>
                   )}
-                  {!product.pricediscount && <>{product.price} грн</>}
+                  {!product.pricediscount && <>{product.price} грн/UAH</>}
                 </div>
                 <button className="btn btn-outline-secondary" onClick={() => onAddToCart(product)}>
-                  {i18n.t('[R:Детальнее][U:Детальнiше]')}
+                  {i18n.t('[E:Details][R:Детальнее][U:Детальнiше]')}
                 </button>
               </div>
             </Card>

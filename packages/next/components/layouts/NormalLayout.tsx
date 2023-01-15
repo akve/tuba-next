@@ -9,10 +9,10 @@ import * as i18n from '@pdeals/next/utils/i18n';
 const NormalLayout: React.FunctionComponent<any> = (props) => {
   const router = useRouter();
   const links = [
-    { href: '/category/featured', title: 'Каталог' },
-    { href: '/info/otzyvy', title: t('[R:Отзывы][U:Відгуки]') },
-    { href: '/info/contacts', title: t('[R:Контакты][U:Контакти]') },
-    { href: '/info/onas', title: t('[R:О нас][U:Про нас]') },
+    { href: '/category/featured', title: t('[E:Catalog][U:Каталог]') },
+    { href: '/info/otzyvy', title: t('[E:Reviews][R:Отзывы][U:Відгуки]') },
+    { href: '/info/contacts', title: t('[E:Contacts][R:Контакты][U:Контакти]') },
+    { href: '/info/onas', title: t('[E:About us][R:О нас][U:Про нас]') },
   ];
 
   return (
@@ -102,18 +102,23 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
         <div className="container">
           <div className="row align-items-center justify-content-xl-between">
             <div className="col-xl-6">
-              <div className="copyright text-center text-xl-left text-muted">&copy; 2021 Tuba-Duba</div>
+              <div className="copyright text-center text-xl-left text-muted">&copy; 2021-2023 Tuba-Duba</div>
             </div>
             <div className="col-xl-6">
               <ul className="nav nav-footer justify-content-center justify-content-xl-end">
                 <li className="nav-item">
                   <a href="/info/dostavka/" className="nav-link">
-                    {t('[R:Доставка и оплата][U:Доставка та оплата]')}
+                    {t('[E:Delivery and payment][R:Доставка и оплата][U:Доставка та оплата]')}
                   </a>
                 </li>
                 <li className="nav-item">
                   <a href="/info/vozvrat/" className="nav-link">
-                    {t('[R:Обмен и возврат][U:Обмін та повернення]')}
+                    {t('[E:Return][R:Обмен и возврат][U:Обмін та повернення]')}
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="/info/policy/" className="nav-link">
+                    {t('[E:Privacy policy][U:Політика конфіденційності]')}
                   </a>
                 </li>
                 <li className="nav-item">

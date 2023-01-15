@@ -69,11 +69,11 @@ const CartForm = (props: IProps) => {
 
   const onSubmit = async (values: any, skip) => {
     if (!values.phone || !values.phone.trim()) {
-      setError(i18n.t('[R:Введите телефон][U:Введіть телефон]'));
+      setError(i18n.t('[E:Enter phone][R:Введите телефон][U:Введіть телефон]'));
       return;
     }
     if (values.delivery_type === 'np' && !values.delivery_warehouse) {
-      setError(i18n.t('[R:Выберите отделение НП][U:Оберіть відділення НП]'));
+      setError(i18n.t('[E:choose delivery with Nova Poshta][R:Выберите отделение НП][U:Оберіть відділення НП]'));
       return;
     }
     values.delivery = values.delivery_warehouse;
@@ -161,43 +161,43 @@ const CartForm = (props: IProps) => {
         <h2 style={{ marginLeft: '20px', marginTop: '10px' }}>{i18n.t('[U:Доставка][R:Доставка]')}</h2>
         <Form onSubmit={() => {}} className="d-flex flex-wrap">
           <Input
-            label={i18n.t(`[R:Имя][U:Ім'я] *`)}
+            label={i18n.t(`[E:Name][R:Имя][U:Ім'я] *`)}
             innerRef={register1({ required: true })}
             name="firstName"
             class="col-12 col-lg-6"
           />
           <Input
-            label={i18n.t(`[R:Фамилия][U:Прізвище] *`)}
+            label={i18n.t(`[E:Surname][R:Фамилия][U:Прізвище] *`)}
             innerRef={register1({ required: true })}
             name="lastName"
             class="col-12 col-lg-6"
           />
           <Input
-            label={i18n.t(`[R:E-mail][U:E-mail] *`)}
+            label={i18n.t(`[E:E-mail][R:E-mail][U:E-mail] *`)}
             innerRef={register1({ required: true })}
             name="email"
             class="col-12 col-lg-6"
           />
           <Input
-            label={i18n.t(`[R:Телефон][U:Телефон] *`)}
+            label={i18n.t(`[E:Phone][R:Телефон][U:Телефон] *`)}
             innerRef={register1({ required: true })}
             name="phone"
             class="col-12 col-lg-6"
           />
           <h4 className="w-100" style={{ marginLeft: '20px' }}>
-            {i18n.t('Доставка')}
+            {i18n.t('[E:Delivery][U:Доставка]')}
           </h4>
           <div className="d-flex w-50">
             <Radio
               name="delivery_type"
-              label={i18n.t(`[R:Новая почта][U:Нова Пошта]`)}
+              label={i18n.t(`[E:Nova Poshta][R:Новая почта][U:Нова Пошта]`)}
               innerRef={register1({ required: true })}
               class="col-6"
               value="np"
             ></Radio>
             <Radio
               name="delivery_type"
-              label={i18n.t(`[R:Что-то другое(в комментарии)][U:Щось інше (в комментарі)]`)}
+              label={i18n.t(`[E:Other (leave in comments)][R:Что-то другое(в комментарии)][U:Щось інше (в комментарі)]`)}
               innerRef={register1({ required: true })}
               class="col-6"
               value="other"
@@ -205,9 +205,9 @@ const CartForm = (props: IProps) => {
           </div>
           {deliveryType === 'np' && (
             <div className="w-100" style={{ marginLeft: '15px', marginBottom: '15px' }}>
-              <Input label={i18n.t(`[R:city][U:city]`)} innerRef={register1()} name="city" class="d-none" />
+              <Input label={i18n.t(`[E:city][R:city][U:city]`)} innerRef={register1()} name="city" class="d-none" />
               <Dropdown
-                label={i18n.t('[R:Город][U:Місто]')}
+                label={i18n.t('[E:City / Coountry][R:Город][U:Місто]')}
                 name={`delivery_np`}
                 innerRef={register1({})}
                 options={getNPAreaOptions()}
@@ -217,7 +217,7 @@ const CartForm = (props: IProps) => {
                 }}
               />
               <Dropdown
-                label={i18n.t('[R:Отделение][U:Вiддiлення]')}
+                label={i18n.t('[E: Warehouse / other][R:Отделение][U:Вiддiлення]')}
                 name={`delivery_warehouse`}
                 innerRef={register1({})}
                 options={getNPWHOptions()}
@@ -227,7 +227,7 @@ const CartForm = (props: IProps) => {
             </div>
           )}
           <Input
-            label={i18n.t(`[R:Комментарии][U:Коментар]`)}
+            label={i18n.t(`[E:Comments][R:Комментарии][U:Коментар]`)}
             innerRef={register1({ required: false })}
             name="comments"
             class="col-12"
@@ -243,8 +243,8 @@ const CartForm = (props: IProps) => {
               onClick={() => handleSave(false)}
             >
               {sending
-                ? i18n.t('[R:Шлем заказ...][U:Надсилаємо замовлення...]')
-                : i18n.t('[R:Оформить заказ][U:Оформити замовлення і сплатити]')}
+                ? i18n.t('[E:Sending...][R:Шлем заказ...][U:Надсилаємо замовлення...]')
+                : i18n.t('[E:Confirm order][R:Оформить заказ][U:Оформити замовлення і сплатити]')}
             </Button>
             <Button
               color="secondary"
@@ -254,7 +254,7 @@ const CartForm = (props: IProps) => {
               disabled={!!sending}
               onClick={goBack}
             >
-              {i18n.t('[R:Отредактировать заказ][U:Відредагувати замовлення]')}
+              {i18n.t('[E:Edit order][R:Отредактировать заказ][U:Відредагувати замовлення]')}
             </Button>
           </div>
           <div className="col-12 mt-2">
@@ -266,8 +266,8 @@ const CartForm = (props: IProps) => {
               onClick={() => handleSave(true)}
             >
               {sending
-                ? i18n.t('[R:Шлем заказ...][U:Надсилаємо замовлення...]')
-                : i18n.t('[R:Хочу сплатити після спілкування з менеджером][U:Хочу сплатити після спілкування з менеджером]')}
+                ? i18n.t('[E:Sending the order][R:Шлем заказ...][U:Надсилаємо замовлення...]')
+                : i18n.t('[E:I want to pay after talking with a manager][R:Хочу сплатити після спілкування з менеджером][U:Хочу сплатити після спілкування з менеджером]')}
             </Button>
           </div>
         </Form>

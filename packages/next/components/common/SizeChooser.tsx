@@ -43,7 +43,7 @@ function SizeChooser(props: IProps) {
       { label: '54', value: '54' },
       { label: '56', value: '56' },
       { label: '58', value: '58' },
-      { value: 'custom', label: i18n.t('[R:По меркам][U:За моїми мірками]') },
+      { value: 'custom', label: i18n.t('[E:my measurements][R:По меркам][U:За моїми мірками]') },
     ],
   };
 
@@ -60,7 +60,7 @@ function SizeChooser(props: IProps) {
           onChange={(e) => props.onChange(e)}
         />
         <Button outline size="sm" className="button-smaller" onClick={toggle}>
-          {i18n.t('[R:Таблица размеров][U:Таблиця розмірів]')}
+          {i18n.t('[E:Sizes table][R:Таблица размеров][U:Таблиця розмірів]')}
         </Button>
       </div>
       <Collapse isOpen={isOpen}>

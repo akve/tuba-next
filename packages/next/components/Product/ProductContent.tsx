@@ -196,13 +196,13 @@ function ProductContent(props: IProps) {
         )}
         {!product.product.description && (
           <div className="content">
-            <p>{i18n.t('[R:Шьем по вашим меркам][U:Шиємо за вашими мірочками]')}</p>
+            <p>{i18n.t('[E:We sew according to your measurements][R:Шьем по вашим меркам][U:Шиємо за вашими мірочками]')}</p>
           </div>
         )}
         <hr />
         <div className="order-wrapper">
           <AmountChooser value={amount} onChange={(v) => setAmount(v)} />
-          <h4>{i18n.t('[U:Розмір][R:Размер]')}</h4>
+          <h4>{i18n.t('[E:Size][U:Розмір][R:Размер]')}</h4>
           <SizeChooser
             value={size}
             onChange={(v) => {
@@ -211,7 +211,7 @@ function ProductContent(props: IProps) {
             }}
             onOpenModal={props.onOpenModal}
           />
-          <h4>{i18n.t('[U:Колiр][R:Цвет]')}</h4>
+          <h4>{i18n.t('[E:Color][U:Колiр][R:Цвет]')}</h4>
           <ColorChooser product={product} value={color} onChange={(v) => setColor(v)} onOpenModal={props.onOpenModal} />
           {/*
         <button className="btn btn-secondary" onClick={() => onAddToCart()}>
@@ -219,7 +219,7 @@ function ProductContent(props: IProps) {
         </button>
         */}
           <button className="btn btn-primary" onClick={() => onAddToCart(true)}>
-            {i18n.t('[R:Купить][U:Купити]')}
+            {i18n.t('[E:Buy][R:Купить][U:Купити]')}
           </button>
         </div>
         <hr />
