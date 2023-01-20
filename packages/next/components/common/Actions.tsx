@@ -137,10 +137,8 @@ export const EditItem = memo(({ params, data }: IActionProps) => (
 ));
 
 export const ViewItem = memo(({ data, params }: IActionProps) => (
-  <Link href={`${params.uiUrlPrefix}/view/[id]`} as={`${params.uiUrlPrefix}/view/${data.id}`}>
-    <a title="View" className="btn btn-primary btn-sm">
+  <Link href={`${params.uiUrlPrefix}/view/[id]`} as={`${params.uiUrlPrefix}/view/${data.id}`} title="View" className="btn btn-primary btn-sm">
       <i className="ni ni-collection small" />
-    </a>
   </Link>
 ));
 

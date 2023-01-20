@@ -67,7 +67,7 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
                   <div className="main-menu">
                     {links.map((link, index) => (
                       <Link href={link.href} key={`${index}`}>
-                        <a href={link.href}>{link.title}</a>
+                        {link.title}
                       </Link>
                     ))}
                   </div>

@@ -59,8 +59,7 @@ function ProductsList(props: IProps) {
         {productsList.map((product) => (
           <div className="col-lg-4 col-xs-12 product-item" key={`${product.code}`}>
             <Card className="">
-              <Link href={`/product/${product.code}?from=${category}`}>
-                <a href={`/product/${product.code}?from=${category}`} className="card-img-top">
+              <Link href={`/product/${product.code}?from=${category}`} className="card-img-top">
                   <Image
                     src={resizeImage(product.image, 'list') || '/assets/img/logo.png'}
                     alt={i18n.t(product.name)}
@@ -69,13 +68,10 @@ function ProductsList(props: IProps) {
                     width={350}
                     layout={'responsive'}
                   />
-                </a>
               </Link>
               <div className="card-body text-center">
                 <Link href={`/product/${product.code}?from=${category}`}>
-                  <a href={`/product/${product.code}?from=${category}`}>
                     <h4>{i18n.t(product.name)}</h4>
-                  </a>
                 </Link>
                 <div className="text-muted price-text">
                   {!!product.pricediscount && (

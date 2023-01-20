@@ -43,10 +43,8 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, orderSto
         <div className="d-flex w-100 justify-content-center flex-column align-items-center pt-100 pb-100">
           <div>{i18n.t('[E:Cart empty :(][R:Корзина пуста :(][U:Корзина пуста]')}</div>
           <div>
-            <Link href={'/category/featured'}>
-              <a className="btn btn-outline-default" href="/">
+            <Link href={'/category/featured'} className="btn btn-outline-default" >
                 {i18n.t('[E:Back to shop][R:В магазин][U:До магазину]')}
-              </a>
             </Link>
           </div>
         </div>

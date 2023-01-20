@@ -63,10 +63,8 @@ const Breadcrumb: FC<Props> = (props) => {
   return (
     <BreadcrumbItem>
       {data.link ? (
-        <Link href={data.link}>
-          <a href={data.link} onClick={handleClick}>
+        <Link href={data.link} onClick={handleClick}>
             {data.icon ? <i className={data.icon} /> : data.title}
-          </a>
         </Link>
       ) : (
         <span style={{ color: 'white' }}>{data.icon ? <i className={data.icon} /> : data.title}</span>

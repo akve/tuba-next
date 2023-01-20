@@ -129,10 +129,8 @@ export const URLCell = (link) => {
   if (!link) return null;
 
   return (
-    <Link href={link}>
-      <a href={link} target="_blank">
+    <Link href={link} target="_blank">
         {link}
-      </a>
     </Link>
   );
 };

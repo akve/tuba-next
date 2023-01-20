@@ -58,11 +58,9 @@ function PublicNavbar(props: IProps) {
               <div className="top-cart">
                 {productsInCart === 0 && <i className="ni ni-cart" />}
                 {productsInCart > 0 && (
-                  <Link href="/checkout">
-                    <a href="/checkout" style={{ display: 'flex' }}>
+                  <Link href="/checkout" style={{ display: 'flex' }}>
                       <img src="/assets/img/cart.svg" width="20" height="20" />
                       <span>{productsInCart}</span>
-                    </a>
                   </Link>
                 )}
               </div>

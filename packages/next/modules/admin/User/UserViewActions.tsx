@@ -10,10 +10,8 @@ export const ViewPokerDealsAction = () => {
   const userId = getId(router);
 
   return (
-    <Link href={`/admin/users/deals/${userId}`}>
-      <a className="btn btn-outline-default btn-sm" href={`/admin/users/deals/${userId}`}>
+    <Link href={`/admin/users/deals/${userId}`} className="btn btn-outline-default btn-sm">
         View Accounts
-      </a>
     </Link>
   );
 };
@@ -43,10 +41,8 @@ export const ViewEarningsAction = () => {
   const userId = getId(router);
 
   return (
-    <Link href={`/admin/users/earnings/${userId}`}>
-      <a className="btn btn-outline-default btn-sm" href={`/admin/users/earnings/${userId}`}>
+    <Link href={`/admin/users/earnings/${userId}`} className="btn btn-outline-default btn-sm" >
         View Earnings
-      </a>
     </Link>
   );
 };

@@ -115,14 +115,14 @@ function Breadcrumb(props: IProps) {
     <div className="breadcrumb-wrapper">
       <div className="breadcrumb">
         <Link href="/category/featured">
-          <a href="/category/featured">{mainText()}</a>
+          {mainText()}
         </Link>
         {bc.map((row: any, index) => (
           <span key={`${index}`}>
             <span>&nbsp;&gt;&nbsp;</span>
             {!!row.link && (
               <Link href={row.link}>
-                <a href={row.link}>{(row.title || '').replace('<br>', ': ')}</a>
+                {(row.title || '').replace('<br>', ': ')}
               </Link>
             )}
             {!row.link && (
