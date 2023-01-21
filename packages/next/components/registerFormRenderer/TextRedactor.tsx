@@ -6,13 +6,13 @@ import dynamic from 'next/dynamic';
 
 const importJodit = () => import('jodit-react');
 
-const JoditEditor = dynamic(importJodit, {
-  ssr: false,
-});
 
 import { registerRenderer } from './index';
 
 const TextRedactor = (props) => {
+  const JoditEditor = dynamic(importJodit, {
+    ssr: false,
+  });
   const editor = useRef(null);
   const [content, setContent] = useState(props.initialValue);
 

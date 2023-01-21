@@ -36,7 +36,7 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, orderSto
   uiStore.setAllData(alldata);
   orderStore!.clear();
   return (
-    <NormalLayout>
+    <NormalLayout structure={alldata}>
       <div className="d-flex w-100 justify-content-center flex-column align-items-center pt-100 pb-100">
         <h1>{i18n.t('[E:Thanks for your order!][R:Спасибо за заказ!][U:Дякуємо за замовлення!]')}</h1>
         <div>

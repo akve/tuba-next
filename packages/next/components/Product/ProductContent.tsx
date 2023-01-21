@@ -17,7 +17,8 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
-import { find } from 'lodash';
+import find from 'lodash/find';
+
 import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
 import OrderStore from '@pdeals/next/stores/orderStore';

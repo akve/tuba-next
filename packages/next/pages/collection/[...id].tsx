@@ -23,7 +23,7 @@ const IndexPage: React.FunctionComponent<any> = ({ structure, list, id }) => {
   getStore().uiStore.setAllData(structure);
   console.log('Rendering now', id, new Date());
   return (
-    <NormalLayout>
+    <NormalLayout  structure={structure}>
       <div className="col-lg-2 d-none d-lg-block d-xl-block">
         <ShopSidebar currentRoute={id} />
       </div>

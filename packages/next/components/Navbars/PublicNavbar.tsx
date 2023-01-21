@@ -26,6 +26,7 @@ import OrderStore from '@pdeals/next/stores/orderStore';
 interface IProps {
   uiStore?: UiStore;
   orderStore?: OrderStore;
+  structure?: any;
 }
 function PublicNavbar(props: IProps) {
   const { uiStore } = props;
@@ -46,9 +47,7 @@ function PublicNavbar(props: IProps) {
         <div>
           <Link href="/">
             <span>
-              <NavbarBrand href="/">
                 <img alt="Tuba-Duba" src="/assets/img/logo-top3.png" width="240" style={{ opacity: 1 }} />
-              </NavbarBrand>
             </span>
           </Link>
         </div>
@@ -56,13 +55,10 @@ function PublicNavbar(props: IProps) {
           <Container className="px-1">
             <div className="nav-top-line" style={{ marginLeft: 'auto' }}>
               <div className="top-cart">
-                {productsInCart === 0 && <i className="ni ni-cart" />}
-                {productsInCart > 0 && (
                   <Link href="/checkout" style={{ display: 'flex' }}>
                       <img src="/assets/img/cart.svg" width="20" height="20" />
                       <span>{productsInCart}</span>
                   </Link>
-                )}
               </div>
               <span>
                 <a onClick={() => onChangeLang('en')}>Eng</a> | <a onClick={() => onChangeLang('ua')}>Укр</a>
@@ -102,7 +98,7 @@ function PublicNavbar(props: IProps) {
                   </Col>
                 </Row>
               </div>
-              <ShopSidebar position="topmenu" />
+              <ShopSidebar position="topmenu" structure={props.structure} />
               <Nav className="ml-auto" navbar>
                 {/*<NavItem>
                   <Link href="/info/contacts">

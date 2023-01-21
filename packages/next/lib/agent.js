@@ -8,7 +8,7 @@ import { addNotification, setGlobalLoading } from '../utils/notifications';
 import I18n from './i18n';
 
 import config from './config';
-import { isFunction } from 'lodash';
+import isFunction from 'lodash/isFunction';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 

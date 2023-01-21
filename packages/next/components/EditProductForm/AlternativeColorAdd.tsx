@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { getRenderer } from '@pdeals/next/components/registerFormRenderer';
 import { inject, observer } from 'mobx-react';
 const LazyDropDownComponent = getRenderer('lazydropdown');
-import { find } from 'lodash';
+import find from 'lodash/find';
 
 const AlternativeColorAdd = (props) => {
   const addByFabric = (f) => {

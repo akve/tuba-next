@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
 import Link from '@pdeals/next/elements/NextLink';
-import { isArray } from 'lodash';
-import { useEffect } from 'react';
 import { getId } from '@pdeals/next/utils/helpers';
 import { getStore } from '@pdeals/next/stores/initStore';
 

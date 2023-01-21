@@ -21,7 +21,7 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, structure, conten
   uiStore.setAllData(structure);
   uiStore.setSnippets(content);
   return (
-    <NormalLayout>
+    <NormalLayout  structure={structure}>
       <div className="d-flex w-100">
         <div className="page-margin">
           <Snippet code={'dostavka'} />

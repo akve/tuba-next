@@ -10,8 +10,10 @@ import Snippet from '@pdeals/next/components/Snippet/Snippet';
 
 const NoPage: React.FunctionComponent<any> = () => {
   // const { query } = useRouter();
+  const structure = {categories: {rows:[]}, collections:[]};
+  getStore().uiStore.setAllData(structure);
   return (
-    <NormalLayout>
+    <NormalLayout structure={structure}>
       <div className="w-100" style={{ textAlign: 'center' }}>
         <h1 style={{ width: '100%' }}>404: сторінка не знайдена</h1>
         Вибачте, щось пішло не так. Розпочніть з початку :(

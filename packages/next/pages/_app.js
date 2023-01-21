@@ -33,6 +33,9 @@ const Admin = dynamic(() => import('@pdeals/next/components/layouts/Admin'));
 import NProgress from 'nprogress';
 import dynamic from 'next/dynamic';
 import { MarketingTrackers } from '../components/MarketingTrackers/MarketingTrackers';
+import { Open_Sans } from '@next/font/google';
+
+const opensans = Open_Sans({subsets:['cyrillic', 'latin']});
 
 NProgress.configure({ showSpinner: true });
 
@@ -52,17 +55,6 @@ Router.events.on('routeChangeError', () => {
   NProgress.done();
 });
 
-function dedupe(bundles) {
-  const files = new Set();
-  const kept = [];
-
-  for (const bundle of bundles) {
-    if (files.has(bundle.file)) continue;
-    files.add(bundle.file);
-    kept.push(bundle);
-  }
-  return kept;
-}
 
 export default class MyApp extends App {
   state = {
@@ -86,6 +78,7 @@ export default class MyApp extends App {
     super(props);
     //const isServer = typeof window === 'undefined';
     // props.initialMobxState
+    // console.log('P', props);
     hydrateEverything(this.state.mobxStore);
     // this.mobxStore = isServer ? props.initialMobxState : initializeStore();
   }
@@ -123,23 +116,19 @@ export default class MyApp extends App {
           <meta property="og:image" content="https://tuba-duba.com/assets/img/main.jpg" />
           {/*<style dangerouslySetInnerHTML={{ __html: require('../assets/css/out.css').default }}></style>*/}
           <meta name="p:domain_verify" content="f80bef3d9d034afebf0911637637190e" />
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>
-          <Safe.script>
-            {`window.dataLayer = window.dataLayer || [];
+          <script defer={true} async src="https://www.googletagmanager.com/gtag/js?id=UA-84542153-1"></script>
+          <script defer={true} async dangerouslySetInnerHTML={{__html:`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'UA-84542153-1');`}
-          </Safe.script>
-          <Safe.script>
-            {`
+            gtag('config', 'UA-84542153-1');`}}/>
+          <script defer={true} async dangerouslySetInnerHTML={{__html:`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-M6F26DG')
-            `}
-          </Safe.script>
+            `}}/>
 
           {/*<Safe.script>
             {`!function(f,b,e,v,n,t,s)
@@ -177,6 +166,11 @@ export default class MyApp extends App {
             />
           </noscript>*/}
         </Head>
+        <style jsx global>
+          {`:root {
+            font-family: ${opensans.style.fontFamily}, serif;
+          }`}
+        </style>
         <Provider {...this.state.mobxStore}>
           <NotificationProvider>
             <Layout>

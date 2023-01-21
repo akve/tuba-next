@@ -19,7 +19,6 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
-import { filter } from 'lodash';
 import { t } from '../../utils/i18n';
 import OutsideClickHandler from 'react-outside-click-handler';
 import UiStore from '@pdeals/next/stores/uiStore';
@@ -56,7 +55,7 @@ function ProductsList(props: IProps) {
       </Head>
       <Breadcrumb type="category" id={props.currentRoute!} isForCollection={props.isForCollection} />
       <div className="list-wrapper">
-        {productsList.map((product) => (
+        {productsList.map((product, index) => (
           <div className="col-lg-4 col-xs-12 product-item" key={`${product.code}`}>
             <Card className="">
               <Link href={`/product/${product.code}?from=${category}`} className="card-img-top">
@@ -67,6 +66,7 @@ function ProductsList(props: IProps) {
                     height={500}
                     width={350}
                     layout={'responsive'}
+                    priority={index === 0}
                   />
               </Link>
               <div className="card-body text-center">

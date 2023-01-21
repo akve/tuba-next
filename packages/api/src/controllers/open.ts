@@ -83,6 +83,7 @@ export class OpenController {
     rows.forEach((r: any) => {
       try {
         r.image = r.data.images[0].image;
+        r.data.images = [r.data.images[0]]; // optimize - only 1st image is fine
       } catch (e) {
         console.log('bad image');
       }
@@ -99,9 +100,10 @@ export class OpenController {
       }
     });
     data.products = res;
+    const ids = res.map((r: any) => r.id).join(',') || '0';
     // data.colors = await getTypeormConnection().query('select * from color');
     // data.fabrics = await getTypeormConnection().query('select * from fabric');
-    data.sorting = await getTypeormConnection().query('select * from product_sort');
+    data.sorting = await getTypeormConnection().query(`select * from product_sort where product in (${ids})`);
     return data;
   }
 

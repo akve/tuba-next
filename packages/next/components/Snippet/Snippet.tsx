@@ -16,7 +16,8 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
-import { find } from 'lodash';
+import find from 'lodash/find';
+
 import { t } from '../../utils/i18n';
 import OutsideClickHandler from 'react-outside-click-handler';
 import UiStore from '@pdeals/next/stores/uiStore';

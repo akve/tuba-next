@@ -2,7 +2,7 @@ import React from 'react';
 import { FormGroup, Input } from 'reactstrap';
 
 import { registerRenderer } from './index';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 
 const Checkbox = ({ class: className, name, innerRef, label, ...rest }) => {
   const normalAttributes = omit(rest, ['notEditable', 'setValue', 'initialValue', 'entityId', 'value']);

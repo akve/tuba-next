@@ -2,7 +2,9 @@ import { action, observable, computed } from 'mobx';
 // import { toast } from 'react-toastify';
 import { ADD_NOTIFICATION, publish } from '../utils/eventBus';
 import { IBreadcrumb } from '@pdeals/next/components/Crud/ICrud';
-import { filter, find, get, sortBy } from 'lodash';
+import filter from 'lodash/filter';
+import find from 'lodash/find';
+import get from 'lodash/get';
 
 interface IListActionDescriptor {
   action: string;

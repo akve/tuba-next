@@ -8,7 +8,7 @@ import { useNotification } from '@pdeals/next/lib/hooks';
 import { getLanguages } from '@pdeals/next/lib/services/languageService';
 import TranslationSwitch from './TranslationSwitch';
 import { useRouter } from 'next/router';
-import { get } from 'lodash';
+import get from 'lodash/get';
 
 interface IProps {
   params: ICrud;

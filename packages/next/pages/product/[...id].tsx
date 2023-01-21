@@ -29,7 +29,7 @@ const ProductPage: React.FunctionComponent<any> = ({ uiStore, structure, product
   const isServer = typeof window === 'undefined';
   return (
     <>
-      <NormalLayout>
+      <NormalLayout structure={structure}>
         <Breadcrumb type="product" id={id} from={from} />
         <ImageModal gallery={isModalOpened} closeModal={() => setModalOpened('')} isModalOpened={isModalOpened} />
         <div

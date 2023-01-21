@@ -1,6 +1,5 @@
 import { inject, observer } from 'mobx-react';
 import * as i18n from '@pdeals/next/utils/i18n';
-import { find } from 'lodash';
 import OrderStore from '@pdeals/next/stores/orderStore';
 import { resizeImage } from '@pdeals/next/utils/helpers';
 import { Button } from 'reactstrap';

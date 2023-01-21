@@ -39,7 +39,7 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, orderSto
   const { cart } = orderStore!;
   if (!cart.products || cart.products.length === 0) {
     return (
-      <NormalLayout>
+      <NormalLayout structure={alldata}>
         <div className="d-flex w-100 justify-content-center flex-column align-items-center pt-100 pb-100">
           <div>{i18n.t('[E:Cart empty :(][R:Корзина пуста :(][U:Корзина пуста]')}</div>
           <div>
@@ -52,7 +52,7 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, orderSto
     );
   }
   return (
-    <NormalLayout>
+    <NormalLayout structure={alldata}>
       <CartForm />
     </NormalLayout>
   );

@@ -30,7 +30,7 @@ const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, orderSto
 
 
   return (
-    <NormalLayout>
+    <NormalLayout structure={alldata}>
       <Spinner/>
     </NormalLayout>
   );

@@ -1,5 +1,8 @@
 import { GetServerSideProps } from 'next';
-import { sortBy, filter, find } from 'lodash';
+import filter from 'lodash/filter';
+import sortBy from 'lodash/sortBy';
+import find from 'lodash/find';
+
 import { client } from '../lib/api/api-client';
 import * as i18n from '@pdeals/next/utils/i18n';
 const ROOT = 'https://tuba-duba.com';

@@ -1,4 +1,7 @@
-import { isArray, isObject, isString, isFinite } from 'lodash';
+import isArray from 'lodash/isArray';
+import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
+import isFinite from 'lodash/isFinite';
 import startOfMonth from 'date-fns/startOfMonth';
 import endOfMonth from 'date-fns/endOfMonth';
 import lightFormat from 'date-fns/lightFormat';

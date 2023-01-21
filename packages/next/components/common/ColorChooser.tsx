@@ -18,7 +18,8 @@ import {
 import { inject, observer } from 'mobx-react';
 import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
-import { find } from 'lodash';
+import find from 'lodash/find';
+
 import { resizeImage } from '@pdeals/next/utils/helpers';
 
 interface IProps {

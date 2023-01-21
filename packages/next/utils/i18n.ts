@@ -1,12 +1,21 @@
+import { setCookie } from '../lib/utils/cookiesHelper';
+
+let _serverLang = 'ua';
+
 const currentLang = () => {
   // return 'ua';
-  if (typeof window === 'undefined') return 'ua';
+  if (typeof window === 'undefined') return _serverLang || 'ua';
   let r = localStorage.getItem('lang');
   if (!r || r === 'ru') r = 'ua';
   return r; //localStorage.getItem('lang') || 'ua';
 };
 
 const setLang = (lang) => {
+  if (typeof window === 'undefined') {
+    _serverLang = lang;
+    return;
+  }
+  setCookie('lang', lang, 365);
   localStorage.setItem('lang', lang);
 };
 

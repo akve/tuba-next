@@ -4,11 +4,12 @@ import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
-import { filter } from 'lodash';
+import filter from 'lodash/filter';
 import { t } from '../../utils/i18n';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Router from 'next/router';
 import i18n from '@pdeals/next/lib/i18n';
+import { getStore } from '@pdeals/next/stores/initStore';
 //import Plus from '../../assets/img/plus.svg';
 //import Minus from '../../assets/img/minus.svg';
 
@@ -16,6 +17,7 @@ interface IProps {
   uiStore?: any;
   currentRoute?: string;
   position?: 'content' | 'topmenu';
+  structure?: any;
 }
 
 class ShopSidebar extends React.Component<IProps, any> {
@@ -107,32 +109,27 @@ class ShopSidebar extends React.Component<IProps, any> {
       }
       return (
         <NavItem className={this.activeRoute(prop.layout + prop.path)} key={key}>
-          <Link href={prop.layout + prop.path} data-path={prop.layout + prop.path}>
-            <NavLink
-              href={prop.layout + prop.path}
-              data-path={prop.layout + prop.path}
-              style={{ paddingLeft: prop.level * 40 }}
-              onClick={() => {
-                try {
-                  console.log('????????????!!!!!');
-                  if (document.getElementById('main-collapse-menu'))
-                    document.getElementById('main-collapse-menu')!.className = 'collapse navbar-collapse';
-                  // document.getElementById('navbar-collapse-main')?.click();
-                } catch (e) {}
-              }}
-            >
+          <Link href={prop.layout + prop.path} data-path={prop.layout + prop.path} className="nav-link" style={{ paddingLeft: prop.level * 40 }}
+                onClick={() => {
+                  try {
+                    console.log('????????????!!!!!');
+                    if (document.getElementById('main-collapse-menu'))
+                      document.getElementById('main-collapse-menu')!.className = 'collapse navbar-collapse';
+                    // document.getElementById('navbar-collapse-main')?.click();
+                  } catch (e) {}
+                }}>
+
               <span className="sidenav-normal" data-path={prop.layout + prop.path}>
                 {' '}
                 {prop.name}{' '}
               </span>
-            </NavLink>
           </Link>
         </NavItem>
       );
     });
   };
   prepareRoutes = (rawRoutes, rawCollections) => {
-    // console.log('R', rawRoutes);
+     //console.log('R', rawCollections);
     const findByParent = (parentId: number) => {
       return (
         filter(rawRoutes, (r: any) => {
@@ -185,9 +182,9 @@ class ShopSidebar extends React.Component<IProps, any> {
   };
 
   render() {
-    const routes = this.props.uiStore.allData
+    const routes = this.props.uiStore.allData && this.props.uiStore.allData.collections
       ? this.prepareRoutes(this.props.uiStore.allData.categories.rows, this.props.uiStore.allData.collections)
-      : [];
+      : this.prepareRoutes(this.props.structure.categories.rows ,this.props.structure.collections);
     if (this.props.position === 'topmenu') {
       return (
         <>

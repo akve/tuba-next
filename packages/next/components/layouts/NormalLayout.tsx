@@ -18,7 +18,7 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
   return (
     <div className="bg-default">
       <div className="main-content">
-        <PublicNavbar />
+        <PublicNavbar structure={props.structure} />
 
         {/*<!-- Header -->*/}
         <div className={`header bg-gradient-primary ${router.asPath === '/' ? '' : 'py-3 py-lg-3'}`}>
