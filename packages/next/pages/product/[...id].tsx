@@ -8,19 +8,23 @@ import { inject, observer } from 'mobx-react';
 import Breadcrumb from '@pdeals/next/components/Product/Breadcrumb';
 import ProductContent from '@pdeals/next/components/Product/ProductContent';
 import ImageModal from '@pdeals/next/components/Product/ImageModal';
+import { serverSetLang, serverTranslate } from '@pdeals/next/lib/utils/serverTranslate';
 const Slider = dynamic(() => import('@pdeals/next/components/Product/Slider'));
 
 export async function getServerSideProps(context) {
+  serverSetLang(context);
+
   const structure = await client().get('/open/structure/structure');
   const { id } = context.params;
   const from = context.query ? context.query.from : '';
   const product = await client().get(`/open/product/${id[0]}`);
-  return { props: { structure, product, id: id[0], from: from || '' } };
+  return { props: { lang: currentLang(), structure: serverTranslate(context, structure), product, id: id[0], from: from || '' } };
 }
 
-const ProductPage: React.FunctionComponent<any> = ({ uiStore, structure, product, id, from }) => {
+const ProductPage: React.FunctionComponent<any> = ({ lang, uiStore, structure, product, id, from }) => {
   const [isModalOpened, setModalOpened] = useState<any>(null);
 
+  setLang(lang);
   // const { query } = useRouter();
   uiStore.setProduct(id);
   uiStore.setProductDetails(product);

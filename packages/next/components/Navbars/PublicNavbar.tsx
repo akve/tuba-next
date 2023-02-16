@@ -41,6 +41,8 @@ function PublicNavbar(props: IProps) {
   const productsInCart = cart && cart.products ? cart.products.length : 0;
   //console.log('???', uiStore.allData);
 
+  if (!props.structure.categories.rows.length) return null;
+
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-light tuba-navbar" expand="md">

@@ -38,7 +38,7 @@ const CartPreview = (props: IProps) => {
                 <b>{product.size}</b>
                 <div>
                   <b>{product.price}</b> {i18n.t('[E:UAH][R:Цвет][U:грн]')},
-                  <b>{product.amount}</b> ${i18n.t('[E:pcs][U:од]')}.
+                  <b>{product.amount}</b> {i18n.t('[E:pcs][U:од]')}.
                 </div>
               </div>
             </div>

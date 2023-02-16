@@ -67,6 +67,7 @@ function ProductsList(props: IProps) {
                     width={350}
                     layout={'responsive'}
                     priority={index === 0}
+                    unoptimized
                   />
               </Link>
               <div className="card-body text-center">

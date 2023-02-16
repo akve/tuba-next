@@ -13,12 +13,10 @@ const NoPage: React.FunctionComponent<any> = () => {
   const structure = {categories: {rows:[]}, collections:[]};
   getStore().uiStore.setAllData(structure);
   return (
-    <NormalLayout structure={structure}>
       <div className="w-100" style={{ textAlign: 'center' }}>
         <h1 style={{ width: '100%' }}>404: сторінка не знайдена</h1>
-        Вибачте, щось пішло не так. Розпочніть з початку :(
+        <a href="/"> Вибачте, щось пішло не так. Розпочніть з початку :(</a>
       </div>
-    </NormalLayout>
   );
 };
 

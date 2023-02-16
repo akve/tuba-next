@@ -61,7 +61,7 @@ const CartPreview = (props: IProps) => {
       <table className="table table-cart">
         <thead>
           <tr>
-            <th>Товар</th>
+            <th>{i18n.t('[E:Item][R:Товар][U:Товар]')}</th>
             <th>{i18n.t('[E:Price][R:Цена][U:Цiна]')}</th>
             <th>{i18n.t('[E:Quantity][R:Количество][U:Кількість]')}</th>
             <th>{i18n.t('[E:Cost][R:Стоимость][U:Вартість]')}</th>
@@ -87,9 +87,9 @@ const CartPreview = (props: IProps) => {
                   </div>
                 </div>
               </td>
-              <td>{product.price} грн</td>
+              <td>{product.price} {i18n.t('[E:uah][U:грн]')}</td>
               <td>{product.amount}</td>
-              <td>{product.price * product.amount} грн</td>
+              <td>{product.price * product.amount} {i18n.t('[E:uah][U:грн]')}</td>
               <td>
                 <a onClick={() => onRemove(index)}>
                   <img src="/assets/img/x.svg" style={{ width: '20px', height: '20px' }} />
@@ -115,10 +115,10 @@ const CartPreview = (props: IProps) => {
                 <br />
                 {i18n.t('[E:Size][R:Размер][U:Розмір]')}: <b>{product.size}</b>
                 <div>
-                  <b>{product.price}</b> грн
+                  <b>{product.price}</b> {i18n.t('[E:uah][U:грн]')}
                 </div>
                 <div>
-                  <b>{product.amount}</b> од.
+                  <b>{product.amount}</b>
                 </div>
               </div>
             </div>
@@ -133,7 +133,7 @@ const CartPreview = (props: IProps) => {
       </div>
       <div style={{ marginLeft: '20px', marginBottom: '50px' }}>
         <h3>
-          {i18n.t('[E:Total][R:Всего][U:Разом]')}: {total} грн
+          {i18n.t('[E:Total][R:Всего][U:Разом]')}: {total} {i18n.t('[E:uah][U:грн]')}
         </h3>
 
         <Button color="primary" type="submit" size="lg" className={`order-button`} onClick={() => onProceed()}>

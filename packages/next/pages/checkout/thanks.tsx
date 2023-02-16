@@ -23,16 +23,20 @@ import {
   PopoverHeader,
   PopoverBody,
 } from 'reactstrap';
+import { serverSetLang, serverTranslate } from '@pdeals/next/lib/utils/serverTranslate';
+import { currentLang, setLang } from '@pdeals/next/utils/i18n';
 
 export async function getServerSideProps(context) {
+  serverSetLang(context);
   const alldata = await client().get('/open/structure/structure');
   return {
-    props: { alldata }, // will be passed to the page component as props
+    props: { lang: currentLang(), alldata: serverTranslate( context, alldata) }, // will be passed to the page component as props
   };
 }
 
-const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, orderStore }) => {
+const CheckoutPage: React.FunctionComponent<any> = ({ lang, uiStore, alldata, orderStore }) => {
   // const { query } = useRouter();
+  setLang(lang);
   uiStore.setAllData(alldata);
   orderStore!.clear();
   return (

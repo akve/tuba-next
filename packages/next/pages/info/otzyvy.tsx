@@ -11,18 +11,23 @@ import { formatDate } from '@pdeals/next/utils/dateFormat';
 //import Quote from '../../assets/img/quote.svg';
 import Plus from '@pdeals/next/assets/img/plus.svg';
 import StarsRating from 'react-rating';
+import { serverSetLang, serverTranslate } from '@pdeals/next/lib/utils/serverTranslate';
+import { currentLang, setLang } from '@pdeals/next/utils/i18n';
 
 export async function getServerSideProps(context) {
+  serverSetLang(context);
+
   const structure = await client().get('/open/structure/structure');
   const content = await client().get('/open/structure/snippets');
   const reviews = await client().get('/open/reviews-frontend/0');
   return {
-    props: { structure, content, reviews }, // will be passed to the page component as props
+    props: { lang: currentLang(), structure: serverTranslate(context, structure), content, reviews }, // will be passed to the page component as props
   };
 }
 
-const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, structure, content, reviews }) => {
+const CheckoutPage: React.FunctionComponent<any> = ({ lang, uiStore, structure, content, reviews }) => {
   // const { query } = useRouter();
+  setLang(lang);
   uiStore.setAllData(structure);
   uiStore.setSnippets(content);
   uiStore.setReviews(reviews);

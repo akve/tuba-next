@@ -60,7 +60,7 @@ export class OpenController {
     const rows = await getTypeormConnection().query(`select * from product where code='${code}'`);
     if (rows.length === 0) return null;
     data.product = rows[0];
-    data.colors = await getTypeormConnection().query('select * from color');
+    data.colors = await getTypeormConnection().query('select id, name, image from color');
     data.fabrics = await getTypeormConnection().query(`select * from fabric where id=${rows[0].fabric || 0}`);
     return data;
   }

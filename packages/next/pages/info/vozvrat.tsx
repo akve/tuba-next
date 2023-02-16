@@ -7,17 +7,22 @@ import NormalLayout from '@pdeals/next/components/layouts/NormalLayout';
 import { inject, observer } from 'mobx-react';
 import * as i18n from '@pdeals/next/utils/i18n';
 import Snippet from '@pdeals/next/components/Snippet/Snippet';
+import { serverSetLang, serverTranslate } from '@pdeals/next/lib/utils/serverTranslate';
+import { currentLang, setLang } from '@pdeals/next/utils/i18n';
 
 export async function getServerSideProps(context) {
+  serverSetLang(context);
+
   const structure = await client().get('/open/structure/structure');
   const content = await client().get('/open/structure/snippets');
   return {
-    props: { structure, content }, // will be passed to the page component as props
+    props: { lang: currentLang(), structure: serverTranslate(context, structure), content }, // will be passed to the page component as props
   };
 }
 
-const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, structure, content }) => {
+const CheckoutPage: React.FunctionComponent<any> = ({ lang, uiStore, structure, content }) => {
   // const { query } = useRouter();
+  setLang(lang);
   uiStore.setAllData(structure);
   uiStore.setSnippets(content);
   return (

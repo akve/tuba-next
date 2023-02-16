@@ -158,7 +158,7 @@ const CartForm = (props: IProps) => {
     <Card className="w-100">
       <CardBody>
         <CartSmallPreview allData={props.uiStore!.allData} />
-        <h2 style={{ marginLeft: '20px', marginTop: '10px' }}>{i18n.t('[U:Доставка][R:Доставка]')}</h2>
+        <h2 style={{ marginLeft: '20px', marginTop: '10px' }}>{i18n.t('[U:Доставка][R:Доставка][E:Delivery]')}</h2>
         <Form onSubmit={() => {}} className="d-flex flex-wrap">
           <Input
             label={i18n.t(`[E:Name][R:Имя][U:Ім'я] *`)}
