@@ -29,7 +29,7 @@ const IndexPage: React.FunctionComponent<any> = ({  lang,structure, list, id }) 
   return (
     <NormalLayout  structure={structure}>
       <div className="col-lg-2 d-none d-lg-block d-xl-block">
-        <ShopSidebar currentRoute={id} />
+        <ShopSidebar currentRoute={id} structure={structure} />
       </div>
       <div className="col-lg-10 col-xs-12">
         <ProductsList currentRoute={id} isForCollection />
