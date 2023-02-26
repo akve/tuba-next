@@ -123,20 +123,20 @@ const safeXml = (s) => {
     + ` ]]>`;
 };
 const getImage = (p, showAll?: boolean) => {
-  if (p.code === 'ubasquare') {
-    console.log('P', p.data.images);
+  const cloudinaryFilter = (url) => {
+    return (url || '').replace('/upload/', '/upload/w_400/');
   }
   const res = p.data.images && p.data.images.length ? p.data.images[0].image : '';
   if (!res) return `${ROOT}/assets/img/main.jpg`;
   if (showAll) {
     return p.data.images
       .map((p1) => {
-        if (p1.image.indexOf('cloudinary') >= 0) return p1.image;
+        if (p1.image.indexOf('cloudinary') >= 0) return cloudinaryFilter(p1.image);
         return `${ROOT}${p1.image}`;
       })
       .join(',');
   }
-  if (res.indexOf('cloudinary') >= 0) return res;
+  if (res.indexOf('cloudinary') >= 0) return cloudinaryFilter(res);
   return `${ROOT}${res}`;
 };
 const sitemapXML = async () => {
