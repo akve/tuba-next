@@ -49,7 +49,7 @@ function PublicNavbar(props: IProps) {
         <div>
           <Link href="/">
             <span>
-                <img alt="Tuba-Duba" src="/assets/img/logo-top3.png" width="240" style={{ opacity: 1 }} />
+                <img alt="Tuba-Duba" src="/assets/img/logo-top4.png" width="240" style={{ opacity: 1 }} />
             </span>
           </Link>
         </div>
@@ -79,7 +79,7 @@ function PublicNavbar(props: IProps) {
                     <Link href="/">
                       <img
                         alt="Tuba-Duba"
-                        src="/assets/img/logo-top3.png"
+                        src="/assets/img/logo-top4.png"
                         width="120"
                         height="38"
                         style={{ opacity: 1 }}
