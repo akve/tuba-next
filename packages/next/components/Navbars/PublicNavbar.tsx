@@ -91,11 +91,11 @@ function PublicNavbar(props: IProps) {
                       <span />
                       <span />
                     </button>
-                    <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380505212930" className="nav-link-icon nav-link">
-                      <i className="ni ni-mobile-button" /> +38 (050) 521-29-30
+                    <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380965096789" className="nav-link-icon nav-link">
+                      <i className="ni ni-mobile-button" /> +38(096)509-67-89
                     </a>
-                    <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380683019731" className="nav-link-icon nav-link">
-                      <i className="ni ni-mobile-button" /> +38 (068) 301-97-31
+                    <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380502943327" className="nav-link-icon nav-link">
+                      <i className="ni ni-mobile-button" /> +38 (050) 294-33-27
                     </a>
                   </Col>
                 </Row>
@@ -110,11 +110,11 @@ function PublicNavbar(props: IProps) {
                   </Link>
                 </NavItem>*/}
                 <NavItem className="d-none d-lg-inline">
-                  <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380505212930" className="nav-link-icon nav-link">
-                    <i className="ni ni-mobile-button" /> +38 (050) 521-29-30
+                  <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380965096789" className="nav-link-icon nav-link">
+                    <i className="ni ni-mobile-button" /> +38(096)509-67-89
                   </a>
-                  <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380683019731" className="nav-link-icon nav-link">
-                    <i className="ni ni-mobile-button" /> +38 (068) 301-97-31
+                  <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380502943327" className="nav-link-icon nav-link">
+                    <i className="ni ni-mobile-button" /> +38 (050) 294-33-27
                   </a>
                 </NavItem>
               </Nav>
