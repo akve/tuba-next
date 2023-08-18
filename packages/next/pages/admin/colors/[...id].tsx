@@ -36,6 +36,11 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
         sort: true,
       },
       {
+        text: 'Invisible?',
+        dataField: 'invisible',
+        sort: true,
+      },
+      {
         text: 'Created Date',
         dataField: 'createdDate',
         formatter: DateCell,
@@ -46,6 +51,7 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
       fields: [
         { name: 'code', label: 'Code', type: 'text', class: 'col-lg-6', required: true, notEditable: false },
         { name: 'name', label: 'Name', type: 'text', class: 'col-lg-6', required: true },
+        { name: 'invisible', label: 'Invisible?', type: 'checkbox', class: 'col-lg-6'},
         {
           name: 'fabric',
           label: 'Fabric',
