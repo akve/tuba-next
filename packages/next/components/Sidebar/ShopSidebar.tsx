@@ -79,9 +79,9 @@ class ShopSidebar extends React.Component<IProps, any> {
             <NavLink
               data-toggle="collapse"
               href={prop.path ? prop.layout + prop.path : null}
-              aria-expanded={isOpen}
+              aria-ex panded={isOpen}
               className={'sidenav-shop-expandable' + this.activeRoute(prop.path)}
-              style={{ paddingLeft: prop.level * 40 }}
+              style={{ paddingLeft: prop.level * 20 }}
               onClick={
                 prop.path
                   ? () => {
@@ -158,7 +158,7 @@ class ShopSidebar extends React.Component<IProps, any> {
     startBuild(res, 0, 0, '');
     const collections = {
       icon: '-',
-      name: t('[R:Коллекции][U:Колекції]'),
+      name: t('[R:Коллекции][U:Колекції][E:Collections]'),
       layout: '',
       path: '',
       level: 0,

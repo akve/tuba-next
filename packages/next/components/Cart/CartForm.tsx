@@ -9,6 +9,7 @@ import { useState } from 'react';
 import CartSmallPreview from '@pdeals/next/components/Cart/CartSmallPreview';
 import UiStore from '@pdeals/next/stores/uiStore';
 import RegisterLazyDropDown from '@pdeals/next/components/registerFormRenderer/LazyDropDown';
+import { isEnglish } from '@pdeals/next/utils/i18n';
 
 interface IProps {
   orderStore?: OrderStore;
@@ -61,7 +62,7 @@ const CartForm = (props: IProps) => {
       'ecommerce': {
         'transaction_id': `${id}`,
         'value': total,						  // Тотал по замовленню
-        'currency': 'UAH',
+        'currency': isEnglish() ? 'EUR' : 'UAH',
         items
       }
     });
@@ -92,7 +93,7 @@ const CartForm = (props: IProps) => {
           orderStore.clear();
           router.push(`/checkout/thanks`);
         } else {
-          const redirect: any = await orderStore.getPaymentRedirect(response.id);
+          const redirect: any = await orderStore.getPaymentRedirect(response.id, i18n.currentLang());
           if (redirect?.response?.checkout_url) {
             router.push(redirect?.response?.checkout_url);
           }

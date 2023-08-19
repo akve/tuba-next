@@ -10,6 +10,10 @@ const currentLang = () => {
   return r; //localStorage.getItem('lang') || 'ua';
 };
 
+const isEnglish = () => {
+  return currentLang() === 'en';
+}
+
 const setLang = (lang) => {
   if (typeof window === 'undefined') {
     _serverLang = lang;
@@ -52,4 +56,4 @@ const t = (s: string, leaveHtml?: boolean) => {
   return s;
 };
 
-export { currentLang, setLang, t };
+export { currentLang, setLang, t, isEnglish };

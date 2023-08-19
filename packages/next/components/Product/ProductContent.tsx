@@ -26,6 +26,7 @@ import AmountChooser from '@pdeals/next/components/common/AmountChooser';
 import SizeChooser from '@pdeals/next/components/common/SizeChooser';
 import ColorChooser from '@pdeals/next/components/common/ColorChooser';
 import { resizeImage, safeJson } from '@pdeals/next/utils/helpers';
+import { isEnglish } from '@pdeals/next/utils/i18n';
 
 interface IProps {
   uiStore?: UiStore;
@@ -98,7 +99,7 @@ function ProductContent(props: IProps) {
       color: color,
       amount: amount,
       size: size,
-      price: p.pricediscount || p.price,
+      price: !isEnglish() ? (p.pricediscount || p.price) : (p.pricediscount_en || p.price_en),
     });
     router.push('/checkout');
   };
@@ -181,12 +182,18 @@ function ProductContent(props: IProps) {
       <div className="product-details-wrapper w-100">
         <h1>{i18n.t(product.product.name)}</h1>
         <h3>
-          {!!product.product.pricediscount && (
+          {isEnglish() && !!product.product.pricediscount_en && (
+            <>
+              <span className="strikeover">{product.product.price_en}</span> {product.product.pricediscount_en} EUR
+            </>
+          )}
+          {!isEnglish() && !!product.product.pricediscount && !product.product.pricediscount_en && (
             <>
               <span className="strikeover">{product.product.price}</span> {product.product.pricediscount} грн
             </>
           )}
-          {!product.product.pricediscount && <>{product.product.price} {i18n.t('[E:uah][U:грн]')}</>}
+          {isEnglish() && !product.product.pricediscount_en && product.product.price_en && <>{product.product.price_en} EUR</>}
+          {!isEnglish() && !product.product.pricediscount && <>{product.product.price} грн</>}
         </h3>
         <div className="content" dangerouslySetInnerHTML={{ __html: i18n.t(product.product.description, true) }}></div>
         {!!fabric && (

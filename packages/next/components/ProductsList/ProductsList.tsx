@@ -19,7 +19,7 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
-import { t } from '../../utils/i18n';
+import { isEnglish, t } from '../../utils/i18n';
 import OutsideClickHandler from 'react-outside-click-handler';
 import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
@@ -75,12 +75,18 @@ function ProductsList(props: IProps) {
                     <h4>{i18n.t(product.name)}</h4>
                 </Link>
                 <div className="text-muted price-text">
-                  {!!product.pricediscount && (
+                  {isEnglish() && !!product.pricediscount_en && (
+                    <>
+                      <span className="strikeover">{product.price_en}</span> {product.pricediscount_en} EUR
+                    </>
+                  )}
+                  {!isEnglish() && !!product.pricediscount && !product.pricediscount_en && (
                     <>
                       <span className="strikeover">{product.price}</span> {product.pricediscount} грн
                     </>
                   )}
-                  {!product.pricediscount && <>{product.price} грн/UAH</>}
+                  {isEnglish() && !product.pricediscount_en && product.price_en && <>{product.price_en} EUR</>}
+                  {!isEnglish() && !product.pricediscount  && <>{product.price} грн</>}
                 </div>
                 <button className="btn btn-outline-secondary" onClick={() => onAddToCart(product)}>
                   {i18n.t('[E:Details][R:Детальнее][U:Детальнiше]')}

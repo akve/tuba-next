@@ -32,8 +32,8 @@ class OrderStore {
     payload.total = total;
     return await client().post('/open/order', payload);
   }
-  @action async getPaymentRedirect(id) {
-    return await client().get(`/open/checkout-fondy-url/${id}`);
+  @action async getPaymentRedirect(id, lang) {
+    return await client().get(`/open/checkout-fondy-url/${id}/${lang}`);
   }
   @action async markAsPaid(id) {
     return await client().get(`/open/checkout-paid/${id}`);

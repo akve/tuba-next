@@ -37,7 +37,7 @@ const CartPreview = (props: IProps) => {
                 {i18n.t('[E:Color][R:Цвет][U:Колір]')}: <b>{i18n.t(product.color || '')}</b>, {i18n.t('[E:Size][R:Размер][U:Розмір]')}:{' '}
                 <b>{product.size}</b>
                 <div>
-                  <b>{product.price}</b> {i18n.t('[E:UAH][R:Цвет][U:грн]')},
+                  <b>{product.price}</b> {i18n.t('[E:EUR][R:usd][U:грн]')},
                   <b>{product.amount}</b> {i18n.t('[E:pcs][U:од]')}.
                 </div>
               </div>

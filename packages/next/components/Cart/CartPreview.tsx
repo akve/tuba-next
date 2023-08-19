@@ -6,6 +6,7 @@ import { Button } from 'reactstrap';
 import { router } from 'next/client';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { isEnglish } from '@pdeals/next/utils/i18n';
 
 interface IProps {
   orderStore?: OrderStore;
@@ -53,7 +54,7 @@ const CartPreview = (props: IProps) => {
   const onProceed = () => {
     router.push('/checkout/order');
   };
-  const total = cart.products.reduce((sum, product) => sum + product.price * product.amount, 0);
+  const total = cart.products.reduce((sum , product) => sum + product.price * product.amount, 0);
 
   return (
     <>
@@ -87,9 +88,9 @@ const CartPreview = (props: IProps) => {
                   </div>
                 </div>
               </td>
-              <td>{product.price} {i18n.t('[E:uah][U:грн]')}</td>
+              <td>{product.price} {i18n.t('[E:EUR][U:грн]')}</td>
               <td>{product.amount}</td>
-              <td>{product.price * product.amount} {i18n.t('[E:uah][U:грн]')}</td>
+              <td>{product.price * product.amount} {i18n.t('[E:EUR][U:грн]')}</td>
               <td>
                 <a onClick={() => onRemove(index)}>
                   <img src="/assets/img/x.svg" style={{ width: '20px', height: '20px' }} />
@@ -115,7 +116,7 @@ const CartPreview = (props: IProps) => {
                 <br />
                 {i18n.t('[E:Size][R:Размер][U:Розмір]')}: <b>{product.size}</b>
                 <div>
-                  <b>{product.price}</b> {i18n.t('[E:uah][U:грн]')}
+                  <b>{product.price}</b> {i18n.t('[E:EUR][U:грн]')}
                 </div>
                 <div>
                   <b>{product.amount}</b>
@@ -133,7 +134,7 @@ const CartPreview = (props: IProps) => {
       </div>
       <div style={{ marginLeft: '20px', marginBottom: '50px' }}>
         <h3>
-          {i18n.t('[E:Total][R:Всего][U:Разом]')}: {total} {i18n.t('[E:uah][U:грн]')}
+          {i18n.t('[E:Total][R:Всего][U:Разом]')}: {total} {i18n.t( '[E:EUR][U:грн]')}
         </h3>
 
         <Button color="primary" type="submit" size="lg" className={`order-button`} onClick={() => onProceed()}>
