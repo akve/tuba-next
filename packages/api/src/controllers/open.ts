@@ -73,9 +73,9 @@ export class OpenController {
     const disabledColorIds = data.colors.filter((r:any)=>r.invisible).map((r: any) =>r.id);
     if (data.product.data.colors) {
       data.product.data.colors = data.product.data.colors.filter((r: any) => {
-        return disabledColorIds.indexOf(r.color) < 0
+        return disabledColorIds.indexOf(parseInt(`${r.color}`, 10)) < 0
       });
-      const foundColorIds = data.product.data.colors.map((r: any)=>r.color);
+      const foundColorIds = data.product.data.colors.map((r: any)=>parseInt(`${r.color}`, 10));
       data.colors = data.colors.filter((r: any) => foundColorIds.indexOf(r.id) >=0);
     }
     data.fabrics = await getTypeormConnection().query(`select * from fabric where id=${rows[0].fabric || 0}`);
