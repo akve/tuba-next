@@ -40,6 +40,7 @@ function ProductContent(props: IProps) {
   const [amount, setAmount] = useState(1);
   const [size, setSize] = useState('44');
   const [color, setColor] = useState('');
+  const [contactOpen, setContactOpen] = useState(false);
   //console.log('PROD', product);
 
   const getFabric = () => {
@@ -227,14 +228,23 @@ function ProductContent(props: IProps) {
         </button>
         */}
           <button className="btn btn-primary" onClick={() => onAddToCart(true)}>
-             {i18n.t('[E:Buy][R:Купить][U:Купити]')}
+            {i18n.t('[E:Buy][R:Купить][U:Купити]')}
           </button>
-          <a className="btn btn-secondary" href={"https://www.instagram.com/tubaiduba/reels/"}>
-            <img src={"/assets/img/contacts-insta.png"} height={20}/>&nbsp;{i18n.t('[E:Contact on Instagram][R:Insta][U:Написати в Інстаграм]')}
-          </a>
-          <a className="btn btn-secondary" href={"https://www.facebook.com/tubaiduba"}>
-            <img src={"/assets/img/contacts-fb.png"} height={20}/>&nbsp;{i18n.t('[E:Contact on Facebook][R:FB][U:Написати в Facebook]')}
-          </a>
+          {!contactOpen && (
+            <a className="btn btn-secondary" onClick={()=>setContactOpen(true)}>
+              <img src={"/assets/img/quote.svg"} height={20}/><i className="fas fa-question-circle"/>&nbsp;{i18n.t('[E:Contact directly][R:Insta][U:Написати в дірект]')}
+            </a>
+          )}
+          {contactOpen && (
+            <>
+              <a className="btn btn-secondary" href={"https://www.instagram.com/tubaiduba/reels/"}>
+                <img src={"/assets/img/contacts-insta.png"} height={20}/>&nbsp;{i18n.t('[E:Contact on Instagram][R:Insta][U:Написати в Інстаграм]')}
+              </a>
+              <a className="btn btn-secondary" href={"https://www.facebook.com/tubaiduba"}>
+                <img src={"/assets/img/contacts-fb.png"} height={20}/>&nbsp;{i18n.t('[E:Contact on Facebook][R:FB][U:Написати в Facebook]')}
+              </a>
+            </>
+          )}
         </div>
         <hr />
       </div>
