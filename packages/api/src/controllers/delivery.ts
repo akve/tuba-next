@@ -2,6 +2,9 @@ import { Context, Path, PreProcessor, ServiceContext, GET, QueryParam, PathParam
 import { RequestPreProcess } from '../utils/request-with-user';
 import axios from 'axios';
 
+// https://new.novaposhta.ua/dashboard/settings/developers
+const KEY="aabb8ac7d83f2cc5994872f01a146a79";
+
 @Path('/v1/delivery')
 @PreProcessor(RequestPreProcess)
 export class DeliveryController {
@@ -23,7 +26,7 @@ export class DeliveryController {
     const r = await axios.post(
       'http://api.novaposhta.ua/v2.0/json/Address/searchSettlements/',
       {
-        apiKey: '91cf3c878c0c414d522ffd14cbabad7d',
+        apiKey: KEY,
         modelName: 'Address',
         calledMethod: 'searchSettlements',
         methodProperties: {
@@ -58,7 +61,7 @@ export class DeliveryController {
         modelName: 'AddressGeneral',
         calledMethod: 'getWarehouses',
         methodProperties,
-        apiKey: '91cf3c878c0c414d522ffd14cbabad7d',
+        apiKey: KEY,
       },
       {
         headers: {}, // Authorization: `Bearer ${process.env.TURBOSMS_KEY}`
