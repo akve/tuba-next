@@ -51,6 +51,7 @@ export const getEndOfMonth = (date = new Date()) => {
 };
 
 export const resizeImage = (url: string, format: 'list' | 'thumb' | 'normal' | 'huge') => {
+  if (!url) return '';
   if (url.indexOf('cloudinary') < 0) return url;
   if (format === 'list') {
     return url.replace('/upload/', '/upload/w_400/');
