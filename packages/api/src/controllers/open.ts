@@ -371,28 +371,40 @@ export class OpenController {
     const rawOrder = await getTypeormConnection().query(`select * from "order" where code = '${id}'`);
     if (!rawOrder.length) throw new Error('order not found');
 
-
-    const data: any = {
-      "amount": rawOrder[0].total * 100,
-      "currency": lang === 'en' ? 'EUR' : "UAH",
-      "merchant_id": process.env.FONDY_MERCHANT,
-      "order_desc": "Tuba-Duba order",
-      "order_id": id,
-      "response_url": resUrl,
-    };
-
-    const v = [];
-    Object.keys(data).forEach(k => {
-      v.push(data[k]);
-    })
-    v.unshift(process.env.FONDY_KEY);
-    const str = v.join('|');
-    shasum.update(str);
-    const signature = shasum.digest('hex');
-    data.signature = signature;
-
-    const response = await axios.post('https://pay.fondy.eu/api/checkout/url/', {request:data}, {
+    const LiqPay = require('liqpay');
+    const liqpay = new LiqPay(process.env.LIQ_PUBLIC, process.env.LIQ_PRIVATE);
+    var html = liqpay.cnb_form({
+      'action'         : 'pay',
+      'amount'         : rawOrder[0].total * 100,
+      'currency'       : lang === 'en' ? 'EUR' : "UAH",
+      'description'    : 'Tuba-Duba order #' + id,
+      'order_id'       : id,
+      'version'        : '3',
+      'language': lang === 'en' ? 'en':'ua'
     });
+    return {html};
+
+    // const data: any = {
+    //   "amount": rawOrder[0].total * 100,
+    //   "currency": lang === 'en' ? 'EUR' : "UAH",
+    //   "merchant_id": process.env.FONDY_MERCHANT,
+    //   "order_desc": "Tuba-Duba order",
+    //   "order_id": id,
+    //   "response_url": resUrl,
+    // };
+    //
+    // const v = [];
+    // Object.keys(data).forEach(k => {
+    //   v.push(data[k]);
+    // })
+    // v.unshift(process.env.FONDY_KEY);
+    // const str = v.join('|');
+    // shasum.update(str);
+    // const signature = shasum.digest('hex');
+    // data.signature = signature;
+    //
+    // const response = await axios.post('https://pay.fondy.eu/api/checkout/url/', {request:data}, {
+    // });
 
     return response.data;
   }
