@@ -54,6 +54,7 @@
     "json2csv": "^5.0.5",
     "jsonschema": "^1.2.6",
     "jsonwebtoken": "^8.5.1",
+    "liqpay": "^0.0.1",
     "lodash": "^4.17.20",
     "memory-cache": "^0.2.0",
     "mkdirp": "^1.0.4",
