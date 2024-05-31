@@ -371,11 +371,11 @@ export class OpenController {
     const rawOrder = await getTypeormConnection().query(`select * from "order" where code = '${id}'`);
     if (!rawOrder.length) throw new Error('order not found');
 
-    const LiqPay = require('liqpay');
+    const LiqPay = require('../lib/liqpay');
     const liqpay = new LiqPay(process.env.LIQ_PUBLIC, process.env.LIQ_PRIVATE);
     var html = liqpay.cnb_form({
       'action'         : 'pay',
-      'amount'         : rawOrder[0].total * 100,
+      'amount'         : rawOrder[0].total ,
       'currency'       : lang === 'en' ? 'EUR' : "UAH",
       'description'    : 'Tuba-Duba order #' + id,
       'order_id'       : id,

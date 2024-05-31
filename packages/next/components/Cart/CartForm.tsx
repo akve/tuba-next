@@ -10,6 +10,7 @@ import CartSmallPreview from '@pdeals/next/components/Cart/CartSmallPreview';
 import UiStore from '@pdeals/next/stores/uiStore';
 import RegisterLazyDropDown from '@pdeals/next/components/registerFormRenderer/LazyDropDown';
 import { isEnglish } from '@pdeals/next/utils/i18n';
+import { Modal } from '@pdeals/next/elements/Modal';
 
 interface IProps {
   orderStore?: OrderStore;
@@ -21,6 +22,7 @@ const CartForm = (props: IProps) => {
   const { cart } = orderStore;
   const [sending, setSending] = useState(false);
   const [skipPay, setSkipPay] = useState(false);
+  const [openModalData, setOpenModalData] = useState(null);
   const [error, setError] = useState('');
   const router = useRouter();
   const formOptions = {
@@ -93,9 +95,15 @@ const CartForm = (props: IProps) => {
           orderStore.clear();
           router.push(`/checkout/thanks`);
         } else {
-          const redirect: any = await orderStore.getPaymentRedirect(response.id, i18n.currentLang());
-          if (redirect?.response?.checkout_url) {
-            router.push(redirect?.response?.checkout_url);
+          const html: any = await orderStore.getPaymentRedirect(response.id, i18n.currentLang());
+          if (html.html) {
+            setOpenModalData(html.html);
+            orderStore.clear();
+            setTimeout(()=>{
+              if (document.forms[1]) {
+                document.forms[1].submit();
+              }
+            },500)
           }
         }
       } else {
@@ -272,6 +280,15 @@ const CartForm = (props: IProps) => {
             </Button>
           </div>
         </Form>
+        {openModalData && (
+          <Modal hideCloseButton={true}>
+            <div dangerouslySetInnerHTML={{__html: openModalData || ''}}/>
+            <img src={"/assets/img/liqpay.svg"} />
+            <div>
+              {i18n.t('[E:Opening payment system][U:Відкриваємо платіжну систему]')}
+            </div>
+          </Modal>
+        )}
       </CardBody>
     </Card>
   );
