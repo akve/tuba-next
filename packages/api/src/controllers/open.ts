@@ -10,7 +10,7 @@ import { ListDto, ListRequestDto } from '@pdeals/models/dto/ListDto';
 import generateUserFilter from '../utils/generateUserFilter';
 import { find } from 'lodash';
 import { Order } from '../../../models/entities/Order';
-import axios from 'axios';
+// import axios from 'axios';
 
 const COURSE = 40;
 
@@ -364,9 +364,9 @@ export class OpenController {
     @PathParam('id') id: string,
     @PathParam('lang') lang: string,
   ): Promise<any> {
-    const crypto = require('crypto')
-    const shasum = crypto.createHash('sha1');
-    const resUrl = `${process.env.FONDY_REDIRECT}?id=${id}`;
+    // const crypto = require('crypto')
+    // const shasum = crypto.createHash('sha1');
+    // const resUrl = `${process.env.FONDY_REDIRECT}?id=${id}`;
 
     const rawOrder = await getTypeormConnection().query(`select * from "order" where code = '${id}'`);
     if (!rawOrder.length) throw new Error('order not found');
@@ -406,7 +406,7 @@ export class OpenController {
     // const response = await axios.post('https://pay.fondy.eu/api/checkout/url/', {request:data}, {
     // });
 
-    return response.data;
+    // return response.data;
   }
 
   @Path('/checkout-paid/:id')
