@@ -161,7 +161,7 @@ class UiStore {
     const self = this;
 
     const shownNow = this.PendingNotifications;
-    const existing = shownNow.filter((notif: any) => notif.message === message);
+    const existing = shownNow?.filter((notif: any) => notif.message === message);
     if (existing && existing.length) {
       console.log('already shown');
       return;
@@ -190,7 +190,7 @@ if (level === 'success') {
 
     // console.log('add', self.notifications, self._displayedUids);
 
-    self.notifications.unshift({
+    self.notifications?.unshift({
       uid,
       title,
       message,
@@ -216,7 +216,7 @@ if (level === 'success') {
   }
 
   @computed get PendingNotifications(): any {
-    return this.notifications.filter((notif) => {
+    return this.notifications?.filter((notif) => {
       return !this._displayedUids.includes(notif.uid);
     });
   }

@@ -2,6 +2,8 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import * as i18n from '../utils/i18n';
 import * as nodemailer from 'nodemailer';
 import axios from 'axios';
+import { JWT } from 'google-auth-library'
+
 
 const buildOrder = (order: any) => {
   let text = '';
@@ -31,12 +33,24 @@ const buildOrder = (order: any) => {
 
 const addToExcel = async (order: any, generatedId: string) => {
   const creds = require('../drive-service-account.json');
-  const doc = new GoogleSpreadsheet(process.env.DRIVE_FILE);
+
+  const SCOPES = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive.file',
+  ];
+
+  const jwt = new JWT({
+    email: creds.client_email,
+    key: creds.private_key,
+    scopes: SCOPES,
+  });
+  const doc = new GoogleSpreadsheet(process.env.DRIVE_FILE, jwt);
+  //const doc = new GoogleSpreadsheet(process.env.DRIVE_FILE, );
 
   const orderText = buildOrder(order).text;
 
   // Initialize Auth - see more available options at https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication
-  await doc.useServiceAccountAuth(creds);
+  //await doc.useServiceAccountAuth(creds);
   await doc.loadInfo();
   const sheet = doc.sheetsByIndex[0];
 
@@ -86,6 +100,7 @@ const sendEmail = async (order: any, generatedId: string) => {
       pass: process.env.GMAIL_PASSWD, // generated ethereal password
     },
   });
+  console.log('TRANSPORTER', process.env.GMAIL_PASSWD);
   text = 'Спасибо за заказ! Наш менеджер свяжется с вами: ' + text;
   await transporter.sendMail({
     from: '"Tuba Duba Shop" <tubadubauk@gmail.com>', // sender address
@@ -97,7 +112,7 @@ const sendEmail = async (order: any, generatedId: string) => {
   const info = await transporter.sendMail({
     from: '"Tuba Duba Shop" <tubadubauk@gmail.com>', // sender address
     to: order.data.email, // list of receivers
-    subject: 'Ваш заказ принят ✔', // Subject line
+    subject: 'Ваше замовлення отримане ✔', // Subject line
     text: text, // plain text body
     html: html, // html body
   });

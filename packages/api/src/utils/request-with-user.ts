@@ -15,6 +15,8 @@ const SESSION_COOKIE_NAME = 'pp_session';
 interface IRequestWithUser extends express.Request {
   user?: User | null;
   sessionId?: string;
+  headers?: { [key: string]: string };
+  cookies?: { [key: string]: string };
 }
 
 function RequestPreProcess(_req: express.Request): IRequestWithUser {

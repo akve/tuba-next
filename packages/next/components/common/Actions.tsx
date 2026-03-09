@@ -116,7 +116,7 @@ export const DeleteItem = memo(({ data, params, callbacks }: IActionProps) => {
       if (callbacks.goBack) callbacks.goBack();
       if (callbacks.refetch) callbacks.refetch();
       notify('success', 'Success', 'Item has been removed!');
-    } catch (error) {
+    } catch (error: any) {
       notify('danger', error.name, error.message);
     }
   };

@@ -43,14 +43,15 @@ const CartForm = (props: IProps) => {
   const { register: register1, handleSubmit: handleSubmit1, setValue, watch, reset, ...rest } = useForm(formOptions);
 
   const addFBPixel = (id) => {
-    window.dataLayer = window.dataLayer || [];
+    window['dataLayer'] = window['dataLayer'] || [];
 
-    const items = [];
+    const items: any[] = [];
     console.log('P', cart.products);
     cart.products.forEach(p => {
       items.push({
         'item_name': `${i18n.t(p.name)}`,       // Name or ID is required.
         'item_id': `${p.code}`,				  // id під яким товар лежить у базі
+        // @ts-ignore no check
         'price': `${p.pricediscount || p.price}`,
         'item_brand': 'Tuba Duba',
         'item_category': i18n.t('Сукня'),
@@ -59,7 +60,7 @@ const CartForm = (props: IProps) => {
       });
     });
 
-    window.dataLayer.push({
+    window['dataLayer'].push({
       'event': 'purchase',
       'ecommerce': {
         'transaction_id': `${id}`,
@@ -109,7 +110,7 @@ const CartForm = (props: IProps) => {
       } else {
         throw new Error('Please contact administrator :(');
       }
-    } catch (e) {
+    } catch (e: any) {
       setError(e.message);
     } finally {
       setSending(false);
@@ -249,11 +250,11 @@ const CartForm = (props: IProps) => {
               size="lg"
               className={`order-button ${sending ? '' : ''}`}
               disabled={!!sending}
-              onClick={() => handleSave(false)}
+              onClick={() => handleSave(true)}
             >
               {sending
                 ? i18n.t('[E:Sending...][R:Шлем заказ...][U:Надсилаємо замовлення...]')
-                : i18n.t('[E:Confirm order][R:Оформить заказ][U:Оформити замовлення і сплатити]')}
+                : i18n.t('[E:Confirm order][R:Оформить заказ][U:Оформити замовлення]')}
             </Button>
             <Button
               color="secondary"
@@ -266,19 +267,19 @@ const CartForm = (props: IProps) => {
               {i18n.t('[E:Edit order][R:Отредактировать заказ][U:Відредагувати замовлення]')}
             </Button>
           </div>
-          <div className="col-12 mt-2">
-            <Button
-              size="sm"
-              color="primary"
-              className={`order-button ${sending ? '' : ''}`}
-              disabled={!!sending}
-              onClick={() => handleSave(true)}
-            >
-              {sending
-                ? i18n.t('[E:Sending the order][R:Шлем заказ...][U:Надсилаємо замовлення...]')
-                : i18n.t('[E:I want to pay after talking with a manager][R:Хочу сплатити після спілкування з менеджером][U:Хочу сплатити після спілкування з менеджером]')}
-            </Button>
-          </div>
+          {/*<div className="col-12 mt-2">*/}
+          {/*  <Button*/}
+          {/*    size="sm"*/}
+          {/*    color="primary"*/}
+          {/*    className={`order-button ${sending ? '' : ''}`}*/}
+          {/*    disabled={!!sending}*/}
+          {/*    onClick={() => handleSave(true)}*/}
+          {/*  >*/}
+          {/*    {sending*/}
+          {/*      ? i18n.t('[E:Sending the order][R:Шлем заказ...][U:Надсилаємо замовлення...]')*/}
+          {/*      : i18n.t('[E:I want to pay after talking with a manager][R:Хочу сплатити після спілкування з менеджером][U:Хочу сплатити після спілкування з менеджером]')}*/}
+          {/*  </Button>*/}
+          {/*</div>*/}
         </Form>
         {openModalData && (
           <Modal hideCloseButton={true}>

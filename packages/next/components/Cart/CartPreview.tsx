@@ -23,14 +23,15 @@ const CartPreview = (props: IProps) => {
   };*/
 
   useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
+    window['dataLayer'] = window['dataLayer'] || [];
 
-    const items = [];
+    const items: any[] = [];
     console.log('P', cart.products);
     cart.products.forEach(p => {
       items.push({
         'item_name': `${i18n.t(p.name)}`,       // Name or ID is required.
         'item_id': `${p.code}`,				  // id під яким товар лежить у базі
+        // @ts-ignore no check
         'price': `${p.pricediscount || p.price}`,
         'item_brand': 'Tuba Duba',
         'item_category': i18n.t('Сукня'),
@@ -39,7 +40,7 @@ const CartPreview = (props: IProps) => {
       });
     });
 
-    window.dataLayer.push({
+    window['dataLayer'].push({
       'event': 'begin_checkout',
       'ecommerce': {
         items

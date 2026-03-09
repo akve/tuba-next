@@ -3,7 +3,7 @@ import { RequestPreProcess } from '../utils/request-with-user';
 import axios from 'axios';
 
 // https://new.novaposhta.ua/dashboard/settings/developers
-const KEY="aabb8ac7d83f2cc5994872f01a146a79";
+const KEY="c1d416207f8a93924dbb6547c7e86ae5";
 
 @Path('/v1/delivery')
 @PreProcessor(RequestPreProcess)

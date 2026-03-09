@@ -23027,12 +23027,12 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 .ql-tooltip .ql-remove::before:focus {
   text-decoration: none;
 }
-.ql-tooltip .ql-action::before:focus, .ql-tooltip .ql-action::before.focus,
+/*.ql-tooltip .ql-action::before:focus, .ql-tooltip .ql-action::before.focus,*/
 .ql-tooltip .ql-remove::before:focus,
-.ql-tooltip .ql-remove::before.focus {
-  outline: 0;
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-}
+/*.ql-tooltip .ql-remove::before.focus {*/
+/*  outline: 0;*/
+/*  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);*/
+/*}*/
 
 .ql-tooltip .ql-action::before,
 .ql-tooltip.ql-editing .ql-action::before {
@@ -23047,32 +23047,32 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   background-color: #5e72e4;
   border-color: #5e72e4;
 }
-.ql-tooltip .ql-action::before:focus, .ql-tooltip .ql-action::before.focus,
+/*.ql-tooltip .ql-action::before:focus, .ql-tooltip .ql-action::before.focus,*/
 .ql-tooltip.ql-editing .ql-action::before:focus,
-.ql-tooltip.ql-editing .ql-action::before.focus {
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(94, 114, 228, 0.5);
-}
-.ql-tooltip .ql-action::before.disabled, .ql-tooltip .ql-action::before:disabled,
-.ql-tooltip.ql-editing .ql-action::before.disabled,
-.ql-tooltip.ql-editing .ql-action::before:disabled {
-  color: #fff;
-  background-color: #5e72e4;
-  border-color: #5e72e4;
-}
-.ql-tooltip .ql-action::before:not(:disabled):not(.disabled):active, .ql-tooltip .ql-action::before:not(:disabled):not(.disabled).active, .show > .ql-tooltip .ql-action::before.dropdown-toggle,
-.ql-tooltip.ql-editing .ql-action::before:not(:disabled):not(.disabled):active,
-.ql-tooltip.ql-editing .ql-action::before:not(:disabled):not(.disabled).active,
-.show > .ql-tooltip.ql-editing .ql-action::before.dropdown-toggle {
-  color: #fff;
-  background-color: #324cdd;
-  border-color: #5e72e4;
-}
-.ql-tooltip .ql-action::before:not(:disabled):not(.disabled):active:focus, .ql-tooltip .ql-action::before:not(:disabled):not(.disabled).active:focus, .show > .ql-tooltip .ql-action::before.dropdown-toggle:focus,
-.ql-tooltip.ql-editing .ql-action::before:not(:disabled):not(.disabled):active:focus,
-.ql-tooltip.ql-editing .ql-action::before:not(:disabled):not(.disabled).active:focus,
-.show > .ql-tooltip.ql-editing .ql-action::before.dropdown-toggle:focus {
-  box-shadow: none, 0 0 0 0 rgba(94, 114, 228, 0.5);
-}
+/*.ql-tooltip.ql-editing .ql-action::before.focus {*/
+/*  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(94, 114, 228, 0.5);*/
+/*}*/
+/*.ql-tooltip .ql-action::before.disabled, .ql-tooltip .ql-action::before:disabled,*/
+/*.ql-tooltip.ql-editing .ql-action::before.disabled,*/
+/*.ql-tooltip.ql-editing .ql-action::before:disabled {*/
+/*  color: #fff;*/
+/*  background-color: #5e72e4;*/
+/*  border-color: #5e72e4;*/
+/*}*/
+/*.ql-tooltip .ql-action::before:not(:disabled):not(.disabled):active, .ql-tooltip .ql-action::before:not(:disabled):not(.disabled).active, .show > .ql-tooltip .ql-action::before.dropdown-toggle,*/
+/*.ql-tooltip.ql-editing .ql-action::before:not(:disabled):not(.disabled):active,*/
+/*.ql-tooltip.ql-editing .ql-action::before:not(:disabled):not(.disabled).active,*/
+/*.show > .ql-tooltip.ql-editing .ql-action::before.dropdown-toggle {*/
+/*  color: #fff;*/
+/*  background-color: #324cdd;*/
+/*  border-color: #5e72e4;*/
+/*}*/
+/*.ql-tooltip .ql-action::before:not(:disabled):not(.disabled):active:focus, .ql-tooltip .ql-action::before:not(:disabled):not(.disabled).active:focus, .show > .ql-tooltip .ql-action::before.dropdown-toggle:focus,*/
+/*.ql-tooltip.ql-editing .ql-action::before:not(:disabled):not(.disabled):active:focus,*/
+/*.ql-tooltip.ql-editing .ql-action::before:not(:disabled):not(.disabled).active:focus,*/
+/*.show > .ql-tooltip.ql-editing .ql-action::before.dropdown-toggle:focus {*/
+/*  box-shadow: none, 0 0 0 0 rgba(94, 114, 228, 0.5);*/
+/*}*/
 
 .ql-tooltip .ql-action::before {
   content: "Edit";
@@ -23095,22 +23095,22 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   background-color: white;
   border-color: white;
 }
-.ql-tooltip .ql-remove::before:focus, .ql-tooltip .ql-remove::before.focus {
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(255, 255, 255, 0.5);
-}
-.ql-tooltip .ql-remove::before.disabled, .ql-tooltip .ql-remove::before:disabled {
-  color: #212529;
-  background-color: #fff;
-  border-color: #fff;
-}
-.ql-tooltip .ql-remove::before:not(:disabled):not(.disabled):active, .ql-tooltip .ql-remove::before:not(:disabled):not(.disabled).active, .show > .ql-tooltip .ql-remove::before.dropdown-toggle {
-  color: #212529;
-  background-color: #e6e6e6;
-  border-color: white;
-}
-.ql-tooltip .ql-remove::before:not(:disabled):not(.disabled):active:focus, .ql-tooltip .ql-remove::before:not(:disabled):not(.disabled).active:focus, .show > .ql-tooltip .ql-remove::before.dropdown-toggle:focus {
-  box-shadow: none, 0 0 0 0 rgba(255, 255, 255, 0.5);
-}
+/*.ql-tooltip .ql-remove::before:focus, .ql-tooltip .ql-remove::before.focus {*/
+/*  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(255, 255, 255, 0.5);*/
+/*}*/
+/*.ql-tooltip .ql-remove::before.disabled, .ql-tooltip .ql-remove::before:disabled {*/
+/*  color: #212529;*/
+/*  background-color: #fff;*/
+/*  border-color: #fff;*/
+/*}*/
+/*.ql-tooltip .ql-remove::before:not(:disabled):not(.disabled):active, .ql-tooltip .ql-remove::before:not(:disabled):not(.disabled).active, .show > .ql-tooltip .ql-remove::before.dropdown-toggle {*/
+/*  color: #212529;*/
+/*  background-color: #e6e6e6;*/
+/*  border-color: white;*/
+/*}*/
+/*.ql-tooltip .ql-remove::before:not(:disabled):not(.disabled):active:focus, .ql-tooltip .ql-remove::before:not(:disabled):not(.disabled).active:focus, .show > .ql-tooltip .ql-remove::before.dropdown-toggle:focus {*/
+/*  box-shadow: none, 0 0 0 0 rgba(255, 255, 255, 0.5);*/
+/*}*/
 
 .ql-tooltip.ql-editing .ql-remove::before {
   display: none;
@@ -24638,9 +24638,9 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
-.bootstrap-datetimepicker-widget table td.active.today:before > div {
-  border-bottom-color: #fff;
-}
+/*.bootstrap-datetimepicker-widget table td.active.today:before > div {*/
+/*  border-bottom-color: #fff;*/
+/*}*/
 
 .bootstrap-datetimepicker-widget table td.disabled > div, .bootstrap-datetimepicker-widget table td.disabled:hover > div {
   background: none;

@@ -10,8 +10,8 @@ import Safe from 'react-safe';
 
 import { Provider } from 'mobx-react';
 
-import '../assets/scss/public.scss';
-// import 'assets/css/out.css';
+// import '../assets/scss/public.scss';
+ import '../assets/css/out.css';
 // import 'react-notification-alert/dist/animate.css';
 // import '../assets/plugins/nucleo/css/nucleo.module.css';
 // import '../assets/vendor/nucleo/css/nucleo.css';
@@ -33,7 +33,7 @@ const Admin = dynamic(() => import('@pdeals/next/components/layouts/Admin'));
 import NProgress from 'nprogress';
 import dynamic from 'next/dynamic';
 import { MarketingTrackers } from '../components/MarketingTrackers/MarketingTrackers';
-import { Open_Sans } from '@next/font/google';
+import { Open_Sans } from 'next/font/google';
 
 const opensans = Open_Sans({subsets:['cyrillic', 'latin']});
 

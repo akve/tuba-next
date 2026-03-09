@@ -12,13 +12,12 @@
     ]
   },
   "devDependencies": {
-    "lerna": "^3.22.1",
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/node": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-decorators": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
@@ -32,7 +31,11 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.0",
     "google-spreadsheet": "^3.0.11",
+    "lerna": "^3.22.1",
     "prettier": "^2.0.5",
     "typescript": "3.7.3"
+  },
+  "dependencies": {
+    "next": "^16.0.7"
   }
 }
