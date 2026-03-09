@@ -1,6 +1,5 @@
 import * as Ajv from 'ajv';
 import { Errors } from 'typescript-rest';
-import { sentryLog } from '../utils/sentry';
 
 class ValidationError extends Errors.HttpError {
     constructor(message?: string, statusCode: number = 422) {
@@ -26,7 +25,6 @@ const validator = {
                 // v.validate(objectToValidate, schema, { allowUnknownAttributes: false, throwError: true });
             } catch (e) {
                 if (!skipLog) {
-                    sentryLog('exception', e);
                     console.log(e);
                 }
                 throw new ValidationError(e.message);
@@ -46,7 +44,6 @@ const validator = {
         });
         if (!result) {
             console.log('Validation failed');
-            sentryLog('exception', resultError);
             throw new ValidationError(resultError);
         }
     },

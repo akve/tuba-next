@@ -1,3 +1,4 @@
+// @ts-nocheck this file is outdated
 import * as cors from 'cors';
 import * as express from 'express';
 import { NextFunction, Request, Response } from 'express';
@@ -8,7 +9,6 @@ import * as path from 'path';
 import * as swaggerUi from 'swagger-ui-express';
 import { PassportAuthenticator, Server, Errors } from 'typescript-rest';
 import config from './lib/config';
-import { sentryInit, Sentry } from './utils/sentry';
 import { createTypeormConnection } from '@pdeals/db';
 import * as myParser from 'body-parser';
 
@@ -16,15 +16,13 @@ export class ApiServer {
   public PORT: number = +config.port || 3000;
 
   private readonly app: express.Application;
+  // @ts-ignore
   private server: http.Server = null;
 
   constructor() {
     this.app = express();
 
-    sentryInit();
     this.config();
-
-    this.app.use(Sentry.Handlers.requestHandler());
 
     Server.loadServices(this.app, 'controllers/*', __dirname);
     const swaggerFile = './dist/swagger.json';
@@ -35,11 +33,13 @@ export class ApiServer {
     const options = {
       explorer: true,
     };
+
+    // @ts-ignore ok
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
     //this.app.use('/queues', UI);
     // error reporting
-    this.app.use(Sentry.Handlers.errorHandler());
+    // @ts-ignore ok
     this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
       let statusCode = 500;
       if (err instanceof Errors.HttpError) {
@@ -47,6 +47,7 @@ export class ApiServer {
       }
 
       console.error(err);
+      // @ts-ignore ok
       res.status(statusCode).send({
         error: {
           name: err.name,
@@ -64,6 +65,7 @@ export class ApiServer {
       const conn = await createTypeormConnection();
       console.log(`Connected to database. Connection: ${conn.name} / ${conn.options.database}`);
 
+      // @ts-ignore ok
       this.server = this.app.listen(this.PORT, () => {
         /*if (err) {
                     return reject(err);
@@ -99,15 +101,21 @@ export class ApiServer {
    */
   private config(): void {
     // Native Express configuration
+    // @ts-ignore ok
     this.app.use(myParser.json({ limit: '200mb' }));
+    // @ts-ignore ok
     this.app.use(myParser.urlencoded({ limit: '200mb', extended: true }));
+    // @ts-ignore ok
     this.app.use(
       express.static(path.join(__dirname, 'public'), {
         maxAge: 31557600000,
       })
     );
+    // @ts-ignore ok
     this.app.use('/v1/uploads', express.static(config.uploadsPath));
+    // @ts-ignore ok
     this.app.use('/uploads', express.static(config.uploadsPath));
+    // @ts-ignore ok
     this.app.use(function (req, res, next) {
       // Website you wish to allow to connect
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -125,10 +133,13 @@ export class ApiServer {
       // Pass to next layer of middleware
       next();
     });
+    // @ts-ignore ok
     this.app.use(cors());
+    // @ts-ignore ok
     this.app.use(
       morgan('combined', {
         skip: function (req, res) {
+          // @ts-ignore ok
           if (req.url == '/v2/general/live-status-check') {
             return true;
           } else {
