@@ -13,7 +13,9 @@ const validator = {
         const singleClass = (className: string, skipLog?: boolean) => {
             const schema = require(`../validation-schemas/${className}.json`);
 
-            // console.log('Validating', objectToValidate, className);
+            if (schema === null) {
+                return true;
+            }
             try {
                 const ajv = new Ajv({ allErrors: true });
                 const valid = ajv.validate(schema, objectToValidate);
