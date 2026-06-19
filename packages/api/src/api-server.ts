@@ -35,7 +35,7 @@ export class ApiServer {
     };
 
     // @ts-ignore ok
-    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+    //this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
     //this.app.use('/queues', UI);
     // error reporting
