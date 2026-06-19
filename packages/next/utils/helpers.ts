@@ -1,4 +1,7 @@
-import { isArray, isObject, isString, isFinite } from 'lodash';
+import isArray from 'lodash/isArray';
+import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
+import isFinite from 'lodash/isFinite';
 import startOfMonth from 'date-fns/startOfMonth';
 import endOfMonth from 'date-fns/endOfMonth';
 import lightFormat from 'date-fns/lightFormat';
@@ -48,6 +51,7 @@ export const getEndOfMonth = (date = new Date()) => {
 };
 
 export const resizeImage = (url: string, format: 'list' | 'thumb' | 'normal' | 'huge') => {
+  if (!url) return '';
   if (url.indexOf('cloudinary') < 0) return url;
   if (format === 'list') {
     return url.replace('/upload/', '/upload/w_400/');

@@ -4,9 +4,8 @@ import { Modal, Form, FormGroup, Input, Card, CardHeader, Row, Button, Col, Card
 import React, { useEffect, useState } from 'react';
 import { client } from '@pdeals/next/lib/api/api-client';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { sortBy, find, filter } from 'lodash';
-import arrayMove from 'array-move';
-import * as i18n from '@pdeals/next/utils/i18n';
+import filter from 'lodash/filter';
+import sortBy from 'lodash/sortBy';
 import EditColorForm from '@pdeals/next/components/EditColorForm/EditColorForm';
 import { EditableTable } from '@pdeals/next/components/EditableTable/EditableTable';
 

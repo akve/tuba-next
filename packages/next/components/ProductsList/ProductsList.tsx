@@ -19,8 +19,7 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
-import { filter } from 'lodash';
-import { t } from '../../utils/i18n';
+import { isEnglish, t } from '../../utils/i18n';
 import OutsideClickHandler from 'react-outside-click-handler';
 import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
@@ -56,11 +55,10 @@ function ProductsList(props: IProps) {
       </Head>
       <Breadcrumb type="category" id={props.currentRoute!} isForCollection={props.isForCollection} />
       <div className="list-wrapper">
-        {productsList.map((product) => (
+        {productsList.map((product, index) => (
           <div className="col-lg-4 col-xs-12 product-item" key={`${product.code}`}>
             <Card className="">
-              <Link href={`/product/${product.code}?from=${category}`}>
-                <a href={`/product/${product.code}?from=${category}`} className="card-img-top">
+              <Link href={`/product/${product.code}?from=${category}`} className="card-img-top">
                   <Image
                     src={resizeImage(product.image, 'list') || '/assets/img/logo.png'}
                     alt={i18n.t(product.name)}
@@ -68,22 +66,27 @@ function ProductsList(props: IProps) {
                     height={500}
                     width={350}
                     layout={'responsive'}
+                    priority={index === 0}
+                    unoptimized
                   />
-                </a>
               </Link>
               <div className="card-body text-center">
                 <Link href={`/product/${product.code}?from=${category}`}>
-                  <a href={`/product/${product.code}?from=${category}`}>
                     <h4>{i18n.t(product.name)}</h4>
-                  </a>
                 </Link>
                 <div className="text-muted price-text">
-                  {!!product.pricediscount && (
+                  {isEnglish() && !!product.pricediscount_en && (
+                    <>
+                      <span className="strikeover">{product.price_en}</span> {product.pricediscount_en} EUR
+                    </>
+                  )}
+                  {!isEnglish() && !!product.pricediscount && !product.pricediscount_en && (
                     <>
                       <span className="strikeover">{product.price}</span> {product.pricediscount} грн
                     </>
                   )}
-                  {!product.pricediscount && <>{product.price} грн/UAH</>}
+                  {isEnglish() && !product.pricediscount_en && product.price_en && <>{product.price_en} EUR</>}
+                  {!isEnglish() && !product.pricediscount  && <>{product.price} грн</>}
                 </div>
                 <button className="btn btn-outline-secondary" onClick={() => onAddToCart(product)}>
                   {i18n.t('[E:Details][R:Детальнее][U:Детальнiше]')}

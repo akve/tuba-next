@@ -9,16 +9,27 @@ import * as i18n from '@pdeals/next/utils/i18n';
 const NormalLayout: React.FunctionComponent<any> = (props) => {
   const router = useRouter();
   const links = [
-    { href: '/category/featured', title: t('[E:Catalog][U:Каталог]') },
+    //{ href: '/category/featured', title: t('[E:Catalog][U:Каталог]') },
     { href: '/info/otzyvy', title: t('[E:Reviews][R:Отзывы][U:Відгуки]') },
     { href: '/info/contacts', title: t('[E:Contacts][R:Контакты][U:Контакти]') },
     { href: '/info/onas', title: t('[E:About us][R:О нас][U:Про нас]') },
   ];
 
+  const onGoMain = () => {
+    if (document.location.pathname === '/' || document.location.pathname === '/category/featured/') {
+      if (document.getElementById('navbar-collapse-main') && document.getElementById('navbar-collapse-main').offsetParent) {
+        console.log('!!')
+        document.getElementById('navbar-collapse-main').click();
+        return false;
+      }
+    }
+    return true;
+  }
+
   return (
     <div className="bg-default">
       <div className="main-content">
-        <PublicNavbar />
+        <PublicNavbar structure={props.structure} />
 
         {/*<!-- Header -->*/}
         <div className={`header bg-gradient-primary ${router.asPath === '/' ? '' : 'py-3 py-lg-3'}`}>
@@ -65,9 +76,12 @@ const NormalLayout: React.FunctionComponent<any> = (props) => {
                       style={{ marginTop: '-20px', marginBottom: '20px', maxWidth: '100%' }}
                     />*/}
                   <div className="main-menu">
+                    <Link href={"/category/featured"} onClick={()=>onGoMain()}>
+                      {t('[E:Catalog][U:Каталог]')}
+                    </Link>
                     {links.map((link, index) => (
                       <Link href={link.href} key={`${index}`}>
-                        <a href={link.href}>{link.title}</a>
+                        {link.title}
                       </Link>
                     ))}
                   </div>

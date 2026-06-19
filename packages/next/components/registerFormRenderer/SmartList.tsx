@@ -115,11 +115,6 @@ const SmartList = ({
       <table style={{ marginLeft: '15px' }}>
         {value.map((row, index) => (
           <tr key={`${index}`}>
-            {listOptions.columns.map((col, colIndex) => (
-              <td key={`${colIndex}`} className={col.class}>
-                {row[col.name]}
-              </td>
-            ))}
             <td>
               {index > 0 && (
                 <a onClick={() => onTopRow(index)}>
@@ -132,6 +127,11 @@ const SmartList = ({
                 <i className="ni ni-fat-remove" style={{ fontSize: '20px' }} />
               </a>
             </td>
+            {listOptions.columns.map((col, colIndex) => (
+              <td key={`${colIndex}`} className={col.class}>
+                {row[col.name]}
+              </td>
+            ))}
           </tr>
         ))}
         <tr>

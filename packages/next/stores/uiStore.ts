@@ -2,7 +2,9 @@ import { action, observable, computed } from 'mobx';
 // import { toast } from 'react-toastify';
 import { ADD_NOTIFICATION, publish } from '../utils/eventBus';
 import { IBreadcrumb } from '@pdeals/next/components/Crud/ICrud';
-import { filter, find, get, sortBy } from 'lodash';
+import filter from 'lodash/filter';
+import find from 'lodash/find';
+import get from 'lodash/get';
 
 interface IListActionDescriptor {
   action: string;
@@ -159,7 +161,7 @@ class UiStore {
     const self = this;
 
     const shownNow = this.PendingNotifications;
-    const existing = shownNow.filter((notif: any) => notif.message === message);
+    const existing = shownNow?.filter((notif: any) => notif.message === message);
     if (existing && existing.length) {
       console.log('already shown');
       return;
@@ -188,7 +190,7 @@ if (level === 'success') {
 
     // console.log('add', self.notifications, self._displayedUids);
 
-    self.notifications.unshift({
+    self.notifications?.unshift({
       uid,
       title,
       message,
@@ -214,7 +216,7 @@ if (level === 'success') {
   }
 
   @computed get PendingNotifications(): any {
-    return this.notifications.filter((notif) => {
+    return this.notifications?.filter((notif) => {
       return !this._displayedUids.includes(notif.uid);
     });
   }

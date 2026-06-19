@@ -91,50 +91,40 @@ export const ViewPokerDeals = () => {
 
 export const ViewPokerDealsCell = ({ data }) => {
   return (
-    <Link href={`/admin/users/deals/${data.id}`}>
-      <a className="btn btn-link btn-block btn-sm" href={`/admin/users/deals/${data.id}`}>
+    <Link href={`/admin/users/deals/${data.id}`} className="btn btn-link btn-block btn-sm" >
         View Accounts
-      </a>
     </Link>
   );
 };
 
 export const ViewEarningsCell = ({ data }) => {
   return (
-    <Link href={`/admin/users/earnings/${data.id}`}>
-      <a className="btn btn-link btn-block btn-sm" href={`/admin/users/earnings/${data.id}`}>
+    <Link href={`/admin/users/earnings/${data.id}`} className="btn btn-link btn-block btn-sm" >
         View Earnings
-      </a>
     </Link>
   );
 };
 
 export const ViewPaymentsCell = ({ data }) => {
   return (
-    <Link href={`/admin/users/user-payments/${data.id}`}>
-      <a className="btn btn-link btn-block btn-sm" href={`/admin/users/user-payments/${data.id}`}>
+    <Link href={`/admin/users/user-payments/${data.id}`} className="btn btn-link btn-block btn-sm">
         View Payments
-      </a>
     </Link>
   );
 };
 
 export const ViewPaymentRequestsCell = ({ data }) => {
   return (
-    <Link href={`/admin/users/user-payment-requests/${data.id}`}>
-      <a className="btn btn-link btn-block btn-sm" href={`/admin/users/user-payment-requests/${data.id}`}>
+    <Link href={`/admin/users/user-payment-requests/${data.id}`} className="btn btn-link btn-block btn-sm" >
         View Payment Requests
-      </a>
     </Link>
   );
 };
 
 export const ViewReferralReportCell = ({ data }) => {
   return (
-    <Link href={`/admin/reports/referrals?user=${data.id}`}>
-      <a className="btn btn-link btn-block btn-sm" href={`/admin/reports/referrals?user=${data.id}`}>
+    <Link href={`/admin/reports/referrals?user=${data.id}`} className="btn btn-link btn-block btn-sm" >
         View Referral Earnings
-      </a>
     </Link>
   );
 };

@@ -26,6 +26,7 @@ import OrderStore from '@pdeals/next/stores/orderStore';
 interface IProps {
   uiStore?: UiStore;
   orderStore?: OrderStore;
+  structure?: any;
 }
 function PublicNavbar(props: IProps) {
   const { uiStore } = props;
@@ -40,15 +41,15 @@ function PublicNavbar(props: IProps) {
   const productsInCart = cart && cart.products ? cart.products.length : 0;
   //console.log('???', uiStore.allData);
 
+  if (!props.structure.categories.rows.length) return null;
+
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-light tuba-navbar" expand="md">
         <div>
           <Link href="/">
             <span>
-              <NavbarBrand href="/">
-                <img alt="Tuba-Duba" src="/assets/img/logo-top3.png" width="240" style={{ opacity: 1 }} />
-              </NavbarBrand>
+                <img alt="Tuba-Duba" src="/assets/img/logo-top4.png" width="240" style={{ opacity: 1 }} />
             </span>
           </Link>
         </div>
@@ -56,15 +57,10 @@ function PublicNavbar(props: IProps) {
           <Container className="px-1">
             <div className="nav-top-line" style={{ marginLeft: 'auto' }}>
               <div className="top-cart">
-                {productsInCart === 0 && <i className="ni ni-cart" />}
-                {productsInCart > 0 && (
-                  <Link href="/checkout">
-                    <a href="/checkout" style={{ display: 'flex' }}>
+                  <Link href="/checkout" style={{ display: 'flex' }}>
                       <img src="/assets/img/cart.svg" width="20" height="20" />
                       <span>{productsInCart}</span>
-                    </a>
                   </Link>
-                )}
               </div>
               <span>
                 <a onClick={() => onChangeLang('en')}>Eng</a> | <a onClick={() => onChangeLang('ua')}>Укр</a>
@@ -83,7 +79,7 @@ function PublicNavbar(props: IProps) {
                     <Link href="/">
                       <img
                         alt="Tuba-Duba"
-                        src="/assets/img/logo-top3.png"
+                        src="/assets/img/logo-top4.png"
                         width="120"
                         height="38"
                         style={{ opacity: 1 }}
@@ -95,16 +91,16 @@ function PublicNavbar(props: IProps) {
                       <span />
                       <span />
                     </button>
-                    <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380505212930" className="nav-link-icon nav-link">
-                      <i className="ni ni-mobile-button" /> +38 (050) 521-29-30
+                    <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380965096789" className="nav-link-icon nav-link">
+                      <i className="ni ni-mobile-button" /> +38 (096) 509-67-89
                     </a>
-                    <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380683019731" className="nav-link-icon nav-link">
-                      <i className="ni ni-mobile-button" /> +38 (068) 301-97-31
+                    <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380502943327" className="nav-link-icon nav-link">
+                      <i className="ni ni-mobile-button" /> +38 (050) 294-33-27
                     </a>
                   </Col>
                 </Row>
               </div>
-              <ShopSidebar position="topmenu" />
+              <ShopSidebar position="topmenu" structure={props.structure} />
               <Nav className="ml-auto" navbar>
                 {/*<NavItem>
                   <Link href="/info/contacts">
@@ -114,11 +110,11 @@ function PublicNavbar(props: IProps) {
                   </Link>
                 </NavItem>*/}
                 <NavItem className="d-none d-lg-inline">
-                  <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380505212930" className="nav-link-icon nav-link">
-                    <i className="ni ni-mobile-button" /> +38 (050) 521-29-30
+                  <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380965096789" className="nav-link-icon nav-link">
+                    <i className="ni ni-mobile-button" /> +38 (096) 509-67-89
                   </a>
-                  <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380683019731" className="nav-link-icon nav-link">
-                    <i className="ni ni-mobile-button" /> +38 (068) 301-97-31
+                  <a style={{paddingTop: 0, paddingBottom: 0}} href="tel:+380502943327" className="nav-link-icon nav-link">
+                    <i className="ni ni-mobile-button" /> +38 (050) 294-33-27
                   </a>
                 </NavItem>
               </Nav>

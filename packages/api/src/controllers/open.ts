@@ -10,7 +10,14 @@ import { ListDto, ListRequestDto } from '@pdeals/models/dto/ListDto';
 import generateUserFilter from '../utils/generateUserFilter';
 import { find } from 'lodash';
 import { Order } from '../../../models/entities/Order';
-import axios from 'axios';
+// import axios from 'axios';
+
+const COURSE = 40;
+
+const transformProduct = (p:any) => {
+  if (!p.price_en) p.price_en = Math.ceil(p.price / COURSE);
+  if (!p.pricediscount_en && p.pricediscount) p.pricediscount_en = Math.ceil(p.pricediscount / COURSE);
+}
 
 @Path('/v1/open')
 @PreProcessor(RequestPreProcess)
@@ -40,6 +47,7 @@ export class OpenController {
     rows.forEach((r: any) => {
       try {
         r.image = r.data.images[0].image;
+        transformProduct(r);
       } catch (e) {
         console.log('bad image');
       }
@@ -59,8 +67,17 @@ export class OpenController {
     const data: any = {};
     const rows = await getTypeormConnection().query(`select * from product where code='${code}'`);
     if (rows.length === 0) return null;
+    transformProduct(rows[0]);
     data.product = rows[0];
-    data.colors = await getTypeormConnection().query('select * from color');
+    data.colors = await getTypeormConnection().query('select id, name, image, invisible from color');
+    const disabledColorIds = data.colors.filter((r:any)=>r.invisible).map((r: any) =>r.id);
+    if (data.product.data.colors) {
+      data.product.data.colors = data.product.data.colors.filter((r: any) => {
+        return disabledColorIds.indexOf(parseInt(`${r.color}`, 10)) < 0
+      });
+      const foundColorIds = data.product.data.colors.map((r: any)=>parseInt(`${r.color}`, 10));
+      data.colors = data.colors.filter((r: any) => foundColorIds.indexOf(r.id) >=0);
+    }
     data.fabrics = await getTypeormConnection().query(`select * from fabric where id=${rows[0].fabric || 0}`);
     return data;
   }
@@ -82,7 +99,9 @@ export class OpenController {
     const res: any = [];
     rows.forEach((r: any) => {
       try {
+        transformProduct(r);
         r.image = r.data.images[0].image;
+        r.data.images = [r.data.images[0]]; // optimize - only 1st image is fine
       } catch (e) {
         console.log('bad image');
       }
@@ -99,9 +118,10 @@ export class OpenController {
       }
     });
     data.products = res;
+    const ids = res.map((r: any) => r.id).join(',') || '0';
     // data.colors = await getTypeormConnection().query('select * from color');
     // data.fabrics = await getTypeormConnection().query('select * from fabric');
-    data.sorting = await getTypeormConnection().query('select * from product_sort');
+    data.sorting = await getTypeormConnection().query(`select * from product_sort where product in (${ids})`);
     return data;
   }
 
@@ -338,42 +358,55 @@ export class OpenController {
     return new SimpleResponseDto('ok');
   }
 
-  @Path('/checkout-fondy-url/:id')
+  @Path('/checkout-fondy-url/:id/:lang')
   @GET
   public async checkoutUrl(
     @PathParam('id') id: string,
+    @PathParam('lang') lang: string,
   ): Promise<any> {
-    const crypto = require('crypto')
-    const shasum = crypto.createHash('sha1');
-    const resUrl = `${process.env.FONDY_REDIRECT}?id=${id}`;
+    // const crypto = require('crypto')
+    // const shasum = crypto.createHash('sha1');
+    // const resUrl = `${process.env.FONDY_REDIRECT}?id=${id}`;
 
     const rawOrder = await getTypeormConnection().query(`select * from "order" where code = '${id}'`);
     if (!rawOrder.length) throw new Error('order not found');
 
-
-    const data: any = {
-      "amount": rawOrder[0].total * 100,
-      "currency": "UAH",
-      "merchant_id": process.env.FONDY_MERCHANT,
-      "order_desc": "Tuba-Duba order",
-      "order_id": id,
-      "response_url": resUrl,
-    };
-
-    const v = [];
-    Object.keys(data).forEach(k => {
-      v.push(data[k]);
-    })
-    v.unshift(process.env.FONDY_KEY);
-    const str = v.join('|');
-    shasum.update(str);
-    const signature = shasum.digest('hex');
-    data.signature = signature;
-
-    const response = await axios.post('https://pay.fondy.eu/api/checkout/url/', {request:data}, {
+    const LiqPay = require('../lib/liqpay');
+    const liqpay = new LiqPay(process.env.LIQ_PUBLIC, process.env.LIQ_PRIVATE);
+    var html = liqpay.cnb_form({
+      'action'         : 'pay',
+      'amount'         : rawOrder[0].total ,
+      'currency'       : lang === 'en' ? 'EUR' : "UAH",
+      'description'    : 'Tuba-Duba order #' + id,
+      'order_id'       : id,
+      'version'        : '3',
+      'language': lang === 'en' ? 'en':'ua'
     });
+    return {html};
 
-    return response.data;
+    // const data: any = {
+    //   "amount": rawOrder[0].total * 100,
+    //   "currency": lang === 'en' ? 'EUR' : "UAH",
+    //   "merchant_id": process.env.FONDY_MERCHANT,
+    //   "order_desc": "Tuba-Duba order",
+    //   "order_id": id,
+    //   "response_url": resUrl,
+    // };
+    //
+    // const v = [];
+    // Object.keys(data).forEach(k => {
+    //   v.push(data[k]);
+    // })
+    // v.unshift(process.env.FONDY_KEY);
+    // const str = v.join('|');
+    // shasum.update(str);
+    // const signature = shasum.digest('hex');
+    // data.signature = signature;
+    //
+    // const response = await axios.post('https://pay.fondy.eu/api/checkout/url/', {request:data}, {
+    // });
+
+    // return response.data;
   }
 
   @Path('/checkout-paid/:id')

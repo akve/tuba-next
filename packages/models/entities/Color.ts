@@ -29,6 +29,9 @@ export class Color extends BaseEntity {
   @Column({ type: 'json' })
   data?: object;
 
+  @Column({ nullable: true })
+  invisible: boolean;
+
   @CreateDateColumn()
   createdDate?: Date;
 

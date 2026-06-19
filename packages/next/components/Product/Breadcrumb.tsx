@@ -1,24 +1,10 @@
 import React, { Component, useEffect } from 'react';
 import Link from '@pdeals/next/elements/NextLink';
 import { useRouter, withRouter } from 'next/router';
-import classnames from 'classnames';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import {
-  Card,
-  Collapse,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-  Popover,
-  PopoverHeader,
-  PopoverBody,
-} from 'reactstrap';
 import { inject, observer } from 'mobx-react';
 import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
-import { find } from 'lodash';
+import find from 'lodash/find';
 
 interface IProps {
   uiStore?: UiStore;
@@ -115,14 +101,14 @@ function Breadcrumb(props: IProps) {
     <div className="breadcrumb-wrapper">
       <div className="breadcrumb">
         <Link href="/category/featured">
-          <a href="/category/featured">{mainText()}</a>
+          {mainText()}
         </Link>
         {bc.map((row: any, index) => (
           <span key={`${index}`}>
             <span>&nbsp;&gt;&nbsp;</span>
             {!!row.link && (
               <Link href={row.link}>
-                <a href={row.link}>{(row.title || '').replace('<br>', ': ')}</a>
+                {(row.title || '').replace('<br>', ': ')}
               </Link>
             )}
             {!row.link && (

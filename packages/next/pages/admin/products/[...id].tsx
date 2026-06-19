@@ -61,14 +61,16 @@ const MainInner: React.FunctionComponent<Props> = ({}) => {
       fields: [
         { name: 'code', label: 'Code', type: 'text', class: 'col-lg-6', required: true, notEditable: false },
         { name: 'name', label: 'Name', type: 'text', class: 'col-lg-6', required: true },
-        { name: 'price', label: 'Price', type: 'number', class: 'col-lg-3', required: true },
-        { name: 'pricediscount', label: 'Price/Discount', type: 'number', class: 'col-lg-3', required: false },
-        { name: 'invisible', label: 'Invisible', type: 'checkbox', class: 'col-lg-3' },
+        { name: 'price', label: 'Price', type: 'number', class: 'col-lg-2', required: true },
+        { name: 'pricediscount', label: 'Price/Discount', type: 'number', class: 'col-lg-2', required: false },
+        { name: 'price_en', label: 'Price $', type: 'number', class: 'col-lg-2', required: false },
+        { name: 'pricediscount_en', label: 'Price/Discount$', type: 'number', class: 'col-lg-2', required: false },
+        { name: 'invisible', label: 'Invisible', type: 'checkbox', class: 'col-lg-2' },
         {
           name: 'fabric',
           label: 'Ткань',
           type: 'lazydropdown',
-          class: 'col-lg-3',
+          class: 'col-lg-2',
           options: {
             resource: {
               url: '/lookups/fabrics',

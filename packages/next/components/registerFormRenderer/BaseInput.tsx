@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormGroup, Input } from 'reactstrap';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
+
 
 import { registerRenderer } from './index';
 

@@ -15,7 +15,7 @@ export type Config = Pick<AxiosRequestConfig, 'baseURL' | 'cancelToken' | 'heade
 let __get = null;
 const __cache = {};
 
-const CACHE_TIME = 10*60*1000; // 10 mins
+const CACHE_TIME = 0;//10*60*1000; // 10 mins
 
 class ClientParams {
   skipHandleErrors?: boolean = false;

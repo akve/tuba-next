@@ -23,20 +23,24 @@ import {
   PopoverHeader,
   PopoverBody,
 } from 'reactstrap';
+import { serverSetLang, serverTranslate } from '@pdeals/next/lib/utils/serverTranslate';
+import { currentLang, setLang } from '@pdeals/next/utils/i18n';
 
 export async function getServerSideProps(context) {
+  serverSetLang(context);
   const alldata = await client().get('/open/structure/structure');
   return {
-    props: { alldata }, // will be passed to the page component as props
+    props: { lang: currentLang(), alldata: serverTranslate( context, alldata) }, // will be passed to the page component as props
   };
 }
 
-const CheckoutPage: React.FunctionComponent<any> = ({ uiStore, alldata, orderStore }) => {
+const CheckoutPage: React.FunctionComponent<any> = ({ lang, uiStore, alldata, orderStore }) => {
   // const { query } = useRouter();
+  setLang(lang);
   uiStore.setAllData(alldata);
   orderStore!.clear();
   return (
-    <NormalLayout>
+    <NormalLayout structure={alldata}>
       <div className="d-flex w-100 justify-content-center flex-column align-items-center pt-100 pb-100">
         <h1>{i18n.t('[E:Thanks for your order!][R:Спасибо за заказ!][U:Дякуємо за замовлення!]')}</h1>
         <div>

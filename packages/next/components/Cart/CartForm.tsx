@@ -9,6 +9,8 @@ import { useState } from 'react';
 import CartSmallPreview from '@pdeals/next/components/Cart/CartSmallPreview';
 import UiStore from '@pdeals/next/stores/uiStore';
 import RegisterLazyDropDown from '@pdeals/next/components/registerFormRenderer/LazyDropDown';
+import { isEnglish } from '@pdeals/next/utils/i18n';
+import { Modal } from '@pdeals/next/elements/Modal';
 
 interface IProps {
   orderStore?: OrderStore;
@@ -20,6 +22,7 @@ const CartForm = (props: IProps) => {
   const { cart } = orderStore;
   const [sending, setSending] = useState(false);
   const [skipPay, setSkipPay] = useState(false);
+  const [openModalData, setOpenModalData] = useState(null);
   const [error, setError] = useState('');
   const router = useRouter();
   const formOptions = {
@@ -40,14 +43,15 @@ const CartForm = (props: IProps) => {
   const { register: register1, handleSubmit: handleSubmit1, setValue, watch, reset, ...rest } = useForm(formOptions);
 
   const addFBPixel = (id) => {
-    window.dataLayer = window.dataLayer || [];
+    window['dataLayer'] = window['dataLayer'] || [];
 
-    const items = [];
+    const items: any[] = [];
     console.log('P', cart.products);
     cart.products.forEach(p => {
       items.push({
         'item_name': `${i18n.t(p.name)}`,       // Name or ID is required.
         'item_id': `${p.code}`,				  // id під яким товар лежить у базі
+        // @ts-ignore no check
         'price': `${p.pricediscount || p.price}`,
         'item_brand': 'Tuba Duba',
         'item_category': i18n.t('Сукня'),
@@ -56,12 +60,12 @@ const CartForm = (props: IProps) => {
       });
     });
 
-    window.dataLayer.push({
+    window['dataLayer'].push({
       'event': 'purchase',
       'ecommerce': {
         'transaction_id': `${id}`,
         'value': total,						  // Тотал по замовленню
-        'currency': 'UAH',
+        'currency': isEnglish() ? 'EUR' : 'UAH',
         items
       }
     });
@@ -92,15 +96,21 @@ const CartForm = (props: IProps) => {
           orderStore.clear();
           router.push(`/checkout/thanks`);
         } else {
-          const redirect: any = await orderStore.getPaymentRedirect(response.id);
-          if (redirect?.response?.checkout_url) {
-            router.push(redirect?.response?.checkout_url);
+          const html: any = await orderStore.getPaymentRedirect(response.id, i18n.currentLang());
+          if (html.html) {
+            setOpenModalData(html.html);
+            orderStore.clear();
+            setTimeout(()=>{
+              if (document.forms[1]) {
+                document.forms[1].submit();
+              }
+            },500)
           }
         }
       } else {
         throw new Error('Please contact administrator :(');
       }
-    } catch (e) {
+    } catch (e: any) {
       setError(e.message);
     } finally {
       setSending(false);
@@ -158,7 +168,7 @@ const CartForm = (props: IProps) => {
     <Card className="w-100">
       <CardBody>
         <CartSmallPreview allData={props.uiStore!.allData} />
-        <h2 style={{ marginLeft: '20px', marginTop: '10px' }}>{i18n.t('[U:Доставка][R:Доставка]')}</h2>
+        <h2 style={{ marginLeft: '20px', marginTop: '10px' }}>{i18n.t('[U:Доставка][R:Доставка][E:Delivery]')}</h2>
         <Form onSubmit={() => {}} className="d-flex flex-wrap">
           <Input
             label={i18n.t(`[E:Name][R:Имя][U:Ім'я] *`)}
@@ -240,11 +250,11 @@ const CartForm = (props: IProps) => {
               size="lg"
               className={`order-button ${sending ? '' : ''}`}
               disabled={!!sending}
-              onClick={() => handleSave(false)}
+              onClick={() => handleSave(true)}
             >
               {sending
                 ? i18n.t('[E:Sending...][R:Шлем заказ...][U:Надсилаємо замовлення...]')
-                : i18n.t('[E:Confirm order][R:Оформить заказ][U:Оформити замовлення і сплатити]')}
+                : i18n.t('[E:Confirm order][R:Оформить заказ][U:Оформити замовлення]')}
             </Button>
             <Button
               color="secondary"
@@ -257,20 +267,29 @@ const CartForm = (props: IProps) => {
               {i18n.t('[E:Edit order][R:Отредактировать заказ][U:Відредагувати замовлення]')}
             </Button>
           </div>
-          <div className="col-12 mt-2">
-            <Button
-              size="sm"
-              color="primary"
-              className={`order-button ${sending ? '' : ''}`}
-              disabled={!!sending}
-              onClick={() => handleSave(true)}
-            >
-              {sending
-                ? i18n.t('[E:Sending the order][R:Шлем заказ...][U:Надсилаємо замовлення...]')
-                : i18n.t('[E:I want to pay after talking with a manager][R:Хочу сплатити після спілкування з менеджером][U:Хочу сплатити після спілкування з менеджером]')}
-            </Button>
-          </div>
+          {/*<div className="col-12 mt-2">*/}
+          {/*  <Button*/}
+          {/*    size="sm"*/}
+          {/*    color="primary"*/}
+          {/*    className={`order-button ${sending ? '' : ''}`}*/}
+          {/*    disabled={!!sending}*/}
+          {/*    onClick={() => handleSave(true)}*/}
+          {/*  >*/}
+          {/*    {sending*/}
+          {/*      ? i18n.t('[E:Sending the order][R:Шлем заказ...][U:Надсилаємо замовлення...]')*/}
+          {/*      : i18n.t('[E:I want to pay after talking with a manager][R:Хочу сплатити після спілкування з менеджером][U:Хочу сплатити після спілкування з менеджером]')}*/}
+          {/*  </Button>*/}
+          {/*</div>*/}
         </Form>
+        {openModalData && (
+          <Modal hideCloseButton={true}>
+            <div dangerouslySetInnerHTML={{__html: openModalData || ''}}/>
+            <img src={"/assets/img/liqpay.svg"} />
+            <div>
+              {i18n.t('[E:Opening payment system][U:Відкриваємо платіжну систему]')}
+            </div>
+          </Modal>
+        )}
       </CardBody>
     </Card>
   );

@@ -1,62 +1,15 @@
-const withPWA = require('next-pwa');
-const runtimeCaching = require('next-pwa/cache');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-const webpack = require('webpack');
 const path = require('path');
-const withTM = require('next-transpile-modules')(
-  // All of the packages will resolve to our monorepo so we can match that path.
-  [path.resolve(__dirname, '../../packages')]
-);
-
-// module.exports = withPWA({
-//   pwa: {
-//     dest: 'public',
-//     runtimeCaching
-
-//   },
-//   exportTrailingSlash: true,
-// });
 module.exports =
   //withTM(
   //withBundleAnalyzer({
   {
-    webpack5: true,
-    pwa: {
-      dest: 'public',
-      runtimeCaching,
-    },
-    trailingSlash: true,
-    env: {
-      stagingMediaURL: 'https://mcprod.wheelhero.com/media/',
-    },
-    plugins: [
-      new webpack.optimize.MinChunkSizePlugin({
-        minChunkSize: 10000,
-      }),
-    ],
-    webpack: (config, { isServer }) => {
-      if (!isServer) {
-        config.resolve.alias['@sentry/node'] = '@sentry/browser';
-      }
-      return config;
-    },
-    eslint: {
-      // Warning: This allows production builds to successfully complete even if
-      // your project has ESLint errors.
-      ignoreDuringBuilds: true,
-    },
     typescript: {
-      // !! WARN !!
-      // Dangerously allow production builds to successfully complete even if
-      // your project has type errors.
-      // JODIT!!!
-      // !! WARN !!
       ignoreBuildErrors: true,
     },
-    //  };
-    //});
+    trailingSlash: true,
+turbopack:{
+
+}
   };
 //);
 

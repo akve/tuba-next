@@ -1,28 +1,19 @@
 {
-  "compileOnSave": true,
   "compilerOptions": {
-    "declaration": false,
+    "skipLibCheck": true,
+    "target": "es2016",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "sourceMap": true,
+    "noUnusedLocals": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "module": "commonjs",
-    "newLine": "LF",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": false,
-    "noUnusedParameters": false,
-    "noUnusedLocals": true,
-    "outDir": "dist",
-    "skipLibCheck": true,
-    "sourceMap": false,
-    "strictNullChecks": false,
-    "target": "es2016",
     "resolveJsonModule": true,
-    // "objectLiteralSortKeys": false
-    "typeRoots": ["src/types/decs.d.ts"]
+    "outDir": "dist",
+    "lib": [
+      "esnext"
+    ]
   },
-  "include": ["src/**/*.ts"],
-  "typeAcquisition": {
-    "enable": true
-  }
+  "exclude": [
+  ],
 }

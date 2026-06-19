@@ -1,12 +1,25 @@
+import { setCookie } from '../lib/utils/cookiesHelper';
+
+let _serverLang = 'ua';
+
 const currentLang = () => {
   // return 'ua';
-  if (typeof window === 'undefined') return 'ua';
+  if (typeof window === 'undefined') return _serverLang || 'ua';
   let r = localStorage.getItem('lang');
   if (!r || r === 'ru') r = 'ua';
   return r; //localStorage.getItem('lang') || 'ua';
 };
 
+const isEnglish = () => {
+  return currentLang() === 'en';
+}
+
 const setLang = (lang) => {
+  if (typeof window === 'undefined') {
+    _serverLang = lang;
+    return;
+  }
+  setCookie('lang', lang, 365);
   localStorage.setItem('lang', lang);
 };
 
@@ -43,4 +56,4 @@ const t = (s: string, leaveHtml?: boolean) => {
   return s;
 };
 
-export { currentLang, setLang, t };
+export { currentLang, setLang, t, isEnglish };

@@ -17,7 +17,8 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
-import { find } from 'lodash';
+import find from 'lodash/find';
+
 import UiStore from '@pdeals/next/stores/uiStore';
 import * as i18n from '@pdeals/next/utils/i18n';
 import OrderStore from '@pdeals/next/stores/orderStore';
@@ -25,6 +26,7 @@ import AmountChooser from '@pdeals/next/components/common/AmountChooser';
 import SizeChooser from '@pdeals/next/components/common/SizeChooser';
 import ColorChooser from '@pdeals/next/components/common/ColorChooser';
 import { resizeImage, safeJson } from '@pdeals/next/utils/helpers';
+import { isEnglish } from '@pdeals/next/utils/i18n';
 
 interface IProps {
   uiStore?: UiStore;
@@ -38,6 +40,7 @@ function ProductContent(props: IProps) {
   const [amount, setAmount] = useState(1);
   const [size, setSize] = useState('44');
   const [color, setColor] = useState('');
+  const [contactOpen, setContactOpen] = useState(false);
   //console.log('PROD', product);
 
   const getFabric = () => {
@@ -97,7 +100,7 @@ function ProductContent(props: IProps) {
       color: color,
       amount: amount,
       size: size,
-      price: p.pricediscount || p.price,
+      price: !isEnglish() ? (p.pricediscount || p.price) : (p.pricediscount_en || p.price_en),
     });
     router.push('/checkout');
   };
@@ -180,12 +183,18 @@ function ProductContent(props: IProps) {
       <div className="product-details-wrapper w-100">
         <h1>{i18n.t(product.product.name)}</h1>
         <h3>
-          {!!product.product.pricediscount && (
+          {isEnglish() && !!product.product.pricediscount_en && (
+            <>
+              <span className="strikeover">{product.product.price_en}</span> {product.product.pricediscount_en} EUR
+            </>
+          )}
+          {!isEnglish() && !!product.product.pricediscount && !product.product.pricediscount_en && (
             <>
               <span className="strikeover">{product.product.price}</span> {product.product.pricediscount} грн
             </>
           )}
-          {!product.product.pricediscount && <>{product.product.price} грн</>}
+          {isEnglish() && !product.product.pricediscount_en && product.product.price_en && <>{product.product.price_en} EUR</>}
+          {!isEnglish() && !product.product.pricediscount && <>{product.product.price} грн</>}
         </h3>
         <div className="content" dangerouslySetInnerHTML={{ __html: i18n.t(product.product.description, true) }}></div>
         {!!fabric && (
@@ -221,6 +230,21 @@ function ProductContent(props: IProps) {
           <button className="btn btn-primary" onClick={() => onAddToCart(true)}>
             {i18n.t('[E:Buy][R:Купить][U:Купити]')}
           </button>
+          {!contactOpen && (
+            <a className="btn btn-secondary" id="direct-btn" onClick={()=>setContactOpen(true)}>
+              <img src={"/assets/img/quote.svg"} height={20}/><i className="fas fa-question-circle"/>&nbsp;{i18n.t('[E:Contact directly][R:Insta][U:Написати в дірект]')}
+            </a>
+          )}
+          {contactOpen && (
+            <>
+              <a className="btn btn-secondary" id="direct-btn-insta" href={"https://www.instagram.com/tubaiduba/reels/"}>
+                <img src={"/assets/img/contacts-insta.png"} height={20}/>&nbsp;{i18n.t('[E:Contact on Instagram][R:Insta][U:Написати в Інстаграм]')}
+              </a>
+              <a className="btn btn-secondary" id="direct-btn-fb" href={"https://www.facebook.com/tubaiduba"}>
+                <img src={"/assets/img/contacts-fb.png"} height={20}/>&nbsp;{i18n.t('[E:Contact on Facebook][R:FB][U:Написати в Facebook]')}
+              </a>
+            </>
+          )}
         </div>
         <hr />
       </div>
